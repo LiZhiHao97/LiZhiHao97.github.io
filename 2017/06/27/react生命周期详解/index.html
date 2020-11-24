@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>react生命周期详解 | Zh的Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="前端,react,生命周期,框架,javascript">
+    <meta name="description" content="组件的生命周期分成三个状态 Mounting：已插入真实 DOM Updating：正在被重新渲染 Unmounting：已移出真实 DOM  Mounting(装载) getInitialState(): 在组件挂载之前调用一次。返回值将会作为 this.state 的初始值。 componentWillMount()：服务器端和客户端都只调用一次，在初始化渲染执行之前立刻调用。不会触发再次渲染">
+<meta name="keywords" content="前端,react,生命周期,框架,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react生命周期详解">
+<meta property="og:url" content="http://yoursite.com/2017/06/27/react生命周期详解/index.html">
+<meta property="og:site_name" content="Zh的Blog">
+<meta property="og:description" content="组件的生命周期分成三个状态 Mounting：已插入真实 DOM Updating：正在被重新渲染 Unmounting：已移出真实 DOM  Mounting(装载) getInitialState(): 在组件挂载之前调用一次。返回值将会作为 this.state 的初始值。 componentWillMount()：服务器端和客户端都只调用一次，在初始化渲染执行之前立刻调用。不会触发再次渲染">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://yoursite.com/image/react生命周期详解/react生命周期笔记-1.png">
+<meta property="og:updated_time" content="2020-11-24T07:29:48.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react生命周期详解">
+<meta name="twitter:description" content="组件的生命周期分成三个状态 Mounting：已插入真实 DOM Updating：正在被重新渲染 Unmounting：已移出真实 DOM  Mounting(装载) getInitialState(): 在组件挂载之前调用一次。返回值将会作为 this.state 的初始值。 componentWillMount()：服务器端和客户端都只调用一次，在初始化渲染执行之前立刻调用。不会触发再次渲染">
+<meta name="twitter:image" content="http://yoursite.com/image/react生命周期详解/react生命周期笔记-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">react生命周期详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">react生命周期详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-27T12:14:02.000Z" itemprop="datePublished" class="page-time">
+  2017-06-27
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件的生命周期分成三个状态"><span class="post-toc-number">1.</span> <span class="post-toc-text">组件的生命周期分成三个状态</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mounting-装载"><span class="post-toc-number"></span> <span class="post-toc-text">Mounting(装载)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Updating-更新"><span class="post-toc-number"></span> <span class="post-toc-text">Updating (更新)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unmounting-移除"><span class="post-toc-number"></span> <span class="post-toc-text">Unmounting(移除)</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-react生命周期详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">react生命周期详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-27 20:14:02" datetime="2017-06-27T12:14:02.000Z"  itemprop="datePublished">2017-06-27</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="组件的生命周期分成三个状态"><a href="#组件的生命周期分成三个状态" class="headerlink" title="组件的生命周期分成三个状态"></a>组件的生命周期分成三个状态</h3><ul>
+<li>Mounting：已插入真实 DOM</li>
+<li>Updating：正在被重新渲染</li>
+<li>Unmounting：已移出真实 DOM</li>
+</ul>
+<h2 id="Mounting-装载"><a href="#Mounting-装载" class="headerlink" title="Mounting(装载)"></a>Mounting(装载)</h2><ul>
+<li>getInitialState(): 在组件挂载之前调用一次。返回值将会作为 this.state 的初始值。</li>
+<li>componentWillMount()：服务器端和客户端都只调用一次，在初始化渲染执行之前立刻调用。不会触发再次渲染。</li>
+<li>componentDidMount()：在初始化渲染执行之后立刻调用一次，仅客户端有效（服务器端不会调用）,可以设置state，会触发再次渲染，组件内部可以通过 <h2 id="Updating-更新"><a href="#Updating-更新" class="headerlink" title="Updating (更新)"></a>Updating (更新)</h2></li>
+<li>componentWillReceiveProps(nextProps) 在组件接收到新的 props 的时候调用。在初始化渲染的时候，该方法不会调用。通常可以调用this.setState方法来比较this.props和nextProps的执行状态，完成对state的修改。在该函数中调用 this.setState() 将不会引起第二次渲染。</li>
+<li>shouldComponentUpdate(nextProps,nextState): 在接收到新的 props 或者 state，将要渲染之前调用。该方法用来拦截新的props或state，然后判断是否更新组件</li>
+</ul>
+<p>该方法在初始化渲染的时候不会调用，在使用 forceUpdate 方法的时候也不会。如果确定新的 props 和 state 不会导致组件更新，则此处应该 返回 false。</p>
+<ul>
+<li>componentWillUpdate(nextProps, nextState)：在接收到新的 props 或者 state 之前立刻调用，即更新之前调用</li>
+</ul>
+<p>在初始化渲染的时候该方法不会被调用。使用该方法做一些更新之前的准备工作。</p>
+<blockquote>
+<p>注意：你不能在该方法中使用 this.setState()。如果需要更新 state 来响应某个 prop 的改变，请使用 componentWillReceiveProps。</p>
+</blockquote>
+<ul>
+<li>componentDidUpdate(prevProps, prevState): 在组件的更新已经同步到 DOM 中之后立刻被调用。</li>
+</ul>
+<p>该方法不会在初始化渲染的时候调用。使用该方法可以在组件更新之后操作 DOM 元素。</p>
+<h2 id="Unmounting-移除"><a href="#Unmounting-移除" class="headerlink" title="Unmounting(移除)"></a>Unmounting(移除)</h2><ul>
+<li>componentWillUnmount：在组件从 DOM 中移除的时候立刻被调用。</li>
+</ul>
+<p>在该方法中执行任何必要的清理,收尾工作，比如无效的定时器，或者清除在 componentDidMount 中创建的 DOM 元素。</p>
+<p><img src="/image/react生命周期详解/react生命周期笔记-1.png" alt></p>
+<p>参考文章:</p>
+<ul>
+<li><a href="http://www.devio.org/2016/08/10/React-Native%E4%B9%8BReact%E9%80%9F%E5%AD%A6%E6%95%99%E7%A8%8B-(%E4%B8%AD" target="_blank" rel="noopener">React-Native之React速学教程-(中)</a>/)</li>
+<li><a href="https://www.jianshu.com/p/c36a0601b00c" target="_blank" rel="noopener">react生命周期</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-24T07:29:48.614Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生命周期/">生命周期</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/27/react生命周期详解/&title=《react生命周期详解》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/27/react生命周期详解/&title=《react生命周期详解》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/27/react生命周期详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《react生命周期详解》 — Zh的Blog&url=http://yoursite.com/2017/06/27/react生命周期详解/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/27/react生命周期详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/18/hexo的使用与部署/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">hexo的使用与部署</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/13/在javascript使用es6-es7/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在javascript使用es6,es7</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/27/react生命周期详解/&title=《react生命周期详解》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/27/react生命周期详解/&title=《react生命周期详解》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/27/react生命周期详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《react生命周期详解》 — Zh的Blog&url=http://yoursite.com/2017/06/27/react生命周期详解/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/27/react生命周期详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS27DMAxF0ex/0+60QBP7PlIpIPFqFPgT62hAiKReLzyuX+P+yt+75N3768uGDBkytmVct4N84P4t8kx6981MZMiQMYDxaXK1Z/rhmH9XhgwZMu6fIdtHEpo7yydDhgwZPFzyTxKqDBkyZNSS2PtQywMrSYa/mIvLkCFjQwavuv//76/0N2TIkLEV4wrHKiq/gmYlQ4aMoxmrSmm82Zmy+XxkyJAxgVE7+JXu01JAkAbLkCFjGINs10j5rHM4I20hyJAhYwKjlnCmxX0STPkCyZAhYwIj3RTWjquSsMupb37LkCFjDGNtwF1VekPBV4YMGQMYadJYK8CRCdWOkcmQIWMmIy261Yp0PPV9WFAZMmSMYfDgS/D8yc67cfdAhgwZGzJWHZvgwTc93hFsLmXIkHEoIw2paauSl97ShPljEitDhoxDGekGjpT4O+E1ZsuQIeNoBp9KrWNItnqdNuoDRoYMGQcx+gX9Wguz1kB9yMVlyJAxjMH3XWm5bdUVFHBlyJBxEKPfyOSbP96Y5MmzDBkyJjBqwY6H1+Lk+KLLkCHjUMYVDl6g5wlw55AZ6mPIkCFjc0Ya5njATRsAtc1oDJMhQ8a2DH5QlQRrvlppWhv0XWXIkHEoIw18aWOyFnz5bGXIkCGjU9bv/HOxDidDhgwZpRJ/8SwtDtkyZMiYwCBJbOfzvM1QfEaGDBlHM4pHHBp/WktrFzQ1ZciQsR/jB5LzvCoAsquSAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

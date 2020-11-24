@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>h5触摸事件实现移动端进度条 | Zh的Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="HTML5,Javascript">
+    <meta name="description" content="#前言 HTML中新添加了许多新的事件，但由于兼容性的问题,许多事件都没有广泛的应用，接下来为大家介绍一些好用的移动端触摸事件: touchstart、touchmove、touchend。 #介绍 下面我们来简单介绍一下这几个事件:  touchstart： 当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。 touchmove：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间">
+<meta name="keywords" content="HTML5,Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h5触摸事件实现移动端进度条">
+<meta property="og:url" content="http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/index.html">
+<meta property="og:site_name" content="Zh的Blog">
+<meta property="og:description" content="#前言 HTML中新添加了许多新的事件，但由于兼容性的问题,许多事件都没有广泛的应用，接下来为大家介绍一些好用的移动端触摸事件: touchstart、touchmove、touchend。 #介绍 下面我们来简单介绍一下这几个事件:  touchstart： 当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。 touchmove：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-11-24T07:29:48.613Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="h5触摸事件实现移动端进度条">
+<meta name="twitter:description" content="#前言 HTML中新添加了许多新的事件，但由于兼容性的问题,许多事件都没有广泛的应用，接下来为大家介绍一些好用的移动端触摸事件: touchstart、touchmove、touchend。 #介绍 下面我们来简单介绍一下这几个事件:  touchstart： 当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。 touchmove：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">h5触摸事件实现移动端进度条</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">h5触摸事件实现移动端进度条</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-01T08:49:23.000Z" itemprop="datePublished" class="page-time">
+  2018-05-01
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-h5触摸事件实现移动端进度条"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">h5触摸事件实现移动端进度条</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-01 16:49:23" datetime="2018-05-01T08:49:23.000Z"  itemprop="datePublished">2018-05-01</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>#前言</p>
+<p>HTML中新添加了许多新的事件，但由于兼容性的问题,许多事件都没有广泛的应用，接下来为大家介绍一些好用的移动端触摸事件: touchstart、touchmove、touchend。</p>
+<p>#介绍</p>
+<p>下面我们来简单介绍一下这几个事件:</p>
+<ul>
+<li><strong>touchstart</strong>： 当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。</li>
+<li><strong>touchmove</strong>：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。</li>
+<li><strong>touchend</strong>：当手指从屏幕上离开的时候触发。</li>
+</ul>
+<p>这些触摸事件具有常见的dom属性。此外，他们还包含着三个用于跟踪触摸的属性：</p>
+<ul>
+<li><strong>touches</strong>：表示当前跟踪的触摸操作的touch对象的数组。</li>
+<li><strong>targetTouches</strong>：特定于事件目标的Touch对象的数组。</li>
+<li><strong>changeTouches</strong>：表示自上次触摸以来发生了什么改变的Touch对象的数组。</li>
+</ul>
+<p>每个touch对象包含的属性如下：</p>
+<ul>
+<li><strong>clientX</strong>：触摸目标在视口中的x坐标。</li>
+<li><strong>clientY</strong>：触摸目标在视口中的y坐标。</li>
+<li><strong>pageX</strong>：触摸目标在页面中的x坐标。</li>
+<li><strong>pageY</strong>：触摸目标在页面中的y坐标。</li>
+<li><strong>screenX</strong>：screenX：触摸目标在屏幕中的x坐标。</li>
+<li><strong>screenY</strong>：screenX：触摸目标在屏幕中的x坐标。</li>
+<li><strong>identifier</strong>：标识触摸的唯一ID。</li>
+<li><strong>target</strong>：screenX：触摸目标在屏幕中的x坐标。</li>
+</ul>
+<p>了解了触摸事件的特征，那就开始紧张刺激的实战环节吧</p>
+<p>#实战</p>
+<p>下面我们来通过使用触摸事件来实现一个移动端可滑动的进度条</p>
+<p>我们先进行HTML的布局</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-wrapper"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-btn"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CSS部分此处省略</p>
+</blockquote>
+<p>获取dom元素，并初始化触摸起点和按钮离容器最左方的距离</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> progressWrapper = <span class="built_in">document</span>.querySelector(<span class="string">'.progress-wrapper'</span>)</span><br><span class="line"><span class="keyword">const</span> progress = <span class="built_in">document</span>.querySelector(<span class="string">'.progress'</span>)</span><br><span class="line"><span class="keyword">const</span> progressBtn = <span class="built_in">document</span>.querySelector(<span class="string">'.progress-btn'</span>)</span><br><span class="line"><span class="keyword">const</span> progressWrapperWidth = progressWrapper.offsetWidth</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> touchPoint = <span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> btnLeft = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>监听<strong>touchstart</strong>事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">progressBtn.addEventListener(<span class="string">'touchstart'</span>, e =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> touch = e.touches[<span class="number">0</span>]</span><br><span class="line">    touchPoint = touch.clientX	<span class="comment">//	获取触摸的初始位置</span></span><br><span class="line">	btnLeft = <span class="built_in">parseInt</span>(getComputedStyle(progressBtn, <span class="literal">null</span>)[<span class="string">'left'</span>], <span class="number">10</span>)	<span class="comment">//	此处忽略IE浏览器兼容性</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>监听<strong>touchmove</strong>事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">progressBtn.addEventListener(<span class="string">'touchmove'</span>, e =&gt; &#123;</span><br><span class="line">e.preventDefault()</span><br><span class="line">    <span class="keyword">let</span> touch = e.touches[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> diffX = touch.clientX - touchPoint	<span class="comment">//	通过当前位置与初始位置之差计算改变的距离</span></span><br><span class="line">    <span class="keyword">let</span> btnLeftStyle = btnLeft + diffX	<span class="comment">//	为按钮定义新的left值</span></span><br><span class="line"></span><br><span class="line">    touch.target.style.left = btnLeftStyle + <span class="string">'px'</span></span><br><span class="line"></span><br><span class="line">    progress.style.width = (btnLeftStyle / progressWrapperWidth) * <span class="number">100</span> + <span class="string">'%'</span>	<span class="comment">//	通过按钮的left值与进度条容器长度的比值，计算进度条的长度百分比</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>通过一系列的逻辑运算，我们的进度条已经基本实现了，但是发现了一个问题，当触摸位置超出进度条容器时，会产生bug，我们再来做一些限制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (btnLeftStyle &gt; progressWrapperWidth) &#123;</span><br><span class="line">    btnLeftStyle = progressWrapperWidth</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (btnLeftStyle &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    btnLeftStyle = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，一个简单的移动端滚动条就实现了</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-24T07:29:48.613Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/&title=《h5触摸事件实现移动端进度条》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/&title=《h5触摸事件实现移动端进度条》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《h5触摸事件实现移动端进度条》 — Zh的Blog&url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/05/趁年轻，赶快学一波vim/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">趁年轻，赶快学一波vim</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/11/React使用Better-Scroll封装Scroll组件/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">React使用Better-Scroll封装Scroll组件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/&title=《h5触摸事件实现移动端进度条》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/&title=《h5触摸事件实现移动端进度条》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《h5触摸事件实现移动端进度条》 — Zh的Blog&url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/01/h5触摸事件实现移动端进度条/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awW7rMAwEwP7/T7fAOxVo5SxJMa+H8Smw3dijApSy1MdHfHz+O35+/n7m+3G6mp9PnnvtwMPDw2u9+unISae/egY8v88z+/npeHh4eNu8+WSQF+6k9FeH+3geDw8P77/yqoV+fmd1eY2Hh4f313jP1BxfLfRvnffw8PDwYl4eK+RXe/Hu/Il4eHh427y78cF7Pr+pv4eHh4dX7KrnZXd+vrpkj94TDw8Pb4GXLG3zqjuPLXpXX7w5Hh4e3hovKdPzyLUXT4zCXDw8PLxlXm/71K24tponlPt7eHh4eFd51R/5ydV8S0FvUokW1nh4eHhXecnXVcOIpHmWL52f3+fFIOLh4eEt83oBQW/zVq9tVp1m8PDw8DZ4vWhgsjErH5o8BCk08/Dw8PDGvOqDeyOXxxnzv/pl3sPDw8O7ysuL+2QbQS/ISKaZfLmPh4eHt8HLvyJvXE3aV/OBw8PDw9vgVTcK5BuzegOUbyOIJio8PDy8BV41cp2z56FwdQjw8PDwNnjVH/mTO+9+fyHgwMPDw7vEyzcw9TZC9aaE3iRx7O/h4eHhLfAmbae8wf98fx7gFt4WDw8Pb4FXDXPzIp4z8qvlfRB4eHh4b+RNItp526y3gH6RsuDh4eEt8KpN/byI50vhZGqpbibAw8PD2+DlQUD1ai/C6G0RiJb+eHh4eJd41eKbTyGT+CMPR17cg4eHh7fGq5b4XpQwub+a0+Lh4eFt8G6V416keyvgOA4THh4e3gKvWnzzhXV1Sd1ryBVmPzw8PLyrvF7A2gsakoHrsY9vi4eHh7fGyxfE8yJebZ5diCTw8PDw/jAvDzXysLgaVTR/DeDh4eEt8KpxwDyczb/5aMHDw8Nb4yVFvLfJoDpJ9JpbxyU4Hh4e3gKv2gCrNrdubQuo/gPw8PDwFnhfaouxhtpq8SIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

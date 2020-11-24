@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>hexo的使用与部署 | Zh的Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="前端">
+    <meta name="description" content="github page在github 上的项目名称必须和自己用户名一样 自己的用户名是aaa项目名得是 aaa.github.io 安装hexo ,一些工具(git,node)  略过 关联 Hexo 与 GitHub Pages我们如何让本地git项目与远程的github建立联系呢？用 SSH keys 生成SSH keys输入你自己的邮箱地址1ssh-keygen -t rsa -C &quot;940">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo的使用与部署">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/hexo的使用与部署/index.html">
+<meta property="og:site_name" content="Zh的Blog">
+<meta property="og:description" content="github page在github 上的项目名称必须和自己用户名一样 自己的用户名是aaa项目名得是 aaa.github.io 安装hexo ,一些工具(git,node)  略过 关联 Hexo 与 GitHub Pages我们如何让本地git项目与远程的github建立联系呢？用 SSH keys 生成SSH keys输入你自己的邮箱地址1ssh-keygen -t rsa -C &quot;940">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://yoursite.com/image/hexo的一些使用和配置/hexo的一些使用和配置-1.png">
+<meta property="og:updated_time" content="2020-11-24T07:29:48.613Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo的使用与部署">
+<meta name="twitter:description" content="github page在github 上的项目名称必须和自己用户名一样 自己的用户名是aaa项目名得是 aaa.github.io 安装hexo ,一些工具(git,node)  略过 关联 Hexo 与 GitHub Pages我们如何让本地git项目与远程的github建立联系呢？用 SSH keys 生成SSH keys输入你自己的邮箱地址1ssh-keygen -t rsa -C &quot;940">
+<meta name="twitter:image" content="http://yoursite.com/image/hexo的一些使用和配置/hexo的一些使用和配置-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">hexo的使用与部署</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">hexo的使用与部署</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-18T09:18:20.000Z" itemprop="datePublished" class="page-time">
+  2018-03-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/hexo/">hexo</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#github-page"><span class="post-toc-number">1.</span> <span class="post-toc-text">github page</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关联-Hexo-与-GitHub-Pages"><span class="post-toc-number"></span> <span class="post-toc-text">关联 Hexo 与 GitHub Pages</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成SSH-keys"><span class="post-toc-number"></span> <span class="post-toc-text">生成SSH keys</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加-SSH-Key-到-GitHub"><span class="post-toc-number"></span> <span class="post-toc-text">添加 SSH Key 到 GitHub</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number"></span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置Git个人信息"><span class="post-toc-number"></span> <span class="post-toc-text">配置Git个人信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置-Deployment"><span class="post-toc-number"></span> <span class="post-toc-text">配置 Deployment</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本地文件提交到-GitHub-Pages"><span class="post-toc-number"></span> <span class="post-toc-text">本地文件提交到 GitHub Pages</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意1："><span class="post-toc-number">1.</span> <span class="post-toc-text">注意1：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写文章"><span class="post-toc-number"></span> <span class="post-toc-text">写文章</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#生成页面"><span class="post-toc-number">0.1.</span> <span class="post-toc-text">生成页面</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#搜索功能的实现"><span class="post-toc-number">0.2.</span> <span class="post-toc-text">搜索功能的实现</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#出错"><span class="post-toc-number"></span> <span class="post-toc-text">出错</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部署出错"><span class="post-toc-number"></span> <span class="post-toc-text">部署出错</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-hexo的使用与部署"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">hexo的使用与部署</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-18 17:18:20" datetime="2018-03-18T09:18:20.000Z"  itemprop="datePublished">2018-03-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/hexo/">hexo</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="github-page"><a href="#github-page" class="headerlink" title="github page"></a>github page</h4><p>在github 上的项目名称必须和自己用户名一样</p>
+<p>自己的用户名是aaa项目名得是 aaa.github.io</p>
+<p>安装hexo ,一些工具(git,node)  略过</p>
+<h1 id="关联-Hexo-与-GitHub-Pages"><a href="#关联-Hexo-与-GitHub-Pages" class="headerlink" title="关联 Hexo 与 GitHub Pages"></a>关联 Hexo 与 GitHub Pages</h1><p>我们如何让本地git项目与远程的github建立联系呢？用 SSH keys</p>
+<h2 id="生成SSH-keys"><a href="#生成SSH-keys" class="headerlink" title="生成SSH keys"></a>生成SSH keys</h2><p>输入你自己的邮箱地址<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "940166841@qq.com"</span><br></pre></td></tr></table></figure></p>
+<p>在回车中会提示你输入一个密码，这个密码会在你提交项目时使用，如果为空的话提交项目时则不用输入，我们按回车不设置密码。</p>
+<h2 id="添加-SSH-Key-到-GitHub"><a href="#添加-SSH-Key-到-GitHub" class="headerlink" title="添加 SSH Key 到 GitHub"></a>添加 SSH Key 到 GitHub</h2><p>打开 C:\Users\lizhihao \ .ssh\id_rsa.pub，此文件里面内容为刚才生成的密钥，准确的复制这个文件的内容，粘贴到 <a href="https://github.com/settings/ssh" target="_blank" rel="noopener">https://github.com/settings/ssh</a> 的 new SSH key 中</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>可以输入下面的命令，看看设置是否成功，<a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>的部分不要修改：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<p>如果是下面的反馈：</p>
+<blockquote>
+<p> The authenticity of host ‘github.com (207.97.227.239)’ can’t be established.<br>RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br>Are you sure you want to continue connecting (yes/no)?</p>
+</blockquote>
+<p>不要紧张，输入yes就好，然后会看到：</p>
+<blockquote>
+<p>Hi Lizhihao97! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+<h2 id="配置Git个人信息"><a href="#配置Git个人信息" class="headerlink" title="配置Git个人信息"></a>配置Git个人信息</h2><p>现在你已经可以通过 SSH 链接到 GitHub 了，还有一些个人信息需要完善的。<br>Git 会根据用户的名字和邮箱来记录提交。GitHub 也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name "lizhihao97"</span><br><span class="line">git config --global user.email "940166841@qq.com"</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置-Deployment"><a href="#配置-Deployment" class="headerlink" title="配置 Deployment"></a>配置 Deployment</h2><p>在_config.yml文件中，找到Deployment，然后按照如下修改，用户名改成你的：</p>
+<p>需要注意的是：冒号后面记得空一格！<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:lizhihao97/lizhihao97.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="本地文件提交到-GitHub-Pages"><a href="#本地文件提交到-GitHub-Pages" class="headerlink" title="本地文件提交到 GitHub Pages"></a>本地文件提交到 GitHub Pages</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 删除旧的 public 文件</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line">// 生成新的 public 文件</span><br><span class="line">hexo generate</span><br><span class="line">或者</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line">// 开始部署</span><br><span class="line">hexo deploye</span><br><span class="line">或者</span><br><span class="line">hexo d</span><br><span class="line">在浏览器中输入 https://lizhihao97.github.io （用户名改成你的）看到了 Hexo 与 GitHub Pages 已经成功关联了</span><br></pre></td></tr></table></figure>
+<h4 id="注意1："><a href="#注意1：" class="headerlink" title="注意1："></a>注意1：</h4><p>若上面操作失败，则需要提前安装一个扩展：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>写一篇文章,默认是以post作为模板<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new first(文章名)</span><br></pre></td></tr></table></figure></p>
+<p>tags里面写标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">- 前端</span><br><span class="line">- 后端</span><br><span class="line"></span><br><span class="line">分类</span><br><span class="line">categories:</span><br><span class="line">- 技术</span><br></pre></td></tr></table></figure></p>
+<h5 id="生成页面"><a href="#生成页面" class="headerlink" title="生成页面"></a>生成页面</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about  //以page 作为模版,会自动生成里面的index.md</span><br></pre></td></tr></table></figure>
+<h5 id="搜索功能的实现"><a href="#搜索功能的实现" class="headerlink" title="搜索功能的实现"></a>搜索功能的实现</h5><blockquote>
+<p><a href="https://github.com/alexbruno/hexo-generator-json-content" target="_blank" rel="noopener">https://github.com/alexbruno/hexo-generator-json-content</a></p>
+</blockquote>
+<p><img src="/image/hexo的一些使用和配置/hexo的一些使用和配置-1.png" alt></p>
+<blockquote>
+<p>部分学习自：<a href="http://www.jianshu.com/p/39562a0d8eb6" target="_blank" rel="noopener">http://www.jianshu.com/p/39562a0d8eb6</a></p>
+</blockquote>
+<h1 id="出错"><a href="#出错" class="headerlink" title="出错"></a>出错</h1><h2 id="部署出错"><a href="#部署出错" class="headerlink" title="部署出错"></a>部署出错</h2><p>Error: Host key verification failed.<br>fatal: Could not read from remote repository.<br>Please make sure you have the correct access rights and the repository exists.</p>
+<p>解决方法：条件SSHkey<br>$ ssh-keygen -t rsa -C “<a href="mailto:imsofter@163.com" target="_blank" rel="noopener">imsofter@163.com</a>“<br>三次回车，即可设置密码为空</p>
+<p>将生成的C:\Users\用户名.ssh目录下的id_rsa.pub添加到github上</p>
+<p>再测试是否可以连接到github上，<br>$ ssh <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a><br>Hi imsofter! You’ve successfully authenticated, but GitHub does not provide shell access.<br>Connection to github.com closed.</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-24T07:29:48.613Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/18/hexo的使用与部署/&title=《hexo的使用与部署》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/18/hexo的使用与部署/&title=《hexo的使用与部署》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/18/hexo的使用与部署/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hexo的使用与部署》 — Zh的Blog&url=http://yoursite.com/2018/03/18/hexo的使用与部署/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/18/hexo的使用与部署/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/11/React使用Better-Scroll封装Scroll组件/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">React使用Better-Scroll封装Scroll组件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/27/react生命周期详解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">react生命周期详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/18/hexo的使用与部署/&title=《hexo的使用与部署》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/18/hexo的使用与部署/&title=《hexo的使用与部署》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/18/hexo的使用与部署/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hexo的使用与部署》 — Zh的Blog&url=http://yoursite.com/2018/03/18/hexo的使用与部署/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/18/hexo的使用与部署/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3awW6DQAxFUf7/p6lUZRGpgtxnQ1s8d1YRIjCHheWxvW147d/r5+/3K+/r6Dp/znbHkiFDxmMZ++ki95z/l3+a9L0yZMhYjcFfc/7f/tPOg/LhdRkyZMgoAXhqyNNHGTJkyOAMEijJ1v844MqQIeNRjDQ48pSR8Pjh9oKzuAwZMh7I6DQG7v79S/0NGTJk/GNGv9Bfu/Oq/byeJkOGjNGMy0pdOGj2p0KCDFeGDBkjGCRc8oJ+vwlaHCCTIUPGAgwSfGuFMB7ESZp4GNZlyJAxmpEW2tIXkCNrp2ImQ4aMFRgkRNYOtHwIg6ek6BArQ4aMoYy0PsebBJ1BDRLoDzNcGTJkDGKkQw887HbwaUIpQ4aMFRidgJsW7NKGKEkrZciQMZvRL5bVAjQPuKjNIEOGjNEM8no+TnHVsAUP3DJkyFiBkQ5GBKNa4Jnx+BeZGZEhQ8Y4RjpUkQ6KdYYz0sELGTJkTGV0psbuSPJqeBkyZMxmpO1Jfg8fpOAAGTJkrMng+WMtNPMQ3BpQkyFDxpIMfiitJX9psxM1L2XIkDGUUTumFnPP0vXOwJkMGTJmMPZwdVoCtbYlaqnKkCFjNIOv2qbJQZQcd9OwLkOGjHmMtNxGtsU/TacxsJHZEBkyZAxi1Mr6/VGJ9HN8OMrKkCFjeQbZbmfMIi3byZAhQ0YaUvlBlDw/vl+GDBkLMNJDbH/wIm1eooArQ4aMoYza4AUJu/0CXGc4Q4YMGSMYX+xHPOKwfX92AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

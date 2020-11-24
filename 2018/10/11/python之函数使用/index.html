@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>python之函数使用 | Zh的Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python">
+    <meta name="description" content="一、Python自定义函数的简单使用与其他许多语言相似，函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。 python中函数定义的规则，基本由以下几个步骤组成：  函数代码块以 def 关键词开头，后接函数标识符名称和圆括号() 任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数 函数的第一行语句可以选择性地使用文档字符串（用于存放函数说明） return [表达">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之函数使用">
+<meta property="og:url" content="http://yoursite.com/2018/10/11/python之函数使用/index.html">
+<meta property="og:site_name" content="Zh的Blog">
+<meta property="og:description" content="一、Python自定义函数的简单使用与其他许多语言相似，函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。 python中函数定义的规则，基本由以下几个步骤组成：  函数代码块以 def 关键词开头，后接函数标识符名称和圆括号() 任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数 函数的第一行语句可以选择性地使用文档字符串（用于存放函数说明） return [表达">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-11-24T07:29:48.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python之函数使用">
+<meta name="twitter:description" content="一、Python自定义函数的简单使用与其他许多语言相似，函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。 python中函数定义的规则，基本由以下几个步骤组成：  函数代码块以 def 关键词开头，后接函数标识符名称和圆括号() 任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数 函数的第一行语句可以选择性地使用文档字符串（用于存放函数说明） return [表达">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python之函数使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python之函数使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-11T07:25:23.000Z" itemprop="datePublished" class="page-time">
+  2018-10-11
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、Python自定义函数的简单使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、Python自定义函数的简单使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、函数的传值与传地址"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、函数的传值与传地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、函数的返回值"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、函数的返回值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、函数的参数"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、函数的参数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、位置参数"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1、位置参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、关键字参数"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2、关键字参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、默认值参数"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3、默认值参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、可变参数"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4、可变参数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#匿名函数"><span class="post-toc-number">5.</span> <span class="post-toc-text">匿名函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展"><span class="post-toc-number">6.</span> <span class="post-toc-text">拓展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、map"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">1、map</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、reduce"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">2、reduce</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、filter"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">3、filter</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、sorted"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">4、sorted</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-python之函数使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python之函数使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-11 15:25:23" datetime="2018-10-11T07:25:23.000Z"  itemprop="datePublished">2018-10-11</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、Python自定义函数的简单使用"><a href="#一、Python自定义函数的简单使用" class="headerlink" title="一、Python自定义函数的简单使用"></a>一、Python自定义函数的简单使用</h2><p>与其他许多语言相似，函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。</p>
+<p>python中函数定义的规则，基本由以下几个步骤组成：</p>
+<ul>
+<li>函数代码块以 def 关键词开头，后接函数标识符名称和圆括号()</li>
+<li>任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数</li>
+<li>函数的第一行语句可以选择性地使用文档字符串（用于存放函数说明）</li>
+<li>return [表达式] 结束函数，选择性地返回一个值给调用方。不带表达式的 return 相当于返回 None。</li>
+</ul>
+<p>语法示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">( parameters )</span>:</span></span><br><span class="line">   <span class="string">'''函数_文档字符串'''</span></span><br><span class="line">   function_suite</span><br><span class="line">   <span class="keyword">return</span> [expression]</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(num1,num2)</span>:</span></span><br><span class="line">    <span class="string">"两数之和"</span></span><br><span class="line">    <span class="keyword">return</span> num1+num2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用函数</span></span><br><span class="line">print(sum(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、函数的传值与传地址"><a href="#二、函数的传值与传地址" class="headerlink" title="二、函数的传值与传地址"></a>二、函数的传值与传地址</h2><p>函数的传值与传地址从字面意思来看很好理解，传值就是传入一个参数的值，传址就是传入一个参数的地址，也就是内存的地址（相当于指针）。他们的区别是如果函数里面对传入的参数重新赋值，函数外的全局变量是否相应改变，用传值传入的参数是不会改变的，用传址传入就会发生改变。</p>
+<p>我们来看一下下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">afferentValue</span><span class="params">(num)</span>:</span></span><br><span class="line">    num = <span class="number">2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">afferentAddress</span><span class="params">(list)</span>:</span></span><br><span class="line">    list.append(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">num = <span class="number">1</span></span><br><span class="line">list = [<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行函数</span></span><br><span class="line">afferentValue(num)</span><br><span class="line">afferentAddress(list)</span><br><span class="line"></span><br><span class="line">print(num)</span><br><span class="line">print(list)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>从以上的实例看出，当将变量传入函数时，并在函数内部修改后，在函数作用域外打印传入函数的变量，Number类型的变量并没有修改成功，List类型的变量修改成功，这就是，传值与传地址的区别</p>
+<blockquote>
+<p>python的传值和传址是根据传入参数的类型来选择的，传值的参数类型：数字，字符串，元组，传址的参数类型：列表，字典</p>
+</blockquote>
+<h2 id="三、函数的返回值"><a href="#三、函数的返回值" class="headerlink" title="三、函数的返回值"></a>三、函数的返回值</h2><p>与许多语言不同的是，Python的函数返回值可以有多个，当返回值为多个时，返回的结果为1个元组</p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">returnTest</span><span class="params">(num1, num2)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> num1, num2</span><br><span class="line"></span><br><span class="line">print(returnTest(<span class="number">1</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="四、函数的参数"><a href="#四、函数的参数" class="headerlink" title="四、函数的参数"></a>四、函数的参数</h2><h3 id="1、位置参数"><a href="#1、位置参数" class="headerlink" title="1、位置参数"></a>1、位置参数</h3><p>大部分情况下我们使用的都是位置参数，例子如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">userInfo</span><span class="params">(name, age, sex)</span>:</span></span><br><span class="line">    print(<span class="string">'姓名:%s, 年龄: %d, 性别: sex: %s'</span> % (name, age, sex))</span><br><span class="line"></span><br><span class="line">userInfo(<span class="string">'李XX'</span>, <span class="number">18</span>, <span class="string">'男'</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">姓名:李XX, 年龄: <span class="number">18</span>, 性别: sex: 男</span><br></pre></td></tr></table></figure>
+<p>我们为什么要使用位置参数，原因显而易见，有时我们在调用函数时，必须按照顺序输入参数，否则输出的信息与预料中会有出入。</p>
+<h3 id="2、关键字参数"><a href="#2、关键字参数" class="headerlink" title="2、关键字参数"></a>2、关键字参数</h3><p>前面说了，在大多数情况下我们用的是位置参数，但是如果参数很多的时候，我们在调用时可能很难记住参数的顺序，我们引入关键字参数即使用参数名提供的参数，在于明确每个参数的作用，使得函数调用的时候，参数的含义变得更加清晰。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">userInfo</span><span class="params">(name, age, sex)</span>:</span></span><br><span class="line">    print(<span class="string">'姓名:%s, 年龄: %d, 性别: sex: %s'</span> % (name, age, sex))</span><br><span class="line"></span><br><span class="line">userInfo(name=<span class="string">'李XX'</span>, sex=<span class="string">'男'</span>, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">姓名:李XX, 年龄: <span class="number">18</span>, 性别: sex: 男</span><br></pre></td></tr></table></figure>
+<p>可以看出，我们使用关键字参数后，传参的顺序打乱，但是输出的结果与使用位置参数时一样，这就是关键字参数的奇妙之处</p>
+<h3 id="3、默认值参数"><a href="#3、默认值参数" class="headerlink" title="3、默认值参数"></a>3、默认值参数</h3><p>有时候，我们自定义的函数中，如果调用的时候没有设置参数，需要给个默认值，这时候就需要用到默认值参数了。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">userInfo</span><span class="params">(name, age, sex=<span class="string">'男'</span>)</span>:</span></span><br><span class="line">    print(<span class="string">'姓名:%s, 年龄: %d, 性别: sex: %s'</span> % (name, age, sex))</span><br><span class="line"></span><br><span class="line">userInfo(<span class="string">'李XX'</span>, <span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">姓名:李XX, 年龄: <span class="number">18</span>, 性别: sex: 男</span><br></pre></td></tr></table></figure>
+<p>从输出结果可以看出，当你设置了默认参数的时候，在调用函数的时候，不传该参数，就会使用默认值。但是有一点需要注意的是：<strong>只有在形参表末尾的那些参数可以有默认参数值</strong>，也就是说你不能在声明函数形参的时候，先声明有默认值的形参而后声明没有默认值的形参。这是因为赋给形参的值是根据实参传递的顺序而赋值的。例如，def func(a, b=1) 是有效的，但是 def func(a=1, b) 是 无效 的。</p>
+<h3 id="4、可变参数"><a href="#4、可变参数" class="headerlink" title="4、可变参数"></a>4、可变参数</h3><p>可变参数有两种，第一种是<em>args，第二种是</em>kwargs。</p>
+<p>先来看第一种，用老师布置的作业举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multi</span><span class="params">(*numbers)</span>:</span></span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">        result = num * result</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">print(multi(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">24</span></span><br></pre></td></tr></table></figure>
+<p>在上面定义的函数中，<strong>*numbers</strong>是一个可变参数，而且它的本质其实就是一个元组，使用了可变参数后，我们可以在函数调用时传入若干个参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">userInfo</span><span class="params">(name, age, sex, **hobby)</span>:</span></span><br><span class="line">    print(<span class="string">'姓名:%s, 年龄: %d, 性别: sex: %s'</span> % (name, age, sex))</span><br><span class="line">    print(<span class="string">'爱好：&#123;&#125;'</span>.format(hobby))</span><br><span class="line">    </span><br><span class="line">userInfo(<span class="string">'李XX'</span>, <span class="number">18</span>, <span class="string">'男'</span>, hobby1 = <span class="string">'编程'</span>, hobby2 = <span class="string">'编程'</span>, hobby3 = <span class="string">'编程'</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">姓名:李XX, 年龄: <span class="number">18</span>, 性别: sex: 男</span><br><span class="line">爱好：&#123;<span class="string">'hobby1'</span>: <span class="string">'编程'</span>, <span class="string">'hobby2'</span>: <span class="string">'编程'</span>, <span class="string">'hobby3'</span>: <span class="string">'编程'</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，这种可变参数，在调用函数时传入实参需用关键字参数，因为它的本质是一个字典。</p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>lambda表达式，通常是在需要一个函数，但是又不想费神去命名一个函数的场合下使用，被称为匿名函数.lambda所表示的匿名函数内容应该比较简单，如果函数内容复杂的话，应该重新定义一个函数。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add = <span class="keyword">lambda</span> x, y : x+y</span><br><span class="line"></span><br><span class="line">print(add(<span class="number">1</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>从实例看，我们可以把冒号左边的表达式，冒号右边的表达式理解为函数返回值。</p>
+<p>Python提供了很多函数式编程的特性，如：map、reduce、filter、sorted等这些函数都支持函数作为参数。lambda函数就可以应用在函数式编程中。</p>
+<blockquote>
+<p>函数式编程中的函数这个术语不是指计算机中的函数（实际上是Subroutine），而是指<strong>数学中的函数</strong>，即<strong>自变量的映射</strong>。也就是说一个<strong>函数的值仅决定于函数参数的值，不依赖其他状态。</strong>比如sqrt(x)函数计算x的平方根，只要x不变，不论什么时候调用，调用几次，值都是不变的。</p>
+</blockquote>
+<p>比如将列表中的元素按照绝对值大小进行升序排列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">-4</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-2</span>, <span class="number">-6</span>]</span><br><span class="line"></span><br><span class="line">list = sorted(list, key=<span class="keyword">lambda</span> x: abs(x))</span><br><span class="line"></span><br><span class="line">print(list)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">-6</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>上面我们提到了map、reduce、filter、sorted这些函数，那它们到底是用来干什么的，让我们来介绍一下</p>
+<h3 id="1、map"><a href="#1、map" class="headerlink" title="1、map"></a>1、map</h3><p>map函数接受两个参数，第一个参数是函数的名称，第二个参数一个可迭代对象。map函数就是将具体数值根据算法进行计算，，并将结果保存为一个迭代器。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x)</span>:</span></span><br><span class="line">    x += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">newList = map(add, list)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> newList:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h3 id="2、reduce"><a href="#2、reduce" class="headerlink" title="2、reduce"></a>2、reduce</h3><p>　reduce同map函数一样，也是接受两个参数，但不同的是，reduce函数将当前数值的计算结果与下一个数值的计算结果进行累积计算。reduce()函数第一次运行时会将可迭代对象的第一项作为第一个参数，第二项作为第二个参数传入函数。第二次运行则会将函数第一次运行所返回的结果作为第一个参数，可迭代对象的第三项作为第二个参数传入函数……<br>　<br>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accumulate</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">result = reduce(accumulate, list)</span><br><span class="line"></span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+<h3 id="3、filter"><a href="#3、filter" class="headerlink" title="3、filter"></a>3、filter</h3><p>同上两个函数一样，接受两个参数，第一个参数为函数名，第二个参数为序列。但filter根据序列中各个元素作用与函数时，函数返回结果(True/False)来决定该元素是否保留。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetchEven</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">newList = filter(fetchEven, list)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> newList:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h3 id="4、sorted"><a href="#4、sorted" class="headerlink" title="4、sorted"></a>4、sorted</h3><p>sorted顾名思义，就是用来排序的，sorted可以接受一个key函数(可选参数)，实现自定义排序。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">-4</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">-2</span>, <span class="number">-6</span>]</span><br><span class="line"></span><br><span class="line">newList = sorted(list, key=abs)</span><br><span class="line"></span><br><span class="line">print(newList)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">3</span>, <span class="number">-4</span>, <span class="number">5</span>, <span class="number">-6</span>]</span><br></pre></td></tr></table></figure>
+<p>以上几个函数的优点是，在执行过程中没有副作用。例如当我们使用map处理list时，并不会改变传入的list，而时返回了一个新的迭代器对象。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-24T07:29:48.614Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/10/11/python之函数使用/&title=《python之函数使用》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/10/11/python之函数使用/&title=《python之函数使用》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/10/11/python之函数使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python之函数使用》 — Zh的Blog&url=http://yoursite.com/2018/10/11/python之函数使用/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/10/11/python之函数使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/12/Node-js项目线上服务器部署与发布/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Node.js项目线上服务器部署与发布</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/05/趁年轻，赶快学一波vim/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">趁年轻，赶快学一波vim</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/10/11/python之函数使用/&title=《python之函数使用》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/10/11/python之函数使用/&title=《python之函数使用》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/10/11/python之函数使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python之函数使用》 — Zh的Blog&url=http://yoursite.com/2018/10/11/python之函数使用/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/10/11/python之函数使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aSW7DMBAEQP//084DHAvdQyWAyOIpiA1rSgdittcrPu8v5/M7n9//9un1U15/cTAwMB7LeF+e67Cu/3P9lOTTJDYMDIxzGN8enF+ms+CSZ13HhoGBgdEy2m/mPAwMDIwZY/bIpADGwMDAmBWx10HMiuHk9d1ci2NgYDyQkXfd///vP5lvYGBgPIrxLs96epdc5XVUGBgYWzPyCy5p/bcLEysXLgYGxmmMexttbRmcl8c357MYGBgPYbSJ4OxibRcyWiQGBsYJjJVLcD01vB5SRiMEDAyMAxjFQsNCo79tuhXJIgYGxgGM2QrFLNxZkTysuTEwMLZgzBr0bVMsGX+244dffgcDA2NrRpvAzVpsbcnatv8wMDB2ZdygLy/E9TFAVMRiYGBsxJglZMny1izcIgVczysxMDAexVgJLul6tYVxvWyBgYGxNSNf1VpnzEriKBnFwMDYmtFegskFmgeaN+PqihwDA+MYRjsMuCvo4SoGBgbGwYx2nDkLN3+h0c4IBgbG1ox82aItVpPglmAYGBgHMO5d9soTxPVLHwMDY2/Guzz5RZw3/duxRPFeMTAwtmDkJ8fc1bZbTxwxMDB2YuSX7EpAs0WK4sLFwMA4gNE2wmapXjs8KF4NBgYGxqiYXCk788EnBgYGRstoVytmZe3SHi4GBsZjGe0wIG+H5UOCtgDGwMA4hzFL1IY/tDBmuGGoiYGB8TzGD5HFxgSdSF9GAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

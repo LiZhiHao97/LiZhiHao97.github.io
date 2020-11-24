@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>React使用Better-Scroll封装Scroll组件 | Zh的Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="React">
+    <meta name="description" content="#React使用Better-Scroll封装Scroll组件 better-scroll是一个移动端滚动插件，基于iscroll重写的。普通的网页滚动效果是很死板的，better-scroll具有拉伸、回弹的效果并且滚动的时候具有惯性，很接近原生体验。better-scroll更多相关内容见github地址相信很多人在vue中都用过better-scroll，因为better-scroll的作者">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React使用Better-Scroll封装Scroll组件">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/index.html">
+<meta property="og:site_name" content="Zh的Blog">
+<meta property="og:description" content="#React使用Better-Scroll封装Scroll组件 better-scroll是一个移动端滚动插件，基于iscroll重写的。普通的网页滚动效果是很死板的，better-scroll具有拉伸、回弹的效果并且滚动的时候具有惯性，很接近原生体验。better-scroll更多相关内容见github地址相信很多人在vue中都用过better-scroll，因为better-scroll的作者">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-11-24T07:29:48.613Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React使用Better-Scroll封装Scroll组件">
+<meta name="twitter:description" content="#React使用Better-Scroll封装Scroll组件 better-scroll是一个移动端滚动插件，基于iscroll重写的。普通的网页滚动效果是很死板的，better-scroll具有拉伸、回弹的效果并且滚动的时候具有惯性，很接近原生体验。better-scroll更多相关内容见github地址相信很多人在vue中都用过better-scroll，因为better-scroll的作者">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React使用Better-Scroll封装Scroll组件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React使用Better-Scroll封装Scroll组件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-11T12:06:20.000Z" itemprop="datePublished" class="page-time">
+  2018-04-11
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-React使用Better-Scroll封装Scroll组件"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React使用Better-Scroll封装Scroll组件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-11 20:06:20" datetime="2018-04-11T12:06:20.000Z"  itemprop="datePublished">2018-04-11</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>#React使用Better-Scroll封装Scroll组件</p>
+<p><strong>better-scroll</strong>是一个移动端滚动插件，基于iscroll重写的。普通的网页滚动效果是很死板的，better-scroll具有拉伸、回弹的效果并且滚动的时候具有惯性，很接近原生体验。better-scroll更多相关内容见<a href="https://github.com/ustbhuangyi/better-scroll" target="_blank" rel="noopener">github地址</a><br>相信很多人在vue中都用过better-scroll，因为better-scroll的作者很好的把它运用在了vue中，几乎一说到better-scroll大家就会想到vue(2333~~~)。其实better-scroll是利用原生js编写的，所以在所有使用原生js的框架中几乎都能使用它，这里我将在React中的运用better-scroll<br>首先在<strong>src</strong>目录下新建一个<strong>common</strong>目录用来存放公用的组件，新建<strong>scroll</strong>文件夹，然后在scroll文件夹下新建<strong>Scroll.js</strong>和<strong>scroll.scss文件</strong>。先来分析一下怎么设计这个<strong>Scroll</strong>组件，better-scroll的原理就是外层一个固定高度的元素，这个元素有一个子元素，当子元素的高度超过父元素时就可以发生滚动，那么子元素里面的内容从何而来？React为我们提供了一个props的<strong>children</strong>属性用来获取组件的子组件，这样就可以用<strong>Scroll</strong>组件去包裹需要滚动的内容。在<strong>Scroll</strong>组件内部的列表，会随着增加或减少原生而发生变化，这个时候元素的高度也会发生变化，better-scroll需要重新计算高度，better-scroll为我们提供了一个<strong>refresh</strong>方法用来重新计算以保证正常滚动，组件发生变化会触发React的<strong>componentDidUpdate</strong>周期函数，所以我们在这个函数里面对better-scroll进行刷新操作，同时需要一个props来告诉Scroll是否<strong>refresh</strong>刷新。某些情况下我们需要手动调用Scroll组件去刷新better-scroll，这里对外暴露一个Scroll组件的方法。better-scroll默认是禁止点击的，需要提供一个控制是否点击的props，为了监听滚动Scroll需要对外暴露一个函数，便于使用Scroll的组件监听滚动进行其他操作。当组件销毁时我们把better-scroll绑定的事件取消以及better-scroll实例给销毁掉，释放资源</p>
+<p>安装better-scroll</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install better-scroll --save</span><br></pre></td></tr></table></figure>
+<p>对组件的props进行类型检查，这里使用<strong>prop-types</strong>库。类型检查是为了提早发现开发问题，避免一些bug产生</p>
+<p>安装props-types</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prop-types --save</span><br></pre></td></tr></table></figure>
+<p>编写<strong>Scroll</strong>组件</p>
+<p><code>scroll.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;</span><br><span class="line">import ReactDOM from &quot;react-dom&quot;</span><br><span class="line">import PropTypes from &quot;prop-types&quot;</span><br><span class="line">import BScroll from &quot;better-scroll&quot;</span><br><span class="line">import &quot;./scroll.styl&quot;</span><br><span class="line"></span><br><span class="line">class Scroll extends React.Component &#123;</span><br><span class="line">    componentDidUpdate() &#123;</span><br><span class="line">        //组件更新后，如果实例化了better-scroll并且需要刷新就调用refresh()函数</span><br><span class="line">        if (this.bScroll &amp;&amp; this.props.refresh === true) &#123;</span><br><span class="line">            this.bScroll.refresh();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        this.scrollView = ReactDOM.findDOMNode(this.refs.scrollView);</span><br><span class="line">        if (!this.bScroll) &#123;</span><br><span class="line">            this.bScroll = new BScroll(this.scrollView, &#123;</span><br><span class="line">                //实时派发scroll事件</span><br><span class="line">                probeType: 3,</span><br><span class="line">                click: this.props.click</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            if (this.props.onScroll) &#123;</span><br><span class="line">                this.bScroll.on(&quot;scroll&quot;, (scroll) =&gt; &#123;</span><br><span class="line">                    this.props.onScroll(scroll);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUnmount() &#123;</span><br><span class="line">        this.bScroll.off(&quot;scroll&quot;);</span><br><span class="line">        this.bScroll = null;</span><br><span class="line">    &#125;</span><br><span class="line">    refresh() &#123;</span><br><span class="line">        if (this.bScroll) &#123;</span><br><span class="line">            this.bScroll.refresh();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div className=&quot;scroll-view&quot; ref=&quot;scrollView&quot;&gt;</span><br><span class="line">                &#123;/*获取子组件*/&#125;</span><br><span class="line">                &#123;this.props.children&#125;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Scroll.defaultProps = &#123;</span><br><span class="line">    click: true,</span><br><span class="line">    refresh: false,</span><br><span class="line">    onScroll: null</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Scroll.propTypes = &#123;</span><br><span class="line">    //是否启用点击</span><br><span class="line">    click: PropTypes.bool,</span><br><span class="line">    //是否刷新</span><br><span class="line">    refresh: PropTypes.bool,</span><br><span class="line">    onScroll: PropTypes.func</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Scroll</span><br></pre></td></tr></table></figure>
+<p>上诉代码中<strong>ref</strong>属性来标记div元素，使用<strong>ReactDOM.findDOMNode</strong>函数来获取dom对象，然后传入better-scroll构造函数中初始化。在Scroll组件中调用外部组件的方法只需要把外部组件的函数通过props传入即可，这里就是<strong>onScroll</strong>函数</p>
+<p><code>scroll.scss</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.scroll-view &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>scroll.styl中就是一个匹配父容器宽高的样式</p>
+<p>接下来在Recommend组件中加入Scroll组件，导入Scroll组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import Scroll from &apos;@/common/scroll/Scroll&apos;</span><br></pre></td></tr></table></figure>
+<p>在state中增加<strong>refreshScroll</strong>用来控制Scroll组件是否刷新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.state = &#123;</span><br><span class="line">    refreshScroll: false</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用<strong>Scroll</strong>组件包裹需要的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Scroll refresh=&#123;this.state.refreshScroll&#125;&gt;</span><br><span class="line">	// 我是内容啊</span><br><span class="line">&lt;/Scroll&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-24T07:29:48.613Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/&title=《React使用Better-Scroll封装Scroll组件》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/&title=《React使用Better-Scroll封装Scroll组件》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React使用Better-Scroll封装Scroll组件》 — Zh的Blog&url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/01/h5触摸事件实现移动端进度条/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">h5触摸事件实现移动端进度条</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/18/hexo的使用与部署/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">hexo的使用与部署</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/&title=《React使用Better-Scroll封装Scroll组件》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/&title=《React使用Better-Scroll封装Scroll组件》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React使用Better-Scroll封装Scroll组件》 — Zh的Blog&url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/11/React使用Better-Scroll封装Scroll组件/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3a207DQAwFwP7/TxeJJyRocmyvoUiTJ9RLsrNIa9f24xFfz8/r69/fr+Rb+T2vXz984eHh4bWWfr3oa0ByvYJd37O6xT/cGQ8PD2+NNznWJ5uVb2i+3Xh4eHjvw+st5fq4z8MDHh4e3n/kJYBqclwNM3h4eHjvw0uO/rxomxd882+t11rw8PDwYl6vAfa3f6/39/Dw8PBaXfXDh2+cUucF35sV4uHh4S3wtgusSUKcjw4kT39Ub4eHh4e3wJsHj2ojrTey8PIzeHh4eAu8s8d99LDiu9WNW4xmeHh4eMUm/WQUoDdqkAeVckkXDw8Pb8xLRgSqCXRv4+ZDBnh4eHjbvHnhYLIdveZZ3kLDw8PD2+BNllsNANepcx4YDvxiwMPDw2vx8hbUJIHuDQpU22x4eHh4v8PbYFcb//lwwKQJh4eHh3eKNz/iE/apcavqmvHw8PA2eNVbV1PhvA+Vp9HVIQY8PDy8PV7v8K2WBvIUvFpuiEYH8PDw8I7yqsXW/HDPw09+3Beac3h4eHgLvPwQv/5kcqDnW1kNVOVwgoeHhzfg5T/1e+9Wk++8zBGtGQ8PD+8o7+zQVZ4iJwEp//+8fAUPDw9vjZekvHlTP1/cRvkjys3x8PDwBrzecZyXA+bfzQsZNyk7Hh4e3gLvZnRpsPRJeaLaZivn7Hh4eHgtXm9ZyeN7rbVncBXKH3h4eHjLvGNp66A8kYSowkgWHh4e3lHes3hVG115QpxscR6uChEGDw8Pr8ibt/N7QwPVwu7emAIeHh5ej9cLBr3iQrVk3CsK4+Hh4f0ObzKn1CvpHuvXXd8BDw8P7w14+QOqSfCpIDEKDHh4eHhHefkrvSGDXtn3xoKHh4e3xsubUnkSnJcPJrCboIWHh4e3wKs2wHrDAb2Cb7Jxh/t7eHh4eFe8D169QQX+D4jSAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

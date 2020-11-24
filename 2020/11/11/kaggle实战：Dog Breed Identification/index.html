@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>kaggle实战：Dog Breed Identification | Zh的Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="pytorch,深度学习,kaggle,迁移学习">
+    <meta name="description" content="前言本文将使用pytorch框架解决kaggle竞赛中犬种识别挑战的问题，该比赛的数据集为ImageNet数据集的子集，在本次挑战中，我们将尝试分类120种不同的犬种  竞赛网址：https://www.kaggle.com/c/dog-breed-identification数据集可在该网址获取  导入相关模块1234567891011import torchimport torch.nn as">
+<meta name="keywords" content="pytorch,深度学习,kaggle,迁移学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kaggle实战：Dog Breed Identification">
+<meta property="og:url" content="http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/index.html">
+<meta property="og:site_name" content="Zh的Blog">
+<meta property="og:description" content="前言本文将使用pytorch框架解决kaggle竞赛中犬种识别挑战的问题，该比赛的数据集为ImageNet数据集的子集，在本次挑战中，我们将尝试分类120种不同的犬种  竞赛网址：https://www.kaggle.com/c/dog-breed-identification数据集可在该网址获取  导入相关模块1234567891011import torchimport torch.nn as">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-11-24T07:29:48.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kaggle实战：Dog Breed Identification">
+<meta name="twitter:description" content="前言本文将使用pytorch框架解决kaggle竞赛中犬种识别挑战的问题，该比赛的数据集为ImageNet数据集的子集，在本次挑战中，我们将尝试分类120种不同的犬种  竞赛网址：https://www.kaggle.com/c/dog-breed-identification数据集可在该网址获取  导入相关模块1234567891011import torchimport torch.nn as">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">kaggle实战：Dog Breed Identification</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">kaggle实战：Dog Breed Identification</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-11T13:26:20.000Z" itemprop="datePublished" class="page-time">
+  2020-11-11
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#导入相关模块"><span class="post-toc-number">2.</span> <span class="post-toc-text">导入相关模块</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设置随机数种子"><span class="post-toc-number">3.</span> <span class="post-toc-text">设置随机数种子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#整理数据集"><span class="post-toc-number">4.</span> <span class="post-toc-text">整理数据集</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#图像增广"><span class="post-toc-number">5.</span> <span class="post-toc-text">图像增广</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据集导入"><span class="post-toc-number">6.</span> <span class="post-toc-text">数据集导入</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#定义模型"><span class="post-toc-number">7.</span> <span class="post-toc-text">定义模型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#定义训练函数"><span class="post-toc-number">8.</span> <span class="post-toc-text">定义训练函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#最终超参数选择"><span class="post-toc-number">9.</span> <span class="post-toc-text">最终超参数选择</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#训练"><span class="post-toc-number">10.</span> <span class="post-toc-text">训练</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试"><span class="post-toc-number">11.</span> <span class="post-toc-text">测试</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="kaggle实战：Dog Breed Identification-kaggle实战：Dog Breed Identification"
+  class="post-article article-type-kaggle实战：Dog Breed Identification fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">kaggle实战：Dog Breed Identification</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-11 21:26:20" datetime="2020-11-11T13:26:20.000Z"  itemprop="datePublished">2020-11-11</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将使用pytorch框架解决kaggle竞赛中犬种识别挑战的问题，该比赛的数据集为ImageNet数据集的子集，在本次挑战中，我们将尝试分类120种不同的犬种</p>
+<blockquote>
+<p>竞赛网址：<a href="https://www.kaggle.com/c/dog-breed-identification" target="_blank" rel="noopener">https://www.kaggle.com/c/dog-breed-identification</a><br>数据集可在该网址获取</p>
+</blockquote>
+<h1 id="导入相关模块"><a href="#导入相关模块" class="headerlink" title="导入相关模块"></a>导入相关模块</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> random</span><br></pre></td></tr></table></figure>
+<h1 id="设置随机数种子"><a href="#设置随机数种子" class="headerlink" title="设置随机数种子"></a>设置随机数种子</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">random.seed(<span class="number">0</span>)</span><br><span class="line">torch.manual_seed(<span class="number">0</span>)</span><br><span class="line">torch.cuda.manual_seed(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="整理数据集"><a href="#整理数据集" class="headerlink" title="整理数据集"></a>整理数据集</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_dir = <span class="string">'./dog-breed-identification'</span>  <span class="comment"># 数据集目录</span></span><br><span class="line">label_file, train_dir, test_dir = <span class="string">'labels.csv'</span>, <span class="string">'train'</span>, <span class="string">'test'</span>  <span class="comment"># data_dir中的文件夹、文件</span></span><br><span class="line">new_data_dir = <span class="string">'./train_valid_test'</span>  <span class="comment"># 整理之后的数据存放的目录</span></span><br><span class="line">valid_ratio = <span class="number">0.1</span>  <span class="comment"># 验证集所占比例</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mkdir_if_not_exist</span><span class="params">(path)</span>:</span></span><br><span class="line">  <span class="comment"># 若目录path不存在，则创建目录</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(os.path.join(*path)):</span><br><span class="line">    os.makedirs(os.path.join(*path))</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reorg_dog_data</span><span class="params">(data_dir, label_file, train_dir, test_dir, new_data_dir, valid_ratio)</span>:</span></span><br><span class="line">  <span class="comment"># 读取训练数据标签</span></span><br><span class="line">  labels = pd.read_csv(os.path.join(data_dir, label_file))</span><br><span class="line">  id2label = &#123;Id: label <span class="keyword">for</span> Id, label <span class="keyword">in</span> labels.values&#125;  <span class="comment"># (key: value): (id: label)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 随机打乱训练数据</span></span><br><span class="line">  train_files = os.listdir(os.path.join(data_dir, train_dir))</span><br><span class="line">  random.shuffle(train_files)    </span><br><span class="line"></span><br><span class="line">  <span class="comment"># 原训练集</span></span><br><span class="line">  valid_ds_size = int(len(train_files) * valid_ratio)  <span class="comment"># 验证集大小</span></span><br><span class="line">  <span class="keyword">for</span> i, file <span class="keyword">in</span> enumerate(train_files):</span><br><span class="line">    img_id = file.split(<span class="string">'.'</span>)[<span class="number">0</span>]  <span class="comment"># file是形式为id.jpg的字符串</span></span><br><span class="line">    img_label = id2label[img_id]</span><br><span class="line">    <span class="keyword">if</span> i &lt; valid_ds_size:</span><br><span class="line">      mkdir_if_not_exist([new_data_dir, <span class="string">'valid'</span>, img_label])</span><br><span class="line">      shutil.copy(os.path.join(data_dir, train_dir, file),</span><br><span class="line">            os.path.join(new_data_dir, <span class="string">'valid'</span>, img_label))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      mkdir_if_not_exist([new_data_dir, <span class="string">'train'</span>, img_label])</span><br><span class="line">      shutil.copy(os.path.join(data_dir, train_dir, file),</span><br><span class="line">            os.path.join(new_data_dir, <span class="string">'train'</span>, img_label))</span><br><span class="line">    mkdir_if_not_exist([new_data_dir, <span class="string">'train_valid'</span>, img_label])</span><br><span class="line">    shutil.copy(os.path.join(data_dir, train_dir, file),</span><br><span class="line">          os.path.join(new_data_dir, <span class="string">'train_valid'</span>, img_label))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 测试集</span></span><br><span class="line">  mkdir_if_not_exist([new_data_dir, <span class="string">'test'</span>, <span class="string">'unknown'</span>])</span><br><span class="line">  <span class="keyword">for</span> test_file <span class="keyword">in</span> os.listdir(os.path.join(data_dir, test_dir)):</span><br><span class="line">    shutil.copy(os.path.join(data_dir, test_dir, test_file),</span><br><span class="line">          os.path.join(new_data_dir, <span class="string">'test'</span>, <span class="string">'unknown'</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reorg_dog_data(data_dir, label_file, train_dir, test_dir, new_data_dir, valid_ratio)</span><br></pre></td></tr></table></figure>
+<h1 id="图像增广"><a href="#图像增广" class="headerlink" title="图像增广"></a>图像增广</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">transform_train = transforms.Compose([</span><br><span class="line">  <span class="comment"># 随机对图像裁剪出面积为原图像面积0.08~1倍、且高和宽之比在3/4~4/3的图像，再放缩为高和宽均为224像素的新图像</span></span><br><span class="line">  transforms.RandomResizedCrop(<span class="number">224</span>, scale=(<span class="number">0.08</span>, <span class="number">1.0</span>), ratio=(<span class="number">3.0</span>/<span class="number">4.0</span>, <span class="number">4.0</span>/<span class="number">3.0</span>)),</span><br><span class="line">  <span class="comment"># 以0.5的概率随机水平翻转</span></span><br><span class="line">  transforms.RandomHorizontalFlip(),</span><br><span class="line">  <span class="comment"># 随机更改亮度、对比度和饱和度</span></span><br><span class="line">  transforms.ColorJitter(brightness=<span class="number">0.4</span>, contrast=<span class="number">0.4</span>, saturation=<span class="number">0.4</span>),</span><br><span class="line">  transforms.ToTensor(),</span><br><span class="line">  <span class="comment"># 对各个通道做标准化，(0.485, 0.456, 0.406)和(0.229, 0.224, 0.225)是在ImageNet上计算得的各通道均值与方差</span></span><br><span class="line">  transforms.Normalize([<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], [<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])  <span class="comment"># ImageNet上的均值和方差</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在测试集上的图像增强只做确定性的操作</span></span><br><span class="line">transform_test = transforms.Compose([</span><br><span class="line">  transforms.Resize(<span class="number">256</span>),</span><br><span class="line">  <span class="comment"># 将图像中央的高和宽均为224的正方形区域裁剪出来</span></span><br><span class="line">  transforms.CenterCrop(<span class="number">224</span>),</span><br><span class="line">  transforms.ToTensor(),</span><br><span class="line">  transforms.Normalize([<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], [<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h1 id="数据集导入"><a href="#数据集导入" class="headerlink" title="数据集导入"></a>数据集导入</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">train_ds = torchvision.datasets.ImageFolder(root=os.path.join(new_data_dir, <span class="string">'train'</span>),</span><br><span class="line">                       transform=transform_train)</span><br><span class="line">valid_ds = torchvision.datasets.ImageFolder(root=os.path.join(new_data_dir, <span class="string">'valid'</span>),</span><br><span class="line">                       transform=transform_test)</span><br><span class="line">train_valid_ds = torchvision.datasets.ImageFolder(root=os.path.join(new_data_dir, <span class="string">'train_valid'</span>),</span><br><span class="line">                       transform=transform_train)</span><br><span class="line">test_ds = torchvision.datasets.ImageFolder(root=os.path.join(new_data_dir, <span class="string">'test'</span>),</span><br><span class="line">                       transform=transform_test)</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line">train_iter = torch.utils.data.DataLoader(train_ds, batch_size=batch_size, shuffle=<span class="literal">True</span>)</span><br><span class="line">valid_iter = torch.utils.data.DataLoader(valid_ds, batch_size=batch_size, shuffle=<span class="literal">True</span>)</span><br><span class="line">train_valid_iter = torch.utils.data.DataLoader(train_valid_ds, batch_size=batch_size, shuffle=<span class="literal">True</span>)</span><br><span class="line">test_iter = torch.utils.data.DataLoader(test_ds, batch_size=batch_size, shuffle=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h1><p>由于此竞赛使用了ImageNet数据集的子集，我们可以使用迁移学习的方法，使用在ImageNet完整数据集上预训练的模型来抽取图像特征。</p>
+<p>此处我们使用预训练的ResNet-34模型，直接复用预训练模型在输出层的输入，即抽取的特征，然后我们重新定义输出层，本次我们仅对重定义的输出层的参数进行训练，而对于用于抽取特征的部分，我们保留预训练模型的参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_net</span><span class="params">(device)</span>:</span></span><br><span class="line">  finetune_net = models.resnet34(pretrained=<span class="literal">False</span>)  <span class="comment"># 预训练的resnet34网络</span></span><br><span class="line">  finetune_net.load_state_dict(torch.load(<span class="string">'./dog-breed-identification/resnet34-333f7ec4.pth'</span>))</span><br><span class="line">  <span class="keyword">for</span> param <span class="keyword">in</span> finetune_net.parameters():  <span class="comment"># 冻结参数</span></span><br><span class="line">      param.requires_grad = <span class="literal">False</span></span><br><span class="line">  <span class="comment"># 原finetune_net.fc是一个输入单元数为512，输出单元数为1000的全连接层</span></span><br><span class="line">  <span class="comment"># 替换掉原finetune_net.fc，新finetuen_net.fc中的模型参数会记录梯度</span></span><br><span class="line">  finetune_net.fc = nn.Sequential(</span><br><span class="line">      nn.Linear(in_features=<span class="number">512</span>, out_features=<span class="number">256</span>),</span><br><span class="line">      nn.ReLU(),</span><br><span class="line">      nn.Linear(in_features=<span class="number">256</span>, out_features=<span class="number">120</span>)  <span class="comment"># 120是输出类别数</span></span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">return</span> finetune_net</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>若将pretrained设为true，会自动下载预训练好的resnet34网络，但是速度较慢，且容易断，还没断点续传功能<br> resnet34-333f7ec4.pth可在网络中搜素下载</p>
+</blockquote>
+<h1 id="定义训练函数"><a href="#定义训练函数" class="headerlink" title="定义训练函数"></a>定义训练函数</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate_loss_acc</span><span class="params">(data_iter, net, device)</span>:</span></span><br><span class="line">  loss = nn.CrossEntropyLoss()</span><br><span class="line">  is_training = net.training</span><br><span class="line">  net.eval()</span><br><span class="line">  l_sum, acc_sum, n = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">  <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter:</span><br><span class="line">      X, y = X.to(device), y.to(device)</span><br><span class="line">      y_hat = net(X)</span><br><span class="line">      l = loss(y_hat, y)</span><br><span class="line">      l_sum += l.item() * y.shape[<span class="number">0</span>]</span><br><span class="line">      acc_sum += (y_hat.argmax(dim=<span class="number">1</span>) == y).sum().item()</span><br><span class="line">      n += y.shape[<span class="number">0</span>]</span><br><span class="line">  net.train(is_training)</span><br><span class="line">  <span class="keyword">return</span> l_sum / n, acc_sum / n</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(net, train_iter, valid_iter, num_epochs, lr, wd, device, lr_period,</span></span></span><br><span class="line"><span class="function"><span class="params">      lr_decay)</span>:</span></span><br><span class="line">  loss = nn.CrossEntropyLoss()</span><br><span class="line">  optimizer = optim.SGD(net.fc.parameters(), lr=lr, momentum=<span class="number">0.9</span>, weight_decay=wd)</span><br><span class="line">  net = net.to(device)</span><br><span class="line">  <span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    train_l_sum, n, start = <span class="number">0.0</span>, <span class="number">0</span>, time.time()</span><br><span class="line">    <span class="keyword">if</span> epoch &gt; <span class="number">0</span> <span class="keyword">and</span> epoch % lr_period == <span class="number">0</span>:  <span class="comment"># 每lr_period个epoch，学习率衰减一次</span></span><br><span class="line">      lr = lr * lr_decay</span><br><span class="line">      <span class="keyword">for</span> param_group <span class="keyword">in</span> optimizer.param_groups:</span><br><span class="line">        param_group[<span class="string">'lr'</span>] = lr</span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> train_iter:</span><br><span class="line">      X, y = X.to(device), y.to(device)</span><br><span class="line">      optimizer.zero_grad()</span><br><span class="line">      y_hat = net(X)</span><br><span class="line">      l = loss(y_hat, y)</span><br><span class="line">      l.backward()</span><br><span class="line">      optimizer.step()</span><br><span class="line">      train_l_sum += l.item() * y.shape[<span class="number">0</span>]</span><br><span class="line">      n += y.shape[<span class="number">0</span>]</span><br><span class="line">    time_s = <span class="string">"time %.2f sec"</span> % (time.time() - start)</span><br><span class="line">    <span class="keyword">if</span> valid_iter <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">      valid_loss, valid_acc = evaluate_loss_acc(valid_iter, net, device)</span><br><span class="line">      epoch_s = (<span class="string">"epoch %d, train loss %f, valid loss %f, valid acc %f, "</span></span><br><span class="line">             % (epoch + <span class="number">1</span>, train_l_sum / n, valid_loss, valid_acc))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      epoch_s = (<span class="string">"epoch %d, train loss %f, "</span></span><br><span class="line">             % (epoch + <span class="number">1</span>, train_l_sum / n))</span><br><span class="line">    print(epoch_s + time_s + <span class="string">', lr '</span> + str(lr))</span><br></pre></td></tr></table></figure>
+<h1 id="最终超参数选择"><a href="#最终超参数选择" class="headerlink" title="最终超参数选择"></a>最终超参数选择</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">num_epochs, lr_period, lr_decay = <span class="number">20</span>, <span class="number">10</span>, <span class="number">0.1</span></span><br><span class="line">lr, wd = <span class="number">0.03</span>, <span class="number">1e-4</span></span><br><span class="line">device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)</span><br><span class="line">net = get_net(device)</span><br><span class="line">train(net, train_iter, valid_iter, num_epochs, lr, wd, device, lr_period, lr_decay)</span><br></pre></td></tr></table></figure>
+<h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net = get_net(device)</span><br><span class="line">train(net, train_valid_iter, <span class="literal">None</span>, num_epochs, lr, wd, device, lr_period, lr_decay)</span><br></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>使用训练好的模型队测试数据进行预测，并写入<strong>submission.csv</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-24T07:29:48.614Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kaggle/">kaggle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/">pytorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/迁移学习/">迁移学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/&title=《kaggle实战：Dog Breed Identification》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/&title=《kaggle实战：Dog Breed Identification》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《kaggle实战：Dog Breed Identification》 — Zh的Blog&url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/11/24/目标检测mAP计算以及coco评价标准/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">目标检测mAP计算以及coco评价标准</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/15/彻底解决git clone太慢的头疼问题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">彻底解决git clone太慢的头疼问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/&title=《kaggle实战：Dog Breed Identification》 — Zh的Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/&title=《kaggle实战：Dog Breed Identification》 — Zh的Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《kaggle实战：Dog Breed Identification》 — Zh的Blog&url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/11/11/kaggle实战：Dog Breed Identification/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACnklEQVR42u3aQXLCMAwFUO5/6fYAIaAvWZTpvKyYJhi/LOxfyY9H+fq5XNe7d09e716fTO8evvDw8PDGU78bunfNp57OBw8PD+8zvLtB00U5+OHCt9L54OHh4X0nr77c92J3fWPAw8PD+0+85lTCiI+Hh4f3t7x0uLu/pEWH3tRXai14eHh4nZrAmxLD93xe6e/h4eHhjUuulaJq2u6al2iD2eLh4eEt8OoL7gR5qgTcnCceHh7eUV5lga5MupdsT20ht8/g4eHhLfN6i2+6JVS2lnqwDjp7eHh4eEd5kxBcPyA1KUZUtqsn38XDw8Nb4M0PV/UKE71icXNLw8PDw1vgpXG5crygUiCu3J2US/Dw8PA2ePOCbBrN04A+ouLh4eEt805F5O0tIXhxeHh4eGu89OjVI7zSTaIe1uOjA3h4eHiHeOlCXC+eVsoTk2D9ugmHh4eHt8frhdrJi6gfBahsDPE+hoeHhzfmVZD1Jb7Z1G9tJ28adXh4eHhrvHRFnTSo5gcUguYcHh4e3jKvEmfjFtQ4uE9eGR4eHt4Gr1dO7YXdyuTmbbbbEfDw8PAO8eZN/XTJ3jhYcPsreHh4eMu8+iGAUyWG9Jn4VeLh4eEt8OolhnprP21W9V5WfUw8PDy8z/MmxwUmmLQhd3sXDw8Pb5nXK7bWX00akdNX+WQEPDw8vDVefehK1E6D9ak2WN74w8PDw+vA4n/vB6F8EpHr88HDw8Pb4/XW2EnM7TXSJrEbDw8Pb4N3tuR6dks4UOrFw8PDW+P1ihS9YuvrDeNwNsbDw8P7Ml4lNNePI9TZQdTGw8PD+wJeuqzXA3o9ZAclXTw8PLw13iT4poe00mJx2sbDw8PD2+bVh0ib+umBg7RYfPjoAB4eHt776xczVpxxOaxnygAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
