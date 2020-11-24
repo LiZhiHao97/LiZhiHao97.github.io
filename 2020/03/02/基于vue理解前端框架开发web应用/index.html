@@ -202,10 +202,22 @@
 <h3 id="2-3-Vue的一些原理"><a href="#2-3-Vue的一些原理" class="headerlink" title="2.3 Vue的一些原理"></a>2.3 Vue的一些原理</h3><p>使用vue会让人感到身心愉悦,它同时具备angular和react的优点,轻量级,api简单,文档齐全,简单强大,麻雀虽小五脏俱全。按官方的话来说Vue是一套构建用户界面的渐进式框架。</p>
 <p>那么,怎样理解什么是渐进式框架？在这之前,我们首先要理解什么是框架。在最初的前端开发中，为了完成某个功能,我们需要通过js在HTML页面中获得dom节点，随后获得dom节点中的文本内容或者在dom节点上添加事件,进行一系列的程序操作，但是,如果任务量很大的情况下，代码会随着业务的增加而变得臃肿和混乱,在现实的开发中,负责的逻辑和巨大的开发量，是原生js无法完成的。</p>
 <p>这个时候,开发人员将js代码分为了三个板块,数据(Model),逻辑控制(*),视图(View),数据板块只负责数据部分,视图板块负责更改样式,逻辑控制负责联系视图板块和数据板块,这样子有很大的好处,当需求发生变动时,只需要修改对应的板块就好</p>
-<p><img src="/image/基于vue理解前端框架开发web应用/1.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/基于vue理解前端框架开发web应用/1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>这种开发模式，就是所谓的MV结构，我们现在了解的MVC，MVP，MVVM都是MV的衍生物，对比这几种框架模式，我们会总结出来一个本质的特点，那就是这些开发模式都是让视图和数据间不会发生直接联系．对比用原生JS获得dom的操作，你会发现原生dom流其实是将dom作为数据，从dom中获得Model，随后又更改dom来实现更新视图，视图和模型其实混在一起，所以代码自然混乱，不易维护。</p>
 <h2 id="三、项目解析"><a href="#三、项目解析" class="headerlink" title="三、项目解析"></a>三、项目解析</h2><p>首先，我先来带你看下项目大致的结构目录</p>
-<p><img src="/image/基于vue理解前端框架开发web应用/2.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/基于vue理解前端框架开发web应用/2.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>我们大致看一下，各部分分别是干什么的</p>
 <pre>
 ├── build                  // 构建服务和 webpack 配置
@@ -225,7 +237,13 @@
 
 <p>本文主要以介绍<strong>src</strong>目录下的的目录为主</p>
 <h3 id="3-1-api"><a href="#3-1-api" class="headerlink" title="3.1 api"></a>3.1 api</h3><p>这里我只进行简单的文字说明，具体的代码请自行阅读项目。</p>
-<p><img src="/image/基于vue理解前端框架开发web应用/3.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/基于vue理解前端框架开发web应用/3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <blockquote>
 <p>可以清楚的看到，api中有两个文件，config.js与index.js</p>
 </blockquote>
@@ -233,7 +251,13 @@
 <p><strong>Index.js</strong>里存放着一个个调用api请求的函数，本项目使用npm上的axios进行http请求。如果对此没有基础，可以简单理解为本文件中的一个个函数通过config.js里的api常量，通过http请求获取到相应的数据。</p>
 <h3 id="3-2-assets"><a href="#3-2-assets" class="headerlink" title="3.2 assets"></a>3.2 assets</h3><p><strong>assets</strong>中存放了可以通用的一些资源，比如字体，图片（如网站logo，很多地方都会用到），还有一些util函数</p>
 <h3 id="3-3-components"><a href="#3-3-components" class="headerlink" title="3.3 components"></a>3.3 components</h3><p><strong>Component</strong>即为组件，这个概念在前文已经说的很详细了，就不再过多赘述。</p>
-<p><img src="/image/基于vue理解前端框架开发web应用/4.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/基于vue理解前端框架开发web应用/4.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <blockquote>
 <p>可以清楚的看到，里面放着各个板块相应的组件，其中common是可以用来通用的组件，即不同页面中相同的组件，放在common中便于重用。</p>
 </blockquote>
@@ -508,10 +532,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = 'good bye~';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '你又在偷偷学习了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

@@ -212,7 +212,13 @@
 <li>componentWillUnmount：在组件从 DOM 中移除的时候立刻被调用。</li>
 </ul>
 <p>在该方法中执行任何必要的清理,收尾工作，比如无效的定时器，或者清除在 componentDidMount 中创建的 DOM 元素。</p>
-<p><img src="/image/react生命周期详解/react生命周期笔记-1.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/react生命周期详解/react生命周期笔记-1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>参考文章:</p>
 <ul>
 <li><a href="http://www.devio.org/2016/08/10/React-Native%E4%B9%8BReact%E9%80%9F%E5%AD%A6%E6%95%99%E7%A8%8B-(%E4%B8%AD" target="_blank" rel="noopener">React-Native之React速学教程-(中)</a>/)</li>
@@ -476,10 +482,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = 'good bye~';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '你又在偷偷学习了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

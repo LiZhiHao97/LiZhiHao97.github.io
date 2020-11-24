@@ -178,11 +178,15 @@
 
     
         1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图
+                
+                    
+                    
+                
+                
+            
 2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标
 
-TP(True Positive)：IoU &gt; 0.5的检测框数（同一GT只计算一次） 
-FP(False Positive)：IoU &lt;= 0.5的检测框（或者是检测到同一个GT的多余检测框数量）
-FN(Fal...
+TP(Tru...
     
 
         <a href="/2020/11/24/目标检测mAP计算以及coco评价标准/" class="post-more waves-effect waves-button">
@@ -331,8 +335,9 @@ FN(Fal...
 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。
 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。
 
-
-三、解决问题解决一个问题的最好方法，往往是从实例中应用，所以我们不妨假设a = 3...
+                
+                    
+    ...
     
 
         <a href="/2020/03/03/快速幂算法详解/" class="post-more waves-effect waves-button">
@@ -425,12 +430,17 @@ FN(Fal...
     
         ssh
 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在
+                
+                    
+                    
+                
+                
+            
 
 
-ctrl +d 退出用户sudo  rm -f  xxx 删除一个文件
-12//连接ssh ubuntu@ip地址
-123// 先给root一个密码sudo passwd root// 然后切换到root su root
-12345678910//在root下sudo adduser liz...
+                
+                    
+  ...
     
 
         <a href="/2019/01/12/Node-js项目线上服务器部署与发布/" class="post-more waves-effect waves-button">
@@ -777,10 +787,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = 'good bye~';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '你又在偷偷学习了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

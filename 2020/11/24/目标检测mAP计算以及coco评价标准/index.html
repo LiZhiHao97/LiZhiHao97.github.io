@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="深度学习,目标检测,评估指标">
-    <meta name="description" content="1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图 2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标  TP(True Positive)：IoU &amp;gt; 0.5的检测框数（同一GT只计算一次）  FP(False Positive)：IoU &amp;lt;= 0.5的检测框（或者是检测到同一个GT的多余检测框数量） FN(False">
+    <meta name="description" content="1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图                                                                                                           2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标  TP(True P">
 <meta name="keywords" content="深度学习,目标检测,评估指标">
 <meta property="og:type" content="article">
 <meta property="og:title" content="目标检测mAP计算以及coco评价标准">
 <meta property="og:url" content="http://yoursite.com/2020/11/24/目标检测mAP计算以及coco评价标准/index.html">
 <meta property="og:site_name" content="Zh的Blog">
-<meta property="og:description" content="1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图 2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标  TP(True Positive)：IoU &amp;gt; 0.5的检测框数（同一GT只计算一次）  FP(False Positive)：IoU &amp;lt;= 0.5的检测框（或者是检测到同一个GT的多余检测框数量） FN(False">
+<meta property="og:description" content="1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图                                                                                                           2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标  TP(True P">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://yoursite.com/image/目标检测mAP计算以及coco评价标准/1.png">
 <meta property="og:image" content="http://yoursite.com/image/目标检测mAP计算以及coco评价标准/2.png">
@@ -35,7 +35,7 @@
 <meta property="og:updated_time" content="2020-11-24T07:40:50.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="目标检测mAP计算以及coco评价标准">
-<meta name="twitter:description" content="1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图 2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标  TP(True Positive)：IoU &amp;gt; 0.5的检测框数（同一GT只计算一次）  FP(False Positive)：IoU &amp;lt;= 0.5的检测框（或者是检测到同一个GT的多余检测框数量） FN(False">
+<meta name="twitter:description" content="1.前言当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图                                                                                                           2.目标检测中常见指标2.1精确率与召回率下面先引入目标检测中常见的一些指标  TP(True P">
 <meta name="twitter:image" content="http://yoursite.com/image/目标检测mAP计算以及coco评价标准/1.png">
     
         <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
@@ -186,7 +186,13 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图<br><img src="/image/目标检测mAP计算以及coco评价标准/1.png" alt></p>
+            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>当我们使用目标检测数据集（如COCO）进行评估时，最后会得到一个评估列表，如下图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测mAP计算以及coco评价标准/1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h1 id="2-目标检测中常见指标"><a href="#2-目标检测中常见指标" class="headerlink" title="2.目标检测中常见指标"></a>2.目标检测中常见指标</h1><h2 id="2-1精确率与召回率"><a href="#2-1精确率与召回率" class="headerlink" title="2.1精确率与召回率"></a>2.1精确率与召回率</h2><p>下面先引入目标检测中常见的一些指标</p>
 <ul>
 <li><strong>TP(True Positive)：</strong>IoU &gt; 0.5的检测框数（同一GT只计算一次） </li>
@@ -199,12 +205,24 @@
 <p>精确率与召回率缺一不可，举例说明：当一张图片中有5个检测对象时，假如算法检测到了10个个目标（其中5个正确，5个错误），那么TP=5，FP=5，FN=0，精确率=0.5，召回率=1。假如算法检测到了3个目标（都正确），那么TP=3，FP=0，FN=2，精确率=1，召回率=0.6。由此可以说明，单一的精确率与召回率，无法完全衡量结果的好坏。</p>
 </blockquote>
 <h2 id="2-2-AP"><a href="#2-2-AP" class="headerlink" title="2.2 AP"></a>2.2 AP</h2><p><strong>AP</strong>定义为P-R曲线下的面积<br><strong>P-R曲线</strong>：Precision-Recall曲线</p>
-<p>举例如下图<br><img src="/image/目标检测mAP计算以及coco评价标准/2.png" alt></p>
+<p>举例如下图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测mAP计算以及coco评价标准/2.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>本图为目标检测中某个类别（比如检测猫）置信度取不同阈值得到的精确率与召回率绘制成的P-R曲线，其面积为：</p>
 <p><strong>S = (0.14-0)×(0.28-0.14)×1.0+(0.42-0.28)×1.0+(0.57-0.42)×1.0+(0.71-0.57)×0.71=0.6694</strong></p>
 <p>因此<strong>AP=0.6694</strong></p>
 <h2 id="2-3-mAP"><a href="#2-3-mAP" class="headerlink" title="2.3 mAP"></a>2.3 mAP</h2><p><strong>mAP</strong>即为各个类别计算的AP取均值，比如目标检测的目标有猫、狗、兔子，将三个类别求得的AP相加除以三即可。</p>
-<h1 id="3-COCO评价指标"><a href="#3-COCO评价指标" class="headerlink" title="3.COCO评价指标"></a>3.COCO评价指标</h1><p>再回过来看上面那张图<br><img src="/image/目标检测mAP计算以及coco评价标准/1.png" alt></p>
+<h1 id="3-COCO评价指标"><a href="#3-COCO评价指标" class="headerlink" title="3.COCO评价指标"></a>3.COCO评价指标</h1><p>再回过来看上面那张图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测mAP计算以及coco评价标准/1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p><strong>IoU</strong>代表交并比，可以观察算法在定位方面的指标</p>
 <p><strong>area</strong>代表检测面积的大小，可以观察算法在检测大目标与小目标方面的指标</p>
 <p><strong>maxDets</strong>代表检测目标数，可以观察算法在对多目标检测方面的指标</p>
@@ -459,10 +477,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = 'good bye~';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '你又在偷偷学习了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="算法,c++">
-    <meta name="description" content="一、问题如果有三个整数a，n，k，要让我们求出a^n的后k位，你会怎么求？ 也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。   三、解决问题解决一个问题的最好方法，往往是从实例中应用，所以我们不妨假设a = 3, n">
+    <meta name="description" content="一、问题如果有三个整数a，n，k，要让我们求出a^n的后k位，你会怎么求？ 也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。">
 <meta name="keywords" content="算法,c++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速幂算法详解">
 <meta property="og:url" content="http://yoursite.com/2020/03/03/快速幂算法详解/index.html">
 <meta property="og:site_name" content="Zh的Blog">
-<meta property="og:description" content="一、问题如果有三个整数a，n，k，要让我们求出a^n的后k位，你会怎么求？ 也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。   三、解决问题解决一个问题的最好方法，往往是从实例中应用，所以我们不妨假设a = 3, n">
+<meta property="og:description" content="一、问题如果有三个整数a，n，k，要让我们求出a^n的后k位，你会怎么求？ 也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://yoursite.com/2020/03/03/快速幂算法详解/image/快速幂算法详解/1.png">
 <meta property="og:image" content="http://yoursite.com/image/快速幂算法详解/2.png">
@@ -35,7 +35,7 @@
 <meta property="og:updated_time" content="2020-11-24T07:29:48.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速幂算法详解">
-<meta name="twitter:description" content="一、问题如果有三个整数a，n，k，要让我们求出a^n的后k位，你会怎么求？ 也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。   三、解决问题解决一个问题的最好方法，往往是从实例中应用，所以我们不妨假设a = 3, n">
+<meta name="twitter:description" content="一、问题如果有三个整数a，n，k，要让我们求出a^n的后k位，你会怎么求？ 也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位 但显然，这样是不现实的，因为我们知道当这个数很大时，即使是long long型的变量也存放不下。 二、前置知识当我们解决问题之前，首先来看一下，我们需要了解的一些知识。">
 <meta name="twitter:image" content="http://yoursite.com/2020/03/03/快速幂算法详解/image/快速幂算法详解/1.png">
     
         <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
@@ -190,11 +190,29 @@
 <p>也许有人可能会想到直接将a^n次求出，然后通过取余求出后k位</p>
 <p>但显然，这样是不现实的，因为我们知道当这个数很大时，即使是<code>long long</code>型的变量也存放不下。</p>
 <h2 id="二、前置知识"><a href="#二、前置知识" class="headerlink" title="二、前置知识"></a>二、前置知识</h2><p>当我们解决问题之前，首先来看一下，我们需要了解的一些知识。</p>
-<p><img src="./image/快速幂算法详解/1.png" alt></p>
-<p><img src="/image/快速幂算法详解/2.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./image/快速幂算法详解/1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/快速幂算法详解/2.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h2 id="三、解决问题"><a href="#三、解决问题" class="headerlink" title="三、解决问题"></a>三、解决问题</h2><p>解决一个问题的最好方法，往往是从实例中应用，所以我们不妨假设<code>a = 3, n = 45</code><br>此外，如果计算机基础较好的读者很容易得到<code>45 = (101101)2</code></p>
 <p>于是，我们可以得到如下推导</p>
-<p><img src="/image/快速幂算法详解/3.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/快速幂算法详解/3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <blockquote>
 <p>我们可以发现，如果最后一步中每一项去掉*后面的乘数，则每一项的值都为后一项的平方</p>
 </blockquote>
@@ -456,10 +474,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = 'good bye~';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '你又在偷偷学习了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

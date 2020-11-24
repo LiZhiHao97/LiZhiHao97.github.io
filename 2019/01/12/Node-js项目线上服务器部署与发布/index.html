@@ -21,13 +21,13 @@
     
     
     <meta name="keywords" content="linux,node,前端,运维">
-    <meta name="description" content="ssh 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在   ctrl +d 退出用户sudo  rm -f  xxx 删除一个文件 12//连接ssh ubuntu@ip地址 123// 先给root一个密码sudo passwd root// 然后切换到root su root 12345678910//在root下sudo adduser lizhih">
+    <meta name="description" content="ssh 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在">
 <meta name="keywords" content="linux,node,前端,运维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js项目线上服务器部署与发布">
 <meta property="og:url" content="http://yoursite.com/2019/01/12/Node-js项目线上服务器部署与发布/index.html">
 <meta property="og:site_name" content="Zh的Blog">
-<meta property="og:description" content="ssh 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在   ctrl +d 退出用户sudo  rm -f  xxx 删除一个文件 12//连接ssh ubuntu@ip地址 123// 先给root一个密码sudo passwd root// 然后切换到root su root 12345678910//在root下sudo adduser lizhih">
+<meta property="og:description" content="ssh 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://yoursite.com/image/nodejs项目服务器部署/nodejs项目服务器部署-1.png">
 <meta property="og:image" content="http://yoursite.com/image/nodejs项目服务器部署/nodejs项目服务器部署-2.png">
@@ -36,7 +36,7 @@
 <meta property="og:updated_time" content="2020-11-24T07:29:48.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js项目线上服务器部署与发布">
-<meta name="twitter:description" content="ssh 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在   ctrl +d 退出用户sudo  rm -f  xxx 删除一个文件 12//连接ssh ubuntu@ip地址 123// 先给root一个密码sudo passwd root// 然后切换到root su root 12345678910//在root下sudo adduser lizhih">
+<meta name="twitter:description" content="ssh 配置公钥 和密钥 可以登录服务器不需要密码看是否已经存在公钥和密钥看用户文件夹下是否存在">
 <meta name="twitter:image" content="http://yoursite.com/image/nodejs项目服务器部署/nodejs项目服务器部署-1.png">
     
         <link rel="alternate" type="application/atom+xml" title="Zh的Blog" href="/atom.xml">
@@ -188,14 +188,32 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><blockquote>
-<p>配置公钥 和密钥 可以登录服务器不需要密码<br>看是否已经存在公钥和密钥<br>看用户文件夹下是否存在<br><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-1.png" alt></p>
+<p>配置公钥 和密钥 可以登录服务器不需要密码<br>看是否已经存在公钥和密钥<br>看用户文件夹下是否存在<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 </blockquote>
-<p><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-2.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-2.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>ctrl +d 退出用户<br>sudo  rm -f  xxx 删除一个文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//连接</span><br><span class="line">ssh ubuntu@ip地址</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 先给root一个密码</span><br><span class="line">sudo passwd root</span><br><span class="line">// 然后切换到root su root</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//在root下</span><br><span class="line">sudo adduser lizhihao</span><br><span class="line">增加一个用户</span><br><span class="line"></span><br><span class="line">//然后在root下给skl sudo 权限</span><br><span class="line"> gpasswd -a lizhihao sudo</span><br><span class="line"> </span><br><span class="line"> //</span><br><span class="line"> sudo visudo</span><br><span class="line"> 增加下面的lizhihao</span><br></pre></td></tr></table></figure>
-<p><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-3.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>ctrl +X保存 之后shift+Y enter 退出</p>
 <p>可以在root 下进入skl 用户 su skl<br>或者 sudo su lizhihao </p>
 <hr>
@@ -209,7 +227,13 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//更新</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">//安装一些</span><br><span class="line">sudo apt-get install vim openssl build-essential libssl-dev wget curl git</span><br><span class="line"></span><br><span class="line">//找到github上的nvm </span><br><span class="line">https://github.com/creationix/nvm</span><br><span class="line">找到安装脚本</span><br></pre></td></tr></table></figure>
 <p>curl -o- <a href="https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh" target="_blank" rel="noopener">https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh</a> | bash</p>
-<p><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-4.png" alt></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-4.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>装完后若发现nvm 不是一个命令 在来一个命令窗口</p>
 <h3 id="安装好nvm-就可以安装nodejs了"><a href="#安装好nvm-就可以安装nodejs了" class="headerlink" title="安装好nvm 就可以安装nodejs了"></a>安装好nvm 就可以安装nodejs了</h3><blockquote>
 <p>nvm install v8.2.1</p>
@@ -524,10 +548,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = 'good bye~';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '你又在偷偷学习了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);
