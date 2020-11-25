@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>目标检测之YOLO理解与总结 | Zh&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="深度学习,目标检测,YOLO">
+    <meta name="description" content="1.背景 我们知道，目标检测通常分为两个步骤： （1）生成bounding box（边界框）（2）对物体分类。因此目标检测算法也因此分为one-stage与two-stage两个算法系列。 顾名思义，two-stage算法就是把两个步骤分别进行，比如R-CNN方法使用region proposal来生成整张图像中可能包含待检测物体的potential bounding boxes，然后用分类器来评">
+<meta name="keywords" content="深度学习,目标检测,YOLO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目标检测之YOLO理解与总结">
+<meta property="og:url" content="http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/index.html">
+<meta property="og:site_name" content="Zh&#39;s Blog">
+<meta property="og:description" content="1.背景 我们知道，目标检测通常分为两个步骤： （1）生成bounding box（边界框）（2）对物体分类。因此目标检测算法也因此分为one-stage与two-stage两个算法系列。 顾名思义，two-stage算法就是把两个步骤分别进行，比如R-CNN方法使用region proposal来生成整张图像中可能包含待检测物体的potential bounding boxes，然后用分类器来评">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/1.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/2.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/3.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/4.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/5.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/6.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/123.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/7.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/8.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/9.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/10.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/11.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/12.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/13.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/14.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/11.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/15.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/16.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/17.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/18.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/19.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/20.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/21.png">
+<meta property="og:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/22.png">
+<meta property="og:updated_time" content="2020-11-25T12:05:54.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="目标检测之YOLO理解与总结">
+<meta name="twitter:description" content="1.背景 我们知道，目标检测通常分为两个步骤： （1）生成bounding box（边界框）（2）对物体分类。因此目标检测算法也因此分为one-stage与two-stage两个算法系列。 顾名思义，two-stage算法就是把两个步骤分别进行，比如R-CNN方法使用region proposal来生成整张图像中可能包含待检测物体的potential bounding boxes，然后用分类器来评">
+<meta name="twitter:image" content="http://yoursite.com/image/目标检测之YOLO理解与总结/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">目标检测之YOLO理解与总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">目标检测之YOLO理解与总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-25T05:31:04.000Z" itemprop="datePublished" class="page-time">
+  2020-11-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-内容介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.内容介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-YOLO-V1"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.YOLO V1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-流程"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-网络结构"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 网络结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-损失函数"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 损失函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-4-YOLO-V1的不足之处"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 YOLO V1的不足之处</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-YOLO-V2"><span class="post-toc-number">4.</span> <span class="post-toc-text">4.YOLO V2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-1-对比YOLO-V1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 对比YOLO V1</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-2-YOLO-V2中的各种尝试"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 YOLO V2中的各种尝试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Batch-Normalization（批量归一化）"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">1. Batch Normalization（批量归一化）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-High-Resolution-Classifier（使用高分辨率图像微调分类模型）"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">2.High Resolution Classifier（使用高分辨率图像微调分类模型）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Convolutional-With-Anchor-Boxes（使用先验框Anchor-Box替换全连接层）"><span class="post-toc-number">4.2.3.</span> <span class="post-toc-text">3.Convolutional With Anchor Boxes（使用先验框Anchor Box替换全连接层）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Dimension-Clusters-使用聚类算法获取anchor-box"><span class="post-toc-number">4.2.4.</span> <span class="post-toc-text">4.Dimension Clusters(使用聚类算法获取anchor box)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-Direct-location-prediction-直接位置预测"><span class="post-toc-number">4.2.5.</span> <span class="post-toc-text">5.Direct location prediction(直接位置预测)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-Fine-Grained-Features（细粒度特征）"><span class="post-toc-number">4.2.6.</span> <span class="post-toc-text">6.Fine-Grained Features（细粒度特征）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-Multi-Scale-Training（多尺寸训练）"><span class="post-toc-number">4.2.7.</span> <span class="post-toc-text">7.Multi-Scale Training（多尺寸训练）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-BackBone-Darknet-19"><span class="post-toc-number">4.2.8.</span> <span class="post-toc-text">8.BackBone: Darknet-19</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-3-网络结构"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 网络结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-4-关于网络的训练细节"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.4 关于网络的训练细节</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-YOLO-V3"><span class="post-toc-number">5.</span> <span class="post-toc-text">5.YOLO V3</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-1-网络结构改进"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">5.1 网络结构改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-BackBone-Darknet-53"><span class="post-toc-number">5.1.1.</span> <span class="post-toc-text">1. BackBone: Darknet-53</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#我们可以看到在Darknet-53中-，与Darknet-19最大的不同是没有池化层和全连接层-张量是通过卷积层来实现下采样的。比如stride-2-2-，这就等于将图像边长缩小了一半，整个特征图缩小-2-2-倍。在YOLO-v3中，最终要经历5次缩小，会将特征图缩小到原输入尺寸的-frac-1-2-5-，即-frac-1-32-。输入为416×416-，则输出为13×13-416-32-13-。需要注意的是，最后三层Avgpool、Connected和-softmax-layer是用于在-Imagenet数据集上作分类训练用的。当我们用-Darknet-53-层对图片提取特征时，是不会用到这三层的。"><span class="post-toc-number">5.1.1.0.1.</span> <span class="post-toc-text">我们可以看到在Darknet-53中)，与Darknet-19最大的不同是没有池化层和全连接层,张量是通过卷积层来实现下采样的。比如stride=(2, 2)，这就等于将图像边长缩小了一半，整个特征图缩小$ 2^2 $ 倍。在YOLO v3中，最终要经历5次缩小，会将特征图缩小到原输入尺寸的$ \frac {1} {2^5} $ ，即$ \frac {1} {32} $。输入为416×416 ，则输出为13×13(416/32 = 13) 。需要注意的是，最后三层Avgpool、Connected和 softmax layer是用于在 Imagenet数据集上作分类训练用的。当我们用 Darknet-53 层对图片提取特征时，是不会用到这三层的。</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-整体网络架构"><span class="post-toc-number">5.1.2.</span> <span class="post-toc-text">2.整体网络架构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-2-目标边界框的预测"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">5.2 目标边界框的预测</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-3-正负样本的匹配"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">5.3 正负样本的匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-4-损失函数的计算"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">5.4 损失函数的计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-4-1-目标置信度损失"><span class="post-toc-number">5.4.1.</span> <span class="post-toc-text">5.4.1 目标置信度损失</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-4-2-目标类别损失"><span class="post-toc-number">5.4.2.</span> <span class="post-toc-text">5.4.2 目标类别损失</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-4-3-目标定位损失"><span class="post-toc-number">5.4.3.</span> <span class="post-toc-text">5.4.3 目标定位损失</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-目标检测之YOLO理解与总结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">目标检测之YOLO理解与总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-25 13:31:04" datetime="2020-11-25T05:31:04.000Z"  itemprop="datePublished">2020-11-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h1><ul>
+<li>我们知道，目标检测通常分为两个步骤： <strong>（1）生成bounding box（边界框）（2）对物体分类</strong>。因此目标检测算法也因此分为<strong>one-stage</strong>与<strong>two-stage</strong>两个算法系列。</li>
+<li>顾名思义，<strong>two-stage</strong>算法就是把两个步骤分别进行，比如<strong>R-CNN</strong>方法使用<code>region proposal</code>来生成整张图像中可能包含待检测物体的<code>potential bounding boxes</code>，然后用分类器来评估这些<code>boxes</code>，接着通过<code>post-processing</code>来改善<code>bounding boxes</code>，消除重复的检测目标，并基于整个场景中的其他物体重新对<code>boxes</code>进行打分。整个流程执行下来很慢，而且因为这些环节都是分开训练的，检测性能很难进行优化。</li>
+<li>作者提出的<strong>YOLO（you only look once）</strong>就是<strong>one-stage</strong>算法系列的代表。它将目标检测任务当做回归问题<code>（regression problem）</code>来处理，直接通过整张图片的所有像素得到 的坐标、box中包含物体的置信度和<code>class probabilities</code>。顾名思义，通过<strong>YOLO</strong>，每张图像只需要看一眼就能得出图像中都有哪些物体和这些物体的位置。</li>
+</ul>
+<h1 id="2-内容介绍"><a href="#2-内容介绍" class="headerlink" title="2.内容介绍"></a>2.内容介绍</h1><p>本篇博客记录我对YOLO的学习，我会分别对YOLOV1，YOLOV2，YOLOV3的内容进行总结，并进行比较。</p>
+<h1 id="3-YOLO-V1"><a href="#3-YOLO-V1" class="headerlink" title="3.YOLO V1"></a>3.YOLO V1</h1><h2 id="3-1-流程"><a href="#3-1-流程" class="headerlink" title="3.1 流程"></a>3.1 流程</h2><ol>
+<li>将一幅图像分成<strong>S×S</strong>个网格（grid cell），如果某个<code>object</code>的中心落在这个网格中，则这个网格就负责预测这个<code>object</code></li>
+<li>每个网格要预测<strong>B</strong>个<code>bounding box</code>，每个<code>bounding box</code>除了要预测位置之外，还要附带预测一个<code>confidence(置信度)</code>。每个网格还要预测<strong>C</strong>个类别的分数</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>比如将上图分为了7×7个网格，要识别的目标狗的中心点落在第5行，第2列的网格点，那么这个网格点就负责预测狗这个object</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/2.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<blockquote>
+<p>For evaluating YOLO on PASACL VOC, we use S = 7, B = 2, PASCAL VOC has 20 labelled classes so C = 20. Our final prediction is a 7 × 7 × 30 tensor</p>
+</blockquote>
+<p>以上为摘自原论文，在<code>PASCAL VOC</code>数据集上，我们通过YOLO，最终获得了<strong>7 × 7 × 30</strong>的特征矩阵，由上图可知，沿着深度方向我们发现有<strong>30</strong>个数值，因为<strong>B = 2</strong>，所以有2个<code>bounding box</code>，每个<code>bounding box</code>有<strong>4+1</strong>个数值，分别为目标的<code>坐标信息(中心点位置和宽高)</code>与<code>confidence</code>，最后<strong>20</strong>个为PASCAL VOC <strong>20</strong>个类别的分数。所以总共是<strong>30</strong></p>
+<h2 id="3-2-网络结构"><a href="#3-2-网络结构" class="headerlink" title="3.2 网络结构"></a>3.2 网络结构</h2><p>YOLO将图像resize到448×448作为神经网络的输入 。</p>
+<p>YOLO检测网络包括<strong>24个卷积层和2个全连接层</strong>，YOLO网络借鉴了<strong>GoogLeNet</strong>分类网络结构。不同的是，YOLO未使用inception module，而是使用1x1卷积层（此处1x1卷积层的存在是为了跨通道信息整合）+3x3卷积层简单替代。、</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="3-3-损失函数"><a href="#3-3-损失函数" class="headerlink" title="3.3 损失函数"></a>3.3 损失函数</h2><p>YOLO V1的损失函数分为三个部分</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/4.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>计算损失过程中，用的都是误差平方和，但是对宽高处理，是先对其开根号处理，为什么这么做呢，看到一个很棒的解释。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/5.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>从上图右侧所示，当预测边界框相对于真实边界框便宜相同的高度和宽度时，小目标改变的IoU与大目标不同。画出y - x和$ \sqrt{y} $ - $ \sqrt{x} $图，如左侧所示，我们会发现,y与x的差值一样时,小目标在纵坐标上的差值大于大目标</p>
+<h2 id="3-4-YOLO-V1的不足之处"><a href="#3-4-YOLO-V1的不足之处" class="headerlink" title="3.4 YOLO V1的不足之处"></a>3.4 YOLO V1的不足之处</h2><ul>
+<li>YOLO V1对<strong>小目标</strong>的预测效果不理想,因为在YOLO V1的每个grid cell只预测2个<code>bounding box</code>,而且这两个<code>bounding box</code>属于同个类别</li>
+<li>当检测目标出现了新的尺寸时,检测效果会变差</li>
+<li>主要的错误原因,都来自于定位不准确,因为不像<strong>Faster RCNN</strong>和<strong>SSD</strong>使用了<strong>anchor box</strong>的回归参数来调整位置</li>
+</ul>
+<h1 id="4-YOLO-V2"><a href="#4-YOLO-V2" class="headerlink" title="4.YOLO V2"></a>4.YOLO V2</h1><h2 id="4-1-对比YOLO-V1"><a href="#4-1-对比YOLO-V1" class="headerlink" title="4.1 对比YOLO V1"></a>4.1 对比YOLO V1</h2><p>作者在YOLO v1的基础上，借鉴了很多<strong>trick</strong>，比如<code>Batch Normalization</code>、<code>High Resolution Classifier</code>等，提出YOLO v2，让预测变得更<strong>准确（Better）</strong>，<strong>更快速（Faster）</strong>，下图为性能对比。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/6.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/123.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="4-2-YOLO-V2中的各种尝试"><a href="#4-2-YOLO-V2中的各种尝试" class="headerlink" title="4.2 YOLO V2中的各种尝试"></a>4.2 YOLO V2中的各种尝试</h2><h3 id="1-Batch-Normalization（批量归一化）"><a href="#1-Batch-Normalization（批量归一化）" class="headerlink" title="1. Batch Normalization（批量归一化）"></a>1. Batch Normalization（批量归一化）</h3><ul>
+<li><strong>批量归一化</strong>有助于解决反向传播过程中出现的<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题，降低对一些超参数的敏感性，并且起到一定的<strong>正则化</strong>效果（YOLO2不再使用dropout），从而能够获得更好的收敛速度和收敛效果，加了BN层后mAP提高了<strong>2%</strong></li>
+</ul>
+<h3 id="2-High-Resolution-Classifier（使用高分辨率图像微调分类模型）"><a href="#2-High-Resolution-Classifier（使用高分辨率图像微调分类模型）" class="headerlink" title="2.High Resolution Classifier（使用高分辨率图像微调分类模型）"></a>2.High Resolution Classifier（使用高分辨率图像微调分类模型）</h3><ul>
+<li>目前先进的目标检测方法中，基本上都会先在<code>ImageNet</code>上进行预训练，而<code>ImageNet</code>的输入采用的是<strong>224×224</strong>，导致分辨率不够高，给检测带来困难。<strong>YOLO v1</strong>网络把分辨率直接提升到了<strong>448×448</strong>，但是直接切换分辨率，检测模型可能难以快速适应高分辨率，这也意味之原有的网络模型必须进行<strong>某种调整</strong>以适应新的分辨率输入。</li>
+<li>所以<strong>YOLO v2</strong>增加了在<code>ImageNet</code>数据集上使用<strong>448×448</strong>输入来<strong>finetune</strong>分类网络这一中间过程（10 epochs），这可以使得模型在检测数据集（eg:COCO）上<strong>finetune</strong>之前已经<strong>适应</strong>高分辨率输入。使用高分辨率分类器后，YOLOv2的mAP提升了约<strong>4%</strong>。</li>
+</ul>
+<h3 id="3-Convolutional-With-Anchor-Boxes（使用先验框Anchor-Box替换全连接层）"><a href="#3-Convolutional-With-Anchor-Boxes（使用先验框Anchor-Box替换全连接层）" class="headerlink" title="3.Convolutional With Anchor Boxes（使用先验框Anchor Box替换全连接层）"></a>3.Convolutional With Anchor Boxes（使用先验框Anchor Box替换全连接层）</h3><p>在之前的<strong>YOLO v1</strong>中，直接采用<strong>全连接层</strong>来预测边界框，效果不好(之前分析中的定位效果较差)。作者借鉴了<strong>Faster R-CNN</strong>中使用<strong>RPN</strong>预测<strong>偏移量offsets</strong>和<strong>置信度confidences</strong>的思想，预测<strong>bounding box</strong>与<strong>Anchor</strong>框的<strong>偏移（offset）</strong>而不是直接预测<strong>bounding box</strong>的坐标。</p>
+<ol>
+<li>首先作者<strong>去除了一个池化层</strong>，来使得输出的卷积特征图有<strong>更高的分辨率</strong>。</li>
+<li>其次作者<strong>缩减了网络</strong>，把原本网络的输入<strong>448×448</strong> 缩减成<strong>416×416</strong>。因为<strong>YOLO v2</strong>模型<strong>下采样</strong>的总步长为<strong>32</strong>，对于<strong>416×416    </strong>大小的图片，最终得到的特征图大小为<strong>13×13</strong>，维度是<strong>奇</strong>数，这样特征图恰好只有一个中心位置。<strong>作者发现对于一些大物体，它们中心点往往落入图片中心位置，此时使用特征图的一个中心点而不是四个中心点去预测这些物体的边界框相对容易些</strong>。所以在YOLOv2设计中要保证输入对应的最终的特征图有奇数个位置</li>
+</ol>
+<ul>
+<li>使用<strong>anchor boxes</strong>之后，mAP下降了<strong>0.3</strong>，但召回率提高了<strong>7%</strong>。这是因为<strong>YOLOv1</strong>只能预测<strong>98</strong>个边界框<strong>(7×7×2)</strong>，而<strong>YOLO v2</strong>使用<strong>anchor boxes</strong>之后可以预测<strong>上千个边界框（13×13×num_anchor）</strong>,召回率的提升使得模型拥有进一步的改进空间。</li>
+</ul>
+<h3 id="4-Dimension-Clusters-使用聚类算法获取anchor-box"><a href="#4-Dimension-Clusters-使用聚类算法获取anchor-box" class="headerlink" title="4.Dimension Clusters(使用聚类算法获取anchor box)"></a>4.Dimension Clusters(使用聚类算法获取anchor box)</h3><ul>
+<li><p>之前<strong>anchor boxes</strong>都是<strong>手工设定</strong>的(如<strong>Faster RCNN</strong>,作者没有给出具体获取anchor boxes的方法,只是根据经验所得)，网络微调<strong>anchor boxes</strong>到实际位置的难度不小。而<strong>YOLO v2的做法是对训练集中标注的边框进行聚类分析，以自动找到更好的尺寸。</strong></p>
+</li>
+<li><p>聚类算法最重要的是选择如何计算两个边框之间的“距离”，对于常用的欧式距离，大边框会产生更大的误差，但我们关心的是<strong>anchor boxes</strong>和<strong>ground truth</strong>的<strong>IOU</strong>。所以，<strong>YOLO2在聚类时巧妙地采用以下公式来计算两个边框之间的距离：</strong></p>
+<p><strong>d(box, centroid) = 1 - IoU(box, centroid)</strong></p>
+</li>
+<li><p><strong>centroid是聚类时被选作中心的边框，box就是其它anchor boxes。IOU越大，距离越近。</strong>YOLO2给出的聚类分析结果如下图所示：</p>
+<p><img src="/image/目标检测之YOLO理解与总结/7.png" alt></p>
+</li>
+<li><p>随着聚类中心数目的增加，我们可以看到平均IOU值是增加的，但是综合考虑模型复杂度和召回率，作者最终选取<strong>5</strong>个聚类中心作为先验框，其相对于图片的大小如右边图所示。</p>
+</li>
+</ul>
+<h3 id="5-Direct-location-prediction-直接位置预测"><a href="#5-Direct-location-prediction-直接位置预测" class="headerlink" title="5.Direct location prediction(直接位置预测)"></a>5.Direct location prediction(直接位置预测)</h3><ul>
+<li><p>作者发现使用<strong>anchor boxes</strong>的时候模型<strong>不稳定</strong>，尤其是在早期迭代的时候。而大部分的不稳定现象出现在预测box的<strong>(x, y)</strong>坐标上了，而以往计算的公式如下（<strong>图中的两个减号应是加号，作者写错</strong>）：</p>
+<p>  <img src="/image/目标检测之YOLO理解与总结/8.png" alt></p>
+</li>
+<li><p>这个公式没有任何限制，使得无论在什么位置进行预测，任何anchor boxes可以在图像中任意一点结束（这是因为偏移量<strong>tx, ty</strong>没有大小限制，可能会导致出现anchor偏离ground truth很远的情况。正确做法应该是每一个anchor只负责检测周围正负一个单位以内的目标box）。YOLO v2调整了预测公式，将<strong>预测边框的中心约束在网格内</strong>:</p>
+<p>  <img src="/image/目标检测之YOLO理解与总结/9.png" alt></p>
+</li>
+<li><p>其中，<strong>bx, by, bw, bh</strong>是<strong>预测边框的中心和宽高</strong>。<br><strong>Pr(object) * IoU(b, object) = σ(to)</strong> 是<strong>预测边框的置信度</strong>，<strong>YOLO v1</strong>是直接预测置信度的值，这里对预测参数<strong>to</strong>进行σ变换后作为置信度的值。<strong>cx, cy</strong>是<strong>当前网格左上角到图像左上角的距离</strong>，要先将<strong>网格大小归一化，即令一个网格的宽=1，高=1</strong>。$ p^w $, $ p^h $ 是<strong>先验框的宽和高</strong>。 σ是<strong>sigmoid</strong>函数。<strong>tx, ty, tw, th, to</strong>是要学习的参数，分别用于<strong>预测边框的中心和宽高，以及置信度</strong>。</p>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/10.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>作者使用Dimension Clusters和Direct location prediction这两项anchor boxes改进方法，mAP获得了<strong>5%</strong>的提升。</li>
+</ul>
+<h3 id="6-Fine-Grained-Features（细粒度特征）"><a href="#6-Fine-Grained-Features（细粒度特征）" class="headerlink" title="6.Fine-Grained Features（细粒度特征）"></a>6.Fine-Grained Features（细粒度特征）</h3><ul>
+<li><p>作者发现<strong>YOLO</strong>使用<strong>13×13</strong>的特征图进行预测<strong>大物体</strong>拥有很好的效果，而相对比较小的物体则效果一般。<strong>YOLO v2</strong>引入一种称为<strong>passthrough</strong>层的方法在特征图中保留一些细节信息。</p>
+</li>
+<li><p><strong>YOLO v2</strong>所利用的<strong>Fine-Grained Features</strong>是<strong>26×26</strong>大小的特征图（最后一个maxpooling层的输入）。<strong>passthrough</strong>层与<strong>ResNet</strong>网络的<strong>identity mappings</strong>类似，<strong>以前面更高分辨率的特征图为输入，然后将其连接到后面的低分辨率特征图上</strong>。前面的特征图维度是后面的特征图的<strong>2</strong>倍，<strong>passthrough</strong>层抽取前面层的每个<strong>2×2</strong>，然后将其转化为channel的维度，对于<strong>26×26×512</strong>的特征图，经<strong>passthrough</strong>层处理之后就变成了 <strong>13×13×25</strong>6的新特征图（特征图大小降低4倍，而channles增加4倍），这样就可以与后面的<strong>13×13×25</strong>6 特征图连接在一起形成<strong>13×13×1280</strong>大小的特征图。</p>
+  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/11.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/12.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="7-Multi-Scale-Training（多尺寸训练）"><a href="#7-Multi-Scale-Training（多尺寸训练）" class="headerlink" title="7.Multi-Scale Training（多尺寸训练）"></a>7.Multi-Scale Training（多尺寸训练）</h3></li>
+<li><p>因为<strong>Yolo v2</strong>去掉了全连接层，只有卷积层与池化层，所以对于网络的输入大小，并没有限制，整个网络的<strong>降采样倍数为32</strong>，只要输入的特征图尺寸为32的倍数即可。<strong>所以Yolo v2可以使用不同尺寸的输入图片训练，来使模型适应不同分辨率的图片，让模型更鲁棒</strong>。</p>
+</li>
+<li><strong>具体来说就是在训练过程中每间隔一定的iterations（论文中是10）之后改变模型的输入图片大小</strong>。由于<strong>YOLOv2</strong>的下采样总步长为<strong>32</strong>，输入图片大小选择一系列为<strong>32倍数</strong>的值：<strong>{320,  352, ……, 608}</strong>，输入图片最小为<strong>320×320</strong>，此时对应的特征图大小为<strong>10×10</strong>（和<strong>Convolutional With Anchor Boxes</strong>中提到要是奇数相悖，但是问题也不是很大），而输入图片最大为<strong>608×608</strong>，对应的特征图大小为<strong>19×19</strong>。在训练过程，每隔<strong>10个iterations</strong>随机选择一种输入图片大小，然后只需要修改对最后检测层的处理就可以重新训练。</li>
+<li>在<strong>小尺寸</strong>图片检测中，<strong>YOLO v2</strong>效果很好，输入为<strong>228×228</strong>的时候，帧率达到<strong>91FPS</strong>，<strong>mAP几乎和Faster R-CNN的水准相同</strong>。在<strong>大尺寸</strong>图片检测中，<strong>YOLO v2</strong>也达到了先进水平，在VOC2007数据集上<strong>mAP为78.6%</strong>，仍然高于平均水准，下图是<strong>YOLO v2</strong>和其他网络的效果对比：  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/13.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<h3 id="8-BackBone-Darknet-19"><a href="#8-BackBone-Darknet-19" class="headerlink" title="8.BackBone: Darknet-19"></a>8.BackBone: Darknet-19</h3><ul>
+<li>YOLOv2采用了一个新的网络，称为<strong>Darknet-19</strong>，包括19个卷积层和5个maxpooling层，在<code>ImageNet</code>数据集上，<strong>Darknet-19的top-1准确度为72.9%，top-5准确度为91.2%，但是模型参数相对小一些</strong>。使用Darknet-19之后，YOLOv2的mAP值没有显著提升，但是<strong>计算量却可以减少约33%</strong>。  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/14.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<h2 id="4-3-网络结构"><a href="#4-3-网络结构" class="headerlink" title="4.3 网络结构"></a>4.3 网络结构</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/11.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="4-4-关于网络的训练细节"><a href="#4-4-关于网络的训练细节" class="headerlink" title="4.4 关于网络的训练细节"></a>4.4 关于网络的训练细节</h2><blockquote>
+<p>We use a weight decay of 0.0005 and momentum of 0.9. We use a weight decay of 0.0005 and momentum of 0.9.We use a similar data augmentation to YOLO and SSD with<br>random crops, color shifting, etC. We use the same training<br>strategy on COCO and VOC.</p>
+</blockquote>
+<p>这是论文给出的原话,至于如何匹配正负样本,如何计算误差等细节并没有多讲,我将会在YOLO V3部分具体分析。</p>
+<h1 id="5-YOLO-V3"><a href="#5-YOLO-V3" class="headerlink" title="5.YOLO V3"></a>5.YOLO V3</h1><h2 id="5-1-网络结构改进"><a href="#5-1-网络结构改进" class="headerlink" title="5.1 网络结构改进"></a>5.1 网络结构改进</h2><h3 id="1-BackBone-Darknet-53"><a href="#1-BackBone-Darknet-53" class="headerlink" title="1. BackBone: Darknet-53"></a>1. BackBone: Darknet-53</h3><ul>
+<li>作者对YOLO v2时期的<code>Darknet-19</code>进行了升级,借鉴了<code>ResNet</code>的<strong>残差单元</strong>，<strong>在加深网络层数提高精度的同时大大降低计算量</strong>，接下来我们来具体剖析，先上backbone的结构图：  <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/15.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li><h5 id="我们可以看到在Darknet-53中-，与Darknet-19最大的不同是没有池化层和全连接层-张量是通过卷积层来实现下采样的。比如stride-2-2-，这就等于将图像边长缩小了一半，整个特征图缩小-2-2-倍。在YOLO-v3中，最终要经历5次缩小，会将特征图缩小到原输入尺寸的-frac-1-2-5-，即-frac-1-32-。输入为416×416-，则输出为13×13-416-32-13-。需要注意的是，最后三层Avgpool、Connected和-softmax-layer是用于在-Imagenet数据集上作分类训练用的。当我们用-Darknet-53-层对图片提取特征时，是不会用到这三层的。"><a href="#我们可以看到在Darknet-53中-，与Darknet-19最大的不同是没有池化层和全连接层-张量是通过卷积层来实现下采样的。比如stride-2-2-，这就等于将图像边长缩小了一半，整个特征图缩小-2-2-倍。在YOLO-v3中，最终要经历5次缩小，会将特征图缩小到原输入尺寸的-frac-1-2-5-，即-frac-1-32-。输入为416×416-，则输出为13×13-416-32-13-。需要注意的是，最后三层Avgpool、Connected和-softmax-layer是用于在-Imagenet数据集上作分类训练用的。当我们用-Darknet-53-层对图片提取特征时，是不会用到这三层的。" class="headerlink" title="我们可以看到在Darknet-53中)，与Darknet-19最大的不同是没有池化层和全连接层,张量是通过卷积层来实现下采样的。比如stride=(2, 2)，这就等于将图像边长缩小了一半，整个特征图缩小$ 2^2 $ 倍。在YOLO v3中，最终要经历5次缩小，会将特征图缩小到原输入尺寸的$ \frac {1} {2^5} $ ，即$ \frac {1} {32} $。输入为416×416 ，则输出为13×13(416/32 = 13) 。需要注意的是，最后三层Avgpool、Connected和 softmax layer是用于在 Imagenet数据集上作分类训练用的。当我们用 Darknet-53 层对图片提取特征时，是不会用到这三层的。"></a>我们可以看到在<strong>Darknet-53</strong>中)，与<strong>Darknet-19</strong>最大的不同是没有池化层和全连接层,张量是通过卷积层来实现<strong>下采样</strong>的。比如stride=(2, 2)，这就等于将图像边长缩小了一半，整个特征图缩小$ 2^2 $ 倍。在<code>YOLO v3</code>中，最终要经历5次缩小，会将特征图缩小到原输入尺寸的$ \frac {1} {2^5} $ ，即$ \frac {1} {32} $。输入为<strong>416×416</strong> ，则输出为<strong>13×13(416/32 = 13)</strong> 。需要注意的是，最后三层<code>Avgpool、Connected</code>和 <code>softmax layer</code>是用于在 <code>Imagenet</code>数据集上作分类训练用的。当我们用 <code>Darknet-53</code> 层对图片提取特征时，是不会用到这三层的。</h5></li>
+<li><p>这个backbone的效果也非常好，<strong>比起同精度的ResNet-152速度也是它的两倍</strong>，具体见下图：</p>
+</li>
+</ul>
+<p><img src="/image/目标检测之YOLO理解与总结/16.png" alt></p>
+<h3 id="2-整体网络架构"><a href="#2-整体网络架构" class="headerlink" title="2.整体网络架构"></a>2.整体网络架构</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/17.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="5-2-目标边界框的预测"><a href="#5-2-目标边界框的预测" class="headerlink" title="5.2 目标边界框的预测"></a>5.2 目标边界框的预测</h2><p>YOLO V3的边界框预测与YOLO V2一样，如下图所示<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/18.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<blockquote>
+<p>将tx，ty传入sigmoid函数能够限制范围在0-1内，避免中心点超出网格</p>
+</blockquote>
+<h2 id="5-3-正负样本的匹配"><a href="#5-3-正负样本的匹配" class="headerlink" title="5.3 正负样本的匹配"></a>5.3 正负样本的匹配</h2><blockquote>
+<p>YOLOv3 predicts an objectness score for each bounding<br>box using logistic regression. This should be 1 if the bound-<br>ing box prior overlaps a ground truth object by more than<br>any other bounding box prior. If the bounding box prior<br>is not the best but does overlap a ground truth object by<br>more than some threshold we ignore the prediction, follow-<br>ing [17]. We use the threshold of .5. Unlike [17] our system<br>only assigns one bounding box prior for each ground truth<br>object. If a bounding box prior is not assigned to a ground<br>truth object it incurs no loss for coordinate or class predic-<br>tions, only objectness.</p>
+</blockquote>
+<p>从原论文可知，<strong>YOLO V3</strong>会为每个<code>ground truth</code>分配一个正样本，也就是一张图片有几个<code>ground truth</code>，就会有几个正样本。对于每个<code>ground truth</code>，会将与它重叠最大，也就是IoU最大的<code>bounding box</code>作为正样本。对于IoU大于设定的阈值,但不是最大的<code>bounding box</code>，将会直接丢弃。如果 某个<code>bounding box</code>没有被分配为正样本，那么它没有定位损失，类别损失，仅仅有<code>objectness loss(置信度的损失)</code>。</p>
+<h2 id="5-4-损失函数的计算"><a href="#5-4-损失函数的计算" class="headerlink" title="5.4 损失函数的计算"></a>5.4 损失函数的计算</h2><p>YOLO V3损失函数计算如下图所示</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/19.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="5-4-1-目标置信度损失"><a href="#5-4-1-目标置信度损失" class="headerlink" title="5.4.1 目标置信度损失"></a>5.4.1 目标置信度损失</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/20.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>置信度损失用的是<strong>二值交叉熵损失(BCE)</strong>，其中o$ _{i} $∈[0,1]，表示预测目标边界框与真实目标边界框的<strong>IoU</strong>，c为预测值，$ \hat{C}_{i} $为c通过Sigmoid函数得到的预测置信度，N为正负样本个数。</p>
+<h3 id="5-4-2-目标类别损失"><a href="#5-4-2-目标类别损失" class="headerlink" title="5.4.2 目标类别损失"></a>5.4.2 目标类别损失</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/21.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>类别损失用的也是<strong>二值交叉熵损失(BCE)</strong>，其中O$ _{ij} $∈{0, 1}，表示预测目标边界框i中是否存在第j类目标，C$ _{ij} $为预测值，$ \hat{C}_{ij} $为C$ _{ij} $通过Sigmoid函数得到的目标概率，N$ _{pos} $为正样本个数</p>
+<h3 id="5-4-3-目标定位损失"><a href="#5-4-3-目标定位损失" class="headerlink" title="5.4.3 目标定位损失"></a>5.4.3 目标定位损失</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/image/目标检测之YOLO理解与总结/22.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<blockquote>
+<p>其中左下角的g就是右图中的b</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-11-25T12:05:54.427Z" itemprop="dateUpdated">2020-11-25 20:05:54</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/YOLO/">YOLO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/目标检测/">目标检测</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/&title=《目标检测之YOLO理解与总结》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/&title=《目标检测之YOLO理解与总结》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《目标检测之YOLO理解与总结》 — Zh's Blog&url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/11/24/目标检测mAP计算以及coco评价标准/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">目标检测mAP计算以及coco评价标准</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/&title=《目标检测之YOLO理解与总结》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/&title=《目标检测之YOLO理解与总结》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《目标检测之YOLO理解与总结》 — Zh's Blog&url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/11/25/目标检测之YOLO理解与总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3a0U7DMAwF0P3/T4PEK2p7b5yMIZ08oTLSnEyKjZ3XKx5fP+PqefLb35+5enI/2+vEwMPDw1ta+tW4X8r9sq5muF/o1duvntxvIh4eHt453v1B3B7r+RGfb0GyQXh4eHifxmsXnQSPPInHw8PD+4+8NsHNiwhtOQMPDw/vE3jJEvMXtKWKvAZ7sNaCh4eHF/PaBPcTfj7Y38PDw8MbdNXXAsa8JZak8tEK8fDw8A7w1gqsbeE1SXwn1xQeVo6Hh4d3jJdMtCvt3lX2jWbAw8PD28rLrwIkhdq1wJOEhLaYW78YDw8Pr+S1x27emlp7S3sp4aGzh4eHh7eVl2PWAkC+oLZgkT/Bw8PDO8HLSwbJcTwpZ7T3AfLUHA8PD28vL2n856Xetb/NU/D6ygIeHh7eAd6k254HhrbF1ZY8ipnx8PDwBry8OJsntXlDq728NboTgYeHh7eJt9awn4SQfFlrVxPq/xjw8PDwSl7dhi/7SvnRn1wmSDbr8nvDw8PD28RLjuA2RV7bmjzk5OVjPDw8vBO8tliwliK3i2svV10i8fDw8A7z2sVNigj5Jq69EQ8PD+8cLx/5HYS8lLA287wUgoeHhzfhJSlsshPnwsNaeo2Hh4d3jrfW3MqP7/bFSQjZVkrGw8PD28rLW/hteXftcG8TdDw8PLz389rO+4Sdt8radh0eHh7eOd7kj09UlPOLBdGa8fDw8I7x1gLGrmN9FMHuFXh4eHhbeV/lmCTHbcuqDQ94eHh47+HtKky06XhbFM6D0Fqow8PDw2t5k4M+b0etJeLJpjwEBjw8PLxjvLzoMDmy8809XmvBw8PDezuvDTBtwaK9xPBQccHDw8P7I15eJpiMfM7oa8DDw8M7xmubXvmB3jax8m19tYvAw8PD28SbX7RqU+e2bTb5JB4eHt5W3jeC2O4DQgp4DwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'good bye~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '你又在偷偷学习了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

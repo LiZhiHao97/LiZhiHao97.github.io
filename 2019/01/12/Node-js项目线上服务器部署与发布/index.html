@@ -237,24 +237,15 @@
 <p>装完后若发现nvm 不是一个命令 在来一个命令窗口</p>
 <h3 id="安装好nvm-就可以安装nodejs了"><a href="#安装好nvm-就可以安装nodejs了" class="headerlink" title="安装好nvm 就可以安装nodejs了"></a>安装好nvm 就可以安装nodejs了</h3><blockquote>
 <p>nvm install v8.2.1</p>
-</blockquote>
-<h3 id="指定一下node版本"><a href="#指定一下node版本" class="headerlink" title="指定一下node版本"></a>指定一下node版本</h3><blockquote>
-<p>nvm use v8.2.2</p>
-</blockquote>
-<h3 id="设置一下默认"><a href="#设置一下默认" class="headerlink" title="设置一下默认"></a>设置一下默认</h3><blockquote>
-<p>nvm alias default v8.2.1</p>
-</blockquote>
-<h3 id="设置成淘宝"><a href="#设置成淘宝" class="headerlink" title="设置成淘宝"></a>设置成淘宝</h3><p>用一个nrm 包</p>
-<blockquote>
-<p>npm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> install -g nrm </p>
-</blockquote>
-<blockquote>
+<h3 id="指定一下node版本"><a href="#指定一下node版本" class="headerlink" title="指定一下node版本"></a>指定一下node版本</h3><p>nvm use v8.2.2</p>
+<h3 id="设置一下默认"><a href="#设置一下默认" class="headerlink" title="设置一下默认"></a>设置一下默认</h3><p>nvm alias default v8.2.1</p>
+<h3 id="设置成淘宝"><a href="#设置成淘宝" class="headerlink" title="设置成淘宝"></a>设置成淘宝</h3><p>用一个nrm 包<br>npm —registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> install -g nrm </p>
 <p>nrm use taobao </p>
 </blockquote>
 <h3 id="安装一些包"><a href="#安装一些包" class="headerlink" title="安装一些包"></a>安装一些包</h3><blockquote>
 <p> npm i pm2 webpack gulp grunt-cli -g</p>
-</blockquote>
-<h3 id="查看全局安装过的包-npm-list-g-depth-0"><a href="#查看全局安装过的包-npm-list-g-depth-0" class="headerlink" title="查看全局安装过的包 npm list -g -depth 0"></a>查看全局安装过的包 npm list -g -depth 0</h3><h4 id="创建-app-js-如下"><a href="#创建-app-js-如下" class="headerlink" title="创建 app.js  如下"></a>创建 app.js  如下</h4><blockquote>
+<h3 id="查看全局安装过的包-npm-list-g-depth-0"><a href="#查看全局安装过的包-npm-list-g-depth-0" class="headerlink" title="查看全局安装过的包 npm list -g -depth 0"></a>查看全局安装过的包 npm list -g -depth 0</h3></blockquote>
+<h4 id="创建-app-js-如下"><a href="#创建-app-js-如下" class="headerlink" title="创建 app.js  如下"></a>创建 app.js  如下</h4><blockquote>
 <p>创建 sudo  vi app.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> server=http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req,res</span>) </span>&#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>:<span class="string">'text/plain'</span>&#125;)</span><br><span class="line">    res.end(<span class="string">'Hello SKL\n'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8081</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://ip地址:8081'</span>);</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>之后 node app.js<br>就可以在浏览器中访问 127.0.0.1:8081</p>
@@ -269,7 +260,7 @@
 </li>
 </ol>
 <p>4.sudo nginx -t  测试是否成功</p>
-<ol start="5">
+<ol>
 <li>sudo nginx -s reload 重启 nginx </li>
 </ol>
 <p>之后输入ip地址 就可以看到了 把8081 的服务都导向到Nginx的80端口</p>
@@ -536,6 +527,27 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
 
 
 
@@ -562,5 +574,20 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
