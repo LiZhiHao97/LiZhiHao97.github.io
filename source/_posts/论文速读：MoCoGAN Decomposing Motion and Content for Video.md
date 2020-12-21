@@ -1,5 +1,5 @@
 ---
-title: 论文速读：MoCoGAN Decomposing Motion and Content for Video 
+title: 论文速读：MoCoGAN Decomposing Motion and Content for Video
 date: 2020-12-21 21:26:14
 tags:
   - 深度学习

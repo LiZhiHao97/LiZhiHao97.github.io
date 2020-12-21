@@ -36,10 +36,8 @@ $$ c = \sqrt{a^{2}+b_{0}^{2} +e^{x}} $$
 1. 转义
 
 > 以下几个字符: # $ % & ~ _ ^ \ { }有特殊意义，需要表示这些字符时，需要转义，即在每个字符前加上\（转义字符的具体含义下面会解释）
->
-> ![img](https:////upload-images.jianshu.io/upload_images/9368615-bcfa93bf4f7c82e8.png?imageMogr2/auto-orient/strip|imageView2/2/w/984/format/webp)
->
-> image.png
+> ![](/image/LaTex/1.jpg)
+
 >
 > 不知为何简书不支持~的表示，需要时写作\sim
 
@@ -65,17 +63,14 @@ $\boldsymbol{E = mc^2}$
 
 1. 希腊字母与特殊字符
 
-![img](https:////upload-images.jianshu.io/upload_images/9368615-49868ef8c5950cf3.png?imageMogr2/auto-orient/strip|imageView2/2/w/855/format/webp)
+   
 
-image.png
+![](/image/LaTex/2.jpg)
 
-![img](https:////upload-images.jianshu.io/upload_images/9368615-3d2020da2a5cfd58.png?imageMogr2/auto-orient/strip|imageView2/2/w/961/format/webp)
+![](/image/LaTex/3.jpg)
 
-image.png
+![](/image/LaTex/4.jpg)
 
-![img](https:////upload-images.jianshu.io/upload_images/9368615-7fcbdefb396ba056.png?imageMogr2/auto-orient/strip|imageView2/2/w/972/format/webp)
-
-image.png
 
 1. 上下标及常用符号
 
@@ -124,9 +119,9 @@ $$ x_{k}^2\quad \sqrt{x}\quad \sqrt[3]{x+y} $$
 
 > 公式中插入空格，间隔效果如下表：
 
-![img](https:////upload-images.jianshu.io/upload_images/9368615-2051eb8ef8627902.png?imageMogr2/auto-orient/strip|imageView2/2/w/683/format/webp)
 
-image.png
+
+![](/image/LaTex/5.jpg)
 
 > 若需要显示更大或更小的字符，在符号前插入 \large 或 \small 命令
 
@@ -150,15 +145,13 @@ $$ x_1, x_2, \dots, x_n\quad 1,2,\cdots,n\quad \vdots\quad \ddots $$
 
 > 关系符如下表所示
 
-![img](https:////upload-images.jianshu.io/upload_images/9368615-0fa226838bae9ea4.png?imageMogr2/auto-orient/strip|imageView2/2/w/976/format/webp)
-
-image.png
+![](/image/LaTex/6.jpg)
 
 > 其他常用符号
 
-![img](https:////upload-images.jianshu.io/upload_images/9368615-2ac87b614fed0f3f.png?imageMogr2/auto-orient/strip|imageView2/2/w/969/format/webp)
+![](/image/LaTex/7.jpg)
 
-image.png
+
 
 1. 分数与组合数
 
@@ -467,7 +460,7 @@ $ \dddot{x} $
 
 ![img](https:////upload-images.jianshu.io/upload_images/9368615-9db47069b8031901.png?imageMogr2/auto-orient/strip|imageView2/2/w/959/format/webp)
 
-image.png
+
 
 > 括号的大小调整
 
@@ -541,7 +534,7 @@ $P=\left(A=2\middle|\frac{A^2}{B}>4\right)$
 
 ![img](https:////upload-images.jianshu.io/upload_images/9368615-2fbc10b9e7ecae71.png?imageMogr2/auto-orient/strip|imageView2/2/w/963/format/webp)
 
-image.png
+
 
 1. 原文照排
 
