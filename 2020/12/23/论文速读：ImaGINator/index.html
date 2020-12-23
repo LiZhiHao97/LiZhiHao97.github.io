@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/12/23/iQ3yBHj9XNCYGmr.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/7cL2kewg64tDmsy.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/eUCXnR7S6LHmDVI.png">
-<meta property="og:updated_time" content="2020-12-23T14:01:47.319Z">
+<meta property="og:updated_time" content="2020-12-23T14:06:14.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文速读：ImaGINator">
 <meta name="twitter:description" content="1. Introduction本文提出了一个新的conditional GAN模型，即ImaGINator，在给定单个图像c_{a}、运动类c_{m}以及噪声z的条件下，生成视频序列，如下图所示。  原文地址：ImaGINator: Conditional Spatio-Temporal GAN for Video Generation">
@@ -189,14 +189,15 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>本文提出了一个新的<strong>conditional</strong> GAN模型，即<strong>ImaGINator</strong>，在给定单个图像<script type="math/tex">c_{a}</script>、运动类<script type="math/tex">c_{m}</script>以及噪声<strong>z</strong>的条件下，生成视频序列，如下图所示。</p>
 <blockquote>
-<p>原文地址：<a href="https://openaccess.thecvf.com/content_WACV_2020/papers/WANG_ImaGINator_Conditional_Spatio-Temporal_GAN_for_Video_Generation_WACV_2020_paper.pdf" target="_blank" rel="noopener">ImaGINator: Conditional Spatio-Temporal GAN for Video Generation</a><br><figure class="image-bubble">
+<p>原文地址：<a href="https://openaccess.thecvf.com/content_WACV_2020/papers/WANG_ImaGINator_Conditional_Spatio-Temporal_GAN_for_Video_Generation_WACV_2020_paper.pdf" target="_blank" rel="noopener">ImaGINator: Conditional Spatio-Temporal GAN for Video Generation</a></p>
+</blockquote>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="https://i.loli.net/2020/12/23/ktXIgMHDd1f5cL8.png" alt="1" title>
                 </div>
                 <div class="image-caption">1</div>
-            </figure></p>
-</blockquote>
+            </figure>
 <p><strong>ImaGINator</strong>的特性如下：</p>
 <ul>
 <li>采用了一种新的时空融合机制，旨在通过增强<strong>G</strong>在低和高特征级别中使用空间信息来保持外观。通过向<strong>Decoder</strong>注入<script type="math/tex">c_{a}</script>，我们使<strong>G</strong>能够将重点放在生成单独的运动上。这是基于这样的假设，即视频可以在潜在空间以及多级时空特征空间中分解成外观和运动。虽然在每一层外观被保留，只有运动被改变。</li>
@@ -243,7 +244,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-12-23T14:01:47.319Z" itemprop="dateUpdated">2020-12-23 22:01:47</time>
+    Last updated: <time datetime="2020-12-23T14:06:14.499Z" itemprop="dateUpdated">2020-12-23 22:06:14</time>
 </span><br>
 
 
