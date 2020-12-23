@@ -12,6 +12,7 @@ tags:
 
 本文提出了一个新的**conditional** GAN模型，即**ImaGINator**，在给定单个图像$$ c_{a} $$、运动类$$ c_{m} $$以及噪声**z**的条件下，生成视频序列，如下图所示。
 > 原文地址：[ImaGINator: Conditional Spatio-Temporal GAN for Video Generation](https://openaccess.thecvf.com/content_WACV_2020/papers/WANG_ImaGINator_Conditional_Spatio-Temporal_GAN_for_Video_Generation_WACV_2020_paper.pdf)
+
 ![1](https://i.loli.net/2020/12/23/ktXIgMHDd1f5cL8.png)
 
 **ImaGINator**的特性如下：
