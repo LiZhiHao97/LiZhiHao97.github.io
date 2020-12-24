@@ -1,11 +1,12 @@
 ---
-title: 论文速读：
+title: 论文速读：G3AN
 date: 2020-12-24 11:53:37
 tags:
   - 深度学习
   - 视频生成
   - GAN
   - Spatio-Temporal
+  - Unconditioned Video Generation
 ---
 
 ## 1. Introduction
