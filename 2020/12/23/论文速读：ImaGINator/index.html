@@ -21,18 +21,23 @@
     
     
     <meta name="keywords" content="深度学习,视频生成,GAN,Spatio-Temporal,Conditioned Video Generation">
-    <meta name="description" content="多总结，多思考">
+    <meta name="description" content="1. Introduction本文提出了一个新的conditional GAN模型，即ImaGINator，在给定单个图像c_{a}、运动类c_{m}以及噪声z的条件下，生成视频序列，如下图所示。  原文地址：ImaGINator: Conditional Spatio-Temporal GAN for Video Generation">
 <meta name="keywords" content="深度学习,视频生成,GAN,Spatio-Temporal,Conditioned Video Generation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文速读：ImaGINator">
 <meta property="og:url" content="http://yoursite.com/2020/12/23/论文速读：ImaGINator/index.html">
 <meta property="og:site_name" content="Zh&#39;s Blog">
-<meta property="og:description" content="多总结，多思考">
+<meta property="og:description" content="1. Introduction本文提出了一个新的conditional GAN模型，即ImaGINator，在给定单个图像c_{a}、运动类c_{m}以及噪声z的条件下，生成视频序列，如下图所示。  原文地址：ImaGINator: Conditional Spatio-Temporal GAN for Video Generation">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2020-12-24T03:55:49.556Z">
+<meta property="og:image" content="https://i.loli.net/2020/12/23/ktXIgMHDd1f5cL8.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/23/iQ3yBHj9XNCYGmr.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/23/7cL2kewg64tDmsy.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/23/eUCXnR7S6LHmDVI.png">
+<meta property="og:updated_time" content="2020-12-24T04:00:42.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文速读：ImaGINator">
-<meta name="twitter:description" content="多总结，多思考">
+<meta name="twitter:description" content="1. Introduction本文提出了一个新的conditional GAN模型，即ImaGINator，在给定单个图像c_{a}、运动类c_{m}以及噪声z的条件下，生成视频序列，如下图所示。  原文地址：ImaGINator: Conditional Spatio-Temporal GAN for Video Generation">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/23/ktXIgMHDd1f5cL8.png">
     
         <link rel="alternate" type="application/atom+xml" title="Zh&#39;s Blog" href="/atom.xml">
     
@@ -155,6 +160,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Introduction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Related-Work"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Related Work</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-NetWork-Architecture"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. NetWork Architecture</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-Generator"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 Generator</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-1-Spatio-temporal-fusion"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">3.1.1 Spatio-temporal fusion.</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-Transposed-1-2-D-Convolution"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">3.1.2 Transposed (1+2)D Convolution</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-Two-stream-Discriminator"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 Two-stream Discriminator</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Conclunsion"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. Conclunsion</span></a></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-论文速读：ImaGINator"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -175,7 +187,56 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>本文提出了一个新的<strong>conditional</strong> GAN模型，即<strong>ImaGINator</strong>，在给定单个图像<script type="math/tex">c_{a}</script>、运动类<script type="math/tex">c_{m}</script>以及噪声<strong>z</strong>的条件下，生成视频序列，如下图所示。</p>
+<blockquote>
+<p>原文地址：<a href="https://openaccess.thecvf.com/content_WACV_2020/papers/WANG_ImaGINator_Conditional_Spatio-Temporal_GAN_for_Video_Generation_WACV_2020_paper.pdf" target="_blank" rel="noopener">ImaGINator: Conditional Spatio-Temporal GAN for Video Generation</a></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/23/ktXIgMHDd1f5cL8.png" alt="1" title>
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
+<p><strong>ImaGINator</strong>的特性如下：</p>
+<ul>
+<li>采用了一种新的时空融合机制，旨在通过增强<strong>G</strong>在低和高特征级别中使用空间信息来保持外观。通过向<strong>Decoder</strong>注入<script type="math/tex">c_{a}</script>，我们使<strong>G</strong>能够将重点放在生成单独的运动上。这是基于这样的假设，即视频可以在潜在空间以及多级时空特征空间中分解成外观和运动。虽然在每一层外观被保留，只有运动被改变。</li>
+<li>一种新颖的转置<strong>(1+2)</strong>D卷积，将转置的三维卷积滤波器分解成独立的时间和空间分量。这带来了几个好处:(1)额外的非线性校正允许模型表示更复杂的函数，(2)它便于优化，因为转置(1+2)D卷积块比完全转置的3D卷积滤波器更容易优化，以及(3)它在视频质量和速度方面产生显著的增益</li>
+</ul>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><p>与之前文章中的MoCoGAN进行比较，MoCoGAN基于seq2seq架构，旨在将时空生成分为两步(将每个视频帧分解为不同潜在空间中的运动和外观)。然而，这种两步生成省略了在更高空间级别的时间一致性的建模，这通常不能保持原始外观。</p>
+<p>与此不同，我们提出了一种单步架构，它在多级特征空间中分解运动和外观，用于图像到视频的生成。</p>
+<h2 id="3-NetWork-Architecture"><a href="#3-NetWork-Architecture" class="headerlink" title="3. NetWork Architecture"></a>3. NetWork Architecture</h2><p>我们的目标是生成给定外观信息(作为单个图像帧)和运动类别(例如，确定面部表情)的视频序列。我们在这里假设一个视频y可以分解为外观<script type="math/tex">c_{a}</script>(源自输入图像)和运动<script type="math/tex">c_{m}</script>(源自类别标签)，在此基础上我们继续生成视频。因此，我们将我们的任务表述为学习一个条件映射G: {z，<script type="math/tex">c_{a}</script>，<script type="math/tex">c_{m}</script>} → y，其中z ~ N(0，1)表示随机噪声。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/23/iQ3yBHj9XNCYGmr.png" alt="2" title>
+                </div>
+                <div class="image-caption">2</div>
+            </figure>
+<h3 id="3-1-Generator"><a href="#3-1-Generator" class="headerlink" title="3.1 Generator"></a>3.1 Generator</h3><p>我们的<strong>Generator</strong>由一个图像编码器和一个视频解码器组成，见上图。<strong>Encoder</strong>提取各种层中的外观信息，从浅的精细层到深的粗糙层。它将输入图像<script type="math/tex">c_{a}</script>编码为一个潜在矢量<strong>p</strong>，然后通过连接<strong>p</strong>、<script type="math/tex">c_{m}</script>以及随机噪声z ~ N(0，1)，<strong>Decoder</strong>生成一个视频序列。</p>
+<p>在我们的生成器<strong>B</strong>中，我们将使用从2个跳跃连接的FCN-8的想法扩展到4个跳跃连接，但不同之处在于，最初的跳跃连接用于融合预测，而我们的跳跃连接用于融合外观和运动时空特征。我们的跳过连接允许<strong>Decoder</strong>直接从<strong>Encoder</strong>访问低级特征，使<strong>Decoder</strong>能够在每个时间片重用外观特征，并专注于生成运动。</p>
+<h4 id="3-1-1-Spatio-temporal-fusion"><a href="#3-1-1-Spatio-temporal-fusion" class="headerlink" title="3.1.1 Spatio-temporal fusion."></a>3.1.1 Spatio-temporal fusion.</h4><p>假设<strong>G</strong>有<code>n</code>个图层，且<script type="math/tex">F_{i}^{H×W×C_{1}×T}</script>是<strong>G</strong>第<code>i</code>层中有<script type="math/tex">C_{1}</script>个通道的的特征图，<script type="math/tex">f_{i,t}^{H×W×C_{1}}</script>，t ∈ {1, …, T}是<script type="math/tex">F_{i}</script>中第<code>t</code>帧的特征图，<script type="math/tex">F_{n-i}^{H×W×C_{2}}</script>是第<code>n-i</code>层的特征图。</p>
+<p>如下图所示，我们设计<strong>Decoder</strong>和<strong>Encoder</strong>的每一层的输出具有相同的空间维度。我们提出了一种融合机制，在通道方向的维度上连接每个<script type="math/tex">f_{i,t}</script>和<script type="math/tex">F_{n-i}</script>串联成同一个通道尺寸，得到一个新的特征映射<script type="math/tex">F_{i}^{'  H×W×(C_{1}+C_{2})×T}</script>，称为<strong>时空融合(Spatio-temporal fusion)</strong>。这里我们注意到，每个初始特征映射<script type="math/tex">F_{i}</script>呈现生成的视频中几个连续帧的时空特征。通过在不同的特征层次上直接时空融合<script type="math/tex">F_{i}</script>和 <script type="math/tex">F_{n-i}</script>，可以在生成的视频中很好地保留输入信息。</p>
+<p>此外，我们将类别标签(构成一个one-hot向量)直接融合到解码器中，以便为每个层提供对标签的访问。为此，我们首先将热点向量投影到热点特征图上。然后，我们在解码器中将类别标签信息时空融合到不同的层中。我们最终的特征地图是大小为H  × W × (C1+ C2+<script type="math/tex">C_{category}</script>)× T</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/23/7cL2kewg64tDmsy.png" alt="image-20201223214650481" title>
+                </div>
+                <div class="image-caption">image-20201223214650481</div>
+            </figure>
+<h4 id="3-1-2-Transposed-1-2-D-Convolution"><a href="#3-1-2-Transposed-1-2-D-Convolution" class="headerlink" title="3.1.2 Transposed (1+2)D Convolution"></a>3.1.2 Transposed (1+2)D Convolution</h4><p>我们注意到，由于难以优化，在一步方法中使用的3D卷积通常会导致产生模糊的视频。然而，得益于空间和时间分解，帧可以在两步方法中单独生成。因此，为了将这种分解结合到一步方法中，我们设计了一个新的卷积层，集成了转置的(1+2)维卷积</p>
+<p>我们建议明确地将转置的3D卷积滤波器分解为两个独立且连续的运算，M个转置的1D时间卷积滤波器之后是一个2D独立的空间分量，我们称之为转置的(1+2)D卷积，如下图所示。这种分解带来了几个好处。第一个好处与这两个操作之间的额外非线性校正有关，因此允许模型表示更复杂的函数。第二个潜在的好处是，分解有助于优化，因为具有分解的时间和空间分量的转置(1+2)D卷积块是比完全转置3D卷积滤波器更容易优化。此外，我们表明，分解转置的3D卷积滤波器在视频质量和速度方面都产生了显著的增益。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/23/eUCXnR7S6LHmDVI.png" alt="image-20201223214950367" title>
+                </div>
+                <div class="image-caption">image-20201223214950367</div>
+            </figure>
+<h3 id="3-2-Two-stream-Discriminator"><a href="#3-2-Two-stream-Discriminator" class="headerlink" title="3.2 Two-stream Discriminator"></a>3.2 Two-stream Discriminator</h3><p>为了提高视频生成中的图像质量，我们设计了一个包含<script type="math/tex">D_{V}</script>和<script type="math/tex">D_{I}</script>的<strong>Two-stream Discriminator</strong>架构。虽然数字视频有五个3D卷积层，但数字视频只包含具有相同数字视频层数的2D卷积。<script type="math/tex">D_{V}</script>接受完整生成的视频作为输入，使用建议的时空融合来融合类别标签的“热点特征图”和第一层的输出，类似于<strong>G</strong>. <script type="math/tex">D_{V}</script>试图测量联合分布p(<script type="math/tex">x_{real}</script>, <script type="math/tex">c_{m}</script>)和p(<script type="math/tex">x_{fake}</script>, <script type="math/tex">c_{m}</script>)间的<strong>KL散度</strong>。我们分别从真实和生成的视频中随机抽取N帧作为输入。</p>
+<h2 id="4-Conclunsion"><a href="#4-Conclunsion" class="headerlink" title="4. Conclunsion"></a>4. Conclunsion</h2><p>以上。</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -183,7 +244,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-12-24T03:55:49.556Z" itemprop="dateUpdated">2020-12-24 11:55:49</time>
+    Last updated: <time datetime="2020-12-24T04:00:42.727Z" itemprop="dateUpdated">2020-12-24 12:00:42</time>
 </span><br>
 
 
@@ -468,5 +529,20 @@ MathJax.Hub.Queue(function() {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

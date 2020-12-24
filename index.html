@@ -226,7 +226,13 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
+        1. Introduction本文提出了一个新的conditional GAN模型，即ImaGINator，在给定单个图像c_{a}、运动类c_{m}以及噪声z的条件下，生成视频序列，如下图所示。
+
+原文地址：ImaGINator: Conditional Spatio-Temporal GAN for Video Generation
+
+
+                
+        ...
     
 
         <a href="/2020/12/23/论文速读：ImaGINator/" class="post-more waves-effect waves-button">
@@ -817,5 +823,20 @@ MathJax.Hub.Queue(function() {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
