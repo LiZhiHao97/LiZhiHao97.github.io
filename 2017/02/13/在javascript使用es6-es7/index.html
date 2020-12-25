@@ -1,500 +1,472 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn" data-default-color-scheme=&quot;auto&quot;>
+
+
+
 <head><meta name="generator" content="Hexo 3.9.0">
-    
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content>
+  <title>在javascript使用es6,es7 - Zh&#39;s Blog</title>
 
-    
-
-    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
 
-    <meta charset="utf-8">
+  
     
     
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css">
     
-    
-    <title>在javascript使用es6,es7 | Zh&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="前端,javascript,es6,es7s">
-    <meta name="description" content="const1234567const a=3; //定义常量// 如果要用es 5的方式怎么写呢？？Object.defineProperty(window, &quot;a&quot;, &amp;#123;  value: 37,  writable: false,&amp;#125;);console.log(window.a) 作用域es6的作用域123456for (let i = 0; i &amp;lt; 10; i++) &amp;#">
-<meta name="keywords" content="前端,javascript,es6,es7s">
-<meta property="og:type" content="article">
-<meta property="og:title" content="在javascript使用es6,es7">
-<meta property="og:url" content="http://yoursite.com/2017/02/13/在javascript使用es6-es7/index.html">
-<meta property="og:site_name" content="Zh&#39;s Blog">
-<meta property="og:description" content="const1234567const a=3; //定义常量// 如果要用es 5的方式怎么写呢？？Object.defineProperty(window, &quot;a&quot;, &amp;#123;  value: 37,  writable: false,&amp;#125;);console.log(window.a) 作用域es6的作用域123456for (let i = 0; i &amp;lt; 10; i++) &amp;#">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2020-11-24T07:29:48.615Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在javascript使用es6,es7">
-<meta name="twitter:description" content="const1234567const a=3; //定义常量// 如果要用es 5的方式怎么写呢？？Object.defineProperty(window, &quot;a&quot;, &amp;#123;  value: 37,  writable: false,&amp;#125;);console.log(window.a) 作用域es6的作用域123456for (let i = 0; i &amp;lt; 10; i++) &amp;#">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zh&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
 
-    <!-- custom head -->
-    
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
 
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Zh</h5>
-          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/LiZhiHao97" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
-                <i class="icon icon-lg icon-link"></i>
-                知乎
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
               </a>
             </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
         
       </ul>
     </div>
   </div>
-</aside>
+</nav>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">在javascript使用es6,es7</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">在javascript使用es6,es7</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2017-02-13T12:33:43.000Z" itemprop="datePublished" class="page-time">
-  2017-02-13
-</time>
-
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="在javascript使用es6,es7">
+              
+            </span>
 
             
-        </h5>
-    </div>
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-02-13 20:33" pubdate>
+        2017年2月13日 晚上
+      </time>
+    </span>
+  
+</div>
 
+<div class="mt-1">
+  
     
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
 
-
-</header>
-
-
-<div class="container body-wrap">
+  
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#const"><span class="post-toc-number">1.</span> <span class="post-toc-text">const</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#作用域"><span class="post-toc-number">2.</span> <span class="post-toc-text">作用域</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ES6-定义属性"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">ES6 定义属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#默认参数"><span class="post-toc-number">3.</span> <span class="post-toc-text">默认参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可变参数"><span class="post-toc-number">4.</span> <span class="post-toc-text">可变参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对象扩展"><span class="post-toc-number">5.</span> <span class="post-toc-text">对象扩展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理做数据保护"><span class="post-toc-number">6.</span> <span class="post-toc-text">代理做数据保护</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#es5中的数据保护"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">es5中的数据保护</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#es6中通过代理的方式做数据保护"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">es6中通过代理的方式做数据保护</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串拼接"><span class="post-toc-number">7.</span> <span class="post-toc-text">字符串拼接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#for…-of…"><span class="post-toc-number">8.</span> <span class="post-toc-text">for… of…</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#promise"><span class="post-toc-number">9.</span> <span class="post-toc-text">promise</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#async"><span class="post-toc-number">10.</span> <span class="post-toc-text">async</span></a></li></ol>
-        </nav>
-    </aside>
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
 
-
-<article id="post-在javascript使用es6-es7"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">在javascript使用es6,es7</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2017-02-13 20:33:43" datetime="2017-02-13T12:33:43.000Z"  itemprop="datePublished">2017-02-13</time>
+  
+  
+</div>
 
             
+          </div>
 
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+          
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="number">3</span>; <span class="comment">//定义常量</span></span><br><span class="line"><span class="comment">// 如果要用es 5的方式怎么写呢？？</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">window</span>, <span class="string">"a"</span>, &#123;</span><br><span class="line">  value: <span class="number">37</span>,</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.a)</span><br></pre></td></tr></table></figure>
-<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>es6的作用域<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line"><span class="comment">// ReferenceError: i is not defined</span></span><br></pre></td></tr></table></figure></p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">在javascript使用es6,es7</h1>
+            
+            <div class="markdown-body">
+              <h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> a=<span class="hljs-number">3</span>; <span class="hljs-comment">//定义常量</span><br><span class="hljs-comment">// 如果要用es 5的方式怎么写呢？？</span><br><span class="hljs-built_in">Object</span>.defineProperty(<span class="hljs-built_in">window</span>, <span class="hljs-string">"a"</span>, &#123;<br>  <span class="hljs-attr">value</span>: <span class="hljs-number">37</span>,<br>  <span class="hljs-attr">writable</span>: <span class="hljs-literal">false</span>,<br>&#125;);<br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a)<br></code></pre></td></tr></table></figure>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>es6的作用域<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>  <span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-built_in">console</span>.log(i);<br><span class="hljs-comment">// ReferenceError: i is not defined</span><br></code></pre></td></tr></table></figure></p>
 <p>在es5中,并没有块级作用域，先用es5写一个作用域看看</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>](); <span class="comment">// 10</span></span><br><span class="line">a[<span class="number">5</span>](); <span class="comment">// 10</span></span><br><span class="line">a[<span class="number">4</span>](); <span class="comment">// 10</span></span><br><span class="line">a[<span class="number">3</span>](); <span class="comment">// 10</span></span><br><span class="line">a[<span class="number">2</span>](); <span class="comment">// 10</span></span><br><span class="line">a[<span class="number">1</span>](); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>  a[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(i);<br>  &#125;;<br>&#125;<br>a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 10</span><br>a[<span class="hljs-number">5</span>](); <span class="hljs-comment">// 10</span><br>a[<span class="hljs-number">4</span>](); <span class="hljs-comment">// 10</span><br>a[<span class="hljs-number">3</span>](); <span class="hljs-comment">// 10</span><br>a[<span class="hljs-number">2</span>](); <span class="hljs-comment">// 10</span><br>a[<span class="hljs-number">1</span>](); <span class="hljs-comment">// 10</span><br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>上面代码中，变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。每一次循环，变量i的值都会发生改变，而循环内被赋给数组a的函数内部的console.log(i)，里面的i指向的就是全局的i。也就是说，所有数组a的成员里面的i，指向的都是同一个i，导致运行时输出的是最后一轮的i的值，也就是 10。</p>
 </blockquote>
-<h4 id="ES6-定义属性"><a href="#ES6-定义属性" class="headerlink" title="ES6 定义属性"></a>ES6 定义属性</h4><p>es5怎么写呢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var x = 1, y = 2;</span><br><span class="line">var object = &#123;</span><br><span class="line">　　x: x,</span><br><span class="line">　　y: y</span><br><span class="line">&#125;;</span><br><span class="line">console.log(object.x); //output &quot;1&quot;</span><br><span class="line">```javascript</span><br><span class="line">在es6中</span><br></pre></td></tr></table></figure></p>
+<h4 id="ES6-定义属性"><a href="#ES6-定义属性" class="headerlink" title="ES6 定义属性"></a>ES6 定义属性</h4><p>es5怎么写呢<br><figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-keyword">var</span> <span class="hljs-symbol">x</span> = <span class="hljs-number">1</span>, <span class="hljs-symbol">y</span> = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">var</span> object = &#123;<br>　　<span class="hljs-symbol">x</span>: <span class="hljs-symbol">x</span>,<br>　　<span class="hljs-symbol">y</span>: <span class="hljs-symbol">y</span><br>&#125;;<br>console.log(object.<span class="hljs-symbol">x</span>); <span class="hljs-comment">//output "1"</span><br>```javascript<br>在es6中<br></code></pre></td></tr></table></figure></p>
 <p>//给一个属性赋一个变量值，如果变量名和属性名相同，ES6 提供了一个简洁的语法，可以省略变量名</p>
-<p>let x = 1, y = 2;<br>let object = {<br>　　x,<br>　　y<br>};<br>console.log(object.x); //output “1”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 箭头函数</span><br><span class="line">```javascript</span><br><span class="line">// es5中的this</span><br><span class="line">var A = function () &#123;</span><br><span class="line">    this.a = &apos;a&apos;;</span><br><span class="line">    this.b = &apos;b&apos;;</span><br><span class="line">    this.c = &#123;</span><br><span class="line">        a: &apos;a++&apos;,</span><br><span class="line">        b: function () &#123;</span><br><span class="line">            console.log(this.a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new A().c.b()) // a++ 因为es5中的this即谁调用它，this就指向谁</span><br><span class="line">//es6</span><br><span class="line">var A = function () &#123;</span><br><span class="line">    this.a = &apos;a&apos;;</span><br><span class="line">    this.b = &apos;b&apos;;</span><br><span class="line">    this.c = &#123;</span><br><span class="line">        a: &apos;a++&apos;,</span><br><span class="line">        b:  ()=&gt;&#123;</span><br><span class="line">            console.log(this.a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new A().c.b()) // a,箭头函数this的指向是定义时this的指向，b函数在定义的时候this就指向函数体里面的this</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//带有默认参数的箭头函数</span></span><br><span class="line"><span class="keyword">let</span> hello =<span class="function">(<span class="params">name=<span class="string">'world'</span></span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`hello <span class="subst">$&#123;name&#125;</span>`</span>) <span class="comment">//注意这边不是单引号</span></span><br><span class="line">&#125;</span><br><span class="line">hello() <span class="comment">//hello world</span></span><br><span class="line">hello(<span class="string">'skl'</span>)<span class="comment">//hello skl</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//多个参数</span><br><span class="line">let cal1 =(num1,num2)=&gt;num1*num2</span><br><span class="line">let arr=[6,7]</span><br><span class="line">console.log(cal1(...arr))//展开</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function hello(name1,name2)&#123;</span><br><span class="line">  console.log(name1,name2)</span><br><span class="line">&#125;</span><br><span class="line">let arr =[&apos;skl1&apos;,&apos;skl2&apos;];</span><br><span class="line">//es5</span><br><span class="line">//hello.apply(null,arr)</span><br><span class="line">//es6</span><br><span class="line">hello(...arr)</span><br></pre></td></tr></table></figure>
-<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// es5</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">x,y </span>) </span>&#123;</span><br><span class="line">    x=x||<span class="number">1</span>;</span><br><span class="line">    y=y||<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// es6</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">x=<span class="number">1</span>,y=<span class="number">2</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#123;   <span class="comment">//es5</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> a = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">        <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">        a.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">            sum += item;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)) </span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//es5</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">...a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">        a.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">            sum += item;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)) </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 扩展运算符的使用</span></span><br><span class="line"><span class="comment">// 合并数组 es5</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">var</span> b=[<span class="number">11</span>,<span class="number">111</span>,<span class="number">111</span>];</span><br><span class="line">    <span class="keyword">var</span> c=b.concat(a);</span><br><span class="line">    <span class="built_in">console</span>.log(c)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 合并数组 es6运用扩展运算符</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">var</span> b=[<span class="number">11</span>,<span class="number">111</span>,<span class="number">111</span>];</span><br><span class="line">    <span class="keyword">var</span> c=[...a,...b];</span><br><span class="line">    <span class="built_in">console</span>.log(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="对象扩展"><a href="#对象扩展" class="headerlink" title="对象扩展"></a>对象扩展</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">  name:<span class="string">'skl'</span>,</span><br><span class="line">  age:<span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj))<span class="comment">//["name","age"]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(obj))<span class="comment">//["skl",18]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(obj))<span class="comment">// key 和value变成一个数组</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">'skl'</span></span><br><span class="line"><span class="keyword">const</span> age=<span class="string">'nian'</span>;</span><br><span class="line"><span class="keyword">const</span> height=<span class="string">'shengao'</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  [age]:<span class="number">18</span>,</span><br><span class="line">  height</span><br><span class="line">&#125;</span><br><span class="line">obj[name] = <span class="string">'hello skl'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj)<span class="comment">//&#123;nian: 18, height: "shengao", skl: "hello skl"&#125;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1=&#123;<span class="attr">name</span>:<span class="string">'skl'</span>,<span class="attr">age</span>:<span class="number">18</span>&#125;</span><br><span class="line"><span class="keyword">const</span> obj2=&#123;<span class="attr">type</span>:<span class="string">'ha'</span>,<span class="attr">aa</span>:<span class="number">90</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(&#123;...obj1,...obj2&#125;)<span class="comment">//&#123;name: "skl", age: 18, type: "ha", aa: 90&#125;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结构赋值</span></span><br><span class="line"><span class="keyword">const</span> arr =[<span class="string">'skl'</span>,<span class="string">'sk2'</span>];</span><br><span class="line"><span class="keyword">let</span> [arg1,arg2]=arr;</span><br><span class="line"><span class="built_in">console</span>.log(arg1,arg2)<span class="comment">//skl sk2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj=&#123;<span class="attr">nian</span>: <span class="number">18</span>, <span class="attr">height</span>: <span class="string">"shengao"</span>, <span class="attr">skl</span>: <span class="string">"hello skl"</span>&#125;</span><br><span class="line"><span class="keyword">const</span> &#123;nian,height&#125;=obj;</span><br><span class="line"><span class="built_in">console</span>.log(nian,height)<span class="comment">//18 shengao</span></span><br></pre></td></tr></table></figure>
-<h3 id="代理做数据保护"><a href="#代理做数据保护" class="headerlink" title="代理做数据保护"></a>代理做数据保护</h3><h4 id="es5中的数据保护"><a href="#es5中的数据保护" class="headerlink" title="es5中的数据保护"></a>es5中的数据保护</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 数据保护（相当于私有变量）es5的写法,定义一个构造函数</span></span><br><span class="line">  <span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = &#123;</span><br><span class="line">      name: <span class="string">'es5'</span>,</span><br><span class="line">      sex: <span class="string">'male'</span>,</span><br><span class="line">      age: <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// getter 和setter</span></span><br><span class="line">    <span class="keyword">this</span>.get = <span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> data[key]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.set = <span class="function"><span class="keyword">function</span> (<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (key !== <span class="string">'sex'</span>) &#123;</span><br><span class="line">        data[key] = value;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 声明实例</span></span><br><span class="line">  <span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">  <span class="comment">// 读取</span></span><br><span class="line">  <span class="built_in">console</span>.table(&#123;</span><br><span class="line">    name: person.get(<span class="string">'name'</span>),</span><br><span class="line">    sex: person.get(<span class="string">'sex'</span>),</span><br><span class="line">    aeg: person.get(<span class="string">'ageqe3w'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 修改</span></span><br><span class="line">  person.set(<span class="string">'name'</span>, <span class="string">'啦啦啦'</span>);<span class="comment">// 这时候console的结果就会变了</span></span><br><span class="line">  person.set(<span class="string">'sex'</span>, <span class="string">'male'</span>)<span class="comment">// console出来发现没有用因为数据被保护了</span></span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 另一种写法</span></span><br><span class="line">  <span class="keyword">var</span> Person = &#123;</span><br><span class="line">    name: <span class="string">'skl'</span>,</span><br><span class="line">    age: <span class="number">10</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// sex只可读不可写</span></span><br><span class="line">  <span class="built_in">Object</span>.defineProperties(Person, <span class="string">'sex'</span>, &#123;</span><br><span class="line">    writeable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">'male'</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">console</span>.table(&#123;</span><br><span class="line">    name: Person.name,</span><br><span class="line">    age: Person.age,</span><br><span class="line">    sex: Person.sex,</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 若强行给只读属性复制会报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="es6中通过代理的方式做数据保护"><a href="#es6中通过代理的方式做数据保护" class="headerlink" title="es6中通过代理的方式做数据保护"></a>es6中通过代理的方式做数据保护</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// es的代理 </span></span><br><span class="line">  <span class="keyword">let</span> Person = &#123;</span><br><span class="line">    name: <span class="string">'11'</span>,</span><br><span class="line">    age: <span class="number">11</span>,</span><br><span class="line">    sex: <span class="string">'male'</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//person是暴露给用户的，吧上面的Person保护起来</span></span><br><span class="line">  <span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(Person, &#123;</span><br><span class="line">    <span class="keyword">get</span>(target, key) &#123;</span><br><span class="line">      <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(target, key, value) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key !== <span class="string">'sex'</span>) &#123;</span><br><span class="line">        target[key] = value;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h3><p>在es5中，凭借字符串要不断的+,尤其是在html模板的时候，变得特别不方便<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`skl<span class="subst">$&#123;a&#125;</span>`</span>)<span class="comment">//skl3</span></span><br><span class="line"><span class="string">`Hello <span class="subst">$&#123;<span class="string">'World'</span>&#125;</span>`</span></span><br><span class="line"><span class="comment">// "Hello World"</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="for…-of…"><a href="#for…-of…" class="headerlink" title="for… of…"></a>for… of…</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="keyword">var</span> iterator = arr.entries();</span><br><span class="line"><span class="built_in">console</span>.log(iterator) <span class="comment">//Array Iterator &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> e <span class="keyword">of</span> iterator) &#123;  <span class="comment">//返回有下标的数组</span></span><br><span class="line">    <span class="built_in">console</span>.log(e) </span><br><span class="line">    <span class="comment">//[0, "a"]</span></span><br><span class="line">    <span class="comment">//[1, "b"]</span></span><br><span class="line">    <span class="comment">//[2, "c"]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="keyword">var</span> iterator = arr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> e <span class="keyword">of</span> iterator) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">    <span class="comment">//a b c</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="keyword">var</span> iterator = arr.entries();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [index,e] <span class="keyword">of</span> iterator) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(index,e);</span><br><span class="line">    <span class="comment">// 0 "a"</span></span><br><span class="line">    <span class="comment">// 1 "b"</span></span><br><span class="line">    <span class="comment">// 2 "c"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="keyword">var</span> iterator = arr.entries();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [index,e] <span class="keyword">of</span> iterator) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// a </span></span><br><span class="line"><span class="comment">// b</span></span><br><span class="line"><span class="comment">// c</span></span><br></pre></td></tr></table></figure>
-<h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> state = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">step1</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'1.开始-做饭'</span>);</span><br><span class="line">  <span class="keyword">if</span> (state == <span class="number">1</span>) &#123;</span><br><span class="line">    resolve(<span class="string">'做饭--完成'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">'做饭--出错'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">step2</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'2.开始-吃饭'</span>);</span><br><span class="line">  <span class="keyword">if</span> (state == <span class="number">1</span>) &#123;</span><br><span class="line">    resolve(<span class="string">'吃饭--完成'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">'吃饭--出错'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">step3</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'3.开始-收拾'</span>);</span><br><span class="line">  <span class="keyword">if</span> (state == <span class="number">1</span>) &#123;</span><br><span class="line">    resolve(<span class="string">'收拾--完成'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(<span class="string">'收拾--出错'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(step1)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(val)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(step2)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(val)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(step3)</span><br><span class="line">  &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(val)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testAsync</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'hello async'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> result =testAsync();</span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// 返回的是一个promise</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'something'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testAsync</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'hello async'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> v1 = <span class="keyword">await</span> getSomething();</span><br><span class="line">  <span class="keyword">const</span> v2 = <span class="keyword">await</span> testAsync();</span><br><span class="line">  <span class="built_in">console</span>.log(v1,v2)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
-<p> 模拟异步请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">takeLongTime</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      resolve(<span class="string">"long_time_value"</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> v = <span class="keyword">await</span> takeLongTime()</span><br><span class="line">  <span class="built_in">console</span>.log(v)</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure></p>
+<p>let x = 1, y = 2;<br>let object = {<br>　　x,<br>　　y<br>};<br>console.log(object.x); //output “1”<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><br><br><span class="kotlin"><br>### 箭头函数<br>```javascript<br><span class="hljs-comment">// es5中的this</span><br><span class="hljs-keyword">var</span> A = function () &#123;<br>    <span class="hljs-keyword">this</span>.a = <span class="hljs-string">'a'</span>;<br>    <span class="hljs-keyword">this</span>.b = <span class="hljs-string">'b'</span>;<br>    <span class="hljs-keyword">this</span>.c = &#123;<br>        a: <span class="hljs-string">'a++'</span>,<br>        b: function () &#123;<br>            console.log(<span class="hljs-keyword">this</span>.a);<br>        &#125;<br>    &#125;<br>&#125;<br><br>console.log(new A().c.b()) <span class="hljs-comment">// a++ 因为es5中的this即谁调用它，this就指向谁</span><br><span class="hljs-comment">//es6</span><br><span class="hljs-keyword">var</span> A = function () &#123;<br>    <span class="hljs-keyword">this</span>.a = <span class="hljs-string">'a'</span>;<br>    <span class="hljs-keyword">this</span>.b = <span class="hljs-string">'b'</span>;<br>    <span class="hljs-keyword">this</span>.c = &#123;<br>        a: <span class="hljs-string">'a++'</span>,<br>        b:  ()=&gt;&#123;<br>            console.log(<span class="hljs-keyword">this</span>.a);<br>        &#125;<br>    &#125;<br>&#125;<br><br>console.log(new A().c.b()) <span class="hljs-comment">// a,箭头函数this的指向是定义时this的指向，b函数在定义的时候this就指向函数体里面的this</span></span><br></code></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//带有默认参数的箭头函数</span><br><span class="hljs-keyword">let</span> hello =<span class="hljs-function">(<span class="hljs-params">name=<span class="hljs-string">'world'</span></span>)=&gt;</span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`hello <span class="hljs-subst">$&#123;name&#125;</span>`</span>) <span class="hljs-comment">//注意这边不是单引号</span><br>&#125;<br>hello() <span class="hljs-comment">//hello world</span><br>hello(<span class="hljs-string">'skl'</span>)<span class="hljs-comment">//hello skl</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-comment">//多个参数</span><br><span class="hljs-keyword">let</span> cal1 =<span class="hljs-function">(<span class="hljs-params">num1,num2</span>)=&gt;</span>num1*num2<br><span class="hljs-keyword">let</span> arr=[<span class="hljs-number">6</span>,<span class="hljs-number">7</span>]<br><span class="hljs-built_in">console</span>.log(cal1(...arr))<span class="hljs-comment">//展开</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hello</span>(<span class="hljs-params">name1,name2</span>)</span>&#123;<br>  <span class="hljs-built_in">console</span>.log(name1,name2)<br>&#125;<br><span class="hljs-keyword">let</span> arr =[<span class="hljs-string">'skl1'</span>,<span class="hljs-string">'skl2'</span>];<br><span class="hljs-comment">//es5</span><br><span class="hljs-comment">//hello.apply(null,arr)</span><br><span class="hljs-comment">//es6</span><br>hello(...arr)<br></code></pre></td></tr></table></figure>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// es5</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params">x,y </span>) </span>&#123;<br>    x=x||<span class="hljs-number">1</span>;<br>    y=y||<span class="hljs-number">2</span>;<br>&#125;<br><span class="hljs-comment">// es6</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params">x=<span class="hljs-number">1</span>,y=<span class="hljs-number">2</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> x+y;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;   <span class="hljs-comment">//es5</span><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-keyword">var</span> a = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>);<br>        <span class="hljs-keyword">var</span> sum = <span class="hljs-number">0</span>;<br>        a.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) </span>&#123;<br>            sum += item;<br>        &#125;)<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>    <span class="hljs-built_in">console</span>.log(f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)) <br>&#125;<br>&#123;<br>    <span class="hljs-comment">//es5</span><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">...a</span>) </span>&#123;<br>        <span class="hljs-keyword">var</span> sum = <span class="hljs-number">0</span>;<br>        a.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) </span>&#123;<br>            sum += item;<br>        &#125;)<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>    <span class="hljs-built_in">console</span>.log(f(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)) <br>&#125;<br><span class="hljs-comment">// 扩展运算符的使用</span><br><span class="hljs-comment">// 合并数组 es5</span><br>&#123;<br>    <span class="hljs-keyword">var</span> a=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>];<br>    <span class="hljs-keyword">var</span> b=[<span class="hljs-number">11</span>,<span class="hljs-number">111</span>,<span class="hljs-number">111</span>];<br>    <span class="hljs-keyword">var</span> c=b.concat(a);<br>    <span class="hljs-built_in">console</span>.log(c)<br>&#125;<br><span class="hljs-comment">// 合并数组 es6运用扩展运算符</span><br>&#123;<br>    <span class="hljs-keyword">var</span> a=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>];<br>    <span class="hljs-keyword">var</span> b=[<span class="hljs-number">11</span>,<span class="hljs-number">111</span>,<span class="hljs-number">111</span>];<br>    <span class="hljs-keyword">var</span> c=[...a,...b];<br>    <span class="hljs-built_in">console</span>.log(c)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="对象扩展"><a href="#对象扩展" class="headerlink" title="对象扩展"></a>对象扩展</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj=&#123;<br>  <span class="hljs-attr">name</span>:<span class="hljs-string">'skl'</span>,<br>  <span class="hljs-attr">age</span>:<span class="hljs-number">18</span>,<br>&#125;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.keys(obj))<span class="hljs-comment">//["name","age"]</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.values(obj))<span class="hljs-comment">//["skl",18]</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.entries(obj))<span class="hljs-comment">// key 和value变成一个数组</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> name = <span class="hljs-string">'skl'</span><br><span class="hljs-keyword">const</span> age=<span class="hljs-string">'nian'</span>;<br><span class="hljs-keyword">const</span> height=<span class="hljs-string">'shengao'</span><br><span class="hljs-keyword">const</span> obj = &#123;<br>  [age]:<span class="hljs-number">18</span>,<br>  height<br>&#125;<br>obj[name] = <span class="hljs-string">'hello skl'</span>;<br><span class="hljs-built_in">console</span>.log(obj)<span class="hljs-comment">//&#123;nian: 18, height: "shengao", skl: "hello skl"&#125;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj1=&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">'skl'</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">18</span>&#125;<br><span class="hljs-keyword">const</span> obj2=&#123;<span class="hljs-attr">type</span>:<span class="hljs-string">'ha'</span>,<span class="hljs-attr">aa</span>:<span class="hljs-number">90</span>&#125;<br><span class="hljs-built_in">console</span>.log(&#123;...obj1,...obj2&#125;)<span class="hljs-comment">//&#123;name: "skl", age: 18, type: "ha", aa: 90&#125;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//结构赋值</span><br><span class="hljs-keyword">const</span> arr =[<span class="hljs-string">'skl'</span>,<span class="hljs-string">'sk2'</span>];<br><span class="hljs-keyword">let</span> [arg1,arg2]=arr;<br><span class="hljs-built_in">console</span>.log(arg1,arg2)<span class="hljs-comment">//skl sk2</span><br><br><span class="hljs-keyword">const</span> obj=&#123;<span class="hljs-attr">nian</span>: <span class="hljs-number">18</span>, <span class="hljs-attr">height</span>: <span class="hljs-string">"shengao"</span>, <span class="hljs-attr">skl</span>: <span class="hljs-string">"hello skl"</span>&#125;<br><span class="hljs-keyword">const</span> &#123;nian,height&#125;=obj;<br><span class="hljs-built_in">console</span>.log(nian,height)<span class="hljs-comment">//18 shengao</span><br></code></pre></td></tr></table></figure>
+<h3 id="代理做数据保护"><a href="#代理做数据保护" class="headerlink" title="代理做数据保护"></a>代理做数据保护</h3><h4 id="es5中的数据保护"><a href="#es5中的数据保护" class="headerlink" title="es5中的数据保护"></a>es5中的数据保护</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;<br>  <span class="hljs-comment">// 数据保护（相当于私有变量）es5的写法,定义一个构造函数</span><br>  <span class="hljs-keyword">var</span> Person = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> data = &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">'es5'</span>,<br>      <span class="hljs-attr">sex</span>: <span class="hljs-string">'male'</span>,<br>      <span class="hljs-attr">age</span>: <span class="hljs-number">20</span><br>    &#125;<br>    <span class="hljs-comment">// getter 和setter</span><br>    <span class="hljs-keyword">this</span>.get = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>&#123;<br>      <span class="hljs-keyword">return</span> data[key]<br>    &#125;<br>    <span class="hljs-keyword">this</span>.set = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key, value</span>) </span>&#123;<br>      <span class="hljs-keyword">if</span> (key !== <span class="hljs-string">'sex'</span>) &#123;<br>        data[key] = value;<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// 声明实例</span><br>  <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();<br>  <span class="hljs-comment">// 读取</span><br>  <span class="hljs-built_in">console</span>.table(&#123;<br>    <span class="hljs-attr">name</span>: person.get(<span class="hljs-string">'name'</span>),<br>    <span class="hljs-attr">sex</span>: person.get(<span class="hljs-string">'sex'</span>),<br>    <span class="hljs-attr">aeg</span>: person.get(<span class="hljs-string">'ageqe3w'</span>)<br>  &#125;)<br>  <span class="hljs-comment">// 修改</span><br>  person.set(<span class="hljs-string">'name'</span>, <span class="hljs-string">'啦啦啦'</span>);<span class="hljs-comment">// 这时候console的结果就会变了</span><br>  person.set(<span class="hljs-string">'sex'</span>, <span class="hljs-string">'male'</span>)<span class="hljs-comment">// console出来发现没有用因为数据被保护了</span><br>&#125;<br>&#123;<br>  <span class="hljs-comment">// 另一种写法</span><br>  <span class="hljs-keyword">var</span> Person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'skl'</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">10</span>,<br>  &#125;<br>  <span class="hljs-comment">// sex只可读不可写</span><br>  <span class="hljs-built_in">Object</span>.defineProperties(Person, <span class="hljs-string">'sex'</span>, &#123;<br>    <span class="hljs-attr">writeable</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">value</span>: <span class="hljs-string">'male'</span>,<br>  &#125;)<br>  <span class="hljs-built_in">console</span>.table(&#123;<br>    <span class="hljs-attr">name</span>: Person.name,<br>    <span class="hljs-attr">age</span>: Person.age,<br>    <span class="hljs-attr">sex</span>: Person.sex,<br>  &#125;)<br>  <span class="hljs-comment">// 若强行给只读属性复制会报错</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="es6中通过代理的方式做数据保护"><a href="#es6中通过代理的方式做数据保护" class="headerlink" title="es6中通过代理的方式做数据保护"></a>es6中通过代理的方式做数据保护</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;<br>  <span class="hljs-comment">// es的代理 </span><br>  <span class="hljs-keyword">let</span> Person = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'11'</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">11</span>,<br>    <span class="hljs-attr">sex</span>: <span class="hljs-string">'male'</span><br>  &#125;<br>  <span class="hljs-comment">//person是暴露给用户的，吧上面的Person保护起来</span><br>  <span class="hljs-keyword">let</span> person = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(Person, &#123;<br>    <span class="hljs-keyword">get</span>(target, key) &#123;<br>      <span class="hljs-keyword">return</span> target[key]<br>    &#125;,<br>    <span class="hljs-keyword">set</span>(target, key, value) &#123;<br>      <span class="hljs-keyword">if</span> (key !== <span class="hljs-string">'sex'</span>) &#123;<br>        target[key] = value;<br>      &#125;<br>    &#125;<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h3><p>在es5中，凭借字符串要不断的+,尤其是在html模板的时候，变得特别不方便<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> a=<span class="hljs-number">3</span>;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">`skl<span class="hljs-subst">$&#123;a&#125;</span>`</span>)<span class="hljs-comment">//skl3</span><br><span class="hljs-string">`Hello <span class="hljs-subst">$&#123;<span class="hljs-string">'World'</span>&#125;</span>`</span><br><span class="hljs-comment">// "Hello World"</span><br></code></pre></td></tr></table></figure></p>
+<h3 id="for…-of…"><a href="#for…-of…" class="headerlink" title="for… of…"></a>for… of…</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>];<br><span class="hljs-keyword">var</span> iterator = arr.entries();<br><span class="hljs-built_in">console</span>.log(iterator) <span class="hljs-comment">//Array Iterator &#123;&#125;</span><br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> e <span class="hljs-keyword">of</span> iterator) &#123;  <span class="hljs-comment">//返回有下标的数组</span><br>    <span class="hljs-built_in">console</span>.log(e) <br>    <span class="hljs-comment">//[0, "a"]</span><br>    <span class="hljs-comment">//[1, "b"]</span><br>    <span class="hljs-comment">//[2, "c"]</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>];<br><span class="hljs-keyword">var</span> iterator = arr;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> e <span class="hljs-keyword">of</span> iterator) &#123;<br>    <span class="hljs-built_in">console</span>.log(e);<br>    <span class="hljs-comment">//a b c</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>];<br><span class="hljs-keyword">var</span> iterator = arr.entries();<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> [index,e] <span class="hljs-keyword">of</span> iterator) &#123;<br>    <span class="hljs-built_in">console</span>.log(index,e);<br>    <span class="hljs-comment">// 0 "a"</span><br>    <span class="hljs-comment">// 1 "b"</span><br>    <span class="hljs-comment">// 2 "c"</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>];<br><span class="hljs-keyword">var</span> iterator = arr.entries();<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> [index,e] <span class="hljs-keyword">of</span> iterator) &#123;<br>    <span class="hljs-built_in">console</span>.log(e);<br>&#125;<br><span class="hljs-comment">// a </span><br><span class="hljs-comment">// b</span><br><span class="hljs-comment">// c</span><br></code></pre></td></tr></table></figure>
+<h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> state = <span class="hljs-number">1</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step1</span>(<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'1.开始-做饭'</span>);<br>  <span class="hljs-keyword">if</span> (state == <span class="hljs-number">1</span>) &#123;<br>    resolve(<span class="hljs-string">'做饭--完成'</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    reject(<span class="hljs-string">'做饭--出错'</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step2</span>(<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'2.开始-吃饭'</span>);<br>  <span class="hljs-keyword">if</span> (state == <span class="hljs-number">1</span>) &#123;<br>    resolve(<span class="hljs-string">'吃饭--完成'</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    reject(<span class="hljs-string">'吃饭--出错'</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step3</span>(<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'3.开始-收拾'</span>);<br>  <span class="hljs-keyword">if</span> (state == <span class="hljs-number">1</span>) &#123;<br>    resolve(<span class="hljs-string">'收拾--完成'</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    reject(<span class="hljs-string">'收拾--出错'</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(step1)<br>  .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(val)<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(step2)<br>  &#125;)<br>  .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(val)<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(step3)<br>  &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(val)<br>  &#125;)<br></code></pre></td></tr></table></figure>
+<h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testAsync</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">'hello async'</span><br>&#125;<br><span class="hljs-keyword">const</span> result =testAsync();<br><span class="hljs-built_in">console</span>.log(result); <span class="hljs-comment">// 返回的是一个promise</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSomething</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">'something'</span><br>&#125;<br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testAsync</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">'hello async'</span><br>&#125;<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">const</span> v1 = <span class="hljs-keyword">await</span> getSomething();<br>  <span class="hljs-keyword">const</span> v2 = <span class="hljs-keyword">await</span> testAsync();<br>  <span class="hljs-built_in">console</span>.log(v1,v2)<br><br>&#125;<br>test()<br></code></pre></td></tr></table></figure>
+<p> 模拟异步请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">takeLongTime</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span>=&gt;</span>&#123;<br>    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;<br>      resolve(<span class="hljs-string">"long_time_value"</span>)<br>    &#125;,<span class="hljs-number">1000</span>)<br>  &#125;)<br>&#125;<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">const</span> v = <span class="hljs-keyword">await</span> takeLongTime()<br>  <span class="hljs-built_in">console</span>.log(v)<br>&#125;<br>test()<br></code></pre></td></tr></table></figure></p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2020-11-24T07:29:48.615Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
-</span><br>
-
-
-        
-        如有问题，请及时联系我
-        
-    </div>
-    
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/avatar.jpg" alt="Zh">
-            Zh
-        </a>
-    </footer>
-</blockquote>
-
-        
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es7s/">es7s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/&title=《在javascript使用es6,es7》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/&title=《在javascript使用es6,es7》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/02/13/在javascript使用es6-es7/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在javascript使用es6,es7》 — Zh's Blog&url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/06/27/react生命周期详解/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">react生命周期详解</h4>
-      </a>
-    </div>
-  
-
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Zh &copy; 2015 - 2020</span>
-            <span>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/前端/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/前端/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/es6/">es6</a>
+                    
+                      <a class="hover-with-bg" href="/tags/es7s/">es7s</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/06/27/react生命周期详解/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">react生命周期详解</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/&title=《在javascript使用es6,es7》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/&title=《在javascript使用es6,es7》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/02/13/在javascript使用es6-es7/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在javascript使用es6,es7》 — Zh's Blog&url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/02/13/在javascript使用es6-es7/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACG0lEQVR42u3aQW7DMAwEwPz/0+m1QBF3l3ILWBqdgtSxNBeWFPl6xev9Y33/Pnm+/dXrLxYGBsZjGe/LlTyTbHz9/GxfDAyM0xifNs4/f/prcuj8/R+/x8DAwLgMgtfvmSExMDAwVhgt7Pq310UsBgYGRlvEzja+KyjfVotjYGA8kJHfuv//5z/pb2BgYDyK8S5XnhS2ZerKwsDA2JvRpmtJOXr9trsCLgYGxmmMfDAiOeJKmJ6FbAwMjDMZ7RHb0Yq2Dr2tXsfAwNiCkSd/+TYrQTNvSGBgYOzKaMcjVq7D8nfWeAwMjK0ZbUjN08RZwXmNGf6vwMDAeDhjlvbNqEmqN2uRYmBg7M1oU7Q8vOZHSYrn6GoPAwNjU8bKYER+xd8Ww3WIx8DAOIwxK1nbMH3XFdsvGS4GBsYxjJXrudnwRD1sgYGBsTVjpZictSeLo5TJKwYGxgmM/BItvzjLy+D1FgIGBsYJjPZaP9+mLX3bwI2BgXECox3typsEecheaY5iYGCcxmjDYnvd3wKKVgEGBsYBjFmW1TYd2zCd74iBgbEr412ulZbAXQ3RKCnEwMDYiDELdiubrVz9D4+OgYGxBWM2GJEkhbP0cTicgYGBcQBjONYwCpGz1kI0YIGBgYERJHxtO6Etbm8LuBgYGFszZglcnjK2V3IYGBjnMO4diWgPPWsnYGBgnMNYKR1noTMhtQUzBgbGpowvZslLqZY4i8UAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
+  
 
 
 
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = 'good bye~';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '你又在偷偷学习了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

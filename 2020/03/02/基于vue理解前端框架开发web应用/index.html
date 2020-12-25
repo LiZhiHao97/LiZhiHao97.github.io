@@ -1,194 +1,233 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn" data-default-color-scheme=&quot;auto&quot;>
+
+
+
 <head><meta name="generator" content="Hexo 3.9.0">
-    
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content>
+  <title>基于vue理解前端框架开发web应用 - Zh&#39;s Blog</title>
 
-    
-
-    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
 
-    <meta charset="utf-8">
+  
     
     
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css">
     
-    
-    <title>基于vue理解前端框架开发web应用 | Zh&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="前端,vue">
-    <meta name="description" content="一、我为什么写这篇博客？我已经入门前端开发大约有了3年时间，从最开始的静态页面编写，到后来的使用ajax开发动态页面，到现在的使用Vue、React、Angular等前端框架开发Web应用，我写过许许多多项目，虽然我的水平依然很一般，但是在不久的将来我可能会告别这段路，这可能会是我写的最后一篇前端有关的文章。 这篇文章的目的在于帮助只接触过普通的html+css+js开发网页，甚至是Javascr">
-<meta name="keywords" content="前端,vue">
-<meta property="og:type" content="article">
-<meta property="og:title" content="基于vue理解前端框架开发web应用">
-<meta property="og:url" content="http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/index.html">
-<meta property="og:site_name" content="Zh&#39;s Blog">
-<meta property="og:description" content="一、我为什么写这篇博客？我已经入门前端开发大约有了3年时间，从最开始的静态页面编写，到后来的使用ajax开发动态页面，到现在的使用Vue、React、Angular等前端框架开发Web应用，我写过许许多多项目，虽然我的水平依然很一般，但是在不久的将来我可能会告别这段路，这可能会是我写的最后一篇前端有关的文章。 这篇文章的目的在于帮助只接触过普通的html+css+js开发网页，甚至是Javascr">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://yoursite.com/image/基于vue理解前端框架开发web应用/1.png">
-<meta property="og:image" content="http://yoursite.com/image/基于vue理解前端框架开发web应用/2.png">
-<meta property="og:image" content="http://yoursite.com/image/基于vue理解前端框架开发web应用/3.png">
-<meta property="og:image" content="http://yoursite.com/image/基于vue理解前端框架开发web应用/4.png">
-<meta property="og:image" content="http://yoursite.com/image/基于vue理解前端框架开发web应用/5.png">
-<meta property="og:updated_time" content="2020-11-24T07:29:48.615Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于vue理解前端框架开发web应用">
-<meta name="twitter:description" content="一、我为什么写这篇博客？我已经入门前端开发大约有了3年时间，从最开始的静态页面编写，到后来的使用ajax开发动态页面，到现在的使用Vue、React、Angular等前端框架开发Web应用，我写过许许多多项目，虽然我的水平依然很一般，但是在不久的将来我可能会告别这段路，这可能会是我写的最后一篇前端有关的文章。 这篇文章的目的在于帮助只接触过普通的html+css+js开发网页，甚至是Javascr">
-<meta name="twitter:image" content="http://yoursite.com/image/基于vue理解前端框架开发web应用/1.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zh&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
 
-    <!-- custom head -->
-    
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
 
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Zh</h5>
-          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/LiZhiHao97" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
-                <i class="icon icon-lg icon-link"></i>
-                知乎
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
               </a>
             </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
         
       </ul>
     </div>
   </div>
-</aside>
+</nav>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">基于vue理解前端框架开发web应用</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">基于vue理解前端框架开发web应用</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2020-03-02T03:47:58.000Z" itemprop="datePublished" class="page-time">
-  2020-03-02
-</time>
-
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基于vue理解前端框架开发web应用">
+              
+            </span>
 
             
-        </h5>
-    </div>
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-02 11:47" pubdate>
+        2020年3月2日 中午
+      </time>
+    </span>
+  
+</div>
 
+<div class="mt-1">
+  
     
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
 
-
-</header>
-
-
-<div class="container body-wrap">
+  
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、我为什么写这篇博客？"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、我为什么写这篇博客？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、初步的了解"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、初步的了解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-使用vue开发和我们上课时用的html-css-js开发前端有什么不同？"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 使用vue开发和我们上课时用的html+css+js开发前端有什么不同？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-Vue开发的优势"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 Vue开发的优势</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-Vue的一些原理"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3 Vue的一些原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、项目解析"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、项目解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-api"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 api</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-assets"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 assets</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-components"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 components</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-4-router"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 router</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-store"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.5 store</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
-        </nav>
-    </aside>
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
 
-
-<article id="post-基于vue理解前端框架开发web应用"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">基于vue理解前端框架开发web应用</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-03-02 11:47:58" datetime="2020-03-02T03:47:58.000Z"  itemprop="datePublished">2020-03-02</time>
+  
+  
+</div>
 
             
+          </div>
 
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+          
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="一、我为什么写这篇博客？"><a href="#一、我为什么写这篇博客？" class="headerlink" title="一、我为什么写这篇博客？"></a>一、我为什么写这篇博客？</h2><p>我已经入门前端开发大约有了3年时间，从最开始的静态页面编写，到后来的使用ajax开发动态页面，到现在的使用Vue、React、Angular等前端框架开发Web应用，我写过许许多多项目，虽然我的水平依然很一般，但是在不久的将来我可能会告别这段路，这可能会是我写的最后一篇前端有关的文章。</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于vue理解前端框架开发web应用</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、我为什么写这篇博客？"><a href="#一、我为什么写这篇博客？" class="headerlink" title="一、我为什么写这篇博客？"></a>一、我为什么写这篇博客？</h2><p>我已经入门前端开发大约有了3年时间，从最开始的静态页面编写，到后来的使用ajax开发动态页面，到现在的使用Vue、React、Angular等前端框架开发Web应用，我写过许许多多项目，虽然我的水平依然很一般，但是在不久的将来我可能会告别这段路，这可能会是我写的最后一篇前端有关的文章。</p>
 <p>这篇文章的目的在于帮助只接触过普通的html+css+js开发网页，甚至是Javascript零基础的朋友对目前流行的前端框架如何开发Web应用有所了解。</p>
 <p>在这篇文章中，我会以一个Vue开发基于网易云Api的音乐播放器应用为例，讲解Vue开发中的一些内容，因为我三大框架都有所使用，所以本篇文章讲解的大多数东西都是三大框架相同的地方。</p>
 <blockquote>
@@ -202,22 +241,10 @@
 <h3 id="2-3-Vue的一些原理"><a href="#2-3-Vue的一些原理" class="headerlink" title="2.3 Vue的一些原理"></a>2.3 Vue的一些原理</h3><p>使用vue会让人感到身心愉悦,它同时具备angular和react的优点,轻量级,api简单,文档齐全,简单强大,麻雀虽小五脏俱全。按官方的话来说Vue是一套构建用户界面的渐进式框架。</p>
 <p>那么,怎样理解什么是渐进式框架？在这之前,我们首先要理解什么是框架。在最初的前端开发中，为了完成某个功能,我们需要通过js在HTML页面中获得dom节点，随后获得dom节点中的文本内容或者在dom节点上添加事件,进行一系列的程序操作，但是,如果任务量很大的情况下，代码会随着业务的增加而变得臃肿和混乱,在现实的开发中,负责的逻辑和巨大的开发量，是原生js无法完成的。</p>
 <p>这个时候,开发人员将js代码分为了三个板块,数据(Model),逻辑控制(*),视图(View),数据板块只负责数据部分,视图板块负责更改样式,逻辑控制负责联系视图板块和数据板块,这样子有很大的好处,当需求发生变动时,只需要修改对应的板块就好</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/image/基于vue理解前端框架开发web应用/1.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="/image/基于vue理解前端框架开发web应用/1.png" srcset="/img/loading.gif" alt></p>
 <p>这种开发模式，就是所谓的MV结构，我们现在了解的MVC，MVP，MVVM都是MV的衍生物，对比这几种框架模式，我们会总结出来一个本质的特点，那就是这些开发模式都是让视图和数据间不会发生直接联系．对比用原生JS获得dom的操作，你会发现原生dom流其实是将dom作为数据，从dom中获得Model，随后又更改dom来实现更新视图，视图和模型其实混在一起，所以代码自然混乱，不易维护。</p>
 <h2 id="三、项目解析"><a href="#三、项目解析" class="headerlink" title="三、项目解析"></a>三、项目解析</h2><p>首先，我先来带你看下项目大致的结构目录</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/image/基于vue理解前端框架开发web应用/2.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="/image/基于vue理解前端框架开发web应用/2.png" srcset="/img/loading.gif" alt></p>
 <p>我们大致看一下，各部分分别是干什么的</p>
 <pre>
 ├── build                  // 构建服务和 webpack 配置
@@ -237,13 +264,7 @@
 
 <p>本文主要以介绍<strong>src</strong>目录下的的目录为主</p>
 <h3 id="3-1-api"><a href="#3-1-api" class="headerlink" title="3.1 api"></a>3.1 api</h3><p>这里我只进行简单的文字说明，具体的代码请自行阅读项目。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/image/基于vue理解前端框架开发web应用/3.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="/image/基于vue理解前端框架开发web应用/3.png" srcset="/img/loading.gif" alt></p>
 <blockquote>
 <p>可以清楚的看到，api中有两个文件，config.js与index.js</p>
 </blockquote>
@@ -251,19 +272,13 @@
 <p><strong>Index.js</strong>里存放着一个个调用api请求的函数，本项目使用npm上的axios进行http请求。如果对此没有基础，可以简单理解为本文件中的一个个函数通过config.js里的api常量，通过http请求获取到相应的数据。</p>
 <h3 id="3-2-assets"><a href="#3-2-assets" class="headerlink" title="3.2 assets"></a>3.2 assets</h3><p><strong>assets</strong>中存放了可以通用的一些资源，比如字体，图片（如网站logo，很多地方都会用到），还有一些util函数</p>
 <h3 id="3-3-components"><a href="#3-3-components" class="headerlink" title="3.3 components"></a>3.3 components</h3><p><strong>Component</strong>即为组件，这个概念在前文已经说的很详细了，就不再过多赘述。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/image/基于vue理解前端框架开发web应用/4.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="/image/基于vue理解前端框架开发web应用/4.png" srcset="/img/loading.gif" alt></p>
 <blockquote>
 <p>可以清楚的看到，里面放着各个板块相应的组件，其中common是可以用来通用的组件，即不同页面中相同的组件，放在common中便于重用。</p>
 </blockquote>
 <h3 id="3-4-router"><a href="#3-4-router" class="headerlink" title="3.4 router"></a>3.4 router</h3><p>如果你有java开发后端的基础，那对router应该不会陌生</p>
 <p><strong>router（路由）</strong>，其实就是指向的意思，当我点击页面上的home按钮时，页面中就要显示home的内容，如果点击页面上的about 按钮，页面中就要显示about 的内容。Home按钮  =&gt; home 内容， about按钮 =&gt; about 内容，也可以说是一种映射. 所以在页面上有两个部分，一个是点击部分，一个是点击之后，显示内容的部分。 </p>
-<p><img src="/image/基于vue理解前端框架开发web应用/5.png" alt></p>
+<p><img src="/image/基于vue理解前端框架开发web应用/5.png" srcset="/img/loading.gif" alt></p>
 <blockquote>
 <p>这是我们访问home页面是，地址栏的url</p>
 </blockquote>
@@ -275,295 +290,217 @@
 <p>当我们使用vuex后，只需要将获取到可能会重用的数据存入vuex建立的store中，以便下次使用，而且在开发过程中，我们能够通过chrome的插件看到它的内容，也为开发带来许多便利。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上为我对前端框架的一些理解，后续可能会有补充。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2020-11-24T07:29:48.615Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
-</span><br>
-
-
-        
-        如有问题，请及时联系我
-        
-    </div>
-    
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/avatar.jpg" alt="Zh">
-            Zh
-        </a>
-    </footer>
-</blockquote>
-
-        
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/&title=《基于vue理解前端框架开发web应用》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/&title=《基于vue理解前端框架开发web应用》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于vue理解前端框架开发web应用》 — Zh's Blog&url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2020/03/03/快速幂算法详解/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">快速幂算法详解</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/01/12/Node-js项目线上服务器部署与发布/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Node.js项目线上服务器部署与发布</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Zh &copy; 2015 - 2020</span>
-            <span>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/前端/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/前端/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/03/快速幂算法详解/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">快速幂算法详解</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/01/12/Node-js项目线上服务器部署与发布/">
+                        <span class="hidden-mobile">Node.js项目线上服务器部署与发布</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/&title=《基于vue理解前端框架开发web应用》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/&title=《基于vue理解前端框架开发web应用》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于vue理解前端框架开发web应用》 — Zh's Blog&url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/03/02/基于vue理解前端框架开发web应用/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqklEQVR42u3a22oDMQwFwPz/T7fQp0K6yTmynaQw+xT2Zo8DayHpdouPr5/j9+/74/7O+zfkz+Zv3nDg4eHhjaa+MvDKciSYq6vJm/Hw8PDO8fIpXg2wsrVc3dNuEnh4eHifxss/4nsXCA8PD+//8pKAOA92Z+/Hw8PD+xxekox4fD6f6CxJcTzXgoeHhxfzZgWw9/4+Xt/Dw8PDG1XVkw9ufrUNiNvN4I+x8PDw8A7wrgbLp5tP6PFytJPOlwwPDw9vL69NmCbFreEaLzRXXY6Ch4eHd4BXF5NGrQY5pr0z+Xvw8PDw9vLyYDf/0M/K/8mG0WZr8fDw8E7w1sPWleJ92zqQg5c6I/Dw8PC21tbzIlY7rWRp6qt4eHh4x3hJgJsE37NP/2wDiBYdDw8P7yW8vNh/ojw220Kidis8PDy8Tbxdadb8kz07s7I54eHh4Z3jtWFuwlhJWLTpDzw8PLzX8NryVV4AaxsR2gIYHh4e3nt5efog3xjy9EEeLrfpYzw8PLwTvLb4lGNmzVUJtQ7i8fDw8LbyVhINLTsPiNcX4o99Dw8PD28Trw1n2/asfIOZhdpRMgUPDw9vKy9Jj65Mom2xytMc0XLj4eHhvZyXF65m7VxtsN62FODh4eGd5s3Sr0uxfFnWauePh4eH9y5em3jNA+hZQ0C+ZHh4eHgneOtFr/Vguk001AkUPDw8vK28E60AbcJi5eoTNh4eHt5hXnLkqYdZkmJ9lMuNAQ8PD28Tb1fCNP+472oL2JwUxsPDwyt56w1Pe0PwvCAXPYuHh4d3jDcrU82ebTFLhTE8PDy8t/Jm6dQck/OK83h4eHgfxpu1HSRFsjzEf/I2PDw8vGO8fKLJ+fxqmz6uC2B4eHh4B3htAWwW8rYpiVki+DY78PDw8NIZfgPWLmnOXXsHTQAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
+  
 
 
 
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = 'good bye~';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '你又在偷偷学习了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

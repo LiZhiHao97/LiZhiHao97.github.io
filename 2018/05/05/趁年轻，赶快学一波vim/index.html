@@ -1,190 +1,235 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn" data-default-color-scheme=&quot;auto&quot;>
+
+
+
 <head><meta name="generator" content="Hexo 3.9.0">
-    
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content>
+  <title>趁年轻，赶快学一波vim - Zh&#39;s Blog</title>
 
-    
-
-    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
 
-    <meta charset="utf-8">
+  
     
     
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css">
     
-    
-    <title>趁年轻，赶快学一波vim | Zh&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="linux,vim">
-    <meta name="description" content="介绍Vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器，在Vi的基础上改进和增加了很多特性。  VIM是自由软件。Vim普遍被推崇为类Vi编辑器中最好的一个，事实上真正的劲敌来自Emacs的不同变体。1999 年Emacs被选为Linuxworld文本编辑分类的优胜者，Vim屈居第二。但在2000年2月Vim赢得了Slashdot Beanie的最佳开放源代码文本编辑器大奖，又将Ema">
-<meta name="keywords" content="linux,vim">
-<meta property="og:type" content="article">
-<meta property="og:title" content="趁年轻，赶快学一波vim">
-<meta property="og:url" content="http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/index.html">
-<meta property="og:site_name" content="Zh&#39;s Blog">
-<meta property="og:description" content="介绍Vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器，在Vi的基础上改进和增加了很多特性。  VIM是自由软件。Vim普遍被推崇为类Vi编辑器中最好的一个，事实上真正的劲敌来自Emacs的不同变体。1999 年Emacs被选为Linuxworld文本编辑分类的优胜者，Vim屈居第二。但在2000年2月Vim赢得了Slashdot Beanie的最佳开放源代码文本编辑器大奖，又将Ema">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2020-11-24T07:29:48.617Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="趁年轻，赶快学一波vim">
-<meta name="twitter:description" content="介绍Vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器，在Vi的基础上改进和增加了很多特性。  VIM是自由软件。Vim普遍被推崇为类Vi编辑器中最好的一个，事实上真正的劲敌来自Emacs的不同变体。1999 年Emacs被选为Linuxworld文本编辑分类的优胜者，Vim屈居第二。但在2000年2月Vim赢得了Slashdot Beanie的最佳开放源代码文本编辑器大奖，又将Ema">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zh&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
 
-    <!-- custom head -->
-    
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
 
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Zh</h5>
-          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                归档
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                标签
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/LiZhiHao97" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
-                <i class="icon icon-lg icon-link"></i>
-                知乎
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
               </a>
             </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
         
       </ul>
     </div>
   </div>
-</aside>
+</nav>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">趁年轻，赶快学一波vim</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">趁年轻，赶快学一波vim</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-05-05T12:15:37.000Z" itemprop="datePublished" class="page-time">
-  2018-05-05
-</time>
-
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="趁年轻，赶快学一波vim">
+              
+            </span>
 
             
-        </h5>
-    </div>
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-05-05 20:15" pubdate>
+        2018年5月5日 晚上
+      </time>
+    </span>
+  
+</div>
 
+<div class="mt-1">
+  
     
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
 
-
-</header>
-
-
-<div class="container body-wrap">
+  
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#vim模式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">vim模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#移动光标"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">移动光标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#vim的进入和退出"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">vim的进入和退出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文本编辑之删除"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">文本编辑之删除</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文本编辑之插入"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">文本编辑之插入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文本编辑之添加"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">文本编辑之添加</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除类命令"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">删除类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用计数指定动作"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">使用计数指定动作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用计数已删除更多"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">使用计数已删除更多</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作整行"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">操作整行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#撤销类命令"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">撤销类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#置入类命令"><span class="post-toc-number">2.12.</span> <span class="post-toc-text">置入类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#替换类命令"><span class="post-toc-number">2.13.</span> <span class="post-toc-text">替换类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更改类命令"><span class="post-toc-number">2.14.</span> <span class="post-toc-text">更改类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用c更改更多"><span class="post-toc-number">2.15.</span> <span class="post-toc-text">使用c更改更多</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定位及文件状态"><span class="post-toc-number">2.16.</span> <span class="post-toc-text">定位及文件状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#搜索类命令"><span class="post-toc-number">2.17.</span> <span class="post-toc-text">搜索类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配对括号的查找"><span class="post-toc-number">2.18.</span> <span class="post-toc-text">配对括号的查找</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#替换命令"><span class="post-toc-number">2.19.</span> <span class="post-toc-text">替换命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在vim内执行外部命令的方法"><span class="post-toc-number">2.20.</span> <span class="post-toc-text">在vim内执行外部命令的方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于保存文件的更多信息"><span class="post-toc-number">2.21.</span> <span class="post-toc-text">关于保存文件的更多信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一个具有选择性的保存命令"><span class="post-toc-number">2.22.</span> <span class="post-toc-text">一个具有选择性的保存命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#提取和合并文件"><span class="post-toc-number">2.23.</span> <span class="post-toc-text">提取和合并文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打开类命令"><span class="post-toc-number">2.24.</span> <span class="post-toc-text">打开类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附加类命令"><span class="post-toc-number">2.25.</span> <span class="post-toc-text">附加类命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#另外一个置换类命令的版本"><span class="post-toc-number">2.26.</span> <span class="post-toc-text">另外一个置换类命令的版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#复制粘贴文本"><span class="post-toc-number">2.27.</span> <span class="post-toc-text">复制粘贴文本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置类命令的选项"><span class="post-toc-number">2.28.</span> <span class="post-toc-text">设置类命令的选项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取帮助信息"><span class="post-toc-number">2.29.</span> <span class="post-toc-text">获取帮助信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建启动脚本"><span class="post-toc-number">2.30.</span> <span class="post-toc-text">创建启动脚本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补全功能"><span class="post-toc-number">2.31.</span> <span class="post-toc-text">补全功能</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#小结"><span class="post-toc-number">3.</span> <span class="post-toc-text">小结</span></a></li></ol>
-        </nav>
-    </aside>
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      48
+       分钟
+    </span>
+  
 
-
-<article id="post-趁年轻，赶快学一波vim"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">趁年轻，赶快学一波vim</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-05-05 20:15:37" datetime="2018-05-05T12:15:37.000Z"  itemprop="datePublished">2018-05-05</time>
+  
+  
+</div>
 
             
+          </div>
 
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+          
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器，在Vi的基础上改进和增加了很多特性。  VIM是自由软件。<br>Vim普遍被推崇为类Vi编辑器中最好的一个，事实上真正的劲敌来自Emacs的不同变体。1999 年Emacs被选为Linuxworld文本编辑分类的优胜者，Vim屈居第二。但在2000年2月Vim赢得了Slashdot Beanie的最佳开放源代码文本编辑器大奖，又将Emacs推至二线， 总的来看， Vim和Emacs在文本编辑方面都是非常优秀的。</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">趁年轻，赶快学一波vim</h1>
+            
+            <div class="markdown-body">
+              <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器，在Vi的基础上改进和增加了很多特性。  VIM是自由软件。<br>Vim普遍被推崇为类Vi编辑器中最好的一个，事实上真正的劲敌来自Emacs的不同变体。1999 年Emacs被选为Linuxworld文本编辑分类的优胜者，Vim屈居第二。但在2000年2月Vim赢得了Slashdot Beanie的最佳开放源代码文本编辑器大奖，又将Emacs推至二线， 总的来看， Vim和Emacs在文本编辑方面都是非常优秀的。</p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>首先我们需要先安装vim</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install vim // mac安装vim</span><br><span class="line">apt-get install vim // ubuntu安装vim</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined">brew install <span class="hljs-keyword">vim</span> // mac安装<span class="hljs-keyword">vim</span><br>apt-<span class="hljs-built_in">get</span> install <span class="hljs-keyword">vim</span> // ubuntu安装<span class="hljs-keyword">vim</span><br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>windows用户请前往搜索引擎搜索vim下载安装</p>
 </blockquote>
@@ -361,11 +406,11 @@
 <li><p>提供一个正确的参数给”:help”命令，您可以找到关于该主题的帮助。请试验以下参数(可别忘了按回车键哦)：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:help w</span><br><span class="line">:help c_CTRL-D</span><br><span class="line">:help insert-index</span><br><span class="line">:help user-manual</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs undefined">:<span class="hljs-keyword">help</span> w<br>:<span class="hljs-keyword">help</span> c_CTRL-D<br>:<span class="hljs-keyword">help</span> <span class="hljs-keyword">insert</span>-<span class="hljs-keyword">index</span><br>:<span class="hljs-keyword">help</span> <span class="hljs-keyword">user</span>-<span class="hljs-keyword">manual</span><br></code></pre></td></tr></table></figure>
 <h2 id="创建启动脚本"><a href="#创建启动脚本" class="headerlink" title="创建启动脚本"></a>创建启动脚本</h2><p>Vim 的功能特性要比 Vi 多得多，但其中大部分都没有缺省启用。为了使用更多的特性，您得创建一个 vimrc 文件。</p>
-<p>1、 开始编辑 vimrc 文件，具体命令取决于您所使用的操作系统：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:edit ~/.vimrc     // 这是 Unix 系统所使用的命令</span><br><span class="line">:edit $VIM/_vimrc  // 这是 MS-Windows 系统所使用的命令</span><br></pre></td></tr></table></figure></p>
-<p>2、 接着读取 vimrc 示例文件的内容：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:r $VIMRUNTIME/vimrc_example.vim</span><br></pre></td></tr></table></figure></p>
-<p>3、 保存文件，命令为：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:write</span><br></pre></td></tr></table></figure></p>
+<p>1、 开始编辑 vimrc 文件，具体命令取决于您所使用的操作系统：<br>    <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined">:<span class="hljs-keyword">edit</span> ~/.vimrc     <span class="hljs-comment">// 这是 Unix 系统所使用的命令</span><br>:<span class="hljs-keyword">edit</span> <span class="hljs-variable">$VIM</span>/_vimrc  <span class="hljs-comment">// 这是 MS-Windows 系统所使用的命令</span><br></code></pre></td></tr></table></figure></p>
+<p>2、 接着读取 vimrc 示例文件的内容：<br>    <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined"><span class="hljs-symbol">:r</span> <span class="hljs-variable">$VIMRUNTIME</span>/vimrc_example.vim<br></code></pre></td></tr></table></figure></p>
+<p>3、 保存文件，命令为：<br>    <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined">:<span class="hljs-built_in">write</span><br></code></pre></td></tr></table></figure></p>
 <p>下次您启动 Vim 时，编辑器就会有了语法高亮的功能。您可以把您喜欢的各种设置添加到这个 vimrc 文件中。要了解更多信息请输入 :help vimrc-intro</p>
 <h2 id="补全功能"><a href="#补全功能" class="headerlink" title="补全功能"></a>补全功能</h2><p>1、 输入 <code>:help</code> 或者按 <code>&lt;F1&gt;</code> 键或 <code>&lt;Help&gt;</code> 键可以打开帮助窗口。</p>
 <p>2、 输入 <code>:help cmd</code> 可以找到关于 cmd 命令的帮助。</p>
@@ -375,295 +420,217 @@
 <p>6、 当输入 : 命令时，按 CTRL-D 可以查看可能的补全结果。<br>按 <code>&lt;TAB&gt;</code> 可以使用一个补全。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>相信学会了vim，你的编程效率能更上一层楼，梦想还是要有的，趁还年轻。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2020-11-24T07:29:48.617Z" itemprop="dateUpdated">2020-11-24 15:29:48</time>
-</span><br>
-
-
-        
-        如有问题，请及时联系我
-        
-    </div>
-    
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/avatar.jpg" alt="Zh">
-            Zh
-        </a>
-    </footer>
-</blockquote>
-
-        
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/&title=《趁年轻，赶快学一波vim》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/&title=《趁年轻，赶快学一波vim》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《趁年轻，赶快学一波vim》 — Zh's Blog&url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/10/11/python之函数使用/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">python之函数使用</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/05/01/h5触摸事件实现移动端进度条/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">h5触摸事件实现移动端进度条</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Zh &copy; 2015 - 2020</span>
-            <span>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/编辑器/">编辑器</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vim/">vim</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/10/11/python之函数使用/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">python之函数使用</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/05/01/h5触摸事件实现移动端进度条/">
+                        <span class="hidden-mobile">h5触摸事件实现移动端进度条</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/&title=《趁年轻，赶快学一波vim》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/&title=《趁年轻，赶快学一波vim》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《趁年轻，赶快学一波vim》 — Zh's Blog&url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/&via=http://yoursite.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/05/趁年轻，赶快学一波vim/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aS3KEMAwFwLn/pSdV2RIzT7KTCnazogIYehaK9Xm94uP9fVzP7++/HvcrXO9cfGBgYDyW8b49Ri8e/WW0Qv5zXO9JVsbAwDiBkS9XfXb0QfOhGQMDA2O0XB5Gq0EZAwMDY1XALSwd5JtJOMbAwMDIk9gkRCZrVgPu4lwcAwPjgYyZxsBvn/9RfwMDA+MfM3phsfpsvtF8tw4MDIy9GXl7svr6+YZltQCHgYGxNyMn9YLmzKYwCfcYGBh7M9Y2I6sFuGrMHK6DgYGxNSMPqcmoRG+wLP9pCjtcDAyMrRmrRiXyUt2qETQMDIwTGKsK+tUKWDXbxsDAOJnRe3EeTHtF/wIeAwNjU0Z1kGJtgzPfLGJgYJzMyItiVXBemEuuRk9hYGBsysgTxfwTq6v15ruGWTgGBsZ2jEKDcHrMIk+Yew0DDAyMXRl5UWym0D/f1GymrxgYGFswquX4vBg3nwznzVEMDIwTGPlGLUlrky1mMtJRDfcYGBi7MvLyfR5Mqx+aj2h82BRiYGBszUjO137i4v8VGBgYWzN6RbdqG7JQMitmphgYGCcwZoa6qqMSvYAeFeYwMDC2ZiyI1sFnzbQlVgV6DAyMpzN6hf5qwM2v9poNGBgYJzCqYTQv4t+H4FWhGQMDA6M6yPUbYxwf3oKBgYFRDMr5UGxvi/nDsxgYGAcwkgCXX10bfBc0MjEwMB7OqCaQM0lvb8hsJlhjYGA8nPEFdkMZBod83PAAAAAASUVORK5CYII=" alt="微信分享二维码">
-</div>
+  
 
 
 
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = 'good bye~';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '你又在偷偷学习了';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 
