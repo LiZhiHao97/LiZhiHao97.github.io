@@ -1,6 +1,9 @@
 ---
 title: python之函数使用
 date: 2018-10-11 15:25:23
+index_img: https://i.loli.net/2020/12/25/yshc4DfBtJiId5N.png
+categories:
+ - Python
 tags:
   - Python
 ---

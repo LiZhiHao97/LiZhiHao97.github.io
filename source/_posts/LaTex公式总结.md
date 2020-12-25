@@ -1,6 +1,9 @@
 ---
 title: LaTex公式总结
 date: 2020-12-21 21:18:10
+index_img: https://i.loli.net/2020/12/25/aJ3gToDUlVqXAm5.png
+categories:
+ - 数学
 tags:
   - LaTex
 ---

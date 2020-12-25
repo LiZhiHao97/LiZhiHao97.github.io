@@ -1,11 +1,12 @@
 ---
 title: 论文速读：MoCoGAN Decomposing Motion and Content for Video
 date: 2020-12-21 21:26:14
+categories:
+ - 计算机视觉
 tags:
   - 深度学习
   - 视频生成
   - GAN
-  - Unconditioned Video Generation
 ---
 
 ## 1. Introduction

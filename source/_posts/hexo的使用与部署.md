@@ -1,10 +1,10 @@
 ---
 title: hexo的使用与部署
 date: 2018-03-18 17:18:20
+index_img: https://i.loli.net/2020/12/25/6xI9ndscVyUaz1L.png
 tags: 前端
 categories:
- - 前端
- - hexo 
+ - 运维
 ---
 
 

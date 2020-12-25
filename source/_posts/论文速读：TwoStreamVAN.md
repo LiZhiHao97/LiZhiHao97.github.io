@@ -1,11 +1,12 @@
 ---
 title: 论文速读：TwoStreamVAN
 date: 2020-12-25 11:13:07
+categories:
+ - 计算机视觉
 tags:
   - 深度学习
   - 视频生成
   - GAN
-  - Conditioned Video Generation
 ---
 
 ## 1. Introduction

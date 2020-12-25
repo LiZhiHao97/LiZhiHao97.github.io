@@ -1,6 +1,9 @@
 ---
 title: 彻底解决git clone太慢的头疼问题
 date: 2020-03-15 16:14:03
+index_img: https://i.loli.net/2020/12/25/VzQe65t3dW8qabu.png
+categories:
+ - git
 tags:
   - git
 ---

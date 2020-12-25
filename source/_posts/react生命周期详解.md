@@ -1,6 +1,9 @@
 ---
 title: react生命周期详解
 date: 2017-06-27 20:14:02
+index_img: https://i.loli.net/2020/12/25/73l2pnrYuBdyQE9.png
+categories:
+ - 前端
 tags:
   - 前端
   - react 

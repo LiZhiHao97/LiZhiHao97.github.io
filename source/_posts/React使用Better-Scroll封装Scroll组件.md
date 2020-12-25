@@ -1,6 +1,9 @@
 ---
 title: React使用Better-Scroll封装Scroll组件
 date: 2018-04-11 20:06:20
+index_img: https://i.loli.net/2020/12/25/aYzMJGBHXkdvWIy.png
+categories:
+ - 前端
 tags: 
   - React
 ---

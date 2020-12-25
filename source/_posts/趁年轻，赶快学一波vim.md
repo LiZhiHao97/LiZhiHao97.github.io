@@ -1,6 +1,9 @@
 ---
 title: 趁年轻，赶快学一波vim
 date: 2018-05-05 20:15:37
+index_img: https://i.loli.net/2020/12/25/i4JWtYcQHonGdwe.png
+categories:
+ - 编辑器
 tags:
   - vim
   - linux

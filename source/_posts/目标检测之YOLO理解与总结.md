@@ -1,6 +1,9 @@
 ---
 title: 目标检测之YOLO理解与总结
 date: 2020-11-25 13:31:04
+index_img: https://i.loli.net/2020/12/25/A5hcHl74OWb1tDz.png
+categories:
+ - 计算机视觉
 tags:
   - 深度学习
   - 目标检测

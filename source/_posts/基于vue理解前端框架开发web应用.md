@@ -1,6 +1,9 @@
 ---
 title: 基于vue理解前端框架开发web应用
 date: 2020-03-02 11:47:58
+index_img: https://i.loli.net/2020/12/25/QldBxbge25EFjW4.png
+categories:
+ - 前端
 tags:
   - 前端
   - vue

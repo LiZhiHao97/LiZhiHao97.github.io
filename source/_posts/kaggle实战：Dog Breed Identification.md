@@ -2,6 +2,9 @@
 layout: kaggle实战：Dog Breed Identification
 title: kaggle实战：Dog Breed Identification
 date: 2020-11-11 21:26:20
+index_img: https://i.loli.net/2020/12/25/wJrkONyRIaKn1Dq.png
+categories:
+ - 计算机视觉
 tags:
   - pytorch 
   - 深度学习

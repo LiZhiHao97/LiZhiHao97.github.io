@@ -1,6 +1,9 @@
 ---
 title: '在javascript使用es6,es7'
 date: 2017-02-13 20:33:43
+index_img: https://rmt.dogedoge.com/fetch/fluid/storage/hexo-static/cover.jpg?w=480&fmt=webp
+categories:
+ - 前端
 tags:
   - 前端
   - javascript

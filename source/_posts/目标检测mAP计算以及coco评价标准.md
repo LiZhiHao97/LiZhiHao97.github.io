@@ -1,6 +1,8 @@
 ---
 title: 目标检测mAP计算以及coco评价标准
 date: 2020-11-24 11:39:05
+categories:
+ - 计算机视觉
 tags:
   - 深度学习
   - 目标检测

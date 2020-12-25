@@ -1,6 +1,9 @@
 ---
 title: Node.js项目线上服务器部署与发布
 date: 2019-01-12 20:37:13
+index_img: https://i.loli.net/2020/12/25/OjXpFCrcAeSLJ8a.png
+categories:
+ - 运维
 tags:
   - linux 
   - node 
