@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>论文速读：TwoStreamVAN | Zh&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="深度学习,视频生成,GAN,Conditioned Video Generation">
+    <meta name="description" content="1. Introduction 原文地址：TwoStreamVAN: Improving Motion Modeling in Video Generation                                                                                                             像素级视频预测[27，">
+<meta name="keywords" content="深度学习,视频生成,GAN,Conditioned Video Generation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文速读：TwoStreamVAN">
+<meta property="og:url" content="http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/index.html">
+<meta property="og:site_name" content="Zh&#39;s Blog">
+<meta property="og:description" content="1. Introduction 原文地址：TwoStreamVAN: Improving Motion Modeling in Video Generation                                                                                                             像素级视频预测[27，">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://i.loli.net/2020/12/24/QuJrB95NZzkI42s.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/24/XulgzWHeoixMRTb.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/24/4NQFA9ECBtfpxza.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/25/F4I7zgub9ahVnft.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/25/NLE6c9F4XHe2CaY.png">
+<meta property="og:updated_time" content="2020-12-25T03:14:03.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文速读：TwoStreamVAN">
+<meta name="twitter:description" content="1. Introduction 原文地址：TwoStreamVAN: Improving Motion Modeling in Video Generation                                                                                                             像素级视频预测[27，">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/24/QuJrB95NZzkI42s.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zh</h5>
+          <a href="mailto:940166841@qq.com" title="940166841@qq.com" class="mail">940166841@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/LiZhiHao97" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.zhihu.com/people/li-zhi-hao-80-25"  >
+                <i class="icon icon-lg icon-link"></i>
+                知乎
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">论文速读：TwoStreamVAN</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">论文速读：TwoStreamVAN</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-12-25T03:13:07.000Z" itemprop="datePublished" class="page-time">
+  2020-12-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Introduction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Related-Work"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Related Work</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Approach"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. Approach</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-Two-Stream-Generation"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 Two-Stream Generation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Multi-scale-Motion-Generation-and-Fusion"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Multi-scale Motion Generation and Fusion</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Conclusion"><span class="post-toc-number">4.</span> <span class="post-toc-text">Conclusion</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-论文速读：TwoStreamVAN"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">论文速读：TwoStreamVAN</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-12-25 11:13:07" datetime="2020-12-25T03:13:07.000Z"  itemprop="datePublished">2020-12-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><blockquote>
+<p>原文地址：<a href="https://openaccess.thecvf.com/content_WACV_2020/papers/Sun_TwoStreamVAN_Improving_Motion_Modeling_in_Video_Generation_WACV_2020_paper.pdf" target="_blank" rel="noopener">TwoStreamVAN: Improving Motion Modeling in Video Generation</a></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/24/QuJrB95NZzkI42s.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>像素级视频预测[27，36，40]和生成方法的一个主要问题是，它们试图在单个纠缠生成器中对静态内容和动态运动进行建模，而不管它们是否在潜在空间中解开运动和内容\</p>
+<p>本文认为在解码阶段分离运动和内容建模是至关重要的。一方面，它消除了内容生成过程中的运动干扰，并产生了更好的内容结构。另一方面，单独的运动建模有助于在整个序列中一致地产生与动作相关的运动。</p>
+<p>本文提出了一个新的<strong>TwoStreamVAN</strong>，它从一个动作标签和一个分离的噪声向量生成一个视频，如上x`图所示。通过两个并行的生成器，分别处理内容和运动，并将它们融合在一起以预测下一帧，而不是高估单个生成器的能力（如MoCoGAN的做法）。</p>
+<p>直观地说，运动通常以其局部上下文窗口内的空间信息为条件，例如，在做跳跃动作时，手臂和腿部附近的不同运动。因此，我们将运动和内容的融合定义为对每个位置唯一的像素值的学习细化。为了精确地生成多尺度运动，我们在具有几个不同分辨率的中间内容层上进行这种细化。此外，我们还引入了运动蒙版，使运动聚焦于它所在的区域。</p>
+<p>本文将引入<strong>图像级监控（image-levelsupervision）</strong>，虽然<strong>MoCoGAN</strong>尝试了图像级监控缺效果甚微，因为内容生成仍然受到单个共享生成器中运动建模的影响。本文使用的双流生成器的关键优势是能分别学习每个流，从而更准确。我们通过图像级监控完全了解其自身生成器中的图像结构，这显著提高了内容生成性能。训练有素的内容生成进一步有利于视频级监控中的动作学习。</p>
+<p>本文贡献如下：</p>
+<ul>
+<li>我们提出了一个视频生成模型TwoStreamVAN和一个更有效的学习方案，解决了生成阶段的运动和内容问题。</li>
+<li>我们设计了一种多尺度运动融合机制，并通过对空间环境的调节进一步改进了运动建模</li>
+<li>我们创建了一个大规模的合成视频生成数据集，供研究团体使用</li>
+<li>我们在四个视频数据集上通过定量和定性分析评估了我们的模型（通过用户研究），并证明了强于几个强基线的结果。</li>
+</ul>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><p>本文结合了<strong>VAE</strong>和<strong>GAN</strong>，提出了一个<strong>变分对抗网络(VAN)</strong>来学习一个可解释的潜在空间以及生成现实的图像。鉴于<strong>VAN</strong>在图像生成方面的成功，我们在此将其用于视频生成。</p>
+<p>MoCoGAN试图通过从单独的潜在空间中采样来解开内容和运动，但是使用单个生成器来一起解码这两个潜在代码。为了克服统一生成过程中无效的运动建模和随之而来的内容恶化，我们进一步引入了分离的内容和运动生成器来分别对空间结构和时间动态进行建模。</p>
+<h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3. Approach"></a>3. Approach</h2><p>我们引入了一个双流变分对抗网络(图2)，它生成一个给定输入动作标签和随机噪声向量的视频。我们定义动作条件视频生成如下。假设我们有<strong>K</strong>个不同的动作类。在每个类别<strong>k ∈ 1: K</strong> 的情况下，<script type="math/tex">C_{k}</script>为该类别训练视频的数量。使<script type="math/tex">V_{k}</script> = {<script type="math/tex">V_{i,k}, \forall i \in 1:C_{k}</script>}为类别<strong>k</strong>视频的集合，<script type="math/tex">v_{i,k}</script>={<script type="math/tex">x_{1},x_{2},...,x_{T}</script>}为一个T帧的短视频。任务是定义一个函数<strong>G</strong>，该函数根据来自潜在向量<script type="math/tex">\epsilon</script> ∈ <script type="math/tex">ℝ^{N}</script>，给定类别标签k，生成可信的视频<script type="math/tex">\hat{v}</script>，即<script type="math/tex">\hat{v} = G(k,\epsilon)</script></p>
+<p>我们将潜在空间<script type="math/tex">\epsilon</script>分解成两个独立的代码:内容代码<script type="math/tex">\epsilon_{c}</script>∈ <script type="math/tex">ℝ^{C}</script>和动作代码<script type="math/tex">\epsilon_{m}</script>∈<script type="math/tex">ℝ^{M}</script>，N = C + M.我们还将视频生成函数<strong>G</strong>分解为两个独立的内容和运动函数($ G_{c} $和$ G_{m} $)，与以前使用单个生成器的工作形成对比，我们设计了一种新的多尺度融合机制。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/24/XulgzWHeoixMRTb.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="3-1-Two-Stream-Generation"><a href="#3-1-Two-Stream-Generation" class="headerlink" title="3.1 Two-Stream Generation"></a>3.1 Two-Stream Generation</h3><p>为了学习内容和运动建模的生成函数$ G_{c} $和$ G_{m} $，我们引入了两个独立的、在几个阶段具有交互作用的以动作为条件的VAN streams。每个steam包含一个<strong>Encoder</strong>，一个<strong>Generator</strong>和一个<strong>Discriminator</strong>，其中<strong>Encoder</strong>和<strong>Generator</strong>作为<strong>VAE</strong>的自动编码器，<strong>Generator</strong>和<strong>Discriminator</strong>组成了<strong>GAN</strong></p>
+<p><strong>Content VAN Stream</strong>由内容编码器$ E_{c} $、内容生成器$ G_{c} $和图像鉴别器$ D_{I} $组成，在观察了<strong>x</strong>之后，生成了后验内容潜在分布$ q(z_{c}|x,k) $，这接近于它的真实先验分布$ p(z_{c}|k) $.$ G_{c} $将采样自内容分布的的内容向量$ \epsilon_{c} $解码成帧。$ D_{I} $鉴别帧的真假以鼓励$ G_{c} $生成更真实的图像。</p>
+<p>类似地，<strong>Motion VAN Stream</strong>由运动编码器$ E_{m} $、运动生成器$ G_{m} $和视频鉴别器$ D_{V} $组成，在我们的方法中，$ E{m} $不是对空间内容进行编码，而是对相邻帧之间的差异图$ \triangle x $的时间动态进行编码。它产生的后验运动潜在分布$ q(z_{m}|\triangle x,k) $接近其真实的先验分布$ p(z_{m}|k) $.<strong>convLSTM</strong>对运动历史进行累积，并生成当前运动，嵌入$ e_{m} $，从所有先前时间步长的运动分布中接收$ \epsilon_{m} $序列。$ G_{m} $通过$ \epsilon_{c} $和$ e_{m} $在不同的尺度上产生运动。我们通过将生成的运动与<strong>T</strong>时间步长的相应内容融合来生成每个视频$ \hat{v} $。$ D_{V} $对真实/生成的视频进行了分类，并对他们的行为进行了分类，以鼓励$ G_{m} $生成逼真的动作</p>
+<h3 id="Multi-scale-Motion-Generation-and-Fusion"><a href="#Multi-scale-Motion-Generation-and-Fusion" class="headerlink" title="Multi-scale Motion Generation and Fusion"></a>Multi-scale Motion Generation and Fusion</h3><p>在像素(a, b)处，运动通常发生在相邻帧之间的局部窗口内。受帧插值空间卷积的启发，我们将运动表示为当前像素值基础局部上下文的细化，并通过空间自适应卷积将这种运动与内容融合。此外，我们提出了一种新的多尺度融合机制来克服其方法的缺点，即:1)由于在全分辨率图像上执行单个融合步骤而导致的多尺度运动的无效建模，以及2)由于用于表示最大可能运动的大卷积核而导致的对存储器的高需求。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/24/4NQFA9ECBtfpxza.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>为了生成精确的运动，$ G_{m} $将解开的内容和运动嵌入($ \epsilon_{c} $和$ e_{m} $)作为输入。在$ G_{m} $中，不同尺度的运动将相应的隐藏层分开:大的运动来自低分辨率层，小的运动来自高分辨率层。在每一层，$ G_{m} $将当前特征映射为:1)以具有尺寸n的像素方式的2D核的形式计算运动(像素细化);2)识别运动遮罩中包含实际运动的区域；3)生成下一层的运动图。为了将运动与内容融合，仅当像素位于运动被激活的区域中时，我们才分别将生成的2D核与以相应像素为中心的面片进行卷积(即，执行空间自适应卷积)(参见上图)。</p>
+<p>具体来说，假设我们把运动分成<strong>S</strong>个尺度。对于每个尺度的<strong>s</strong>，让$ l_{s} $为相对应的分辨率隐藏层，$ w^{s} ∈ ℝ^{l_{s}×l_{s}×n^{2}} $为$ G_{m} $产生的卷积核，$ h_{c}^{s} ∈ ℝ^{l_{s} × l_{s} × d_{s}} $为相对应的内容层，其中$ d_{s} $是内容特征维度。我们在以下步骤中执行空间自适应卷积。首先，对于每个位置(a,b)，我们从展开形式$ w^{s}(a,b) $恢复一个2D卷积核$ K^{s}(a,b) $.然后，我们将$ K^{s}(a,b) $与在$ h_{c}^{s} $的补丁$ P^{s}(a,b) ∈ ℝ^{n×n×d_{s}} $做卷积运算来生成一个位置(a,b)中间内容表示 $ \tilde{h}_{c}^{s}(a,b) $:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/25/F4I7zgub9ahVnft.png" alt="image-20201225105952830" title>
+                </div>
+                <div class="image-caption">image-20201225105952830</div>
+            </figure>
+<p>我们通过向较小的层添加自适应卷积来处理较大的运动，而[29]则通过增加核大小来处理较大的运动。由于要存储和建模的参数数量在核大小中是平方的，因此在我们的多尺度融合框架中，我们通过对所有层利用小核(푛=3或5)来显著降低内存使用量和模型复杂度</p>
+<p>为了$ G_{m} $的注意力集中学习尺度<strong>s</strong>在实际发生的区域的运动上，我们预测了一个带有$ w^{s} $的运动遮罩$ M^{s} ∈ ℝ^{l_{s}×l_{s}} $，以识别这样的区域。每个$ M^{s} $的的值都在[0，1]中。我们在$ M^{s}(a,b) $:的指导下通过融合运动从$ h_{c}^{s}(a,b) $和 $ \tilde{h}_{c}^{s}(a,b) $生成了新的内容$ \hat{h}_{c}^{s} $：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2020/12/25/NLE6c9F4XHe2CaY.png" alt="image-20201225110922089" title>
+                </div>
+                <div class="image-caption">image-20201225110922089</div>
+            </figure>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>以上。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-25T03:14:03.961Z" itemprop="dateUpdated">2020-12-25 11:14:03</time>
+</span><br>
+
+
+        
+        如有问题，请及时联系我
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="Zh">
+            Zh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Conditioned-Video-Generation/">Conditioned Video Generation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/视频生成/">视频生成</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/&title=《论文速读：TwoStreamVAN》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/&title=《论文速读：TwoStreamVAN》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《论文速读：TwoStreamVAN》 — Zh's Blog&url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/12/24/论文速读：G3AN/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">论文速读：G3AN</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zh &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/&title=《论文速读：TwoStreamVAN》 — Zh's Blog&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/&title=《论文速读：TwoStreamVAN》 — Zh's Blog&source=多总结，多思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《论文速读：TwoStreamVAN》 — Zh's Blog&url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/12/25/论文速读：TwoStreamVAN/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aQW7CQAwFUO5/6VTqCok2fHsS2jhvVggimDcL47H9eMRr+17Pr5/f2X/m9fn9b3h9/7CFgYFxWca2u163eCw1/57f9oaBgXEfxsq29pHV76lSMTAwMJKtJJuoPoOBgYGxEnCTcJlfcf/sfwMDA+OCjLxA1rvcVg/lxLs4BgbGBRm9xsBnXp/e38DAwPj3jK24qoF1P5nLg/ubXWFgYIxm7P9AvtG8lFZtGxSSUQwMjNsw8qvm+nRWssXCr2NgYIxmVAtnZ49TJKMb5eEwDAyMQYw8vcvTuDxZPKAYh4GBMY5x7LWzeflc4GFgYNyBsR4Wq4WzKjLHY2BgTGUkjcNqTMtTzF4h74edYGBgjGb0hidy8MrIV9JGxcDAuA8j91VbjL0g3hz7wMDAGMqopnHVGtd61I+u0BgYGKMZvVGJXntgJbAWuhwYGBhDGWekdEkqmZfnDriFY2BgjGD0ymfV4LgSypMiHQYGxlRGHlirSWR+NCtHhoGBMZuRXyy3eO2H0ZzU/K/AwMAYyqjW2Hufnld6w8DAmM3oFdzzja63MAsxFgMDYyhjK65jC3B54/PNQWBgYIxmrMTpowr6+QEdEKwxMDAuy6iOPuQn0Tu5fPwCAwPjboxq0a3XACgX/fPmAQYGBkYryCYDYb3Q/6ZqiIGBcXvGSgNy5aL7pgiIgYFxA0ZvzCv5serltplcYmBgjGZ8pjFQTfV6jVUMDIxxjC9PtEup0V6AfwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'good bye~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '你又在偷偷学习了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
