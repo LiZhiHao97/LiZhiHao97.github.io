@@ -1,6 +1,7 @@
 ---
 title: 论文速读：MoCoGAN Decomposing Motion and Content for Video
 date: 2020-12-21 21:26:14
+index_img: https://img1.baidu.com/it/u=2254860652,1957676121&fm=253&fmt=auto&app=138&f=JPEG?w=900&h=500
 categories:
  - 计算机视觉
 tags:

@@ -1,6 +1,7 @@
 ---
 title: 论文速读：TwoStreamVAN
 date: 2020-12-25 11:13:07
+index_img: https://img1.baidu.com/it/u=2357930729,2857529824&fm=253&fmt=auto&app=120&f=JPEG?w=650&h=367
 categories:
  - 计算机视觉
 tags:

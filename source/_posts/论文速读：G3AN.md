@@ -1,6 +1,7 @@
 ---
 title: 论文速读：G3AN
 date: 2020-12-24 11:53:37
+index_img: https://img1.baidu.com/it/u=2557856125,3864054135&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500
 categories:
  - 计算机视觉
 tags:

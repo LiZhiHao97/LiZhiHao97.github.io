@@ -1,6 +1,7 @@
 ---
 title: 论文速读：ImaGINator
 date: 2020-12-23 21:56:29
+index_img: https://img1.baidu.com/it/u=182820371,1370805228&fm=253&fmt=auto&app=120&f=JPEG?w=650&h=436
 categories:
  - 计算机视觉
 tags:
