@@ -1,6 +1,7 @@
 ---
 title: 目标检测mAP计算以及coco评价标准
 date: 2020-11-24 11:39:05
+index_img: https://img1.baidu.com/it/u=2691253530,1906892216&fm=253&fmt=auto&app=138&f=JPEG?w=901&h=500
 categories:
  - 计算机视觉
 tags:
