@@ -2,7 +2,7 @@
 title: Javascript的事件循环机制(event loop)
 date: 2022-03-04 21:47:33
 index_img: https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220304214916011.png
-categories: Javascript
+categories: 前端
 tags: 
  - 前端
  - Javascript
