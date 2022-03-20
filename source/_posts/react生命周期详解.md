@@ -5,11 +5,10 @@ index_img: https://i.loli.net/2020/12/25/73l2pnrYuBdyQE9.png
 categories:
  - 前端
 tags:
-  - 前端
-  - react 
+  - React 
   - 生命周期
   - 框架
-  - javascript
+  - Javascript
 ---
 
 ### 组件的生命周期分成三个状态

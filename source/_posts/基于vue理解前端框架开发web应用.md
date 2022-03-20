@@ -5,8 +5,7 @@ index_img: https://i.loli.net/2020/12/25/QldBxbge25EFjW4.png
 categories:
  - 前端
 tags:
-  - 前端
-  - vue
+  - Vue
 ---
 
 ## 一、我为什么写这篇博客？

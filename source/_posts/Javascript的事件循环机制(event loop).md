@@ -4,7 +4,6 @@ date: 2022-03-04 21:47:33
 index_img: https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220304214916011.png
 categories: 前端
 tags: 
- - 前端
  - Javascript
 ---
 
@@ -74,11 +73,14 @@ for(var i = 0; i < 3; i++){
 
  - setInterval()
  - setTimeout()
+ - setImmediate(Node.js 环境)
 
 以下事件属于微任务：
 
- - new Promise()
- - new MutaionObserver()
+- Promise.then
+- Object.observe
+- MutationObserver
+- process.nextTick(Node.js 环境)
 
  在一个事件循环中，异步事件返回结果后会被放到一个任务队列中。然而，根据这个异步事件的类型，这个事件实际上会被对应的宏任务队列或者微任务队列中去。并且在当前执行栈为空的时候，主线程会查看微任务队列是否有事件存在。如果不存在，那么再去宏任务队列中取出一个事件并把对应的事件加入当前执行栈；如果存在，则会依次执行队列中事件对应的回调，直到微任务队列为空，然后去宏任务队列中取出最前面的一个事件，把对应的回调加入当前执行栈...如此反复，进入循环。
  > 微任务在本轮“事件循环”结束时执行，宏任务在下一轮“事件循环”开始时执行。
