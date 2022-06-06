@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-06-06T05:50:00.980Z</updated>
+  <updated>2022-06-06T05:55:19.120Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>python之函数使用</title>
+    <title>React Native中渲染的坑</title>
     <link href="http://yoursite.com/2022/06/06/React%20Native%E4%B8%AD%E6%B8%B2%E6%9F%93%E7%9A%84%E5%9D%91/"/>
     <id>http://yoursite.com/2022/06/06/React Native中渲染的坑/</id>
     <published>2022-06-06T03:55:00.000Z</published>
-    <updated>2022-06-06T05:50:00.980Z</updated>
+    <updated>2022-06-06T05:55:19.120Z</updated>
     
     <content type="html"><![CDATA[<p>解决方案来自<a href="https://stackoverflow.com/questions/52368342/invariant-violation-text-strings-must-be-rendered-within-a-text-component">StackOverflow</a></p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>当<strong>React Native</strong>从 0.54 升级到 0.57，代码报了以下错误</p><p><code>Invariant Violation: Text strings must be rendered within a &lt;Text&gt; component</code></p><p>乍一看好像是文本没有写在<code>&lt;Text&gt;</code>标签里，查了一下代码发现没有这个问题。最后网上搜索后解决</p><p>以下为伪代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">condition &amp;&amp; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span> /&gt;</span></span>;<br></code></pre></td></tr></table></figure><p>需要修改为：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">condition ? <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span> /&gt;</span></span> : <span class="hljs-literal">null</span>;<br></code></pre></td></tr></table></figure><p>这是因为<code>condition</code>为<code>undefined</code>时，将不会渲染任何组件，而<code>null</code>或<code>空数组</code>可以安全的显示空白区域</p><blockquote><p>Tips: undefined &amp;&amp; true 与 true &amp;&amp; undefined 的结果都为 undefined</p></blockquote>]]></content>
     
