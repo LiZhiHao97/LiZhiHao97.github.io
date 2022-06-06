@@ -1,5 +1,5 @@
 ---
-title: python之函数使用
+title: React Native中渲染的坑
 date: 2022-06-06 11:55
 index_img: https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/71654487516_.pic.jpg
 categories:
