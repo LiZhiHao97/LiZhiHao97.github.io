@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>论文速读：TwoStreamVAN - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="论文速读：TwoStreamVAN">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-25 11:13" pubdate>
+        2020年12月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">论文速读：TwoStreamVAN</h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><blockquote>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_WACV_2020/papers/Sun_TwoStreamVAN_Improving_Motion_Modeling_in_Video_Generation_WACV_2020_paper.pdf">TwoStreamVAN: Improving Motion Modeling in Video Generation</a></p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/12/24/QuJrB95NZzkI42s.png" srcset="/img/loading.gif" alt=""></p>
+<p>像素级视频预测[27，36，40]和生成方法的一个主要问题是，它们试图在单个纠缠生成器中对静态内容和动态运动进行建模，而不管它们是否在潜在空间中解开运动和内容\</p>
+<p>本文认为在解码阶段分离运动和内容建模是至关重要的。一方面，它消除了内容生成过程中的运动干扰，并产生了更好的内容结构。另一方面，单独的运动建模有助于在整个序列中一致地产生与动作相关的运动。</p>
+<p>本文提出了一个新的<strong>TwoStreamVAN</strong>，它从一个动作标签和一个分离的噪声向量生成一个视频，如上x`图所示。通过两个并行的生成器，分别处理内容和运动，并将它们融合在一起以预测下一帧，而不是高估单个生成器的能力（如MoCoGAN的做法）。</p>
+<p>直观地说，运动通常以其局部上下文窗口内的空间信息为条件，例如，在做跳跃动作时，手臂和腿部附近的不同运动。因此，我们将运动和内容的融合定义为对每个位置唯一的像素值的学习细化。为了精确地生成多尺度运动，我们在具有几个不同分辨率的中间内容层上进行这种细化。此外，我们还引入了运动蒙版，使运动聚焦于它所在的区域。</p>
+<p>本文将引入<strong>图像级监控（image-levelsupervision）</strong>，虽然<strong>MoCoGAN</strong>尝试了图像级监控缺效果甚微，因为内容生成仍然受到单个共享生成器中运动建模的影响。本文使用的双流生成器的关键优势是能分别学习每个流，从而更准确。我们通过图像级监控完全了解其自身生成器中的图像结构，这显著提高了内容生成性能。训练有素的内容生成进一步有利于视频级监控中的动作学习。</p>
+<p>本文贡献如下：</p>
+<ul>
+<li>我们提出了一个视频生成模型TwoStreamVAN和一个更有效的学习方案，解决了生成阶段的运动和内容问题。</li>
+<li>我们设计了一种多尺度运动融合机制，并通过对空间环境的调节进一步改进了运动建模</li>
+<li>我们创建了一个大规模的合成视频生成数据集，供研究团体使用</li>
+<li>我们在四个视频数据集上通过定量和定性分析评估了我们的模型（通过用户研究），并证明了强于几个强基线的结果。</li>
+</ul>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><p>本文结合了<strong>VAE</strong>和<strong>GAN</strong>，提出了一个<strong>变分对抗网络(VAN)</strong>来学习一个可解释的潜在空间以及生成现实的图像。鉴于<strong>VAN</strong>在图像生成方面的成功，我们在此将其用于视频生成。</p>
+<p>MoCoGAN试图通过从单独的潜在空间中采样来解开内容和运动，但是使用单个生成器来一起解码这两个潜在代码。为了克服统一生成过程中无效的运动建模和随之而来的内容恶化，我们进一步引入了分离的内容和运动生成器来分别对空间结构和时间动态进行建模。</p>
+<h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3. Approach"></a>3. Approach</h2><p>我们引入了一个双流变分对抗网络(图2)，它生成一个给定输入动作标签和随机噪声向量的视频。我们定义动作条件视频生成如下。假设我们有<strong>K</strong>个不同的动作类。在每个类别<strong>k ∈ 1: K</strong> 的情况下，<script type="math/tex">C_{k}</script>为该类别训练视频的数量。使<script type="math/tex">V_{k}</script> = {<script type="math/tex">V_{i,k}, \forall i \in 1:C_{k}</script>}为类别<strong>k</strong>视频的集合，<script type="math/tex">v_{i,k}</script>={<script type="math/tex">x_{1},x_{2},...,x_{T}</script>}为一个T帧的短视频。任务是定义一个函数<strong>G</strong>，该函数根据来自潜在向量<script type="math/tex">\epsilon</script> ∈ <script type="math/tex">ℝ^{N}</script>，给定类别标签k，生成可信的视频<script type="math/tex">\hat{v}</script>，即<script type="math/tex">\hat{v} = G(k,\epsilon)</script></p>
+<p>我们将潜在空间<script type="math/tex">\epsilon</script>分解成两个独立的代码:内容代码<script type="math/tex">\epsilon_{c}</script>∈ <script type="math/tex">ℝ^{C}</script>和动作代码<script type="math/tex">\epsilon_{m}</script>∈<script type="math/tex">ℝ^{M}</script>，N = C + M.我们还将视频生成函数<strong>G</strong>分解为两个独立的内容和运动函数($ G<em>{c} $和$ G</em>{m} $)，与以前使用单个生成器的工作形成对比，我们设计了一种新的多尺度融合机制。</p>
+<p><img src="https://i.loli.net/2020/12/24/XulgzWHeoixMRTb.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="3-1-Two-Stream-Generation"><a href="#3-1-Two-Stream-Generation" class="headerlink" title="3.1 Two-Stream Generation"></a>3.1 Two-Stream Generation</h3><p>为了学习内容和运动建模的生成函数$ G<em>{c} $和$ G</em>{m} $，我们引入了两个独立的、在几个阶段具有交互作用的以动作为条件的VAN streams。每个steam包含一个<strong>Encoder</strong>，一个<strong>Generator</strong>和一个<strong>Discriminator</strong>，其中<strong>Encoder</strong>和<strong>Generator</strong>作为<strong>VAE</strong>的自动编码器，<strong>Generator</strong>和<strong>Discriminator</strong>组成了<strong>GAN</strong></p>
+<p><strong>Content VAN Stream</strong>由内容编码器$ E<em>{c} $、内容生成器$ G</em>{c} $和图像鉴别器$ D<em>{I} $组成，在观察了<strong>x</strong>之后，生成了后验内容潜在分布$ q(z</em>{c}|x,k) $，这接近于它的真实先验分布$ p(z<em>{c}|k) $.$ G</em>{c} $将采样自内容分布的的内容向量$ \epsilon<em>{c} $解码成帧。$ D</em>{I} $鉴别帧的真假以鼓励$ G_{c} $生成更真实的图像。</p>
+<p>类似地，<strong>Motion VAN Stream</strong>由运动编码器$ E<em>{m} $、运动生成器$ G</em>{m} $和视频鉴别器$ D<em>{V} $组成，在我们的方法中，$ E{m} $不是对空间内容进行编码，而是对相邻帧之间的差异图$ \triangle x $的时间动态进行编码。它产生的后验运动潜在分布$ q(z</em>{m}|\triangle x,k) $接近其真实的先验分布$ p(z<em>{m}|k) $.<strong>convLSTM</strong>对运动历史进行累积，并生成当前运动，嵌入$ e</em>{m} $，从所有先前时间步长的运动分布中接收$ \epsilon<em>{m} $序列。$ G</em>{m} $通过$ \epsilon<em>{c} $和$ e</em>{m} $在不同的尺度上产生运动。我们通过将生成的运动与<strong>T</strong>时间步长的相应内容融合来生成每个视频$ \hat{v} $。$ D<em>{V} $对真实/生成的视频进行了分类，并对他们的行为进行了分类，以鼓励$ G</em>{m} $生成逼真的动作</p>
+<h3 id="Multi-scale-Motion-Generation-and-Fusion"><a href="#Multi-scale-Motion-Generation-and-Fusion" class="headerlink" title="Multi-scale Motion Generation and Fusion"></a>Multi-scale Motion Generation and Fusion</h3><p>在像素(a, b)处，运动通常发生在相邻帧之间的局部窗口内。受帧插值空间卷积的启发，我们将运动表示为当前像素值基础局部上下文的细化，并通过空间自适应卷积将这种运动与内容融合。此外，我们提出了一种新的多尺度融合机制来克服其方法的缺点，即:1)由于在全分辨率图像上执行单个融合步骤而导致的多尺度运动的无效建模，以及2)由于用于表示最大可能运动的大卷积核而导致的对存储器的高需求。</p>
+<p><img src="https://i.loli.net/2020/12/24/4NQFA9ECBtfpxza.png" srcset="/img/loading.gif" alt=""></p>
+<p>为了生成精确的运动，$ G<em>{m} $将解开的内容和运动嵌入($ \epsilon</em>{c} $和$ e<em>{m} $)作为输入。在$ G</em>{m} $中，不同尺度的运动将相应的隐藏层分开:大的运动来自低分辨率层，小的运动来自高分辨率层。在每一层，$ G_{m} $将当前特征映射为:1)以具有尺寸n的像素方式的2D核的形式计算运动(像素细化);2)识别运动遮罩中包含实际运动的区域；3)生成下一层的运动图。为了将运动与内容融合，仅当像素位于运动被激活的区域中时，我们才分别将生成的2D核与以相应像素为中心的面片进行卷积(即，执行空间自适应卷积)(参见上图)。</p>
+<p>具体来说，假设我们把运动分成<strong>S</strong>个尺度。对于每个尺度的<strong>s</strong>，让$ l<em>{s} $为相对应的分辨率隐藏层，$ w^{s} ∈ ℝ^{l</em>{s}×l<em>{s}×n^{2}} $为$ G</em>{m} $产生的卷积核，$ h<em>{c}^{s} ∈ ℝ^{l</em>{s} × l<em>{s} × d</em>{s}} $为相对应的内容层，其中$ d<em>{s} $是内容特征维度。我们在以下步骤中执行空间自适应卷积。首先，对于每个位置(a,b)，我们从展开形式$ w^{s}(a,b) $恢复一个2D卷积核$ K^{s}(a,b) $.然后，我们将$ K^{s}(a,b) $与在$ h</em>{c}^{s} $的补丁$ P^{s}(a,b) ∈ ℝ^{n×n×d<em>{s}} $做卷积运算来生成一个位置(a,b)中间内容表示 $ \tilde{h}</em>{c}^{s}(a,b) $:</p>
+<p><img src="https://i.loli.net/2020/12/25/F4I7zgub9ahVnft.png" srcset="/img/loading.gif" alt="image-20201225105952830"></p>
+<p>我们通过向较小的层添加自适应卷积来处理较大的运动，而[29]则通过增加核大小来处理较大的运动。由于要存储和建模的参数数量在核大小中是平方的，因此在我们的多尺度融合框架中，我们通过对所有层利用小核(푛=3或5)来显著降低内存使用量和模型复杂度</p>
+<p>为了$ G<em>{m} $的注意力集中学习尺度<strong>s</strong>在实际发生的区域的运动上，我们预测了一个带有$ w^{s} $的运动遮罩$ M^{s} ∈ ℝ^{l</em>{s}×l<em>{s}} $，以识别这样的区域。每个$ M^{s} $的的值都在[0，1]中。我们在$ M^{s}(a,b) $:的指导下通过融合运动从$ h</em>{c}^{s}(a,b) $和 $ \tilde{h}<em>{c}^{s}(a,b) $生成了新的内容$ \hat{h}</em>{c}^{s} $：</p>
+<p><img src="https://i.loli.net/2020/12/25/NLE6c9F4XHe2CaY.png" srcset="/img/loading.gif" alt="image-20201225110922089"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>以上。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/">视频生成</a>
+                    
+                      <a class="hover-with-bg" href="/tags/GAN/">GAN</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/04/Javascript%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6(event%20loop)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Javascript的事件循环机制(event loop)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/24/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB%EF%BC%9AG3AN/">
+                        <span class="hidden-mobile">论文速读：G3AN</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,963 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="种一棵树最好的时间是十年前，其次是现在">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/06/React%20Native%E4%B8%AD%E6%B8%B2%E6%9F%93%E7%9A%84%E5%9D%91/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/71654487516_.pic.jpg" srcset="/img/loading.gif" alt="python之函数使用">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/06/React%20Native%E4%B8%AD%E6%B8%B2%E6%9F%93%E7%9A%84%E5%9D%91/">python之函数使用</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/06/React%20Native%E4%B8%AD%E6%B8%B2%E6%9F%93%E7%9A%84%E5%9D%91/">
+          
+          
+            
+          
+          解决方案来自StackOverflow
+问题当React Native从 0.54 升级到 0.57，代码报了以下错误
+Invariant Violation: Text strings must be rendered within a &lt;Text&gt; component
+乍一看好像是文本没有写在&lt;Text&gt;标签里，查了一下代码发现没有这个问题。最后网上搜索后解决
+以下为伪
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-06 11:55" pubdate>
+              2022-06-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/React-Native/">React Native</a>
+            
+              <a href="/tags/React/">React</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/04/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%88%E4%BB%A3%E7%90%86%EF%BC%89%EF%BC%9F/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/20220404193829.png" srcset="/img/loading.gif" alt="什么是事件委托（代理）？">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/04/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%88%E4%BB%A3%E7%90%86%EF%BC%89%EF%BC%9F/">什么是事件委托（代理）？</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/04/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%88%E4%BB%A3%E7%90%86%EF%BC%89%EF%BC%9F/">
+          
+          
+            
+          
+          前置知识事件冒泡 &amp;&amp; 事件捕获当我们触发一个元素事件时，如果事件从最内层元素传递到最外层元素，此过程为事件冒泡，如果从最外层元素传递到最内层元素，此过程为事件捕获
+如以下代码所示：
+
+若触发事件冒泡，则事件执行顺序为c、b、a
+若触发事件捕获，则事件执行顺序为a、b、c
+
+123456&lt;div class=&quot;a&quot;&gt;  &lt;div class=&
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-04 19:35" pubdate>
+              2022-04-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/20/Javascript%E5%B8%B8%E8%A7%81%E6%89%8B%E5%86%99%E9%A2%98/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220320172852864.png" srcset="/img/loading.gif" alt="Javascript常见手写题">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/20/Javascript%E5%B8%B8%E8%A7%81%E6%89%8B%E5%86%99%E9%A2%98/">Javascript常见手写题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/20/Javascript%E5%B8%B8%E8%A7%81%E6%89%8B%E5%86%99%E9%A2%98/">
+          
+          
+            
+          
+          防抖（debounce）123456789function debounce(fn, timeout)&#123;  let timer = null  return function(...args)&#123;    if (timer) clearTimeout(timer)    timer = setTimeout(() =&gt; &#123;    	fn.apply(this, a
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-20 19:17" pubdate>
+              2022-03-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%E7%9A%84%EF%BC%9F/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220320102349853.png" srcset="/img/loading.gif" alt="浏览器到底是怎么渲染页面的?">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%E7%9A%84%EF%BC%9F/">浏览器到底是怎么渲染页面的?</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/20/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%E7%9A%84%EF%BC%9F/">
+          
+          
+            
+          
+          三个阶段当url输入到地址栏，到页面渲染完成，总共会有三个阶段
+
+HTTP请求阶段
+HTTP响应阶段
+浏览器渲染阶段
+
+让我们来看看每个阶段到底发生了什么
+HTTP请求阶段
+在浏览器地址栏输入URL后，点击回车跳转
+浏览器向服务器发起HTTP请求
+DNS解析
+TCP三次握手建立连接
+建立连接后发起请求
+
+HTTP响应阶段
+服务端准备资源
+服务端将资源返回给浏览器
+TCP四次挥手断开连接
+
+浏览器渲
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-20 10:21" pubdate>
+              2022-03-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+              <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/19/Javascript%E4%BC%AA%E6%95%B0%E7%BB%84%E4%B8%8Earguments/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220319223452332.png" srcset="/img/loading.gif" alt="Javascript伪数组与arguments">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/19/Javascript%E4%BC%AA%E6%95%B0%E7%BB%84%E4%B8%8Earguments/">Javascript伪数组与arguments</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/19/Javascript%E4%BC%AA%E6%95%B0%E7%BB%84%E4%B8%8Earguments/">
+          
+          
+            
+          
+          什么是伪数组？所谓伪数组，也称为类数组对象，指的是可以通过索引属性访问元素并且拥有 length 属性的对象。
+以下为一个简单的伪数组的例子：
+123456const arrFake = &#123;  0: &#x27;name&#x27;,  1: &#x27;age&#x27;,  2: &#x27;job&#x27;,  length: 3&#125;
+它所对应的数组如下所示：
+1cons
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-19 21:59" pubdate>
+              2022-03-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/10/V8%E5%BC%95%E6%93%8E%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220310211550138.png" srcset="/img/loading.gif" alt="V8引擎的垃圾回收机制">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/10/V8%E5%BC%95%E6%93%8E%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">V8引擎的垃圾回收机制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/10/V8%E5%BC%95%E6%93%8E%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
+          
+          
+            
+          
+          一、Javascript内存管理JavaScript内存的流程很简单，分为3步：
+
+分配给使用者所需的内存
+使用者拿到这些内存，并使用内存
+使用者不需要这些内存了，释放并归还给系统
+
+那么这些使用者是谁呢？举个例子：12345var num = &#x27;&#x27;var str = &#x27;Zh&#x27;var obj = &#123; name: &#x27;Zh&#x27; &#1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-10 21:17" pubdate>
+              2022-03-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+              <a href="/tags/V8/">V8</a>
+            
+              <a href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">垃圾回收机制</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/10/Javascript%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220310155116766.png" srcset="/img/loading.gif" alt="Javascript如何避免内存泄漏">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/10/Javascript%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">Javascript如何避免内存泄漏</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/10/Javascript%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
+          
+          
+            
+          
+          一、如何监控内存状况这里借用一下林三心大佬的图文。
+浏览器任务管理器打开方式：在浏览器顶部右键，打开任务管理器：
+
+
+打开后，可以看到内存和JavaScript内存：
+
+内存：页面里的原始内存，也就是DOM节点的总占用内存
+JavaScript内存(括号里)：是该页面中所有可达对象的总占用内存
+
+那什么是可达对象呢？简单说就是：就是从初始的根对象（window或者global）的指针开始，向下搜索
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-10 20:49" pubdate>
+              2022-03-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">内存泄漏</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/09/Javascript%E4%B8%ADisNaN%E5%92%8CNumer.isNaN%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220309104530660.png" srcset="/img/loading.gif" alt="Javascript中isNaN和Numer.isNaN的区别">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/09/Javascript%E4%B8%ADisNaN%E5%92%8CNumer.isNaN%E7%9A%84%E5%8C%BA%E5%88%AB/">Javascript中isNaN和Numer.isNaN的区别</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/09/Javascript%E4%B8%ADisNaN%E5%92%8CNumer.isNaN%E7%9A%84%E5%8C%BA%E5%88%AB/">
+          
+          
+            
+          
+          isNaN()当我们将参数传入isNaN时，它的内部实现调用了Number()方法将参数转换为Number类型，如下所示。
+1234567Number(&#x27;&#x27;)  // 0Number(null) // 0Number(true) // 1Number(false) // 0Number(undefined) // NaNNumber(&#x27;aa&#x27;) // NaN
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-09 10:32" pubdate>
+              2022-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/08/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F%E9%97%AD%E5%8C%85%E6%98%AF%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%9F/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220308204123562.png" srcset="/img/loading.gif" alt="词法作用域？动态作用域？闭包是如何产生的？">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/08/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F%E9%97%AD%E5%8C%85%E6%98%AF%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%9F/">词法作用域？动态作用域？闭包是如何产生的？</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/08/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F%E9%97%AD%E5%8C%85%E6%98%AF%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%9F/">
+          
+          
+            
+          
+          词法作用域词法作用域就是定义在词法阶段的作用域，就是说跟我们写代码时将变量定义在哪个函数作用域或者块作用域中有关系，大多数情况是不变的（evel/with会修改）
+
+图片来自《你不知道的Javascript》
+
+
+包含着全局作用域，包括标识符foo
+包含着foo所创建的作用域，包括标识符：a,bar和b
+包含着bar所创建的作用域, 包括标识符c无论函数在哪里被调用，它的词法作用域都只有函数被声明
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-08 19:50" pubdate>
+              2022-03-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+              <a href="/tags/%E9%97%AD%E5%8C%85/">闭包</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/04/Javascript%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6(event%20loop)/" target="_self">
+          <img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220304214916011.png" srcset="/img/loading.gif" alt="Javascript的事件循环机制(event loop)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/04/Javascript%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6(event%20loop)/">Javascript的事件循环机制(event loop)</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/04/Javascript%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6(event%20loop)/">
+          
+          
+            
+          
+          一、Javascript引擎的特点：单线程与非阻塞单线程JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。
+
+比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
+
+为了利用多核CPU的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-04 21:47" pubdate>
+              2022-03-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Javascript/">Javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>python之函数使用 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="python之函数使用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-10-11 15:25" pubdate>
+        2018年10月11日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">python之函数使用</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、Python自定义函数的简单使用"><a href="#一、Python自定义函数的简单使用" class="headerlink" title="一、Python自定义函数的简单使用"></a>一、Python自定义函数的简单使用</h2><p>与其他许多语言相似，函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。</p>
+<p>python中函数定义的规则，基本由以下几个步骤组成：</p>
+<ul>
+<li>函数代码块以 def 关键词开头，后接函数标识符名称和圆括号()</li>
+<li>任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数</li>
+<li>函数的第一行语句可以选择性地使用文档字符串（用于存放函数说明）</li>
+<li>return [表达式] 结束函数，选择性地返回一个值给调用方。不带表达式的 return 相当于返回 None。</li>
+</ul>
+<p>语法示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"> parameters </span>):<br>   <span class="hljs-string">&#x27;&#x27;&#x27;函数_文档字符串&#x27;&#x27;&#x27;</span><br>   function_suite<br>   <span class="hljs-keyword">return</span> [expression]<br></code></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sum</span>(<span class="hljs-params">num1,num2</span>):<br>    <span class="hljs-string">&quot;两数之和&quot;</span><br>    <span class="hljs-keyword">return</span> num1+num2<br><br><span class="hljs-comment"># 调用函数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">sum</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+<h2 id="二、函数的传值与传地址"><a href="#二、函数的传值与传地址" class="headerlink" title="二、函数的传值与传地址"></a>二、函数的传值与传地址</h2><p>函数的传值与传地址从字面意思来看很好理解，传值就是传入一个参数的值，传址就是传入一个参数的地址，也就是内存的地址（相当于指针）。他们的区别是如果函数里面对传入的参数重新赋值，函数外的全局变量是否相应改变，用传值传入的参数是不会改变的，用传址传入就会发生改变。</p>
+<p>我们来看一下下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">afferentValue</span>(<span class="hljs-params">num</span>):<br>    num = <span class="hljs-number">2</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">afferentAddress</span>(<span class="hljs-params"><span class="hljs-built_in">list</span></span>):<br>    <span class="hljs-built_in">list</span>.append(<span class="hljs-number">2</span>)<br><br>num = <span class="hljs-number">1</span><br><span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>]<br><br><span class="hljs-comment"># 执行函数</span><br>afferentValue(num)<br>afferentAddress(<span class="hljs-built_in">list</span>)<br><br><span class="hljs-built_in">print</span>(num)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">1</span><br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br></code></pre></td></tr></table></figure>
+<p>从以上的实例看出，当将变量传入函数时，并在函数内部修改后，在函数作用域外打印传入函数的变量，Number类型的变量并没有修改成功，List类型的变量修改成功，这就是，传值与传地址的区别</p>
+<blockquote>
+<p>python的传值和传址是根据传入参数的类型来选择的，传值的参数类型：数字，字符串，元组，传址的参数类型：列表，字典</p>
+</blockquote>
+<h2 id="三、函数的返回值"><a href="#三、函数的返回值" class="headerlink" title="三、函数的返回值"></a>三、函数的返回值</h2><p>与许多语言不同的是，Python的函数返回值可以有多个，当返回值为多个时，返回的结果为1个元组</p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">returnTest</span>(<span class="hljs-params">num1, num2</span>):<br>    <span class="hljs-keyword">return</span> num1, num2<br><br><span class="hljs-built_in">print</span>(returnTest(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="四、函数的参数"><a href="#四、函数的参数" class="headerlink" title="四、函数的参数"></a>四、函数的参数</h2><h3 id="1、位置参数"><a href="#1、位置参数" class="headerlink" title="1、位置参数"></a>1、位置参数</h3><p>大部分情况下我们使用的都是位置参数，例子如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">userInfo</span>(<span class="hljs-params">name, age, sex</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;姓名:%s, 年龄: %d, 性别: sex: %s&#x27;</span> % (name, age, sex))<br><br>userInfo(<span class="hljs-string">&#x27;李XX&#x27;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&#x27;男&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">姓名:李XX, 年龄: <span class="hljs-number">18</span>, 性别: sex: 男<br></code></pre></td></tr></table></figure>
+<p>我们为什么要使用位置参数，原因显而易见，有时我们在调用函数时，必须按照顺序输入参数，否则输出的信息与预料中会有出入。</p>
+<h3 id="2、关键字参数"><a href="#2、关键字参数" class="headerlink" title="2、关键字参数"></a>2、关键字参数</h3><p>前面说了，在大多数情况下我们用的是位置参数，但是如果参数很多的时候，我们在调用时可能很难记住参数的顺序，我们引入关键字参数即使用参数名提供的参数，在于明确每个参数的作用，使得函数调用的时候，参数的含义变得更加清晰。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">userInfo</span>(<span class="hljs-params">name, age, sex</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;姓名:%s, 年龄: %d, 性别: sex: %s&#x27;</span> % (name, age, sex))<br><br>userInfo(name=<span class="hljs-string">&#x27;李XX&#x27;</span>, sex=<span class="hljs-string">&#x27;男&#x27;</span>, age=<span class="hljs-number">18</span>)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">姓名:李XX, 年龄: <span class="hljs-number">18</span>, 性别: sex: 男<br></code></pre></td></tr></table></figure>
+<p>可以看出，我们使用关键字参数后，传参的顺序打乱，但是输出的结果与使用位置参数时一样，这就是关键字参数的奇妙之处</p>
+<h3 id="3、默认值参数"><a href="#3、默认值参数" class="headerlink" title="3、默认值参数"></a>3、默认值参数</h3><p>有时候，我们自定义的函数中，如果调用的时候没有设置参数，需要给个默认值，这时候就需要用到默认值参数了。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">userInfo</span>(<span class="hljs-params">name, age, sex=<span class="hljs-string">&#x27;男&#x27;</span></span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;姓名:%s, 年龄: %d, 性别: sex: %s&#x27;</span> % (name, age, sex))<br><br>userInfo(<span class="hljs-string">&#x27;李XX&#x27;</span>, <span class="hljs-number">18</span>)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">姓名:李XX, 年龄: <span class="hljs-number">18</span>, 性别: sex: 男<br></code></pre></td></tr></table></figure>
+<p>从输出结果可以看出，当你设置了默认参数的时候，在调用函数的时候，不传该参数，就会使用默认值。但是有一点需要注意的是：<strong>只有在形参表末尾的那些参数可以有默认参数值</strong>，也就是说你不能在声明函数形参的时候，先声明有默认值的形参而后声明没有默认值的形参。这是因为赋给形参的值是根据实参传递的顺序而赋值的。例如，def func(a, b=1) 是有效的，但是 def func(a=1, b) 是 无效 的。</p>
+<h3 id="4、可变参数"><a href="#4、可变参数" class="headerlink" title="4、可变参数"></a>4、可变参数</h3><p>可变参数有两种，第一种是<em>args，第二种是</em>kwargs。</p>
+<p>先来看第一种，用老师布置的作业举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">multi</span>(<span class="hljs-params">*numbers</span>):<br>    result = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> numbers:<br>        result = num * result<br>    <span class="hljs-keyword">return</span> result<br><br><span class="hljs-built_in">print</span>(multi(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>))<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+<p>在上面定义的函数中，<strong>*numbers</strong>是一个可变参数，而且它的本质其实就是一个元组，使用了可变参数后，我们可以在函数调用时传入若干个参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">userInfo</span>(<span class="hljs-params">name, age, sex, **hobby</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;姓名:%s, 年龄: %d, 性别: sex: %s&#x27;</span> % (name, age, sex))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;爱好：&#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(hobby))<br>    <br>userInfo(<span class="hljs-string">&#x27;李XX&#x27;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&#x27;男&#x27;</span>, hobby1 = <span class="hljs-string">&#x27;编程&#x27;</span>, hobby2 = <span class="hljs-string">&#x27;编程&#x27;</span>, hobby3 = <span class="hljs-string">&#x27;编程&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">姓名:李XX, 年龄: <span class="hljs-number">18</span>, 性别: sex: 男<br>爱好：&#123;<span class="hljs-string">&#x27;hobby1&#x27;</span>: <span class="hljs-string">&#x27;编程&#x27;</span>, <span class="hljs-string">&#x27;hobby2&#x27;</span>: <span class="hljs-string">&#x27;编程&#x27;</span>, <span class="hljs-string">&#x27;hobby3&#x27;</span>: <span class="hljs-string">&#x27;编程&#x27;</span>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以看出，这种可变参数，在调用函数时传入实参需用关键字参数，因为它的本质是一个字典。</p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>lambda表达式，通常是在需要一个函数，但是又不想费神去命名一个函数的场合下使用，被称为匿名函数.lambda所表示的匿名函数内容应该比较简单，如果函数内容复杂的话，应该重新定义一个函数。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">add = <span class="hljs-keyword">lambda</span> x, y : x+y<br><br><span class="hljs-built_in">print</span>(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+<p>从实例看，我们可以把冒号左边的表达式，冒号右边的表达式理解为函数返回值。</p>
+<p>Python提供了很多函数式编程的特性，如：map、reduce、filter、sorted等这些函数都支持函数作为参数。lambda函数就可以应用在函数式编程中。</p>
+<blockquote>
+<p>函数式编程中的函数这个术语不是指计算机中的函数（实际上是Subroutine），而是指<strong>数学中的函数</strong>，即<strong>自变量的映射</strong>。也就是说一个<strong>函数的值仅决定于函数参数的值，不依赖其他状态。</strong>比如sqrt(x)函数计算x的平方根，只要x不变，不论什么时候调用，调用几次，值都是不变的。</p>
+</blockquote>
+<p>比如将列表中的元素按照绝对值大小进行升序排列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">list</span> = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">4</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">6</span>]<br><br><span class="hljs-built_in">list</span> = <span class="hljs-built_in">sorted</span>(<span class="hljs-built_in">list</span>, key=<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">abs</span>(x))<br><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">[<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, -<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">6</span>]<br></code></pre></td></tr></table></figure>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>上面我们提到了map、reduce、filter、sorted这些函数，那它们到底是用来干什么的，让我们来介绍一下</p>
+<h3 id="1、map"><a href="#1、map" class="headerlink" title="1、map"></a>1、map</h3><p>map函数接受两个参数，第一个参数是函数的名称，第二个参数一个可迭代对象。map函数就是将具体数值根据算法进行计算，，并将结果保存为一个迭代器。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">x</span>):<br>    x += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> x<br><br><span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><br>newList = <span class="hljs-built_in">map</span>(add, <span class="hljs-built_in">list</span>)<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> newList:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2</span><br><span class="hljs-number">3</span><br><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<h3 id="2、reduce"><a href="#2、reduce" class="headerlink" title="2、reduce"></a>2、reduce</h3><p>　reduce同map函数一样，也是接受两个参数，但不同的是，reduce函数将当前数值的计算结果与下一个数值的计算结果进行累积计算。reduce()函数第一次运行时会将可迭代对象的第一项作为第一个参数，第二项作为第二个参数传入函数。第二次运行则会将函数第一次运行所返回的结果作为第一个参数，可迭代对象的第三项作为第二个参数传入函数……<br>　<br>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">accumulate</span>(<span class="hljs-params">x, y</span>):<br>    <span class="hljs-keyword">return</span> x + y<br><br><span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br><br>result = reduce(accumulate, <span class="hljs-built_in">list</span>)<br><br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+<h3 id="3、filter"><a href="#3、filter" class="headerlink" title="3、filter"></a>3、filter</h3><p>同上两个函数一样，接受两个参数，第一个参数为函数名，第二个参数为序列。但filter根据序列中各个元素作用与函数时，函数返回结果(True/False)来决定该元素是否保留。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">fetchEven</span>(<span class="hljs-params">num</span>):<br>    <span class="hljs-keyword">if</span> num % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><br>newList = <span class="hljs-built_in">filter</span>(fetchEven, <span class="hljs-built_in">list</span>)<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> newList:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2</span><br><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<h3 id="4、sorted"><a href="#4、sorted" class="headerlink" title="4、sorted"></a>4、sorted</h3><p>sorted顾名思义，就是用来排序的，sorted可以接受一个key函数(可选参数)，实现自定义排序。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">list</span> = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">4</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">6</span>]<br><br>newList = <span class="hljs-built_in">sorted</span>(<span class="hljs-built_in">list</span>, key=<span class="hljs-built_in">abs</span>)<br><br><span class="hljs-built_in">print</span>(newList)<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">[<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, -<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">6</span>]<br></code></pre></td></tr></table></figure>
+<p>以上几个函数的优点是，在执行过程中没有副作用。例如当我们使用map处理list时，并不会改变传入的list，而时返回了一个新的迭代器对象。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/01/12/Node-js%E9%A1%B9%E7%9B%AE%E7%BA%BF%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%8F%91%E5%B8%83/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Node.js项目线上服务器部署与发布</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/05/05/%E8%B6%81%E5%B9%B4%E8%BD%BB%EF%BC%8C%E8%B5%B6%E5%BF%AB%E5%AD%A6%E4%B8%80%E6%B3%A2vim/">
+                        <span class="hidden-mobile">趁年轻，赶快学一波vim</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

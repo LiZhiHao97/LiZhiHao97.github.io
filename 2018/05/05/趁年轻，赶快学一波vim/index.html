@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>趁年轻，赶快学一波vim - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="趁年轻，赶快学一波vim">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-05-05 20:15" pubdate>
+        2018年5月5日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      48
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">趁年轻，赶快学一波vim</h1>
+            
+            <div class="markdown-body">
+              <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器，在Vi的基础上改进和增加了很多特性。  VIM是自由软件。<br>Vim普遍被推崇为类Vi编辑器中最好的一个，事实上真正的劲敌来自Emacs的不同变体。1999 年Emacs被选为Linuxworld文本编辑分类的优胜者，Vim屈居第二。但在2000年2月Vim赢得了Slashdot Beanie的最佳开放源代码文本编辑器大奖，又将Emacs推至二线， 总的来看， Vim和Emacs在文本编辑方面都是非常优秀的。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>首先我们需要先安装vim</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">brew install <span class="hljs-keyword">vim</span> // mac安装<span class="hljs-keyword">vim</span><br>apt-<span class="hljs-built_in">get</span> install <span class="hljs-keyword">vim</span> // ubuntu安装<span class="hljs-keyword">vim</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>windows用户请前往搜索引擎搜索vim下载安装</p>
+</blockquote>
+<p>本文通过vimtutor进行vim的学习，安装完vim后在终端输入vimtutor即可</p>
+<h2 id="vim模式"><a href="#vim模式" class="headerlink" title="vim模式"></a>vim模式</h2><p><strong>命令模式</strong>: 用于输入指令，如：保存、运行、切换标签、切割屏幕等<br><strong>插入模式</strong>: 也即编辑模式，用于编辑文本<br><strong>可视模式</strong>: 相当于高亮选取文本后的正常模式<br><strong>正常模式</strong>: 用于查看文本，也可复制、粘贴、撤销、重做等</p>
+<h2 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h2><p>在正常模式键可用<code>h、j、k、l</code>来分别代替<code>←、↓、↑、→</code>键来移动光标,对于初学者来说,这种移动光标的方式十分不习惯,但是用这种方式移动光标在编程的过程中可以不用频繁的移动右手</p>
+<blockquote>
+<p>注意：当某一行为空时，h、l无法进行左右的移动</p>
+<p>如果您不敢确定您所按下的字母，请按下<ESC>键回到正常(Normal)模式。然后再次从键盘输入您想要的命令。</p>
+</blockquote>
+<h2 id="vim的进入和退出"><a href="#vim的进入和退出" class="headerlink" title="vim的进入和退出"></a>vim的进入和退出</h2><p>恩,我已经玩熟了光标操作，这个玩意儿太方便啦，咦，但是我怎么退出vim呢</p>
+<p>1、按<code>&lt;ESC&gt;</code>键，确定你处于正常模式。</p>
+<p>2、然后键入<code>:q</code>， 然后按回车，但这样做并不会将你修改的内容保存。</p>
+<p>3、键入<code>:wq</code>，可以在退出的同时保存你所修改的内容。</p>
+<p>4、对，你没猜错，如果想只保存不退出，键入<code>:w</code>就行了</p>
+<h2 id="文本编辑之删除"><a href="#文本编辑之删除" class="headerlink" title="文本编辑之删除"></a>文本编辑之删除</h2><p>那么我想要在正常模式下删除某个内容怎么办呢，很简单，你只需要用我们所学的移动光标方式将光标移动到你想要删除的文本位置，按下<code>x</code>键即可</p>
+<blockquote>
+<p>提示：当我对某个操作不满意，想要撤回的时候，只要键入u即可</p>
+</blockquote>
+<h2 id="文本编辑之插入"><a href="#文本编辑之插入" class="headerlink" title="文本编辑之插入"></a>文本编辑之插入</h2><p>哇，我发现文本的内容不是我想要的，我要修改他，可是在正常模式下我好像无法编辑它诶，怎么办。</p>
+<p>按<code>i</code>进入插入模式，在这个模式下，你可以随意的修改文本了，但是你不能再用h、j、k、l的方式来移动光标了，当你修改完成后，可以按<code>&lt;ESC&gt;</code>返回正常模式</p>
+<h2 id="文本编辑之添加"><a href="#文本编辑之添加" class="headerlink" title="文本编辑之添加"></a>文本编辑之添加</h2><p>啊？这个插入模式是什么鬼，我怎么只能往光标前添加内容，如果我想在原本的内容后添加新的内容怎么办？</p>
+<p>你可以在正常模式下，按<code>a</code>键，然后输入你要添加的内容，同样的，在输入完成后按<code>&lt;ESC&gt;</code>返回正常模式。</p>
+<h2 id="删除类命令"><a href="#删除类命令" class="headerlink" title="删除类命令"></a>删除类命令</h2><p>之前的删除方法好麻烦啊，难道我删除一大串内容要一个一个移动光标，然后按一次又一次的<code>x</code>吗。当然不是</p>
+<p>许多改变文本的命令都由一个操作符和一个动作构成。</p>
+<p>使用删除操作符 d 的删除命令的格式如下：</p>
+<p>​    d motion</p>
+<p>  一个简短的动作列表：</p>
+<p>​    w - 从当前光标当前位置直到下一个单词起始处，不包括它的第一个字符。<br>    e - 从当前光标当前位置直到单词末尾，包括最后一个字符。<br>    $ - 从当前光标当前位置直到当前行末。</p>
+<p>简单来说，如果我想要删除一个单词只需要键入<code>dw</code>，如果我键入<code>d$</code>，那么这一整行的内容都被我删了</p>
+<h2 id="使用计数指定动作"><a href="#使用计数指定动作" class="headerlink" title="使用计数指定动作"></a>使用计数指定动作</h2><p>假如vim打开的文件中某一个行有这样一句的内容</p>
+<p><code>This is just a line with words you can move around in.</code></p>
+<p>我的光标在开头的<code>T</code>位置</p>
+<ul>
+<li>键入一次<code>e</code>，我的光标位置就会出现在<code>This</code>这个单词的末尾<code>s</code>处，键入两次，就会出现在下一个单词的末尾。</li>
+<li>键入<code>w</code>，就会出现在下一个单词的开头，多次键入与<code>e</code>的效果雷同。</li>
+<li>键入<code>0</code>，能使我的光标出现在行首。</li>
+<li>键入<code>$</code>，能使我的光标出现在行末。</li>
+</ul>
+<h2 id="使用计数已删除更多"><a href="#使用计数已删除更多" class="headerlink" title="使用计数已删除更多"></a>使用计数已删除更多</h2><p>上面已经提到过删除操作符和动作的组合，你可以在组合中动作之前插入一个数字以删除更多</p>
+<p>​    d   number(数字)   motion</p>
+<p>比如键入<code>d2w</code>，我们就可以删除光标所在位置起的两个单词</p>
+<h2 id="操作整行"><a href="#操作整行" class="headerlink" title="操作整行"></a>操作整行</h2><ul>
+<li><p>之前用<code>d$</code>命令删除整行内容后，我们会发现这一行变成了一个空行，所以可能用清除整行内容来称呼它更加合适</p>
+</li>
+<li><p>如果我们要删除当前行，可以键入<code>dd</code>命令</p>
+</li>
+<li><p>你也可以键入<code>2dd</code>，来删除当前行起的两行</p>
+</li>
+</ul>
+<h2 id="撤销类命令"><a href="#撤销类命令" class="headerlink" title="撤销类命令"></a>撤销类命令</h2><ul>
+<li>之前有提到过，如果你操作失误，可以键入<code>u</code>来撤销最后一次执行的命令</li>
+<li>如果你嫌一次一次的撤销太麻烦，你可以键入<code>U</code>，来使当前行恢复到初始状态</li>
+<li>你也可以键入<code>CTRL-R(先按着CTRL键不放，再键入R)</code>来重做撤销的命令</li>
+</ul>
+<h2 id="置入类命令"><a href="#置入类命令" class="headerlink" title="置入类命令"></a>置入类命令</h2><p>之前所说的<code>dd</code>命令删除了一整行内容，其实呢，他并没有它并没有消失，而是保存在了vim的寄存器中。</p>
+<ul>
+<li>当使用<code>dd</code>命令删除了某一行内容后，光标移到某一行，键入<code>p</code>，刚刚删除掉的那一行内容就会粘贴到当前行的下一行了</li>
+</ul>
+<h2 id="替换类命令"><a href="#替换类命令" class="headerlink" title="替换类命令"></a>替换类命令</h2><p>当我们发现某处出错时，我们可以不必先删除再插入来修改错误，这样子太麻烦，我们可以使用替换命令。</p>
+<p>如下两行，第一行有错误，第二行是正确的，我们想要将第一行单词出错的地方修正可以怎么做呢</p>
+<p><code>Whan this lime was tyoed in, someone presswd some wrojg keys!</code></p>
+<p><code>When this line was typed in, someone pressed some wrong keys!</code></p>
+<ul>
+<li>将光标移到所要修改的字符处，键入<code>p</code>，然后输入所要替换的字符即可</li>
+</ul>
+<h2 id="更改类命令"><a href="#更改类命令" class="headerlink" title="更改类命令"></a>更改类命令</h2><p>同样的我们也可以更改整个单词，而不是一个字符</p>
+<ul>
+<li>键入<code>cw</code>，然后输入正确的内容，我们就可以更改整个单词了。</li>
+</ul>
+<h2 id="使用c更改更多"><a href="#使用c更改更多" class="headerlink" title="使用c更改更多"></a>使用c更改更多</h2><p>更改类操作符的工作方式跟删除类是一致的。操作格式是：<br>​    c    [number]   motion</p>
+<p>动作参数(motion)也是一样的，比如 w 代表单词，$代表行末等等</p>
+<ul>
+<li>除了上一节所说的<code>cw</code>，我也可以键入<code>c$</code>，用来修改当前字符到行末的所有内容</li>
+</ul>
+<h2 id="定位及文件状态"><a href="#定位及文件状态" class="headerlink" title="定位及文件状态"></a>定位及文件状态</h2><p>输入 CTRL-G 显示当前编辑文件中当前光标所在行位置以及文件状态信息。输入大写 G 则直接跳转到文件中的某一指定行</p>
+<blockquote>
+<p>提示：切记要先通读本节内容，之后才可以执行以下步骤!!!</p>
+</blockquote>
+<ol>
+<li><p>按下 CTRL 键不放开然后按 g 键。我们称这个键组合为 CTRL-G。您会看到页面最底部出现一个状态信息行，显示的内容是当前编辑的文件名和文件中光标位置。请记住行号，它会在步骤3中用到。</p>
+</li>
+<li><p>输入大写 G 可以使得当前光标直接跳转到文件最后一行。输入 gg 可以使得当前光标直接跳转到文件第一行。</p>
+</li>
+<li><p>输入您曾停留的行号，然后输入大写 G。这样就可以返回到您第一次按下CTRL-G 时所在的行了。</p>
+</li>
+</ol>
+<h2 id="搜索类命令"><a href="#搜索类命令" class="headerlink" title="搜索类命令"></a>搜索类命令</h2><p>输入 <code>/</code> 加上一个字符串可以用以在当前文件中查找该字符串。</p>
+<p>1、 在正常模式下输入 / 字符。您此时会注意到该字符和光标都会出现在屏幕底部，这跟 : 命令是一样的。</p>
+<p>2、接着输入你要查找的内容，然后按回车，就会查找到您所输入的字符串</p>
+<p>3、要查找同上一次的字符串，只需要按 n 键。要向相反方向查找同上一次的字符串，请输入大写 N 即可。</p>
+<p>4、如想逆向查找字符串，请使用 ? 代替 / 进行。</p>
+<p>5、要回到您之前的位置按 CTRL-O (按住 Ctrl 键不放同时按下字母 o)。重复按可以回退更多步。CTRL-I 会跳转到较新的位置。</p>
+<blockquote>
+<p>提示：如果查找已经到达文件末尾，查找会自动从文件头部继续查找，除非’wrapscan’ 选项被复位。</p>
+</blockquote>
+<h2 id="配对括号的查找"><a href="#配对括号的查找" class="headerlink" title="配对括号的查找"></a>配对括号的查找</h2><p>输入<code>%</code>可以查找配对的字符串</p>
+<p>*当你的光标位置在某一个括号上，键入<code>%</code>，你的光标就会跳到与之配对的括号位置了，如果再次键入，光标就会调回配对的第一个括号处</p>
+<blockquote>
+<p>在程序调试时，这个功能用来查找不配对的括号是很有用的。</p>
+</blockquote>
+<h2 id="替换命令"><a href="#替换命令" class="headerlink" title="替换命令"></a>替换命令</h2><p>假如有这么一行字符串</p>
+<p><code>thee best time to see thee flowers is in thee spring.</code></p>
+<ul>
+<li>当我键入<code>:s/thee/the &lt;回车&gt;</code>，那么该行的第一<code>thee</code>就被我替换成了<code>the</code></li>
+<li>如果想将所有的<code>thee</code>替换，可以键入<code>:s/thee/the/g</code></li>
+<li>要替换两行之间出现的每个匹配串，请<br>   输入   :#,#s/old/new/g   其中 #,# 代表的是替换操作的若干行中首尾两行的行号。<br>   输入   :%s/old/new/g     则是替换整个文件中的每个匹配串。<br>   输入   :%s/old/new/gc    会找到整个文件中的每个匹配串，并且对每个匹配串提示是否进行替换。</li>
+</ul>
+<h2 id="在vim内执行外部命令的方法"><a href="#在vim内执行外部命令的方法" class="headerlink" title="在vim内执行外部命令的方法"></a>在vim内执行外部命令的方法</h2><p>再用vim编程的时候，如果我想输入一个外部命令怎么办，难道我还需要新建个终端窗口吗？当然不需要</p>
+<p>1、 按下我们所熟悉的 <code>:</code> 命令使光标移动到屏幕底部。这样您就可以输入一行命令了。</p>
+<p>2、 接着输入感叹号 <code>!</code> 这个字符，这样就允许您执行外部的 shell 命令了。</p>
+<p>3、 我们以 <code>ls</code> 命令为例。输入 <code>!ls &lt;回车&gt;</code> 。该命令就会列举出您当前目录的内容，就如同您在命令行提示符下输入 ls 命令的结果一样。如果 <code>!ls</code> 没起作用，您可以试试 <code>:!dir</code> 看看。</p>
+<h2 id="关于保存文件的更多信息"><a href="#关于保存文件的更多信息" class="headerlink" title="关于保存文件的更多信息"></a>关于保存文件的更多信息</h2><p>要将对文件的改动保存到文件中，请输入 :w FILENAME 。</p>
+<p>1、 输入 <code>:!dir</code> 或者 <code>:!ls</code> 获知当前目录的内容。您应当已知道最后还得敲&lt;回车&gt; 吧。</p>
+<p>2、 选择一个未被用到的文件名，比如 TEST。</p>
+<p>3、 接着输入 <code>:w TEST</code>  (此处 TEST 是您所选择的文件名。)</p>
+<p>4、 该命令会以 TEST 为文件名保存整个文件 (Vim 教程)。为了验证这一点，请再次输入 <code>:!dir</code> 或 <code>:!ls</code> 查看您的目录列表内容。</p>
+<h2 id="一个具有选择性的保存命令"><a href="#一个具有选择性的保存命令" class="headerlink" title="一个具有选择性的保存命令"></a>一个具有选择性的保存命令</h2><p>要保存文件的部分内容，请输入 v motion :w FILENAM</p>
+<p>1、移动光标到某一行</p>
+<p>2、键入<code>v</code>，将光标移到下面几行，您会发现，之前的文本被高亮了</p>
+<p>3、然后键入<code>:</code>，您将看到屏幕底部会出现 :’&lt;,’&gt; 。</p>
+<p>4、现在请输入 w TEST，其中 TEST 是一个未被使用的文件名。确认您看到了 :’&lt;,’&gt;w TEST 之后按 &lt;回车&gt; 键。 </p>
+<p>5、这时 Vim 会把选中的行写入到以 TEST 命名的文件中去。使用 <code>:!dir</code> 或 <code>:!ls</code>确认文件被正确保存。这次先别删除它！我们在下一讲中会用到它</p>
+<blockquote>
+<p>按 v 键使 Vim 进入可视模式进行选取。您可以四处移动光标使选取区域变大或变小。接着您可以使用一个操作符对选中文本进行操作。例如，按 d 键会删除选中的文本内容。</p>
+</blockquote>
+<h2 id="提取和合并文件"><a href="#提取和合并文件" class="headerlink" title="提取和合并文件"></a>提取和合并文件</h2><p>要向当前文件中插入另外的文件的内容，请输入 :r FILENAME</p>
+<p>1、将光标移到新的一行</p>
+<blockquote>
+<p>提示：步骤2之后您将看到第五讲第三节的文字，请届时往下移动以再次看到本讲内容</p>
+</blockquote>
+<p>2、接着通过命令 :r TEST 将前面创建的名为 TEST 的文件提取进来。您所提取进来的文件将从光标所在位置处开始置入</p>
+<p>3、为了确认文件已经提取成功，移动光标回到原来的位置就可以注意有两份上一讲的内容，一份是原始内容，另外一份是来自文件的副本。</p>
+<blockquote>
+<p>您还可以读取外部命令的输出。例如， :r !ls 可以读取 ls 命令的输出，并把它放置在光标下面。</p>
+</blockquote>
+<h2 id="打开类命令"><a href="#打开类命令" class="headerlink" title="打开类命令"></a>打开类命令</h2><p>输入 o 将在光标的下方打开新的一行并进入插入模式。</p>
+<ul>
+<li>当光标在任意行时，键如<code>o</code>，可以打开新的一行并进入插入模式，您可以写入新的内容，写入完成后按<code>&lt;ESC&gt;</code>返回正常模式。</li>
+</ul>
+<h2 id="附加类命令"><a href="#附加类命令" class="headerlink" title="附加类命令"></a>附加类命令</h2><p>输入 <code>a</code> 将可在光标之后插入文本</p>
+<h2 id="另外一个置换类命令的版本"><a href="#另外一个置换类命令的版本" class="headerlink" title="另外一个置换类命令的版本"></a>另外一个置换类命令的版本</h2><p>输入大写的 R 可连续替换多个字符。</p>
+<p>假如有如下两个字符串</p>
+<p><code>Adding 123 to xxx gives you xxx.</code><br><code>Adding 123 to 456 gives you 579.</code></p>
+<ul>
+<li>您可以将光标移到第一句的<code>xxx</code>处，然后键入<code>R</code>，进行连续的输入，知道内容与第二句相似，按<code>ESC</code>进入正常模式，将光标移到下个<code>xxx</code>处，重复上述操作，这样上下两个字符串就相等啦。</li>
+</ul>
+<h2 id="复制粘贴文本"><a href="#复制粘贴文本" class="headerlink" title="复制粘贴文本"></a>复制粘贴文本</h2><p>使用操作符 y 复制文本，使用 p 粘贴文本</p>
+<p>1、首先将光标移到要复制的内容开头。</p>
+<p>2、键入<code>v</code>进入可视模式。</p>
+<p>3、移动光标，将要复制的内容高亮</p>
+<p>4、键入<code>y</code>抽离文本</p>
+<p>5、将光标移动到你希望复制的位置，键入<code>p</code>粘贴</p>
+<h2 id="设置类命令的选项"><a href="#设置类命令的选项" class="headerlink" title="设置类命令的选项"></a>设置类命令的选项</h2><p>1、 要查找单词 ignore 可在正常模式下输入 <code>/ignore &lt;回车&gt;</code>。要重复查找该词，可以重复按 n 键。</p>
+<p>2、 然后设置 ic 选项(Ignore Case，忽略大小写)，请输入： <code>:set ic</code></p>
+<p>3、 现在可以通过键入 n 键再次查找单词 ignore。注意到 Ignore 和 IGNORE 现在也被找到了。</p>
+<p>4、 然后设置 hlsearch 和 incsearch 这两个选项，请输入： <code>:set hls is</code></p>
+<p>5、 现在可以再次输入查找命令，看看会有什么效果：<code>/ignore &lt;回车&gt;</code></p>
+<p>6、 要禁用忽略大小写，请输入： :set noic</p>
+<blockquote>
+<p>提示：要移除匹配项的高亮显示，请输入：  :nohlsearch<br>提示：如果您想要仅在一次查找时忽略字母大小写，您可以使用 \c：/ignore\c &lt;回车&gt;</p>
+</blockquote>
+<h2 id="获取帮助信息"><a href="#获取帮助信息" class="headerlink" title="获取帮助信息"></a>获取帮助信息</h2><p>Vim 拥有一个细致全面的在线帮助系统。要启动该帮助系统，请选择如下三种方法之一：</p>
+<ul>
+<li>按下<code>&lt;HELP&gt;</code>键 (如果键盘上有的话)</li>
+<li>按下 <code>&lt;F1&gt;</code> 键 (如果键盘上有的话)</li>
+<li>输入 <code>:help &lt;回车&gt;</code></li>
+</ul>
+<p>请阅读帮助窗口中的文字以了解帮助是如何工作的。</p>
+<ul>
+<li>输入 CTRL-W CTRL-W   可以使您在窗口之间跳转。</li>
+<li><p>输入 :q &lt;回车&gt; 可以关闭帮助窗口。</p>
+</li>
+<li><p>提供一个正确的参数给”:help”命令，您可以找到关于该主题的帮助。请试验以下参数(可别忘了按回车键哦)：</p>
+</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">:<span class="hljs-keyword">help</span> <span class="hljs-keyword">w</span><br>:<span class="hljs-keyword">help</span> c_CTRL-D<br>:<span class="hljs-keyword">help</span> <span class="hljs-keyword">insert</span>-<span class="hljs-built_in">index</span><br>:<span class="hljs-keyword">help</span> user-manual<br></code></pre></td></tr></table></figure>
+<h2 id="创建启动脚本"><a href="#创建启动脚本" class="headerlink" title="创建启动脚本"></a>创建启动脚本</h2><p>Vim 的功能特性要比 Vi 多得多，但其中大部分都没有缺省启用。为了使用更多的特性，您得创建一个 vimrc 文件。</p>
+<p>1、 开始编辑 vimrc 文件，具体命令取决于您所使用的操作系统：<br>    <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata">:<span class="hljs-keyword">edit</span> ~/.vimrc     <span class="hljs-comment">// 这是 Unix 系统所使用的命令</span><br>:<span class="hljs-keyword">edit</span> <span class="hljs-variable">$VIM</span>/_vimrc  <span class="hljs-comment">// 这是 MS-Windows 系统所使用的命令</span><br></code></pre></td></tr></table></figure></p>
+<p>2、 接着读取 vimrc 示例文件的内容：<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">:r <span class="hljs-variable">$VIMRUNTIME</span>/vimrc_example.vim<br></code></pre></td></tr></table></figure></p>
+<p>3、 保存文件，命令为：<br>    <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">:<span class="hljs-built_in">write</span><br></code></pre></td></tr></table></figure></p>
+<p>下次您启动 Vim 时，编辑器就会有了语法高亮的功能。您可以把您喜欢的各种设置添加到这个 vimrc 文件中。要了解更多信息请输入 :help vimrc-intro</p>
+<h2 id="补全功能"><a href="#补全功能" class="headerlink" title="补全功能"></a>补全功能</h2><p>1、 输入 <code>:help</code> 或者按 <code>&lt;F1&gt;</code> 键或 <code>&lt;Help&gt;</code> 键可以打开帮助窗口。</p>
+<p>2、 输入 <code>:help cmd</code> 可以找到关于 cmd 命令的帮助。</p>
+<p>3、 输入 <code>CTRL-W CTRL-W</code>  可以使您在窗口之间跳转。</p>
+<p>4、 输入 <code>:q</code> 以关闭帮助窗口</p>
+<p>5、 您可以创建一个 vimrc 启动脚本文件用来保存您偏好的设置。</p>
+<p>6、 当输入 : 命令时，按 CTRL-D 可以查看可能的补全结果。<br>按 <code>&lt;TAB&gt;</code> 可以使用一个补全。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>相信学会了vim，你的编程效率能更上一层楼，梦想还是要有的，趁还年轻。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vim/">vim</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/10/11/python%E4%B9%8B%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">python之函数使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/05/01/h5%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%BF%9B%E5%BA%A6%E6%9D%A1/">
+                        <span class="hidden-mobile">h5触摸事件实现移动端进度条</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

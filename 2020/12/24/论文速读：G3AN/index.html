@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>论文速读：G3AN - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="论文速读：G3AN">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-24 11:53" pubdate>
+        2020年12月24日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">论文速读：G3AN</h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><blockquote>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_G3AN_Disentangling_Appearance_and_Motion_for_Video_Generation_CVPR_2020_paper.pdf">G3AN: Disentangling Appearance and Motion for Video Generation</a></p>
+</blockquote>
+<p>在推断和建模人类视频的分布时，生成模型面临三个主要挑战:(a)生成不确定运动，(b)在整个生成的视频中保持人类外观，以及(c)建模时空一致性。</p>
+<p>本文提出了一个新的被简化的生成模型<script type="math/tex">G^{3}AN</script>，以学习视频生成因子外观和运动的解纠结表示，允许对两者进行操作。解纠缠表示被定义为单个潜在单位对单个生成因素的变化敏感，而对其他因素的变化相对不变[4]。在这种情况下，我们的G3AN被赋予了一个<strong> three-stream</strong>生成器架构，其中主流编码时空视频表示，由两个辅助流增强，表示独立的生成因子外观和运动。针对高级功能图的<strong>self-attention</strong>机制可确保令人满意的视频质量。</p>
+<p><script type="math/tex">G^{3}AN</script>因此能够通过遵循训练分布而不需要额外的输入来生成逼真的视频(应对挑战(a)和(c))，并且能够分离地操纵外观和运动，同时强调保持外观(挑战(b))。</p>
+<p>本文的技术贡献包括以下内容：</p>
+<ul>
+<li><p>一种新的生成模型G3AN，它试图从人类视频数据中学习生成外观和运动因素的解纠缠表示。这些表示允许对这两个因素进行单独操作。</p>
+</li>
+<li><p>一种新颖的<strong>three-stream</strong>生成器，它同时考虑了个体外观特征(空间流)、运动特征(时间流)和平滑生成的视频(主流)的学习</p>
+</li>
+<li><p>一种新的<strong>factorized spatio-temporal self-attention(F-SA)</strong>被认为是第一个应用于视频生成的<strong>self-attention</strong>模块，用于对全局时空表示进行建模，提高生成视频的质量。</p>
+</li>
+<li><p>广泛的定性和定量评估，证明了G3AN在一系列数据集上系统地、显著地优于最先进的基线。</p>
+</li>
+</ul>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><p>虽然视频生成任务旨在生成真实的时间动态，但这些任务会随着条件作用的水平而变化。我们有基于与运动或外观相关的附加先验的视频生成，相反，视频生成仅遵循训练分布。我们注意到，从建模的角度来看，后者更具挑战性，因为缺少关于例如生成的视频的结构的附加输入。因此，迄今为止的大多数方法都包含某种<strong>条件作用</strong>。</p>
+<p><strong>Video generation from noise</strong>。从噪声中直接生成视频需要捕获数据集分布并对其建模。最接近本文工作的是<strong>MoCoGAN</strong>，它将每一帧的潜在表现分解为运动和内容，旨在控制这两个因素。然而，<strong>MoCoGAN</strong>和<script type="math/tex">G^{3}AN</script>之间有两个关键的区别。首先，<strong>MoCoGAN</strong>不是对每个视频只采样两个噪声矢量，而是采样一系列噪声矢量作为运动，一个固定的噪声作为内容。然而，为每一帧引入随机噪声来表示运动增加了学习难度，因为模型必须将这些噪声向量映射到生成的视频中的连续人体运动。因此，MoCoGAN逐渐忽略输入噪声，并倾向于产生类似的运动。</p>
+<h2 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3.Approach"></a>3.Approach</h2><p>在这项工作中，我们提出了<script type="math/tex">G^{3}AN</script>，一种新颖的GAN架构，旨在从两个噪声矢量<script type="math/tex">z_{a}</script> ∈ <script type="math/tex">Z_{A}</script>和<script type="math/tex">z_{m}</script>∈ <script type="math/tex">Z_{M}</script>(分别代表外观和运动)中以分离的方式生成视频。<script type="math/tex">G^{3}AN</script>由一个三流发生器<strong>G</strong>和一个双流鉴别器<strong>D</strong>组成，如下图所示。<strong>G</strong>的目标是生成能够同时调节外观和运动的视频，而<strong>D</strong>则分别在视频和帧中区分生成的样本和真实数据。</p>
+<p><img src="https://i.loli.net/2020/12/24/DqKO3zug159r7da.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://i.loli.net/2020/12/24/SHYvbkaCuUIN7rw.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="3-1-Generator"><a href="#3-1-Generator" class="headerlink" title="3.1 Generator"></a>3.1 Generator</h3><p>我们在<script type="math/tex">G^{3}</script>模块的层次结构中设计<strong>G</strong>。具体来说，我们有<code>N</code>个层次，表示为<script type="math/tex">G_{n=0...N-1}^{3}</script>。第一个<script type="math/tex">G^{3}</script>模块<script type="math/tex">G_{0}^{3}</script>接受两个噪声矢量<script type="math/tex">z_{a}</script>和<script type="math/tex">z_{m}</script>作为输入。其余模块<script type="math/tex">G_{n=1...N-1}^{3}</script>，继承三个特征映射<script type="math/tex">F_{S_{n-1}}</script>、<script type="math/tex">F_{V_{n-1}}</script>和<script type="math/tex">F_{T_{n-1}}</script>，作为它们来自每个先前<script type="math/tex">G_{n-1}^{3}</script>模块的输入，如上图所示。</p>
+<p>每个<script type="math/tex">G^{3}</script>模块由三个并行流组成:空间流<script type="math/tex">G_{S_{n}}</script>、时间流<script type="math/tex">G_{T_{n}}</script>以及视频流<script type="math/tex">G_{V_{n}}</script>。它们被设计成产生三种不同类型的特征。在上图中用蓝线表示的空间流将n  = 0时的<script type="math/tex">z_{a}</script>和n &gt;  1时的<script type="math/tex">F_{S_{n-1}}</script>作为输入，并通过使用转置的2D卷积层对输入特征进行上采样来生成2D外观特征<script type="math/tex">F_{S_{n}}</script>。这些特征在空间维度上发展，并在所有时间实例中共享。用橙色线表示的时间流<script type="math/tex">G_{T_{n}}</script>接受n  = 0的<script type="math/tex">z_{m}</script>和n &gt;  1的<script type="math/tex">F_{T_{n-1}}</script>作为输入，并试图通过用转置的1D卷积层对输入特征进行上采样来生成1D运动特征<script type="math/tex">F_{T_{n}}</script>。这些特征在时间维度上演化，并包含每个时间步长的全局信息。然后，用黑线表示的视频流<script type="math/tex">G_{V_{n}}</script>将n  = 0的<script type="math/tex">z_{a}</script>、<script type="math/tex">z_{m}</script>和n &gt; 1的<script type="math/tex">F_{V_{n-1}}</script>的连接作为输入。它对时空一致性进行建模，并通过对输入要素进行上采样和因子化转置时空卷积来产生3D联合嵌入<script type="math/tex">F_{V_{n}^{'}}</script>。然后将<script type="math/tex">F_{S_{n}}</script>和<script type="math/tex">F_{T_{n}}</script>弹射到时空融合块，在此与<script type="math/tex">F_{V_{n}^{'}}</script>融合，产生<script type="math/tex">F_{V_{n}}</script>。最后，<script type="math/tex">F_{S_{n}}</script>、<script type="math/tex">F_{T_{n}}</script>和<script type="math/tex">F_{V_{n}}</script>作为下一个分层<script type="math/tex">G_{n+1}^{3}</script>的输入。</p>
+<p>王等人在[40]中提出了<strong>Factorized transposed spatio-temporal convolution</strong>。它明确地将转置的3D卷积分解成两个独立且连续的运算，M个转置的1D时间卷积之后是2D独立的空间卷积，其被称为转置的(1+2)D卷积。这种分解在这两个操作之间带来了额外的非线性激活，并有助于优化。至关重要的是，分解转置的3D卷积产生了视频质量的显著提高</p>
+<p><strong>Spatio-temporal fusion</strong>是学习好解纠缠特征的关键，其输入是来自每个<script type="math/tex">G^{3}</script>模块卷积层的输出特征映射<script type="math/tex">F_{S_{n}}</script>、<script type="math/tex">F_{T_{n}}</script>以及<script type="math/tex">F_{V_{n}^{'}}</script>。融合包含三个步骤(见下图)。首先，分别对<script type="math/tex">F_{T_{n}}</script>和<script type="math/tex">F_{S_{n}}</script>进行空间和时间复制，以获得两个新的特征图<script type="math/tex">F_{T_{n}}^{R}</script>和<script type="math/tex">F_{S_{n}}^{R}</script>。两个新的特征图都具有与<script type="math/tex">F_{V_{n}^{'}}</script>相同的时空大小。接下来，通过位置相加将<script type="math/tex">F_{T_{n}}^{R}</script>和<script type="math/tex">F_{V_{n}^{'}}</script>合并，创建新的时空嵌入<script type="math/tex">F_{V_{n}^{''}}</script>。最后，将<script type="math/tex">F_{S_{n}}^{R}</script>与<script type="math/tex">F_{V_{n}^{''}}</script>通道相连接，获得最终的融合特征图<script type="math/tex">F_{V_{n}}</script>。该功能将<script type="math/tex">F_{S_{n}}</script>、<script type="math/tex">F_{T_{n}}</script>和<script type="math/tex">F_{V_{n}}</script>映射为以下<script type="math/tex">G_{n+1}^{3}</script>模块的输入。</p>
+<p><img src="https://i.loli.net/2020/12/24/5H1inxpkBuYWTyE.png" srcset="/img/loading.gif" alt="image-20201224114926234"></p>
+<p><strong>Factorized spatio-temporal Self-Attention (F-SA)：</strong>在这里，我们结合了一个时空模拟模块，使<strong>G</strong>能够利用来自所有时空特征位置的线索，并对广泛分离的区域之间的关系进行建模。然而，计算3D时空特征地图中每个位置与所有其他位置之间的相关性在计算上非常昂贵，特别是如果它应用于G中的更高特征地图。因此，我们提出了一种新的因子化时空自我注意，即<strong>F-SA</strong>，如下图所示。它由一个时间上的模拟退火算法和一个空间上的模拟退火算法组成。这种因子分解减少了计算的复杂性，允许在更大的特征地图上应用因子分析</p>
+<p><img src="https://i.loli.net/2020/12/24/Wk6O7SocAsxRIum.png" srcset="/img/loading.gif" alt="image-20201224115132598"></p>
+<h3 id="3-2-Discriminator"><a href="#3-2-Discriminator" class="headerlink" title="3.2 Discriminator"></a>3.2 Discriminator</h3><p>为了提高视频和帧质量，类似于MoCoGAN，我们使用了一个双流鉴别器架构，包含一个视频流DV和一个图像流DI。在训练期间，数字视频接受完整的视频作为输入，而双标签从视频中随机抽取帧</p>
+<h2 id="4-Conclusion"><a href="#4-Conclusion" class="headerlink" title="4. Conclusion"></a>4. Conclusion</h2><p>以上。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/">视频生成</a>
+                    
+                      <a class="hover-with-bg" href="/tags/GAN/">GAN</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/25/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB%EF%BC%9ATwoStreamVAN/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文速读：TwoStreamVAN</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/23/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB%EF%BC%9AImaGINator/">
+                        <span class="hidden-mobile">论文速读：ImaGINator</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

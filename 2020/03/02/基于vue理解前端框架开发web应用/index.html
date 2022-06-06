@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>基于vue理解前端框架开发web应用 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基于vue理解前端框架开发web应用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-02 11:47" pubdate>
+        2020年3月2日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于vue理解前端框架开发web应用</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、我为什么写这篇博客？"><a href="#一、我为什么写这篇博客？" class="headerlink" title="一、我为什么写这篇博客？"></a>一、我为什么写这篇博客？</h2><p>我已经入门前端开发大约有了3年时间，从最开始的静态页面编写，到后来的使用ajax开发动态页面，到现在的使用Vue、React、Angular等前端框架开发Web应用，我写过许许多多项目，虽然我的水平依然很一般，但是在不久的将来我可能会告别这段路，这可能会是我写的最后一篇前端有关的文章。</p>
+<p>这篇文章的目的在于帮助只接触过普通的html+css+js开发网页，甚至是Javascript零基础的朋友对目前流行的前端框架如何开发Web应用有所了解。</p>
+<p>在这篇文章中，我会以一个Vue开发基于网易云Api的音乐播放器应用为例，讲解Vue开发中的一些内容，因为我三大框架都有所使用，所以本篇文章讲解的大多数东西都是三大框架相同的地方。</p>
+<blockquote>
+<p>本篇文章不是Vue的基础教程，可能略有涉及，但会用通俗的语言讲解。</p>
+</blockquote>
+<h2 id="二、初步的了解"><a href="#二、初步的了解" class="headerlink" title="二、初步的了解"></a>二、初步的了解</h2><p>因为本篇教程不是讲解Vue，所以对Vue的一些信息不作赘述。</p>
+<h3 id="2-1-使用vue开发和我们上课时用的html-css-js开发前端有什么不同？"><a href="#2-1-使用vue开发和我们上课时用的html-css-js开发前端有什么不同？" class="headerlink" title="2.1 使用vue开发和我们上课时用的html+css+js开发前端有什么不同？"></a>2.1 使用vue开发和我们上课时用的html+css+js开发前端有什么不同？</h3><p>首先理解一个概念，这也是目前市面上流行的大多数前端框架都有的概念——<strong>“组件“</strong></p>
+<p>我们可以用我们软件工程里<strong>“模块”</strong>的概念来理解组件。什么是模块？我们可以理解为实现某一种功能的代码，重点是功能。同理，回想一下平时我们开发页面时，是否是将一整个页面，放在同一个html文件里，这样会导致整个文件非常庞大。但细想一下，我们可以把页面中不同的部分，封装成一个一个组件，比如导航栏，我封装成一个Nav组件，然后Nav组件中，可以有<strong>子组件</strong>（这个应该好理解吧）Search组件，也就是搜索组件。这样下来，整个页面被我们切割成了各个组件，当我们开发时，目录结构十分清晰，代码可读性也很好。</p>
+<h3 id="2-2-Vue开发的优势"><a href="#2-2-Vue开发的优势" class="headerlink" title="2.2 Vue开发的优势"></a>2.2 Vue开发的优势</h3><p>回想一下我们上课时开发的网页，或者你平时在使用大多数网站，是不是在同一个网站里，点击某个跳转按钮，比如说我点击了搜索按钮，他是不是跳转到了一个搜索页面，这个过程中浏览器重新加载了页面。</p>
+<p>Vue开发出来的web应用，是一种<strong>单页应用</strong>，我们先不着急理解什么是单页应用，我先来讲讲在我们使用vue应用中，页面中到底发生了什么，我们得知道有个概念，组件的<strong>生命周期</strong>，因为本篇文章不是Vue教程，所以我就简单讲一下，比如每个人都有出生和死亡，组件也是，比如说当页面刚加载时，某些组件出现，这是这些组件的<strong>“诞生阶段”</strong>，当这些组件从页面中消失（比如点击关闭键关闭某个弹出框），这就是组件的<strong>“死亡阶段“</strong>，我们可以把这些阶段，简单理解为组件的生命周期的阶段，当然，组件的生命周期阶段不止“诞生”和“死亡”，就好比你的一生会有许多重要的阶段。说了那么多<del>废话</del>知识，我们再来理解下什么是单页应用。举例说明，当我们在Vue应用中点击导航栏的菜单切换页面时，页面中发生的事情时，原来的组件都被销毁了，而取而代之的是新的组件被创建了出来，而不像我们之前开发过程中，跳转到了另一个html文件。这样的好处是极大的增加了用户体验，因为用户并不用等待网页加载了，整个使用过程中会感觉十分流畅。</p>
+<h3 id="2-3-Vue的一些原理"><a href="#2-3-Vue的一些原理" class="headerlink" title="2.3 Vue的一些原理"></a>2.3 Vue的一些原理</h3><p>使用vue会让人感到身心愉悦,它同时具备angular和react的优点,轻量级,api简单,文档齐全,简单强大,麻雀虽小五脏俱全。按官方的话来说Vue是一套构建用户界面的渐进式框架。</p>
+<p>那么,怎样理解什么是渐进式框架？在这之前,我们首先要理解什么是框架。在最初的前端开发中，为了完成某个功能,我们需要通过js在HTML页面中获得dom节点，随后获得dom节点中的文本内容或者在dom节点上添加事件,进行一系列的程序操作，但是,如果任务量很大的情况下，代码会随着业务的增加而变得臃肿和混乱,在现实的开发中,负责的逻辑和巨大的开发量，是原生js无法完成的。</p>
+<p>这个时候,开发人员将js代码分为了三个板块,数据(Model),逻辑控制(*),视图(View),数据板块只负责数据部分,视图板块负责更改样式,逻辑控制负责联系视图板块和数据板块,这样子有很大的好处,当需求发生变动时,只需要修改对应的板块就好</p>
+<p><img src="/image/基于vue理解前端框架开发web应用/1.png" srcset="/img/loading.gif" alt=""></p>
+<p>这种开发模式，就是所谓的MV结构，我们现在了解的MVC，MVP，MVVM都是MV的衍生物，对比这几种框架模式，我们会总结出来一个本质的特点，那就是这些开发模式都是让视图和数据间不会发生直接联系．对比用原生JS获得dom的操作，你会发现原生dom流其实是将dom作为数据，从dom中获得Model，随后又更改dom来实现更新视图，视图和模型其实混在一起，所以代码自然混乱，不易维护。</p>
+<h2 id="三、项目解析"><a href="#三、项目解析" class="headerlink" title="三、项目解析"></a>三、项目解析</h2><p>首先，我先来带你看下项目大致的结构目录</p>
+<p><img src="/image/基于vue理解前端框架开发web应用/2.png" srcset="/img/loading.gif" alt=""></p>
+<p>我们大致看一下，各部分分别是干什么的</p>
+<pre>
+├── build                  // 构建服务和 webpack 配置
+├── config                 // 项目不同环境的配置
+├── index.html             // 项目入口文件
+├── package.json           // 项目配置文件
+├── static                 // 放置静态资源
+├── src                    // 生产目录
+│   ├── api                  // api请求
+│   ├── assets               // 公共的images, fonts， js资源
+│   ├── components           // 各种组件
+│   ├── store                // vuex状态管理
+│   ├── App.vue              // 主页面
+│   ├── router               // 路由配置
+│   └── main.js              // Webpack 预编译入口
+</pre>
+
+<p>本文主要以介绍<strong>src</strong>目录下的的目录为主</p>
+<h3 id="3-1-api"><a href="#3-1-api" class="headerlink" title="3.1 api"></a>3.1 api</h3><p>这里我只进行简单的文字说明，具体的代码请自行阅读项目。</p>
+<p><img src="/image/基于vue理解前端框架开发web应用/3.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>可以清楚的看到，api中有两个文件，config.js与index.js</p>
+</blockquote>
+<p><strong>config.js</strong>可以理解为将api定义为常量，这样当我们调用api的时候，就不用繁琐的将一串url输入，而是调用对应的变量名。这样做不仅简便而且代码具有相当高的可读性</p>
+<p><strong>Index.js</strong>里存放着一个个调用api请求的函数，本项目使用npm上的axios进行http请求。如果对此没有基础，可以简单理解为本文件中的一个个函数通过config.js里的api常量，通过http请求获取到相应的数据。</p>
+<h3 id="3-2-assets"><a href="#3-2-assets" class="headerlink" title="3.2 assets"></a>3.2 assets</h3><p><strong>assets</strong>中存放了可以通用的一些资源，比如字体，图片（如网站logo，很多地方都会用到），还有一些util函数</p>
+<h3 id="3-3-components"><a href="#3-3-components" class="headerlink" title="3.3 components"></a>3.3 components</h3><p><strong>Component</strong>即为组件，这个概念在前文已经说的很详细了，就不再过多赘述。</p>
+<p><img src="/image/基于vue理解前端框架开发web应用/4.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>可以清楚的看到，里面放着各个板块相应的组件，其中common是可以用来通用的组件，即不同页面中相同的组件，放在common中便于重用。</p>
+</blockquote>
+<h3 id="3-4-router"><a href="#3-4-router" class="headerlink" title="3.4 router"></a>3.4 router</h3><p>如果你有java开发后端的基础，那对router应该不会陌生</p>
+<p><strong>router（路由）</strong>，其实就是指向的意思，当我点击页面上的home按钮时，页面中就要显示home的内容，如果点击页面上的about 按钮，页面中就要显示about 的内容。Home按钮  =&gt; home 内容， about按钮 =&gt; about 内容，也可以说是一种映射. 所以在页面上有两个部分，一个是点击部分，一个是点击之后，显示内容的部分。 </p>
+<p><img src="/image/基于vue理解前端框架开发web应用/5.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>这是我们访问home页面是，地址栏的url</p>
+</blockquote>
+<p>可以看到，访问时的url，与html+css+js开发网页时有所不同，当我们使用html+css+js开发网页时，地址栏是<code>localhost:3000/home.html</code>这种形式(如果你用过jsp开发，那后面会是.jsp)，因为我们之前说过，当页面跳转时，它的本质是加载不同的html文件，而不是像vue这样，通过路由来控制不同的组件创建与销毁</p>
+<h3 id="3-5-store"><a href="#3-5-store" class="headerlink" title="3.5 store"></a>3.5 store</h3><p>这应该是比较难的一块，涉及到数据管理框架，vue中使用vuex来进行数据管理，如果要细讲vuex，那可能会需要极大的篇幅。</p>
+<p>这里我只会帮助你大致的理解，我们可以把这个store理解为vuex在浏览器中创建的一个数据仓库。</p>
+<p><strong>这样做的好处是什么？</strong></p>
+<p>设想一下，如果我们的web应用，内容比较丰富的时候，许多地方可能会用到重复的数据，那如果没有数据管理，我们会需要在每一次需要数据的时候，都进行http请求获取数据（因为许多组件是不会互通的），这样一来，会大大增加性能开销</p>
+<p>当我们使用vuex后，只需要将获取到可能会重用的数据存入vuex建立的store中，以便下次使用，而且在开发过程中，我们能够通过chrome的插件看到它的内容，也为开发带来许多便利。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上为我对前端框架的一些理解，后续可能会有补充。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/03/%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">快速幂算法详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/01/12/Node-js%E9%A1%B9%E7%9B%AE%E7%BA%BF%E4%B8%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%8F%91%E5%B8%83/">
+                        <span class="hidden-mobile">Node.js项目线上服务器部署与发布</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

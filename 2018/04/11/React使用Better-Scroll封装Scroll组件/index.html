@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>React使用Better-Scroll封装Scroll组件 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="React使用Better-Scroll封装Scroll组件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-04-11 20:06" pubdate>
+        2018年4月11日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">React使用Better-Scroll封装Scroll组件</h1>
+            
+            <div class="markdown-body">
+              <h1 id="React使用Better-Scroll封装Scroll组件"><a href="#React使用Better-Scroll封装Scroll组件" class="headerlink" title="React使用Better-Scroll封装Scroll组件"></a>React使用Better-Scroll封装Scroll组件</h1><p><strong>better-scroll</strong>是一个移动端滚动插件，基于iscroll重写的。普通的网页滚动效果是很死板的，better-scroll具有拉伸、回弹的效果并且滚动的时候具有惯性，很接近原生体验。better-scroll更多相关内容见<a target="_blank" rel="noopener" href="https://github.com/ustbhuangyi/better-scroll">github地址</a><br>相信很多人在vue中都用过better-scroll，因为better-scroll的作者很好的把它运用在了vue中，几乎一说到better-scroll大家就会想到vue(2333~~~)。其实better-scroll是利用原生js编写的，所以在所有使用原生js的框架中几乎都能使用它，这里我将在React中的运用better-scroll<br>首先在<strong>src</strong>目录下新建一个<strong>common</strong>目录用来存放公用的组件，新建<strong>scroll</strong>文件夹，然后在scroll文件夹下新建<strong>Scroll.js</strong>和<strong>scroll.scss文件</strong>。先来分析一下怎么设计这个<strong>Scroll</strong>组件，better-scroll的原理就是外层一个固定高度的元素，这个元素有一个子元素，当子元素的高度超过父元素时就可以发生滚动，那么子元素里面的内容从何而来？React为我们提供了一个props的<strong>children</strong>属性用来获取组件的子组件，这样就可以用<strong>Scroll</strong>组件去包裹需要滚动的内容。在<strong>Scroll</strong>组件内部的列表，会随着增加或减少原生而发生变化，这个时候元素的高度也会发生变化，better-scroll需要重新计算高度，better-scroll为我们提供了一个<strong>refresh</strong>方法用来重新计算以保证正常滚动，组件发生变化会触发React的<strong>componentDidUpdate</strong>周期函数，所以我们在这个函数里面对better-scroll进行刷新操作，同时需要一个props来告诉Scroll是否<strong>refresh</strong>刷新。某些情况下我们需要手动调用Scroll组件去刷新better-scroll，这里对外暴露一个Scroll组件的方法。better-scroll默认是禁止点击的，需要提供一个控制是否点击的props，为了监听滚动Scroll需要对外暴露一个函数，便于使用Scroll的组件监听滚动进行其他操作。当组件销毁时我们把better-scroll绑定的事件取消以及better-scroll实例给销毁掉，释放资源</p>
+<p>安装better-scroll</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">npm install better-<span class="hljs-keyword">scroll</span> --<span class="hljs-keyword">save</span><br></code></pre></td></tr></table></figure>
+<p>对组件的props进行类型检查，这里使用<strong>prop-types</strong>库。类型检查是为了提早发现开发问题，避免一些bug产生</p>
+<p>安装props-types</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">npm install <span class="hljs-keyword">prop</span>-types <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure>
+<p>编写<strong>Scroll</strong>组件</p>
+<p><code>scroll.js</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">import</span> React from <span class="hljs-string">&quot;react&quot;</span><br><span class="hljs-keyword">import</span> ReactDOM from <span class="hljs-string">&quot;react-dom&quot;</span><br><span class="hljs-keyword">import</span> PropTypes from <span class="hljs-string">&quot;prop-types&quot;</span><br><span class="hljs-keyword">import</span> BScroll from <span class="hljs-string">&quot;better-scroll&quot;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./scroll.styl&quot;</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Scroll</span> <span class="hljs-title">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;<br>    componentDidUpdate() &#123;<br>        <span class="hljs-comment">//组件更新后，如果实例化了better-scroll并且需要刷新就调用refresh()函数</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bScroll &amp;&amp; <span class="hljs-keyword">this</span>.props.refresh === <span class="hljs-literal">true</span>) &#123;<br>            <span class="hljs-keyword">this</span>.bScroll.refresh();<br>        &#125;<br>    &#125;<br>    componentDidMount() &#123;<br>        <span class="hljs-keyword">this</span>.scrollView = ReactDOM.findDOMNode(<span class="hljs-keyword">this</span>.refs.scrollView);<br>        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.bScroll) &#123;<br>            <span class="hljs-keyword">this</span>.bScroll = new BScroll(<span class="hljs-keyword">this</span>.scrollView, &#123;<br>                <span class="hljs-comment">//实时派发scroll事件</span><br>                probeType: <span class="hljs-number">3</span>,<br>                click: <span class="hljs-keyword">this</span>.props.click<br>            &#125;);<br><br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onScroll) &#123;<br>                <span class="hljs-keyword">this</span>.bScroll.on(<span class="hljs-string">&quot;scroll&quot;</span>, (scroll) =&gt; &#123;<br>                    <span class="hljs-keyword">this</span>.props.onScroll(scroll);<br>                &#125;);<br>            &#125;<br><br>        &#125;<br>    &#125;<br>    componentWillUnmount() &#123;<br>        <span class="hljs-keyword">this</span>.bScroll.off(<span class="hljs-string">&quot;scroll&quot;</span>);<br>        <span class="hljs-keyword">this</span>.bScroll = <span class="hljs-literal">null</span>;<br>    &#125;<br>    refresh() &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bScroll) &#123;<br>            <span class="hljs-keyword">this</span>.bScroll.refresh();<br>        &#125;<br>    &#125;<br>    render() &#123;<br>        <span class="hljs-keyword">return</span> (<br>            &lt;div className=<span class="hljs-string">&quot;scroll-view&quot;</span> ref=<span class="hljs-string">&quot;scrollView&quot;</span>&gt;<br>                &#123;<span class="hljs-comment">/*获取子组件*/</span>&#125;<br>                &#123;<span class="hljs-keyword">this</span>.props.children&#125;<br>            &lt;/div&gt;<br>        );<br>    &#125;<br>&#125;<br><br>Scroll.defaultProps = &#123;<br>    click: <span class="hljs-literal">true</span>,<br>    refresh: <span class="hljs-literal">false</span>,<br>    onScroll: <span class="hljs-literal">null</span><br>&#125;;<br><br>Scroll.propTypes = &#123;<br>    <span class="hljs-comment">//是否启用点击</span><br>    click: PropTypes.bool,<br>    <span class="hljs-comment">//是否刷新</span><br>    refresh: PropTypes.bool,<br>    onScroll: PropTypes.func<br>&#125;;<br><br>export default Scroll<br></code></pre></td></tr></table></figure>
+<p>上诉代码中<strong>ref</strong>属性来标记div元素，使用<strong>ReactDOM.findDOMNode</strong>函数来获取dom对象，然后传入better-scroll构造函数中初始化。在Scroll组件中调用外部组件的方法只需要把外部组件的函数通过props传入即可，这里就是<strong>onScroll</strong>函数</p>
+<p><code>scroll.scss</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.scroll-view</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;<br>    <span class="hljs-attribute">overflow</span>: hidden;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>scroll.styl中就是一个匹配父容器宽高的样式</p>
+<p>接下来在Recommend组件中加入Scroll组件，导入Scroll组件</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> Scroll <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/common/scroll/Scroll&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>在state中增加<strong>refreshScroll</strong>用来控制Scroll组件是否刷新</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pf">this.<span class="hljs-keyword">state</span> = &#123;<br>    refreshScroll: false<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>使用<strong>Scroll</strong>组件包裹需要的内容</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">&lt;Scroll <span class="hljs-built_in">ref</span>resh=&#123;<span class="hljs-keyword">this</span>.state.<span class="hljs-built_in">ref</span>reshScroll&#125;&gt;<br>	<span class="hljs-comment">// 我是内容啊</span><br>&lt;/Scroll&gt;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/05/01/h5%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%BF%9B%E5%BA%A6%E6%9D%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">h5触摸事件实现移动端进度条</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/03/18/hexo%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%83%A8%E7%BD%B2/">
+                        <span class="hidden-mobile">hexo的使用与部署</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>V8引擎的垃圾回收机制 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="V8引擎的垃圾回收机制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-10 21:17" pubdate>
+        2022年3月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">V8引擎的垃圾回收机制</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、Javascript内存管理"><a href="#一、Javascript内存管理" class="headerlink" title="一、Javascript内存管理"></a>一、Javascript内存管理</h2><p>JavaScript内存的流程很简单，分为3步：</p>
+<ol>
+<li>分配给<strong>使用者</strong>所需的内存</li>
+<li><strong>使用者</strong>拿到这些内存，并使用内存</li>
+<li><strong>使用者</strong>不需要这些内存了，释放并归还给系统</li>
+</ol>
+<p>那么这些使用者是谁呢？举个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> num = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Zh&#x27;</span><br><br><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Zh&#x27;</span> &#125;<br>obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Zh&#x27;</span> &#125;<br></code></pre></td></tr></table></figure><br>上面这些num，str，obj就是就是使用者，我们都知道，JavaScript数据类型分为基础数据类型和引用数据类型:</p>
+<ul>
+<li>基础数据类型：拥有固定的大小，值保存在栈内存里，可以通过值直接访问</li>
+<li>引用数据类型：大小不固定(可以加属性)，栈内存中存着指针，指向堆内存中的对象空间，通过引用来访问</li>
+</ul>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220310195900386.png" srcset="/img/loading.gif" alt="image-20220310195900386"></p>
+<ul>
+<li>由于栈内存所存的基础数据类型大小是固定的，所以栈内存的内存都是操作系统自动分配和释放回收的</li>
+<li>由于堆内存所存大小不固定，系统无法自动释放回收，所以需要JS引擎来手动释放这些内存<h2 id="二、V8引擎的垃圾回收机制"><a href="#二、V8引擎的垃圾回收机制" class="headerlink" title="二、V8引擎的垃圾回收机制"></a>二、V8引擎的垃圾回收机制</h2><h3 id="为何需要垃圾回收"><a href="#为何需要垃圾回收" class="headerlink" title="为何需要垃圾回收"></a>为何需要垃圾回收</h3>在Chrome中，V8被限制了内存的使用（<strong>64位约1.4G/1464MB</strong> ，<strong> 32位约0.7G/732MB</strong>），为什么要限制呢？</li>
+<li>表层原因：V8最初为浏览器而设计，不太可能遇到用大量内存的场景</li>
+<li>深层原因：V8的垃圾回收机制的限制（如果清理大量的内存垃圾是很耗时间，这样回引起JavaScript线程暂停执行的时间，那么性能和应用直线下降）</li>
+</ul>
+<h2 id="三、V8引擎的垃圾回收算法"><a href="#三、V8引擎的垃圾回收算法" class="headerlink" title="三、V8引擎的垃圾回收算法"></a>三、V8引擎的垃圾回收算法</h2><h3 id="1-分代回收"><a href="#1-分代回收" class="headerlink" title="1.分代回收"></a>1.分代回收</h3><p>在JavaScript中，对象存活周期分为两种情况。</p>
+<ul>
+<li>存活周期很短：经过一次垃圾回收后，就被释放回收掉</li>
+<li>存活周期很长：经过多次垃圾回收后，他还存在，赖着不走</li>
+</ul>
+<p>那么问题来了，对于存活周期短的，回收掉就算了，但对于存活周期长的，多次回收都回收不掉，明知回收不掉，却还不断地去做回收无用功，那岂不是很消耗性能？</p>
+<p>对于这个问题，V8做了<strong>分代回收</strong>的优化方法，通俗点说就是：<strong>V8将堆分为两个空间，一个叫新生代，一个叫老生代，新生代是存放存活周期短对象的地方，老生代是存放存活周期长对象的地方</strong></p>
+<p>新生代通常只有<code>1-8M</code>的容量，而老生代的容量就大很多了。对于这两块区域，V8分别使用了<strong>不同的垃圾回收器和不同的回收算法</strong>，以便更高效地实施垃圾回收</p>
+<p><code>副垃圾回收器 + Scavenge算法</code>：主要负责新生代的垃圾回收<br><code>主垃圾回收器 + Mark-Sweep &amp;&amp; Mark-Compact算法</code>：主要负责老生代的垃圾回收</p>
+<h3 id="1-1-新生代"><a href="#1-1-新生代" class="headerlink" title="1.1 新生代"></a>1.1 新生代</h3><p>在JavaScript中，任何对象的声明分配到的内存，将会先被放置在新生代中，而因为大部分对象在内存中存活的周期很短，所以需要一个效率非常高的算法。在新生代中，主要使用<code>Scavenge</code>算法进行垃圾回收，<code>Scavenge</code>算法是一个典型的牺牲空间换取时间的复制算法，在占用空间不大的场景上非常适用。<br><code>Scavange</code>算法将新生代堆分为两部分，分别叫<code>from-space</code>和<code>to-space</code>，工作方式也很简单，就是将<code>from-space</code>中存活的活动对象复制到<code>to-space</code>中，并将这些对象的内存有序的排列起来，然后将<code>from-space</code>中的非活动对象的内存进行释放，完成之后，将<code>from space</code> 和<code>to space</code>进行互换，这样可以使得新生代中的这两块区域可以重复利用。</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/image-20220310205820365.png" srcset="/img/loading.gif" alt="image-20220310205820365"></p>
+<p>具体步骤为以下4步：</p>
+<ol>
+<li>标记活动对象和非活动对象</li>
+<li>复制<code>from-space</code>的活动对象到<code>to-space</code>中并进行排序</li>
+<li>清除<code>from-space</code>中的非活动对象</li>
+<li>将<code>from-space</code>和<code>to-space</code>进行角色互换，以便下一次的<code>Scavenge</code>算法垃圾回收</li>
+</ol>
+<p>那么，垃圾回收器是怎么知道哪些对象是活动对象，哪些是非活动对象呢？</p>
+<p>这就要不得不提一个东西了——<code>可达性</code>。什么是可达性呢？就是从初始的<code>根对象（window或者global）</code>的指针开始，向下搜索子节点，子节点被搜索到了，说明该子节点的引用对象可达，并为其进行标记，然后接着递归搜索，直到所有子节点被遍历结束。那么没有被遍历到节点，也就没有被标记，也就会被当成没有被任何地方引用，就可以证明这是一个需要被释放内存的对象，可以被垃圾回收器回收。</p>
+<p>新生代中的对象什么时候变成老生代的对象？</p>
+<p>在新生代中，还进一步进行了细分。分为<code>nursery子代</code>和<code>intermediate</code>子代两个区域，一个对象第一次分配内存时会被分配到新生代中的<code>nursery子代</code>，如果经过下一次垃圾回收这个对象还存在新生代中，这时候我们将此对象移动到<code>intermediate子代</code>，在经过下一次垃圾回收，如果这个对象还在新生代中，副垃圾回收器会将该对象移动到老生代中，这个移动的过程被称为<code>晋升</code></p>
+<h3 id="1-2老生代"><a href="#1-2老生代" class="headerlink" title="1.2老生代"></a>1.2老生代</h3><p>新生代空间的对象，身经百战之后，留下来的老对象，成功晋升到了老生代空间里，由于这些对象都是经过多次回收过程但是没有被回收走的，都是一群生命力顽强，存活率高的对象，所以老生代里，回收算法不宜使用<code>Scavenge</code>算法，为啥呢，有以下原因：</p>
+<ul>
+<li>cavenge`算法是复制算法，反复复制这些存活率高的对象，没什么意义，效率极低</li>
+<li>cavenge<code>算法是以空间换时间的算法，老生代是内存很大的空间，如果使用</code>Scavenge`法，空间资源非常浪费，得不偿失啊。。</li>
+</ul>
+<p>所以老生代里使用了Mark-Sweep算法(标记清理)和Mark-Compact算法(标记整理)</p>
+<h3 id="Mark-Sweep-标记清理"><a href="#Mark-Sweep-标记清理" class="headerlink" title="Mark-Sweep(标记清理)"></a>Mark-Sweep(标记清理)</h3><p><code>Mark-Sweep</code>两个阶段，标记和清理阶段，之前的<code>Scavenge算法</code>标记和清理，但是<code>Mark-Sweep算法</code>跟Scavenge算法的区别是，后者需要复制后再清理，前者不需要，<code>Mark-Sweep</code>直接标记活动对象和非活动对象之后，就直接执行清理了。</p>
+<ul>
+<li>标记阶段：对老生代对象进行第一次扫描，对活动对象进行标记</li>
+<li>清理阶段：对老生代对象进行第二次扫描，清除未标记的对象，即非活动对象<br><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/e8767d07d348429d8205e33c77637c0f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></li>
+</ul>
+<p>由上图，我想大家也发现了，有一个问题：清除非活动对象之后，留下了很多零零散散的空位。</p>
+<h3 id="Mark-Compact-标记整理"><a href="#Mark-Compact-标记整理" class="headerlink" title="Mark-Compact(标记整理)"></a>Mark-Compact(标记整理)</h3><p><code>Mark-Sweep算法</code>执行垃圾回收之后，留下了很多<code>零零散散的空位</code>，这有什么坏处呢？如果此时进来了一个大对象，需要对此对象分配一个大内存，先从<code>零零散散的空位</code>中找位置，找了一圈，发现没有适合自己大小的空位，只好拼在了最后，这个寻找空位的过程是耗性能的，这也是<code>Mark-Sweep算法</code>的一个缺点<br>这个时候<code>Mark-Compact算法</code>出现了，他是<code>Mark-Sweep算法</code>的加强版，在Mark-Sweep算法的基础上，加上了<code>整理阶段</code>，每次清理完非活动对象，就会把剩下的活动对象，整理到内存的一侧，整理完成后，直接回收掉边界上的内存</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/f7da553309a04432ba93840a1c06ca36~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></p>
+<h3 id="2-全停顿-Stop-The-World"><a href="#2-全停顿-Stop-The-World" class="headerlink" title="2. 全停顿(Stop-The-World)"></a>2. 全停顿(Stop-The-World)</h3><p>说完V8的分代回收，咱们来聊聊一个问题。JS代码的运行要用到JS引擎，垃圾回收也要用到JS引擎，那如果这两者同时进行了，发生冲突了咋办呢？答案是，<code>垃圾回收优先于代码执行</code>，会先停止代码的执行，等到垃圾回收完毕，再执行JS代码。这个过程，称为<code>全停顿</code></p>
+<p>由于新生代空间小，并且存活对象少，再配合<code>Scavenge算法</code>顿时间较短。但是老生代就不一样了，某些情况活动对象比较多的时候，停顿时间就会较长，使得页面出现了<code>卡顿现象</code></p>
+<h3 id="3-Orinoco优化"><a href="#3-Orinoco优化" class="headerlink" title="3. Orinoco优化"></a>3. Orinoco优化</h3><p>orinoco为V8的垃圾回收器的项目代号，为了提升用户体验，解决<code>全停顿问题</code>,它提出了<code>增量标记、懒性清理、并发、并行</code>的优化方法。</p>
+<h3 id="3-1-增量标记-Incremental-marking"><a href="#3-1-增量标记-Incremental-marking" class="headerlink" title="3.1 增量标记(Incremental marking)"></a>3.1 增量标记(Incremental marking)</h3><p>咱们前面不断强调了<code>先标记，后清除</code>，而增量标记就是在<code>标记</code>这个阶段进行了优化。我举个生动的例子：路上有很多<code>垃圾</code>，害得<code>路人</code>都走不了路，需要<code>清洁工</code>打扫干净才能走。前几天路上的垃圾都比较少，所以路人们都等到清洁工全部清理干净才通过，但是后几天垃圾越来越多，清洁工清理的太久了，路人就等不及了，跟清洁工说：“你打扫一段，我就走一段，这样效率高”。</p>
+<p>大家把上面例子里，<code>清洁工清理垃圾的过程——标记过程，路人——JS代码</code>，一一对应就懂了。当垃圾少量时不会做增量标记优化，但是当垃圾达到一定数量时，增量标记就会开启：<code>标记一点，JS代码运行一段</code>，从而提高效率</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/a5719b8cec604c98b5d55a39df776fb7~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></p>
+<h3 id="3-2-惰性清理-Lazy-sweeping"><a href="#3-2-惰性清理-Lazy-sweeping" class="headerlink" title="3.2 惰性清理(Lazy sweeping)"></a>3.2 惰性清理(Lazy sweeping)</h3><p>上面说了，增量标记只是针对<code>标记</code>阶段，而惰性清理就是针对<code>清除</code>阶段了。在增量标记之后，要进行清理非活动对象的时候，垃圾回收器发现了其实就算是不清理，剩余的空间也足以让JS代码跑起来，所以就<code>延迟了清理</code>，让JS代码先执行，或者<code>只清理部分垃圾</code>，而不清理全部。这个优化就叫做<code>惰性清理</code><br>整理标记和惰性清理的出现，大大改善了<code>全停顿</code>现象。但是问题也来了：增量标记是<code>标记一点，JS运行一段</code>，那如果你前脚刚标记一个对象为活动对象，后脚JS代码就把此对象设置为非活动对象，或者反过来，前脚没有标记一个对象为活动对象，后脚JS代码就把此对象设置为活动对象。总结起来就是：标记和代码执行的穿插，有可能造成<code>对象引用改变，标记错误</code>现象。这就需要使用<code>写屏障</code>技术来记录这些引用关系的变化</p>
+<h3 id="3-3-并发-Concurrent"><a href="#3-3-并发-Concurrent" class="headerlink" title="3.3 并发(Concurrent)"></a>3.3 并发(Concurrent)</h3><p>并发式GC允许在在垃圾回收的同时不需要将主线程挂起，两者可以同时进行，只有在个别时候需要短暂停下来让垃圾回收器做一些特殊的操作。但是这种方式也要面对增量回收的问题，就是在垃圾回收过程中，由于JavaScript代码在执行，堆中的对象的引用关系随时可能会变化，所以也要进行<code>写屏障</code>操作。</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/204846e6d5614529b71bc67114c2b6df~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></p>
+<h3 id="3-4-并行"><a href="#3-4-并行" class="headerlink" title="3.4 并行"></a>3.4 并行</h3><p>并行式GC允许主线程和辅助线程同时执行同样的GC工作，这样可以让辅助线程来分担主线程的GC工作，使得垃圾回收所耗费的时间等于总时间除以参与的线程数量（加上一些同步开销）。</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/d55ad43196a34c8b996aa21f2e1dabf7~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></p>
+<h2 id="V8当前的垃圾回收机制"><a href="#V8当前的垃圾回收机制" class="headerlink" title="V8当前的垃圾回收机制"></a>V8当前的垃圾回收机制</h2><p>2011年，V8应用了<code>增量标记机制</code>。直至2018年，Chrome64和Node.js V10启动<code>并发标记（Concurrent）</code>，同时在并发的基础上添加<code>并行（Parallel）技术</code>，使得垃圾回收时间大幅度缩短。</p>
+<h3 id="副垃圾回收器"><a href="#副垃圾回收器" class="headerlink" title="副垃圾回收器"></a>副垃圾回收器</h3><p>V8在新生代垃圾回收中，使用并行（parallel）机制，在整理排序阶段，也就是将活动对象从<code>from-to</code>复制到<code>space-to</code>的时候，启用多个辅助线程，并行的进行整理。由于多个线程竞争一个新生代的堆的内存资源，可能出现有某个活动对象被多个线程进行复制操作的问题，为了解决这个问题，V8在第一个线程对活动对象进行复制并且复制完成后，都必须去维护复制这个活动对象后的指针转发地址，以便于其他协助线程可以找到该活动对象后可以判断该活动对象是否已被复制。</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/ca66013ea62f4637bd57744a5e62326f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></p>
+<h3 id="主垃圾回收器"><a href="#主垃圾回收器" class="headerlink" title="主垃圾回收器"></a>主垃圾回收器</h3><p>V8在老生代垃圾回收中，如果堆中的内存大小超过某个阈值之后，会启用并发（Concurrent）标记任务。每个辅助线程都会去追踪每个标记到的对象的指针以及对这个对象的引用，而在JavaScript代码执行时候，并发标记也在后台的辅助进程中进行，当堆中的某个对象指针被JavaScript代码修改的时候，<code>写屏障（write barriers）</code>技术会在辅助线程在进行并发标记的时候进行追踪。</p>
+<p>当并发标记完成或者动态分配的内存到达极限的时候，主线程会执行最终的快速标记步骤，这个时候主线程会挂起，主线程会再一次的扫描根集以确保所有的对象都完成了标记，由于辅助线程已经标记过活动对象，主线程的本次扫描只是进行check操作，确认完成之后，某些辅助线程会进行清理内存操作，某些辅助进程会进行内存整理操作，由于都是并发的，并不会影响主线程JavaScript代码的执行。</p>
+<p><img src="https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/97a854ba9a464ba8adf143a5612ad91c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" srcset="/img/loading.gif" alt="image.png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Javascript/">Javascript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/V8/">V8</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">垃圾回收机制</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/19/Javascript%E4%BC%AA%E6%95%B0%E7%BB%84%E4%B8%8Earguments/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Javascript伪数组与arguments</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/10/Javascript%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
+                        <span class="hidden-mobile">Javascript如何避免内存泄漏</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

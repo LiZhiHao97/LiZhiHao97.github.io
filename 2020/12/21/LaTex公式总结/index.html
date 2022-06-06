@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>LaTex公式总结 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LaTex公式总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-21 21:18" pubdate>
+        2020年12月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      62
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LaTex公式总结</h1>
+            
+            <div class="markdown-body">
+              <p>本文转载自<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/22117d964baf">简书</a></p>
+<h3 id="Markdown中的LaTeX格式"><a href="#Markdown中的LaTeX格式" class="headerlink" title="Markdown中的LaTeX格式"></a>Markdown中的LaTeX格式</h3><p>大部分情况下，我对于latex的数学公式都是内嵌于Markdown文本编辑器中的，分为两种形式</p>
+<ol>
+<li>行内公式排版：</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>c = \sqrt&#123;a^&#123;<span class="hljs-number">2</span>&#125;+b_&#123;<span class="hljs-number">0</span>&#125;^&#123;<span class="hljs-number">2</span>&#125;+e^&#123;x&#125;&#125; $<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=c%20%3D%20%5Csqrt%7Ba%5E%7B2%7D%2Bb_%7B0%7D%5E%7B2%7D%2Be%5E%7Bx%7D%7D" srcset="/img/loading.gif" alt="c = \sqrt{a^{2}+b_{0}^{2}+e^{x}}"></p>
+<ol>
+<li>块公式排版：</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span> c = \sqrt&#123;a^&#123;<span class="hljs-number">2</span>&#125;+b_&#123;<span class="hljs-number">0</span>&#125;^&#123;<span class="hljs-number">2</span>&#125; +e^&#123;x&#125;&#125; <span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=c%20%3D%20%5Csqrt%7Ba%5E%7B2%7D%2Bb_%7B0%7D%5E%7B2%7D%20%2Be%5E%7Bx%7D%7D" srcset="/img/loading.gif" alt="c = \sqrt{a^{2}+b_{0}^{2} +e^{x}}"></p>
+<h3 id="LaTex的数学公式基本规则"><a href="#LaTex的数学公式基本规则" class="headerlink" title="LaTex的数学公式基本规则"></a>LaTex的数学公式基本规则</h3><ol>
+<li>转义</li>
+</ol>
+<blockquote>
+<p>以下几个字符: # $ % &amp; ~ _ ^ \ { }有特殊意义，需要表示这些字符时，需要转义，即在每个字符前加上\（转义字符的具体含义下面会解释）<br><img src="/image/LaTex/1.jpg" srcset="/img/loading.gif" alt=""></p>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>不知为何简书不支持~的表示，需要时写作\sim</p>
+<p>\boxed命令给公式加一个方框。\fbox具有类似功能<br> \mathbf将字体加粗<br> \boldsymbol将字体斜体且加粗</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$E</span> = mc^<span class="hljs-number">2</span> <span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$ </span>\boxed&#123;E=mc^<span class="hljs-number">2</span>&#125; <span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$\</span>fbox&#123;E=mc^<span class="hljs-number">2</span>&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$\</span>mathbf&#123;E = mc^<span class="hljs-number">2</span>&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$\</span>boldsymbol&#123;E = mc^<span class="hljs-number">2</span>&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=E%20%3D%20mc%5E2" srcset="/img/loading.gif" alt="E = mc^2"><br> <img src="https://math.jianshu.com/math?formula=%5Cboxed%7BE%3Dmc%5E2%7D" srcset="/img/loading.gif" alt="\boxed{E=mc^2}"><br> <img src="https://math.jianshu.com/math?formula=%5Cfbox%7BE%3Dmc%5E2%7D" srcset="/img/loading.gif" alt="\fbox{E=mc^2}"><br> <img src="https://math.jianshu.com/math?formula=%5Cmathbf%7BE%20%3D%20mc%5E2%7D" srcset="/img/loading.gif" alt="\mathbf{E = mc^2}"><br> <img src="https://math.jianshu.com/math?formula=%5Cboldsymbol%7BE%20%3D%20mc%5E2%7D" srcset="/img/loading.gif" alt="\boldsymbol{E = mc^2}"></p>
+<ol>
+<li>希腊字母与特殊字符</li>
+</ol>
+<p><img src="/image/LaTex/2.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="/image/LaTex/3.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="/image/LaTex/4.jpg" srcset="/img/loading.gif" alt=""></p>
+<ol>
+<li>上下标及常用符号</li>
+</ol>
+<blockquote>
+<p>用^来表示上标<br> 用_来表示下标<br> 根号用\sqrt表示</p>
+</blockquote>
+<p>注意：这些有特殊含义的表示中（不限于这三种内容），如果超过一个字符或符号，需要用{}括起来。</p>
+<p>对角标的使用中，如果角标位置看起来不明显时，可以强制改变角标大小或层次，如下所示：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$y_N</span>, y_&#123;_N&#125;,$<br></code></pre></td></tr></table></figure>
+<p>显示为：<br> <img src="https://math.jianshu.com/math?formula=y_N%2C%20y_%7B_N%7D%2C" srcset="/img/loading.gif" alt="y_N, y_{_N},"></p>
+<p>第一种输出为正常输出，但输出效果不明显；第二种是将一级角标改为二级角标，字体也自动变为二级角标字体</p>
+<p>当需要在左右两边都有上下标，可以用 \sideset 命令</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span> \sideset&#123;^<span class="hljs-number">1_2</span>&#125;&#123;^<span class="hljs-number">3_4</span>&#125;\bigotimes <span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Csideset%7B%5E1_2%7D%7B%5E3_4%7D%5Cbigotimes" srcset="/img/loading.gif" alt="\sideset{^1_2}{^3_4}\bigotimes"></p>
+<p>\sqrt[开方次数，默认为2]{开方公式}， 例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">$$ x_&#123;k&#125;^<span class="hljs-number">2</span>\quad \sqrt&#123;x&#125;\quad \sqrt[<span class="hljs-number">3</span>]&#123;x+y&#125; $$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=x_%7Bk%7D%5E2%5Cquad%20%5Csqrt%7Bx%7D%5Cquad%20%5Csqrt%5B3%5D%7Bx%2By%7D" srcset="/img/loading.gif" alt="x_{k}^2\quad \sqrt{x}\quad \sqrt[3]{x+y}"></p>
+<blockquote>
+<p>公式中插入文本\text{}或\mbox{}，建议使用前者，它对于latex内置的\mbox{}的优势在于它可以根据当前位置自动调整文本样式（尤其是大小），而\mbox采用统一的正文样式。这一点在你的文本被用作上下标的时候非常重要。</p>
+</blockquote>
+<p><img src="https://math.jianshu.com/math?formula=y%20%3D%20x%5E2%20%5Cmbox%7B(%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0" srcset="/img/loading.gif" alt="y = x^2 \mbox{(二次函数)}">%7D)</p>
+<blockquote>
+<p>公式中插入空格，间隔效果如下表：</p>
+</blockquote>
+<p><img src="/image/LaTex/5.jpg" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>若需要显示更大或更小的字符，在符号前插入 \large 或 \small 命令</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$A</span>\large  A  \small A$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=A%5Clarge%20A%20%5Csmall%20A" srcset="/img/loading.gif" alt="A\large A \small A"></p>
+<blockquote>
+<p>省略号\dots, \cdots,\vdots \ddots表示，\cdot常表示点乘，\vots是竖直方向的，\ddots是斜线方向的</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span> x_1, x_2, \dots, x_n\quad <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,\cdots,n\quad \vdots\quad \ddots <span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=x_1%2C%20x_2%2C%20%5Cdots%2C%20x_n%5Cquad%201%2C2%2C%5Ccdots%2Cn%5Cquad%20%5Cvdots%5Cquad%20%5Cddots" srcset="/img/loading.gif" alt="x_1, x_2, \dots, x_n\quad 1,2,\cdots,n\quad \vdots\quad \ddots"></p>
+<blockquote>
+<p>关系符如下表所示</p>
+</blockquote>
+<p><img src="/image/LaTex/6.jpg" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>其他常用符号</p>
+</blockquote>
+<p><img src="/image/LaTex/7.jpg" srcset="/img/loading.gif" alt=""></p>
+<ol>
+<li>分数与组合数</li>
+</ol>
+<blockquote>
+<p>分数用\frac{分子}{分母}表示，\cfrac用于连分数表示(这样相较于\frac不会产生字体自动缩小的问题)</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$x</span> = a _ <span class="hljs-number">0</span> + \cfrac &#123;<span class="hljs-number">1</span>&#125; &#123;a _ <span class="hljs-number">1</span><br>          + \cfrac &#123;<span class="hljs-number">1</span>&#125; &#123;a _ <span class="hljs-number">2</span><br>          + \cfrac &#123;<span class="hljs-number">1</span>&#125; &#123;a _ <span class="hljs-number">3</span> + \cfrac &#123;<span class="hljs-number">1</span>&#125; &#123;a _ <span class="hljs-number">4</span>&#125; &#125; &#125; &#125; <br>$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=x%20%3D%20a%20_%200%20%2B%20%5Ccfrac%20%7B1%7D%20%7Ba%20_%201%20%2B%20%5Ccfrac%20%7B1%7D%20%7Ba%20_%202%20%2B%20%5Ccfrac%20%7B1%7D%20%7Ba%20_%203%20%2B%20%5Ccfrac%20%7B1%7D%20%7Ba%20_%204%7D%20%7D%20%7D%20%7D" srcset="/img/loading.gif" alt="x = a _ 0 + \cfrac {1} {a _ 1 + \cfrac {1} {a _ 2 + \cfrac {1} {a _ 3 + \cfrac {1} {a _ 4} } } }"></p>
+<p>字号工具环境设置：<br> \dfrac命令把字号设置为独立公式中的大小；<br> \tfrac则把字号设置为行间公式中的大小。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\frac&#123;<span class="hljs-number">1</span>&#125;&#123;<span class="hljs-number">2</span>&#125; \dfrac&#123;<span class="hljs-number">1</span>&#125;&#123;<span class="hljs-number">2</span>&#125; <span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cfrac%7B1%7D%7B2%7D%20%5Cdfrac%7B1%7D%7B2%7D" srcset="/img/loading.gif" alt="\frac{1}{2} \dfrac{1}{2}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span> \frac&#123;<span class="hljs-number">1</span>&#125;&#123;<span class="hljs-number">2</span>&#125; \tfrac&#123;<span class="hljs-number">1</span>&#125;&#123;<span class="hljs-number">2</span>&#125; <span class="hljs-variable">$$</span> <br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cfrac%7B1%7D%7B2%7D%20%5Ctfrac%7B1%7D%7B2%7D" srcset="/img/loading.gif" alt="\frac{1}{2} \tfrac{1}{2}"></p>
+<blockquote>
+<p>组合数用法与分数类似，在命令前加d和t也能达到分数字号设置同样的功能</p>
+</blockquote>
+<p>\binom{233}{x^2}<img src="https://math.jianshu.com/math?formula=%5Cbinom%7B233%7D%7Bx%5E2%7D" srcset="/img/loading.gif" alt="\binom{233}{x^2}"></p>
+<ol>
+<li>运算符</li>
+</ol>
+<blockquote>
+<p>基本加减乘除等于 +-*/= 可以直接输入<br> 特殊运算则用以下特殊命令\pm; \times; \div; \cdot; \cap; \cup; \geq; \leq; \neq; \approx; \equiv<br> <img src="https://math.jianshu.com/math?formula=%5Cpm%5C%3B%20%5Ctimes%5C%3B%20%5Cdiv%5C%3B%20%5Ccdot%5C%3B%20%5Ccap%5C%3B%20%5Ccup%5C%3B%20%5Cgeq%5C%3B%20%5Cleq%5C%3B%20%5Cneq%5C%3B%20%5Capprox%5C%3B%20%5Cequiv" srcset="/img/loading.gif" alt="\pm\; \times\; \div\; \cdot\; \cap\; \cup\; \geq\; \leq\; \neq\; \approx\; \equiv"><br> 在此之上，如果想要使用堆积符号有以下三种形式</p>
+</blockquote>
+<ul>
+<li>\stackrel{上位符号}{基位符号} 基位符号大，上位符号小</li>
+<li>{上位公式\atop 下位公式} 上下符号一样大</li>
+<li>{上位公式\choose 下位公式} 上下符号一样大；上下符号被包括在圆弧内</li>
+</ul>
+<p><img src="https://math.jianshu.com/math?formula=%5Cvec%7Bx%7D%5Cstackrel%7B%5Cmathrm%7Bdef%7D%7D%7B%3D%7D%7Bx_1%2C%5Cdots%2Cx_n%7D%5C%5C%20%5Csum_%7Bk_0%2Ck_1%2C%5Cldots%3E0%20%5Catop%20k_0%2Bk_1%2B%5Ccdots%3Dn%7D%5C%5CA_%7Bk_0%7DA_%7Bk_1%7D%5Ccdots%7Bn%2B1%20%5Cchoose%20k%7D%3D%7Bn%20%5Cchoose%20k%7D%2B%7Bn%20%5Cchoose%20k-1%7D%5C%5C" srcset="/img/loading.gif" alt="\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}\\ \sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}\\A_{k_0}A_{k_1}\cdots{n+1 \choose k}={n \choose k}+{n \choose k-1}\\"></p>
+<blockquote>
+<p>和、积、极限、积分等运算符用\sum, \prod, \lim, \int,这些公式在行内公式被压缩，以适应行高，可以通过\limits和\nolimits命令其是否压缩。<br> <img src="https://math.jianshu.com/math?formula=%5Csum%2C%20%5Cprod%2C%20%5Clim%2C%20%5Cint" srcset="/img/loading.gif" alt="\sum, \prod, \lim, \int"></p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\sum_&#123;i=<span class="hljs-number">1</span>&#125;^n i <span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$ </span>\prod_&#123;i=<span class="hljs-number">1</span>&#125;^n i<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$\</span>lim_&#123;x\to0&#125;x^<span class="hljs-number">2</span> <span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$\</span>int_&#123;a&#125;^&#123;b&#125;x^<span class="hljs-number">2</span> dx <span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$\</span>sum\nolimits_&#123;i=<span class="hljs-number">1</span>&#125;^n i \quad\prod\nolimits_&#123;i=<span class="hljs-number">1</span>&#125;^n i<br>\quad<br>\lim\nolimits_&#123;x\to0&#125;x^<span class="hljs-number">2</span> \quad\int\limits_&#123;a&#125;^&#123;b&#125;x^<span class="hljs-number">2</span> dx <br>$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Csum_%7Bi%3D1%7D%5En%20i%20%5Cquad%20%5Cprod_%7Bi%3D1%7D%5En%20%5Cquad%5Clim_%7Bx%5Cto0%7Dx%5E2%20%5Cquad%5Cint_%7Ba%7D%5E%7Bb%7Dx%5E2%20dx" srcset="/img/loading.gif" alt="\sum_{i=1}^n i \quad \prod_{i=1}^n \quad\lim_{x\to0}x^2 \quad\int_{a}^{b}x^2 dx"><br> <img src="https://math.jianshu.com/math?formula=%5Csum%5Cnolimits_%7Bi%3D1%7D%5En%20i%20%5Cquad%5Cprod%5Cnolimits_%7Bi%3D1%7D%5En%20i%20%5Cquad%20%5Clim%5Cnolimits_%7Bx%5Cto0%7Dx%5E2%20%5Cquad%5Cint%5Climits_%7Ba%7D%5E%7Bb%7Dx%5E2%20dx" srcset="/img/loading.gif" alt="\sum\nolimits_{i=1}^n i \quad\prod\nolimits_{i=1}^n i \quad \lim\nolimits_{x\to0}x^2 \quad\int\limits_{a}^{b}x^2 dx"></p>
+<ol>
+<li>积分及箭头</li>
+</ol>
+<blockquote>
+<p>积分符号使用如下形式：\int、\iint、\iiint、\iiiint、\idotsint</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">$$ \<span class="hljs-type">int</span> \<span class="hljs-type">int</span> \quad \<span class="hljs-type">int</span> \<span class="hljs-type">int</span> \<span class="hljs-type">int</span> \quad <br> \<span class="hljs-type">int</span> \<span class="hljs-type">int</span> \<span class="hljs-type">int</span> \<span class="hljs-type">int</span> \quad \<span class="hljs-type">int</span> \dots（表示...） \<span class="hljs-type">int</span> $$<br><br>$$ \iint \quad \iiint \quad \iiiint \quad \idotsint $$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cint%20%5Cint%20%5Cquad%20%5Cint%20%5Cint%20%5Cint%20%5Cquad%20%5Cint%20%5Cint%20%5Cint%20%5Cint%20%5Cquad%20%5Cint%20%5Cdots%20%5Cint" srcset="/img/loading.gif" alt="\int \int \quad \int \int \int \quad \int \int \int \int \quad \int \dots \int"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Ciint%20%5Cquad%20%5Ciiint%20%5Cquad%20%5Ciiiint%20%5Cquad%20%5Cidotsint" srcset="/img/loading.gif" alt="\iint \quad \iiint \quad \iiiint \quad \idotsint"></p>
+<blockquote>
+<p>箭头的种类过于繁多，这里不就一一列举了，但是箭头符号的名字很有规律，一般命名规则为方向+箭头种类：</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\leftarrow 或 \gets</td>
+<td style="text-align:center"><img src="https://math.jianshu.com/math?formula=%5Cgets" srcset="/img/loading.gif" alt="\gets"></td>
+</tr>
+<tr>
+<td style="text-align:center">\rightarrow 或 \to</td>
+<td style="text-align:center"><img src="https://math.jianshu.com/math?formula=%5C%2C%5Cto" srcset="/img/loading.gif" alt="\,\to"></td>
+</tr>
+<tr>
+<td style="text-align:center">\uparrow</td>
+<td style="text-align:center"><img src="https://math.jianshu.com/math?formula=%5Cuparrow" srcset="/img/loading.gif" alt="\uparrow"></td>
+</tr>
+<tr>
+<td style="text-align:center">\downarrow</td>
+<td style="text-align:center"><img src="https://math.jianshu.com/math?formula=%5Cdownarrow" srcset="/img/loading.gif" alt="\downarrow"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<blockquote>
+<p>四个基本方向上下左右不多说，斜着的箭头的方向部分为\ne \se \nw \sw，为东北、东南、西北、西南简写<br> 示例：\nearrow <img src="https://math.jianshu.com/math?formula=%5Cnearrow" srcset="/img/loading.gif" alt="\nearrow"></p>
+<p>还有左右、上下两个方向的箭头：<br> \leftrightarrow   <img src="https://math.jianshu.com/math?formula=%5Cleftrightarrow" srcset="/img/loading.gif" alt="\leftrightarrow"><br> \updownarrow  <img src="https://math.jianshu.com/math?formula=%5Cupdownarrow" srcset="/img/loading.gif" alt="\updownarrow"></p>
+<p>上面的箭头只有一根线，可以通过大写第一个字母变成双线：<br> \Leftrightarrow  <img src="https://math.jianshu.com/math?formula=%5CLeftrightarrow" srcset="/img/loading.gif" alt="\Leftrightarrow"><br> \Uparrow  <img src="https://math.jianshu.com/math?formula=%5CUparrow" srcset="/img/loading.gif" alt="\Uparrow"></p>
+<p>在前面加上long可以把箭头变长，仅适用于左右箭头，注意双线箭头大写字母的位置：<br> \longleftarrow  <img src="https://math.jianshu.com/math?formula=%5Clongleftarrow" srcset="/img/loading.gif" alt="\longleftarrow"><br> \longleftrightarrow  <img src="https://math.jianshu.com/math?formula=%5Clongleftrightarrow" srcset="/img/loading.gif" alt="\longleftrightarrow"><br> \Longleftrightarrow 或 \iff <img src="https://math.jianshu.com/math?formula=%5Ciff" srcset="/img/loading.gif" alt="\iff"></p>
+<p>还有只有一边的箭头，名字为harpoon+up/down，表示那一边的位置，这种箭头似乎不支持上面的buff buffbuff，但拥有左右双向箭头：<br> \leftharpoonup  <img src="https://math.jianshu.com/math?formula=%5Cleftharpoonup" srcset="/img/loading.gif" alt="\leftharpoonup"><br> \rightleftharpoons  <img src="https://math.jianshu.com/math?formula=%5Crightleftharpoons" srcset="/img/loading.gif" alt="\rightleftharpoons"></p>
+<p>意图在箭头上下位置添加说明时，有以下两种方式</p>
+</blockquote>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-number">1</span>.\xleftarrow和\xrightarrow可根据内容自动调整（上下都可以添加内容）<br><br><span class="hljs-number">2</span>.\overset&#123;&#125;&#123;\rightarrow&#125;则是长度固定的箭头，适合单个字符，内容在上<br>  \overrightarrow&#123;&#125;则是长度变化的箭头，适合多个字符，箭头在上<br>注意<span class="hljs-number">2</span>中的都只适用于只在箭头上或下添加内容，改变位置将over改为under<br><br><span class="hljs-variable">$\</span>xleftarrow[x+y+z]&#123;x+y+z+<span class="hljs-number">1</span>&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$\</span>xrightarrow[x+y+z+<span class="hljs-number">1</span>]&#123;x+y+z&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$\</span>overset&#123;x+y+z&#125;&#123;\rightarrow&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br> <span class="hljs-variable">$\</span>underrightarrow&#123;x+y+z&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br><span class="hljs-variable">$\</span>underset&#123;x+y+z&#125;&#123;\leftarrow&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><br> <span class="hljs-variable">$\</span>overleftarrow&#123;x+y+z&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cxleftarrow%5Bx%2By%2Bz%5D%7Bx%2By%2Bz%2B1%7D" srcset="/img/loading.gif" alt="\xleftarrow[x+y+z]{x+y+z+1}"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Cxrightarrow%5Bx%2By%2Bz%2B1%5D%7Bx%2By%2Bz%7D" srcset="/img/loading.gif" alt="\xrightarrow[x+y+z+1]{x+y+z}"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Coverset%7Bx%2By%2Bz%7D%7B%5Crightarrow%7D" srcset="/img/loading.gif" alt="\overset{x+y+z}{\rightarrow}"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Cunderrightarrow%7Bx%2By%2Bz%7D" srcset="/img/loading.gif" alt="\underrightarrow{x+y+z}"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Cunderset%7Bx%2By%2Bz%7D%7B%5Cleftarrow%7D" srcset="/img/loading.gif" alt="\underset{x+y+z}{\leftarrow}"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Coverleftarrow%7Bx%2By%2Bz%7D" srcset="/img/loading.gif" alt="\overleftarrow{x+y+z}"></p>
+<ol>
+<li>注音和标注</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ruby">字母上方横线\overline&#123;&#125;, \bar&#123;&#125;<br><span class="hljs-variable">$ </span>\bar&#123;x&#125; <span class="hljs-variable">$ </span>单个字符 <br><span class="hljs-variable">$\</span>overline&#123;xyz&#125;<span class="hljs-variable">$ </span>多个字符<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbar%7Bx%7D" srcset="/img/loading.gif" alt="\bar{x}"><br> <img src="https://math.jianshu.com/math?formula=%5Coverline%7Bxyz%7D" srcset="/img/loading.gif" alt="\overline{xyz}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ruby">字母下方横线\underline&#123;&#125;<br><span class="hljs-variable">$\</span>underline&#123;xyz&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cunderline%7Bxyz%7D" srcset="/img/loading.gif" alt="\underline{xyz}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ruby">\overbrace 和\underbrace 在表达式的上、下方给出一水平的大括号<br><span class="hljs-variable">$\</span>overbrace&#123;a\dots a&#125;^&#123;n个&#125;<span class="hljs-variable">$ </span><br><span class="hljs-variable">$\</span>underbrace&#123;a\dots a&#125;_&#123;n个&#125;<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Coverbrace%7Ba%5Cdots%20a%7D%5E%7Bn%E4%B8%AA%7D" srcset="/img/loading.gif" alt="\overbrace{a\dots a}^{n个}"></p>
+<p><img src="https://math.jianshu.com/math?formula=%5Cunderbrace%7Ba%5Cdots%20a%7D_%7Bn%E4%B8%AA%7D" srcset="/img/loading.gif" alt="\underbrace{a\dots a}_{n个}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby">向量表示有两种，单个字母用\vec&#123;x&#125;，多个字母用\overrightarrow 和\overleftarrow<br><span class="hljs-variable">$ </span>\vec&#123;x&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$\</span>overrightarrow&#123;AB&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$\</span>overleftarrow&#123;ABC&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cvec%7Bx%7D" srcset="/img/loading.gif" alt="\vec{x}"><br> <img src="https://math.jianshu.com/math?formula=%5Coverrightarrow%7BAB%7D" srcset="/img/loading.gif" alt="\overrightarrow{AB}"><br> <img src="https://math.jianshu.com/math?formula=%5Coverleftarrow%7BABC%7D" srcset="/img/loading.gif" alt="\overleftarrow{ABC}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ruby">字母上方波浪线\tilde&#123;&#125;, \widetilde&#123;&#125;<br><span class="hljs-variable">$ </span>\tilde&#123;x&#125;<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$ </span>\widetilde&#123;xyz&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Ctilde%7Bx%7D" srcset="/img/loading.gif" alt="\tilde{x}"><br> <img src="https://math.jianshu.com/math?formula=%5Cwidetilde%7Bxyz%7D" srcset="/img/loading.gif" alt="\widetilde{xyz}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\dot&#123;x&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cdot%7Bx%7D" srcset="/img/loading.gif" alt="\dot{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\hat&#123;x&#125;<span class="hljs-variable">$ </span><br><span class="hljs-variable">$ </span>\widehat&#123;xyz&#125;<span class="hljs-variable">$ </span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Chat%7Bx%7D" srcset="/img/loading.gif" alt="\hat{x}"><br> <img src="https://math.jianshu.com/math?formula=%5Cwidehat%7Bxyz%7D" srcset="/img/loading.gif" alt="\widehat{xyz}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\acute&#123;x&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cacute%7Bx%7D" srcset="/img/loading.gif" alt="\acute{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\grave&#123;x&#125; $<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cgrave%7Bx%7D" srcset="/img/loading.gif" alt="\grave{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\mathring&#123;x&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cmathring%7Bx%7D" srcset="/img/loading.gif" alt="\mathring{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\ddot&#123;x&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cddot%7Bx%7D" srcset="/img/loading.gif" alt="\ddot{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\check&#123;x&#125; $<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Ccheck%7Bx%7D" srcset="/img/loading.gif" alt="\check{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\breve&#123;x&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbreve%7Bx%7D" srcset="/img/loading.gif" alt="\breve{x}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\dddot&#123;x&#125; $<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cdddot%7Bx%7D" srcset="/img/loading.gif" alt="\dddot{x}"></p>
+<ol>
+<li>编号</li>
+</ol>
+<blockquote>
+<p>插入编号：<br> 使用\tag指令指定公式的具体编号，并使用\label指令埋下锚点。如y=x^2 \tag{1.5a}</p>
+</blockquote>
+<p><img src="https://math.jianshu.com/math?formula=y%3Dx%5E2%20%5Ctag%7B1.5a%7D" srcset="/img/loading.gif" alt="y=x^2 \tag{1.5a}"></p>
+<blockquote>
+<p>引用编号：<br> 在markdown中不支持编号的锚点设置 \label与\ref 的使用</p>
+</blockquote>
+<ol>
+<li>括号及嵌套</li>
+</ol>
+<p>常用括号有以下几种</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/9368615-9db47069b8031901.png?imageMogr2/auto-orient/strip|imageView2/2/w/959/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<blockquote>
+<p>括号的大小调整</p>
+</blockquote>
+<p>对括号的大小，手动模式可以用\big, \Big, \bigg, \Bigg等一系列命令(从小到大，默认是最小)放在上述括号前面调整大小。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span>Bigg( \bigg( \Big( \big((x) \big) \Big) \bigg) \Bigg)<span class="hljs-variable">$</span><br><span class="hljs-variable"></span><span class="hljs-variable">$\</span>Bigg\&#123; \bigg\&#123; \Big\&#123; \big\&#123;\&#123;x\&#125; \big\&#125; \Big\&#125; \bigg\&#125; \Bigg\&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5CBigg(%20%5Cbigg(%20%5CBig(%20%5Cbig((x" srcset="/img/loading.gif" alt="\Bigg( \bigg( \Big( \big((x) \big) \Big) \bigg) \Bigg)\quad \Bigg\{ \bigg\{ \Big\{ \big\{\{x\} \big\} \Big\} \bigg\} \Bigg\}">%20%5Cbig)%20%5CBig)%20%5Cbigg)%20%5CBigg)%5Cquad%20%5CBigg%5C%7B%20%5Cbigg%5C%7B%20%5CBig%5C%7B%20%5Cbig%5C%7B%5C%7Bx%5C%7D%20%5Cbig%5C%7D%20%5CBig%5C%7D%20%5Cbigg%5C%7D%20%5CBigg%5C%7D)<br> 自动模式下要用 \left 和 \right 命令后面跟上所需分隔符，用来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 等分隔符</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span> f(x,y,z) = 3y^2z \left( <span class="hljs-number">3</span>+\frac&#123;7x+<span class="hljs-number">5</span>&#125;&#123;<span class="hljs-number">1</span>+y^<span class="hljs-number">2</span>&#125; \right) <span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=f(x%2Cy%2Cz" srcset="/img/loading.gif" alt="f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)">%20%3D%203y%5E2z%20%5Cleft(%203%2B%5Cfrac%7B7x%2B5%7D%7B1%2By%5E2%7D%20%5Cright))</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs swift">$$<br>f\left(<br>   \left[ <br>     \frac&#123;<br>       <span class="hljs-number">1</span><span class="hljs-operator">+</span>\left\&#123;x,y\right\&#125;<br>     &#125;&#123;<br>       \left(<br>          \frac&#123;x&#125;&#123;y&#125;<span class="hljs-operator">+</span>\frac&#123;y&#125;&#123;x&#125;<br>       \right)<br>       \left(u<span class="hljs-operator">+</span><span class="hljs-number">1</span>\right)<br>     &#125;<span class="hljs-operator">+</span>a<br>   \right]<span class="hljs-operator">^</span>&#123;<span class="hljs-number">3</span><span class="hljs-operator">/</span><span class="hljs-number">2</span>&#125;<br>\right)<br>\tag&#123;<span class="hljs-number">1.2</span>&#125;<br>$$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=f%5Cleft(%20%5Cleft%5B%20%5Cfrac%7B%201%2B%5Cleft%5C%7Bx%2Cy%5Cright%5C%7D%20%7D%7B%20%5Cleft(%20%5Cfrac%7Bx%7D%7By%7D%2B%5Cfrac%7By%7D%7Bx%7D%20%5Cright" srcset="/img/loading.gif" alt="f\left( \left[ \frac{ 1+\left\{x,y\right\} }{ \left( \frac{x}{y}+\frac{y}{x} \right) \left(u+1\right) }+a \right]^{3/2} \right) \tag{行标}">%20%5Cleft(u%2B1%5Cright)%20%7D%2Ba%20%5Cright%5D%5E%7B3%2F2%7D%20%5Cright)%20%5Ctag%7B%E8%A1%8C%E6%A0%87%7D)<br> 如果你需要在不同的行显示对应括号，可以在每一行对应处使用 \left. 或 \right. 来放一个”影子”括号：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span><br>\<span class="hljs-keyword">begin</span>&#123;aligned&#125;<br>a=&amp;\left(<span class="hljs-number">1</span>+<span class="hljs-number">2</span>+<span class="hljs-number">3</span>+  \cdots \right. \\<br>&amp; \cdots+ \left. \infty-<span class="hljs-number">2</span>+\infty-<span class="hljs-number">1</span>+\infty\right)<br>\<span class="hljs-keyword">end</span>&#123;aligned&#125;<br><span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Baligned%7D%20a%3D%26%5Cleft(1%2B2%2B3%2B%20%5Ccdots%20%5Cright.%20%5C%5C%20%26%20%5Ccdots%2B%20%5Cleft.%20%5Cinfty-2%2B%5Cinfty-1%2B%5Cinfty%5Cright" srcset="/img/loading.gif" alt="\begin{aligned} a=&amp;\left(1+2+3+ \cdots \right. \\ &amp; \cdots+ \left. \infty-2+\infty-1+\infty\right) \end{aligned}">%20%5Cend%7Baligned%7D)</p>
+<p>而如果分隔符不在左右而在中间，为了能够格式对齐，要用\middle加分隔符表示</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-variable">$P</span><span class="hljs-operator">=</span>\left(<span class="hljs-type">A</span><span class="hljs-operator">=</span><span class="hljs-number">2</span>\middle<span class="hljs-operator">|</span>\frac&#123;<span class="hljs-type">A</span><span class="hljs-operator">^</span><span class="hljs-number">2</span>&#125;&#123;<span class="hljs-type">B</span>&#125;<span class="hljs-operator">&gt;</span><span class="hljs-number">4</span>\right)$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=P%3D%5Cleft(A%3D2%5Cmiddle%7C%5Cfrac%7BA%5E2%7D%7BB%7D%3E4%5Cright" srcset="/img/loading.gif" alt="P=\left(A=2\middle|\frac{A^2}{B}&gt;4\right)">)</p>
+<ol>
+<li>颜色设置</li>
+</ol>
+<p><img src="https:////upload-images.jianshu.io/upload_images/9368615-2fbc10b9e7ecae71.png?imageMogr2/auto-orient/strip|imageView2/2/w/963/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<ol>
+<li>原文照排</li>
+</ol>
+<blockquote>
+<p>LATEX 提供了 \verb 命令(一般用于在正文中插入较短的命令)来实现</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span>verb<span class="hljs-params">|x^2|</span>\quad x^<span class="hljs-number">2</span>$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cverb%7Cx%5E2%7C%5Cquad%20x%5E2" srcset="/img/loading.gif" alt="\verb|x^2|\quad x^2"></p>
+<ol>
+<li>删除线</li>
+</ol>
+<blockquote>
+<p>在公式内使用 \require{cancel} 来允许 片段删除线 的显示。<br> 声明片段删除线后，使用 \cancel{字符}、\bcancel{字符}、\xcancel{字符} 和 \cancelto{字符} 来实现各种片段删除线效果。</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby">\<span class="hljs-keyword">require</span>&#123;cancel&#125;\<span class="hljs-keyword">begin</span>&#123;array&#125;&#123;rl&#125;<br>\verb<span class="hljs-params">|y+\cancel&#123;x&#125;|</span> &amp; y+\cancel&#123;x&#125;\\<br>\verb<span class="hljs-params">|\cancel&#123;y+x&#125;|</span> &amp; \cancel&#123;y+x&#125;\\<br>\verb<span class="hljs-params">|y+\bcancel&#123;x&#125;|</span> &amp; y+\bcancel&#123;x&#125;\\<br>\verb<span class="hljs-params">|y+\xcancel&#123;x&#125;|</span> &amp; y+\xcancel&#123;x&#125;\\<br>\verb<span class="hljs-params">|y+\cancelto&#123;0&#125;&#123;x&#125;|</span> &amp; y+\cancelto&#123;<span class="hljs-number">0</span>&#125;&#123;x&#125;\\<br>\verb+\frac&#123;<span class="hljs-number">1</span>\cancel9&#125;&#123;\cancel95&#125; = \frac15+&amp; \frac&#123;<span class="hljs-number">1</span>\cancel9&#125;&#123;\cancel95&#125; = \frac15 \\<br>\<span class="hljs-keyword">end</span>&#123;array&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Crequire%7Bcancel%7D%5Cbegin%7Barray%7D%7Brl%7D%20%5Cverb%7Cy%2B%5Ccancel%7Bx%7D%7C%20%26%20y%2B%5Ccancel%7Bx%7D%5C%5C%20%5Cverb%7C%5Ccancel%7By%2Bx%7D%7C%20%26%20%5Ccancel%7By%2Bx%7D%5C%5C%20%5Cverb%7Cy%2B%5Cbcancel%7Bx%7D%7C%20%26%20y%2B%5Cbcancel%7Bx%7D%5C%5C%20%5Cverb%7Cy%2B%5Cxcancel%7Bx%7D%7C%20%26%20y%2B%5Cxcancel%7Bx%7D%5C%5C%20%5Cverb%7Cy%2B%5Ccancelto%7B0%7D%7Bx%7D%7C%20%26%20y%2B%5Ccancelto%7B0%7D%7Bx%7D%5C%5C%20%5Cverb%2B%5Cfrac%7B1%5Ccancel9%7D%7B%5Ccancel95%7D%20%3D%20%5Cfrac15%2B%26%20%5Cfrac%7B1%5Ccancel9%7D%7B%5Ccancel95%7D%20%3D%20%5Cfrac15%20%5C%5C%20%5Cend%7Barray%7D" srcset="/img/loading.gif" alt="\require{cancel}\begin{array}{rl} \verb|y+\cancel{x}| &amp; y+\cancel{x}\\ \verb|\cancel{y+x}| &amp; \cancel{y+x}\\ \verb|y+\bcancel{x}| &amp; y+\bcancel{x}\\ \verb|y+\xcancel{x}| &amp; y+\xcancel{x}\\ \verb|y+\cancelto{0}{x}| &amp; y+\cancelto{0}{x}\\ \verb+\frac{1\cancel9}{\cancel95} = \frac15+&amp; \frac{1\cancel9}{\cancel95} = \frac15 \\ \end{array}"></p>
+<h3 id="数学公式高级规则"><a href="#数学公式高级规则" class="headerlink" title="数学公式高级规则"></a>数学公式高级规则</h3><ol>
+<li>公式环境与对齐<br> 在下文的公式环境中，形如 equation<em>中， 带</em>号的不将公式标号排出来, 而不带*的自动给每行式子编排标号<br> latex的公式环境有很多种，这里只列举我常用的，更多请查阅latex官方说明</li>
+</ol>
+<blockquote>
+<p>单行公式环境 equation<br> \begin{equation}<br> …<br> \end{equation}<br> 是最一般的公式环境，表示一个公式，默认情况下之表示一个单行的公式，但是它的功能可以通过内嵌各种其他环境进行扩展，不可以使用\与&amp;功能。它可以内嵌的一些关于对齐的环境将在后面介绍。</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;equation&#125;<br>f(x)=3x^&#123;<span class="hljs-number">2</span>&#125;+<span class="hljs-number">6</span>(x-<span class="hljs-number">2</span>)-<span class="hljs-number">1</span><br>\<span class="hljs-keyword">end</span>&#123;equation&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bequation%7D%20f(x" srcset="/img/loading.gif" alt="\begin{equation} f(x)=3x^{2}+6(x-2)-1 \end{equation}">%3D3x%5E%7B2%7D%2B6(x-2)-1%20%5Cend%7Bequation%7D)</p>
+<blockquote>
+<p>align（多个公式）<br> 这是最基本的对齐环境，其他多公式环境都不同程度地依赖它。它采用“&amp;”分割各个对齐单元，使用“\”换行。它的每行是一个公式，都会独立编号。在排版过程中，它将&amp;分出来的列又分成组，组间特定方式排版，具体方式在flalign环境中讨论。<br> 通常情况下在公式中可以通过\tag设置标号，\label设置引用名称，但好像简书的markdown不支持\label，所以编号的意义就无所谓了。</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;align&#125;<br> f(x) &amp;= (x+a)(x+b) \\<br> &amp;= x^<span class="hljs-number">2</span> + (a+b)x + ab \tag&#123;<span class="hljs-number">1.1</span>&#125;<br>\<span class="hljs-keyword">end</span>&#123;align&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Balign%7D%20f(x" srcset="/img/loading.gif" alt="\begin{align} f(x) &amp;= (x+a)(x+b) \\ &amp;= x^2 + (a+b)x + ab \tag{1.1} \end{align}">%20%26%3D%20(x%2Ba)(x%2Bb)%20%5C%5C%20%26%3D%20x%5E2%20%2B%20(a%2Bb)x%20%2B%20ab%20%5Ctag%7B1.1%7D%20%5Cend%7Balign%7D)</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;align&#125;<br>A_&#123;<span class="hljs-number">1</span>&#125;&amp;=B_&#123;<span class="hljs-number">1</span>&#125;B_&#123;<span class="hljs-number">2</span>&#125; &amp; A_&#123;<span class="hljs-number">3</span>&#125; &amp; = B_&#123;<span class="hljs-number">1</span>&#125;\\<br>A_&#123;<span class="hljs-number">2</span>&#125;&amp;=B_&#123;<span class="hljs-number">3</span>&#125;&amp; A_&#123;<span class="hljs-number">3</span>&#125;A_&#123;<span class="hljs-number">4</span>&#125; &amp; = B_&#123;<span class="hljs-number">4</span>&#125;<br>\<span class="hljs-keyword">end</span>&#123;align&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Balign%7D%20A_%7B1%7D%26%3DB_%7B1%7DB_%7B2%7D%20%26%20A_%7B3%7D%20%26%20%3D%20B_%7B1%7D%5C%5C%20A_%7B2%7D%26%3DB_%7B3%7D%26%20A_%7B3%7DA_%7B4%7D%20%26%20%3D%20B_%7B4%7D%20%5Cend%7Balign%7D" srcset="/img/loading.gif" alt="\begin{align} A_{1}&amp;=B_{1}B_{2} &amp; A_{3} &amp; = B_{1}\\ A_{2}&amp;=B_{3}&amp; A_{3}A_{4} &amp; = B_{4} \end{align}"></p>
+<blockquote>
+<p>公式组环境flalign与align的功能基本相同，唯一区别是列对之间的距离为弹性宽度，以使公式组两端对齐。然而简书不支持。。。</p>
+<p>gather环境<br> 它是最简单的多行公式环境，自己不提供任何对齐。其中的各行公式按照全局方式分别对齐。<br> 在设置了全局左对齐之后，因为不存在内部各个公式之间对排版的干扰，这种环境非常适合写数学推导或者证明。而默认情况下，是居中对齐。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">\begin&#123;gather*&#125;<br>E(X)=\<span class="hljs-keyword">lambda</span>    \qquad  D(X)=\<span class="hljs-keyword">lambda</span>    \\<br>E(\bar&#123;X&#125;)=\<span class="hljs-keyword">lambda</span>  \\<br>D(\bar&#123;X&#125;)=\frac&#123;\<span class="hljs-keyword">lambda</span>&#125;&#123;n&#125;    \\<br>E(S^<span class="hljs-number">2</span>)=\frac&#123;n-<span class="hljs-number">1</span>&#125;&#123;n&#125;\<span class="hljs-keyword">lambda</span> \\<br>\end&#123;gather*&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bgather%7D%20%5Cbecause%20E(X" srcset="/img/loading.gif" alt="\begin{gather} \because E(X)=\lambda \qquad D(X)=\lambda \\ \therefore E(\bar{X})=\lambda \\ D(\bar{X})=\frac{\lambda}{n} \\ E(S^2)=\frac{n-1}{n}\lambda \\ \end{gather}">%3D%5Clambda%20%5Cqquad%20D(X)%3D%5Clambda%20%5C%5C%20%5Ctherefore%20E(%5Cbar%7BX%7D)%3D%5Clambda%20%5C%5C%20D(%5Cbar%7BX%7D)%3D%5Cfrac%7B%5Clambda%7D%7Bn%7D%20%5C%5C%20E(S%5E2)%3D%5Cfrac%7Bn-1%7D%7Bn%7D%5Clambda%20%5C%5C%20%5Cend%7Bgather%7D)</p>
+<blockquote>
+<p>与上文中公式组类似的，长公式也有两种multline和split两种环境，分别对应不对齐与对齐。</p>
+</blockquote>
+<p>multline不支持“&amp;”分列。其首行左对齐，末行右对齐，其余各行分别按照全局方式对齐。<br> split也用于排版多行公式，但它与多行公式环境multline的区别主要是以下三点：</p>
+<ul>
+<li>用&amp;作为分列符，但至多两列；左列右对齐，右列左对齐，形成一个列对，可使多行公式关于某个符号垂直对齐。因此用它排版的多行公式更为整齐美观。如果不用分列符&amp;,所有公式行为一列，且全都与首行公式的右端对齐。</li>
+<li>必须置于除multline环境之外的其它公式环境中。</li>
+<li>自身并不生成公式序号，而是由外在公式环境提供，序号垂直居中。</li>
+</ul>
+<p>示例如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span>\<span class="hljs-keyword">begin</span>&#123;multline&#125;<br>x=a+b+c+&#123;&#125; \\<br>d+e+f+g<br>\<span class="hljs-keyword">end</span>&#123;multline&#125;<span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bmultline%7D%20x%3Da%2Bb%2Bc%2B%7B%7D%20%5C%5C%20d%2Be%2Bf%2Bg%20%5Cend%7Bmultline%7D" srcset="/img/loading.gif" alt="\begin{multline} x=a+b+c+{} \\ d+e+f+g \end{multline}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span>\<span class="hljs-keyword">begin</span>&#123;split&#125;<br>x=&amp;a+b+c+&#123;&#125; \\<br>&amp;d+e+f+g<br>\<span class="hljs-keyword">end</span>&#123;split&#125;<span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bsplit%7D%20x%3D%26a%2Bb%2Bc%2B%7B%7D%20%5C%5C%20%26d%2Be%2Bf%2Bg%20%5Cend%7Bsplit%7D" srcset="/img/loading.gif" alt="\begin{split} x=&amp;a+b+c+{} \\ &amp;d+e+f+g \end{split}"></p>
+<blockquote>
+<p>/gathered，/aligned。以上几种方程组环境，无论每个公式多小，都会占满一行。而/gathered，/aligned环境，则只占据公式的实际宽度，整体作为一个特大的符号与其他符号一同处理。<br> 这个结构还可以添加位置参数，以决定与其他符号的竖直对齐方式(b,t)。而且这种环境不再具有自动编号功能。</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;equation&#125;<br> \left.\<span class="hljs-keyword">begin</span>&#123;aligned&#125;<br>        B<span class="hljs-string">&#x27;&amp;=-\partial \times E,\\</span><br><span class="hljs-string">        E&#x27;</span>&amp;=\partial \times B - <span class="hljs-number">4</span>\pi j,<br>       \<span class="hljs-keyword">end</span>&#123;aligned&#125;<br> \right\&#125;<br> \qquad \text&#123;Maxwell<span class="hljs-string">&#x27;s equations&#125;</span><br><span class="hljs-string">\end&#123;equation&#125;</span><br><span class="hljs-string">$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bequation%7D%20%5Cleft.%5Cbegin%7Baligned%7D%20B&#39;%26%3D-%5Cpartial%20%5Ctimes%20E%2C%5C%5C%20E&#39;%26%3D%5Cpartial%20%5Ctimes%20B%20-%204%5Cpi%20j%2C%20%5Cend%7Baligned%7D%20%5Cright%5C%7D%20%5Cqquad%20%5Ctext%7BMaxwell&#39;s%20equations%7D%20%5Cend%7Bequation%7D" srcset="/img/loading.gif" alt="\begin{equation} \left.\begin{aligned} B&#39;&amp;=-\partial \times E,\\ E&#39;&amp;=\partial \times B - 4\pi j, \end{aligned} \right\} \qquad \text{Maxwell&#39;s equations} \end{equation}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;equation&#125;<br>\left.<br>\<span class="hljs-keyword">begin</span>&#123;aligned&#125;<br>x+y &amp;&gt; <span class="hljs-number">5</span> \\<br>y-y &amp;&gt; <span class="hljs-number">11</span><br>\<span class="hljs-keyword">end</span>&#123;aligned&#125;<br>\ \right\&#125;\Rightarrow x^<span class="hljs-number">2</span> - y^<span class="hljs-number">2</span> &gt; <span class="hljs-number">55</span><br>\<span class="hljs-keyword">end</span>&#123;equation&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bequation%7D%20%5Cleft.%20%5Cbegin%7Baligned%7D%20x%2By%20%26%3E%205%20%5C%5C%20y-y%20%26%3E%2011%20%5Cend%7Baligned%7D%20%5C%20%5Cright%5C%7D%5CRightarrow%20x%5E2%20-%20y%5E2%20%3E%2055%20%5Cend%7Bequation%7D" srcset="/img/loading.gif" alt="\begin{equation} \left. \begin{aligned} x+y &amp;&gt; 5 \\ y-y &amp;&gt; 11 \end{aligned} \ \right\}\Rightarrow x^2 - y^2 &gt; 55 \end{equation}"></p>
+<blockquote>
+<p>cases环境常用于分段函数，上面的环境虽然支持分段函数形式的表达，但比较繁琐</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span><br>L(Y,f(X))=<br>\<span class="hljs-keyword">begin</span>&#123;cases&#125;<br><span class="hljs-number">1</span>,\quad &amp;Y\neq f(X)\\<br><span class="hljs-number">0</span>,\quad &amp;Y=f(X)<br>\<span class="hljs-keyword">end</span>&#123;cases&#125;<br><span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=L(Y%2Cf(X" srcset="/img/loading.gif" alt="L(Y,f(X))= \begin{cases} 1,\quad &amp;Y\neq f(X)\\ 0,\quad &amp;Y=f(X) \end{cases}">)%3D%20%5Cbegin%7Bcases%7D%201%2C%5Cquad%20%26Y%5Cneq%20f(X)%5C%5C%200%2C%5Cquad%20%26Y%3Df(X)%20%5Cend%7Bcases%7D)</p>
+<blockquote>
+<p>阵列环境 array可以帮助我们输入一个数组或表格<br> 通常，一个格式化后的表格比单纯的文字或排版后的文字更具有可读性。数组和表格均以 begin{array} 开头，并在其后定义列数及每一列的文本对齐属性，字母c l r 分别代表居中、左对齐及右对齐。若需要插入垂直分割线，在定义式中插入 | ，若要插入水平分割线，在下一行输入前插入 \hline 。与矩阵相似，每行元素间均须要插入 &amp; ，每行元素以 \ 结尾，最后以 end{array} 结束数组。下面是几个示例：</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;array&#125;&#123;c<span class="hljs-params">|l|</span>c<span class="hljs-params">|r&#125;</span><br><span class="hljs-params">n &amp; \text&#123;左对齐&#125; &amp; \text&#123;居中对齐&#125; &amp; \text&#123;右对齐&#125; \\</span><br><span class="hljs-params">\hline</span><br><span class="hljs-params">1 &amp; 0.24 &amp; 1 &amp; 125 \\</span><br><span class="hljs-params">\hline</span><br><span class="hljs-params">2 &amp; -1 &amp; 189 &amp; -8 \\</span><br><span class="hljs-params">\hline</span><br><span class="hljs-params">3 &amp; -20 &amp; 2000 &amp; 1+10i</span><br><span class="hljs-params">\<span class="hljs-keyword">end</span>&#123;array&#125;$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Barray%7D%7Bc%7Cl%7Cc%7Cr%7D%20n%20%26%20%5Ctext%7B%E5%B7%A6%E5%AF%B9%E9%BD%90%7D%20%26%20%5Ctext%7B%E5%B1%85%E4%B8%AD%E5%AF%B9%E9%BD%90%7D%20%26%20%5Ctext%7B%E5%8F%B3%E5%AF%B9%E9%BD%90%7D%20%5C%5C%20%5Chline%201%20%26%200.24%20%26%201%20%26%20125%20%5C%5C%20%5Chline%202%20%26%20-1%20%26%20189%20%26%20-8%20%5C%5C%20%5Chline%203%20%26%20-20%20%26%202000%20%26%201%2B10i%20%5Cend%7Barray%7D" srcset="/img/loading.gif" alt="\begin{array}{c|l|c|r} n &amp; \text{左对齐} &amp; \text{居中对齐} &amp; \text{右对齐} \\ \hline 1 &amp; 0.24 &amp; 1 &amp; 125 \\ \hline 2 &amp; -1 &amp; 189 &amp; -8 \\ \hline 3 &amp; -20 &amp; 2000 &amp; 1+10i \end{array}"></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span>left(\<span class="hljs-keyword">begin</span>&#123;array&#125;&#123;ccc<span class="hljs-params">|c&#125;</span><br><span class="hljs-params"> a11 &amp; a12 &amp; a13  &amp; b1 \\</span><br><span class="hljs-params">a21 &amp; a22  &amp; a23 &amp; b2  \\ </span><br><span class="hljs-params">a31 &amp; a32  &amp; a33 &amp; b3  \\</span><br><span class="hljs-params"> \<span class="hljs-keyword">end</span>&#123;array&#125;\right)$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cleft(%5Cbegin%7Barray%7D%7Bccc%7Cc%7D%20a11%20%26%20a12%20%26%20a13%20%26%20b1%20%5C%5C%20a21%20%26%20a22%20%26%20a23%20%26%20b2%20%5C%5C%20a31%20%26%20a32%20%26%20a33%20%26%20b3%20%5C%5C%20%5Cend%7Barray%7D%5Cright" srcset="/img/loading.gif" alt="\left(\begin{array}{ccc|c} a11 &amp; a12 &amp; a13 &amp; b1 \\ a21 &amp; a22 &amp; a23 &amp; b2 \\ a31 &amp; a32 &amp; a33 &amp; b3 \\ \end{array}\right)">)</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span><br>\left\&#123; <br>\<span class="hljs-keyword">begin</span>&#123;array&#125;&#123;c&#125;<br>a_1x+b_1y+c_1z=d_1 \\ <br>a_2x+b_2y+c_2z=d_2 \\ <br>a_3x+b_3y+c_3z=d_3<br>\<span class="hljs-keyword">end</span>&#123;array&#125;<br>\right. <br><span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cleft%5C%7B%20%5Cbegin%7Barray%7D%7Bc%7D%20a_1x%2Bb_1y%2Bc_1z%3Dd_1%20%5C%5C%20a_2x%2Bb_2y%2Bc_2z%3Dd_2%20%5C%5C%20a_3x%2Bb_3y%2Bc_3z%3Dd_3%20%5Cend%7Barray%7D%20%5Cright." srcset="/img/loading.gif" alt="\left\{ \begin{array}{c} a_1x+b_1y+c_1z=d_1 \\ a_2x+b_2y+c_2z=d_2 \\ a_3x+b_3y+c_3z=d_3 \end{array} \right."></p>
+<ol>
+<li>矩阵</li>
+</ol>
+<ul>
+<li>第一种方式：使用matrix、pmatrix、bmatrix、Bmatrix、vmatrix或者Vmatrix，smallmatrix<br> 一个最基本的矩阵</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>\<span class="hljs-keyword">begin</span>&#123;matrix&#125;<br><span class="hljs-number">0</span> &amp; <span class="hljs-number">1</span> \\<br><span class="hljs-number">1</span> &amp; <span class="hljs-number">0</span> <br>\<span class="hljs-keyword">end</span>&#123;matrix&#125; <span class="hljs-variable">$ </span>  <br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bmatrix%7D%200%20%26%201%20%5C%5C%201%20%26%200%20%5Cend%7Bmatrix%7D" srcset="/img/loading.gif" alt="\begin{matrix} 0 &amp; 1 \\ 1 &amp; 0 \end{matrix}"></p>
+<p>可以看到矩阵中用 &amp; 分隔列，用 \ 分隔行，在矩阵开始和结束部分\begin和\end+矩阵类型<br> 下面给出这几种矩阵类型的图示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>矩阵类型</th>
+<th>矩阵图示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matrix</td>
+<td><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bmatrix%7D0%20%26%201%20%5C%5C1%20%26%200%20%5Cend%7Bmatrix%7D" srcset="/img/loading.gif" alt="\begin{matrix}0 &amp; 1 \\1 &amp; 0 \end{matrix}"></td>
+</tr>
+<tr>
+<td>pmatrix</td>
+<td><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bpmatrix%7D0%20%26%201%20%5C%5C1%20%26%200%20%5Cend%7Bpmatrix%7D" srcset="/img/loading.gif" alt="\begin{pmatrix}0 &amp; 1 \\1 &amp; 0 \end{pmatrix}"></td>
+</tr>
+<tr>
+<td>bmatrix</td>
+<td><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bbmatrix%7D0%20%26%201%20%5C%5C1%20%26%200%20%5Cend%7Bbmatrix%7D" srcset="/img/loading.gif" alt="\begin{bmatrix}0 &amp; 1 \\1 &amp; 0 \end{bmatrix}"></td>
+</tr>
+<tr>
+<td>Bmatrix</td>
+<td><img src="https://math.jianshu.com/math?formula=%5Cbegin%7BBmatrix%7D0%20%26%201%20%5C%5C1%20%26%200%20%5Cend%7BBmatrix%7D" srcset="/img/loading.gif" alt="\begin{Bmatrix}0 &amp; 1 \\1 &amp; 0 \end{Bmatrix}"></td>
+</tr>
+<tr>
+<td>vmatrix</td>
+<td><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bvmatrix%7D0%20%26%201%20%5C%5C1%20%26%200%20%5Cend%7Bvmatrix%7D" srcset="/img/loading.gif" alt="\begin{vmatrix}0 &amp; 1 \\1 &amp; 0 \end{vmatrix}"></td>
+</tr>
+<tr>
+<td>Vmatrix</td>
+<td><img src="https://math.jianshu.com/math?formula=%5Cbegin%7BVmatrix%7D0%20%26%201%20%5C%5C1%20%26%200%20%5Cend%7BVmatrix%7D" srcset="/img/loading.gif" alt="\begin{Vmatrix}0 &amp; 1 \\1 &amp; 0 \end{Vmatrix}"></td>
+</tr>
+<tr>
+<td>smallmatrix</td>
+<td><img src="https://math.jianshu.com/math?formula=(%5Cbegin%7Bsmallmatrix%7D%200%20%26%201%20%5C%5C%201%20%26%200%20%5Cend%7Bsmallmatrix%7D" srcset="/img/loading.gif" alt="(\begin{smallmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{smallmatrix})">)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在此之上，如果我们需要对矩阵起始和结束部分的括号进行变化，可以使用诸如</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span>left\&#123;\<span class="hljs-keyword">begin</span>&#123;matrix&#125;<br> x_1&amp; x_2\\ <br> y_1&amp; y_2<br>\<span class="hljs-keyword">end</span>&#123;matrix&#125;\right.<span class="hljs-variable">$ </span>   (此处.作为占位符表示不需要分隔符)<br><span class="hljs-variable">$\</span>left.\<span class="hljs-keyword">begin</span>&#123;matrix&#125;<br>x_1 &amp; x_2\\ <br> y_1&amp; y_2<br>\<span class="hljs-keyword">end</span>&#123;matrix&#125;\right\&#125;<span class="hljs-variable">$ </span> <br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_1%26%20x_2%5C%5C%20y_1%26%20y_2%20%5Cend%7Bmatrix%7D%5Cright." srcset="/img/loading.gif" alt="\left\{\begin{matrix} x_1&amp; x_2\\ y_1&amp; y_2 \end{matrix}\right."><br> <img src="https://math.jianshu.com/math?formula=%5Cleft.%5Cbegin%7Bmatrix%7D%20x_1%20%26%20x_2%5C%5C%20y_1%26%20y_2%20%5Cend%7Bmatrix%7D%5Cright%5C%7D" srcset="/img/loading.gif" alt="\left.\begin{matrix} x_1 &amp; x_2\\ y_1&amp; y_2 \end{matrix}\right\}"></p>
+<p>第二种方式就是使用array环境，在左右端加上所需括号即可</p>
+<blockquote>
+<p>输入带省略符号的矩阵</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$$</span><br>        \<span class="hljs-keyword">begin</span>&#123;pmatrix&#125;<br>        <span class="hljs-number">1</span> &amp; a_1 &amp; a_1^<span class="hljs-number">2</span> &amp; \cdots &amp; a_1^n \\<br>        <span class="hljs-number">1</span> &amp; a_2 &amp; a_2^<span class="hljs-number">2</span> &amp; \cdots &amp; a_2^n \\<br>        \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>        <span class="hljs-number">1</span> &amp; a_m &amp; a_m^<span class="hljs-number">2</span> &amp; \cdots &amp; a_m^n \\<br>        \<span class="hljs-keyword">end</span>&#123;pmatrix&#125;<br><span class="hljs-variable">$$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7Bpmatrix%7D%201%20%26%20a_1%20%26%20a_1%5E2%20%26%20%5Ccdots%20%26%20a_1%5En%20%5C%5C%201%20%26%20a_2%20%26%20a_2%5E2%20%26%20%5Ccdots%20%26%20a_2%5En%20%5C%5C%20%5Cvdots%20%26%20%5Cvdots%20%26%20%5Cvdots%20%26%20%5Cddots%20%26%20%5Cvdots%20%5C%5C%201%20%26%20a_m%20%26%20a_m%5E2%20%26%20%5Ccdots%20%26%20a_m%5En%20%5C%5C%20%5Cend%7Bpmatrix%7D" srcset="/img/loading.gif" alt="\begin{pmatrix} 1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\ 1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\ \end{pmatrix}"></p>
+<ol>
+<li>交换图表</li>
+</ol>
+<blockquote>
+<p>使用一行  \require{AMScd}  语句来允许交换图表的显示。<br> 声明交换图表后，语法与矩阵相似，在开头使用 begin{CD}，在结尾使用 end{CD}，在中间插入图表元素，每个元素之间插入 &amp; ，并在每行结尾处使用 \ 。</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">require</span>&#123;AMScd&#125;<br>\<span class="hljs-keyword">begin</span>&#123;CD&#125;<br>    A @&gt;a&gt;&gt; B\\<br>    <span class="hljs-variable">@V</span> b V V\<span class="hljs-comment"># <span class="hljs-doctag">@VV</span> c V\\</span><br>    C @&gt;&gt;d&gt; D<br>\<span class="hljs-keyword">end</span>&#123;CD&#125;$<br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Crequire%7BAMScd%7D%20%5Cbegin%7BCD%7D%20A%20%40%3Ea%3E%3E%20B%5C%5C%20%40V%20b%20V%20V%5C%23%20%40VV%20c%20V%5C%5C%20C%20%40%3E%3Ed%3E%20D%20%5Cend%7BCD%7D" srcset="/img/loading.gif" alt="\require{AMScd} \begin{CD} A @&gt;a&gt;&gt; B\\ @V b V V\# @VV c V\\ C @&gt;&gt;d&gt; D \end{CD}"><br> 其中，@&gt;&gt;&gt; 代表右箭头、@&lt;&lt;&lt; 代表左箭头、@VVV 代表下箭头、@AAA 代表上箭头、@= 代表水平双实线、@| 代表竖直双实线、@.代表没有箭头。<br> 在 @&gt;&gt;&gt; 的 &gt;&gt;&gt; 之间任意插入文字即代表该箭头的注释文字。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$\</span><span class="hljs-keyword">begin</span>&#123;CD&#125;<br>    A @&gt;&gt;&gt; B @&gt;&#123;\text&#123;very long label&#125;&#125;&gt;&gt; C \\<br>    @. <span class="hljs-variable">@AAA</span> @<span class="hljs-params">| \\</span><br><span class="hljs-params">    D @= E @&lt;&lt;&lt; F</span><br><span class="hljs-params">\<span class="hljs-keyword">end</span>&#123;CD&#125;$</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://math.jianshu.com/math?formula=%5Cbegin%7BCD%7D%20A%20%40%3E%3E%3E%20B%20%40%3E%7B%5Ctext%7Bvery%20long%20label%7D%7D%3E%3E%20C%20%5C%5C%20%40.%20%40AAA%20%40%7C%20%5C%5C%20D%20%40%3D%20E%20%40%3C%3C%3C%20F%20%5Cend%7BCD%7D" srcset="/img/loading.gif" alt="\begin{CD} A @&gt;&gt;&gt; B @&gt;{\text{very long label}}&gt;&gt; C \\ @. @AAA @| \\ D @= E @&lt;&lt;&lt; F \end{CD}"></p>
+<p>以上内容大致上应该能把绝大多数数学公式优美的书写下来了，更多内容还需要自行查阅官方说明~~</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/LaTex/">LaTex</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/21/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB%EF%BC%9AMoCoGAN%20Decomposing%20Motion%20and%20Content%20for%20Video/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文速读：MoCoGAN Decomposing Motion and Content for Video</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/25/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B9%8BYOLO%E7%90%86%E8%A7%A3%E4%B8%8E%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">目标检测之YOLO理解与总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

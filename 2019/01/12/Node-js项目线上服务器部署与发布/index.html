@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>Node.js项目线上服务器部署与发布 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Node.js项目线上服务器部署与发布">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-01-12 20:37" pubdate>
+        2019年1月12日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Node.js项目线上服务器部署与发布</h1>
+            
+            <div class="markdown-body">
+              <h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><blockquote>
+<p>配置公钥 和密钥 可以登录服务器不需要密码<br>看是否已经存在公钥和密钥<br>看用户文件夹下是否存在<br><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-1.png" srcset="/img/loading.gif" alt=""></p>
+</blockquote>
+<p><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-2.png" srcset="/img/loading.gif" alt=""></p>
+<p>ctrl +d 退出用户<br>sudo  rm -f  xxx 删除一个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">//连接<br>ssh ubuntu@ip地址<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">// 先给root一个密码<br>sudo passwd root<br>// 然后切换到root su root<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">//在root下<br>sudo adduser lizhihao<br>增加一个用户<br><br>//然后在root下给skl sudo 权限<br> gpasswd -a lizhihao sudo<br> <br> //<br> sudo visudo<br> 增加下面的lizhihao<br></code></pre></td></tr></table></figure>
+<p><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-3.png" srcset="/img/loading.gif" alt=""></p>
+<p>ctrl +X保存 之后shift+Y enter 退出</p>
+<p>可以在root 下进入skl 用户 su skl<br>或者 sudo su lizhihao </p>
+<hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">//重启服务<br> sudo service ssh restart<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">//生成公钥和私钥<br> ssh-keygen -t rsa -C &quot;lizhihao@qq.com&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">//配置文件 修改默认端口<br>sudo vi /etc/ssh/sshd_config<br></code></pre></td></tr></table></figure>
+<h2 id="改过端口后-连接服务器会连不上"><a href="#改过端口后-连接服务器会连不上" class="headerlink" title="改过端口后 连接服务器会连不上"></a>改过端口后 连接服务器会连不上</h2><p>出现<br>     : ssh: connect to host ip地址 port 22: Connection refused</p>
+<p>这时候就要虚入输入端口号了</p>
+<ul>
+<li>ssh -p 8888 ubuntu@ip地址<br>(8888是刚刚改过的端口)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">//更新<br>sudo apt-get update<br><br>//安装一些<br>sudo apt-get install vim openssl build-essential libssl-dev wget curl git<br><br>//找到github上的nvm <br>https://github.com/creationix/nvm<br>找到安装脚本<br></code></pre></td></tr></table></figure>
+<p>curl -o- <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh">https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh</a> | bash</p>
+<p><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-4.png" srcset="/img/loading.gif" alt=""></p>
+<p>装完后若发现nvm 不是一个命令 在来一个命令窗口</p>
+<h3 id="安装好nvm-就可以安装nodejs了"><a href="#安装好nvm-就可以安装nodejs了" class="headerlink" title="安装好nvm 就可以安装nodejs了"></a>安装好nvm 就可以安装nodejs了</h3><blockquote>
+<p>nvm install v8.2.1</p>
+<h3 id="指定一下node版本"><a href="#指定一下node版本" class="headerlink" title="指定一下node版本"></a>指定一下node版本</h3><p>nvm use v8.2.2</p>
+<h3 id="设置一下默认"><a href="#设置一下默认" class="headerlink" title="设置一下默认"></a>设置一下默认</h3><p>nvm alias default v8.2.1</p>
+<h3 id="设置成淘宝"><a href="#设置成淘宝" class="headerlink" title="设置成淘宝"></a>设置成淘宝</h3><p>用一个nrm 包<br>npm —registry=<a target="_blank" rel="noopener" href="http://registry.npm.taobao.org">http://registry.npm.taobao.org</a> install -g nrm </p>
+<p>nrm use taobao </p>
+</blockquote>
+<h3 id="安装一些包"><a href="#安装一些包" class="headerlink" title="安装一些包"></a>安装一些包</h3><blockquote>
+<p> npm i pm2 webpack gulp grunt-cli -g</p>
+<h3 id="查看全局安装过的包-npm-list-g-depth-0"><a href="#查看全局安装过的包-npm-list-g-depth-0" class="headerlink" title="查看全局安装过的包 npm list -g -depth 0"></a>查看全局安装过的包 npm list -g -depth 0</h3></blockquote>
+<h4 id="创建-app-js-如下"><a href="#创建-app-js-如下" class="headerlink" title="创建 app.js  如下"></a>创建 app.js  如下</h4><blockquote>
+<p>创建 sudo  vi app.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> http=<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);<br><span class="hljs-keyword">var</span> server=http.<span class="hljs-title function_">createServer</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">req,res</span>) &#123;<br>    res.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>,&#123;<span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;text/plain&#x27;</span>&#125;)<br>    res.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;Hello SKL\n&#x27;</span>);<br>&#125;)<br>server.<span class="hljs-title function_">listen</span>(<span class="hljs-number">8081</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server running at http://ip地址:8081&#x27;</span>);<br><br></code></pre></td></tr></table></figure></p>
+</blockquote>
+<p>之后 node app.js<br>就可以在浏览器中访问 127.0.0.1:8081</p>
+<h3 id="使用nginx-80端口"><a href="#使用nginx-80端口" class="headerlink" title="使用nginx 80端口"></a>使用nginx 80端口</h3><blockquote>
+<p>停止apache 服务<br>   sudo service apache2 stop<br>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">移除Apache 2<br><br>sudo update-rc.d -f apache2 remove<br><br>sudo apt-get remove apache2<br></code></pre></td></tr></table></figure><br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">下载 nginx <br>   sudo apt-get install nginx<br></code></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li>cd /etc/nginx/</li>
+<li>cd conf.d</li>
+<li>sudo vi lizhihao-cn-8081.conf<br>写入<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">upstream</span> blog&#123;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:8081</span>;<br>&#125;<br><br><span class="hljs-comment"># NGINX Server Instance,PORT 80</span><br><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> ip地址;<br><br><br>    <span class="hljs-comment"># Proxy to the Node instance</span><br>    <span class="hljs-section">location</span> / &#123;<br>      <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>      <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>      <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>;<br>      <span class="hljs-attribute">proxy_set_header</span> X-NginX-Proxy <span class="hljs-literal">true</span>;<br>      <span class="hljs-attribute">proxy_pass</span> http://blog;<br>      <span class="hljs-attribute">proxy_redirect</span> <span class="hljs-literal">off</span>;<br>    &#125;<br> &#125;<br><br></code></pre></td></tr></table></figure>
+4.sudo nginx -t  测试是否成功</li>
+<li>sudo nginx -s reload 重启 nginx </li>
+</ol>
+</blockquote>
+<p>之后输入ip地址 就可以看到了 把8081 的服务都导向到Nginx的80端口</p>
+<blockquote>
+<p>让 Nginx的版本信息在浏览器的头信息中不那么明显</p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/etc/</span>nginx<br>sudo vi nginx.conf<br>去掉下面配置文件前的<span class="hljs-comment"># 保存</span><br></code></pre></td></tr></table></figure>
+<p>去掉<br><img src="/image/nodejs项目服务器部署/nodejs项目服务器部署-5.png" srcset="/img/loading.gif" alt=""><br>然后 sudo service nginx reload</p>
+<h3 id="MongoDB-ubuntu16-04"><a href="#MongoDB-ubuntu16-04" class="headerlink" title="MongoDB ubuntu16.04"></a>MongoDB ubuntu16.04</h3><p><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk">命令：<br>xxxx<br><br>sudo apt-get install -y mongodb-org<br>其中这一步速度很慢，改成阿里云的连接<br>cd <span class="hljs-regexp">/etc/</span>apt/sources.list.d<br>vi mongodb-org-<span class="hljs-number">3.4</span>.list  (注意看安装时的版本)<br>改成：<br>deb [ arch=amd64,arm64 ] http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/mongodb/</span>apt<span class="hljs-regexp">/ubuntu xenial/m</span>ongodb-org/<span class="hljs-number">3.6</span> multiverse<br>命令：<br><span class="hljs-regexp">//</span> 改过镜像后要upadte一下<br>xxxx<br>xxx<br>xxx<br></code></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">sudo service mongod <span class="hljs-literal">start</span><br>之后 mongo就启动了<br></code></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">若遇到无法写入。加sudo <br><br>mongodb 默认跑在27017 端口上<br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>修改<br>sudo vi <span class="hljs-regexp">/etc/m</span>ongod.conf<br>port 改成了<span class="hljs-number">19997</span> <br></code></pre></td></tr></table></figure>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">scp ./test.html lizhihao<span class="hljs-variable">@ip</span>地址<span class="hljs-number">0</span><span class="hljs-symbol">:/home/lizhihao/test</span><br>scp -P <span class="hljs-number">8888</span> ant-mobile-recruit-app.tar lizhihao<span class="hljs-variable">@ip</span>地址<span class="hljs-symbol">:/home/lizhihao/</span><br></code></pre></td></tr></table></figure>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><blockquote>
+<p>tar<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-c ： 打包</span><br><br><span class="hljs-deletion">-v ： 显示过程</span><br><br><span class="hljs-deletion">-f ： 指定打包后的文件名</span><br><br><span class="hljs-deletion">-x : 解打包</span><br><br><span class="hljs-deletion">-z：压缩为.tar.gz格式</span><br><br></code></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">//压缩</span><br>tar -cvf japan<span class="hljs-selector-class">.tar</span> japan<br>tar -zcvf japan<span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span> japan<br><span class="hljs-comment">//解压</span><br>tar -xvf japan<span class="hljs-selector-class">.tar</span><br>tar -zxvf japan<span class="hljs-selector-class">.tar</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="配置可以让域名访问服务器"><a href="#配置可以让域名访问服务器" class="headerlink" title="配置可以让域名访问服务器"></a>配置可以让域名访问服务器</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/etc/nginx/conf.d</span><br>sudo mv lizhihao-cn-8081.conf www-lizhihao-cn-3000.conf<br>修改配置文件<br>upstream blog&#123;                                                      <br>        server 127.0.0.1<span class="hljs-function">:3000</span>;                                      <br>&#125;                                                                   <br><span class="hljs-comment"># NGINX Server Instance,PORT 80                                     </span><br>server &#123;                                                            <br>        listen 80;                                                  <br>        server_name www.lizhihao.cn;                            <br><span class="hljs-comment"># Proxy to the Node instance                                        </span><br>location / &#123;                                                        <br>       proxy_<span class="hljs-keyword">set</span>_header X-Real-IP $remote_addr;                     <br>       proxy_<span class="hljs-keyword">set</span>_header X-Forwarded-For $proxy_add_x_forwarded_for; <br>       proxy_<span class="hljs-keyword">set</span>_header Host $http_host;                            <br>       proxy_<span class="hljs-keyword">set</span>_header X-NginX-Proxy <span class="hljs-literal">true</span>;                         <br>       proxy_pass http:<span class="hljs-string">//blog</span>;                                      <br>       proxy_redirect off;                                          <br>     &#125;                                                              <br>&#125;    <br><span class="hljs-string">//</span> 重启nginx<br>sudo nginx -s <span class="hljs-keyword">reload</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="配一下防火墙"><a href="#配一下防火墙" class="headerlink" title="配一下防火墙"></a>配一下防火墙</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">sudo apt-get update &amp;&amp; sudo apt-get upgrade<br>sudo iptables -F <span class="hljs-string">//</span>先清掉所有的规则<br>sudo vi <span class="hljs-string">/etc/iptables.up.rules</span><br><span class="hljs-params">------------------------------------------</span>  <br>*filter<br><span class="hljs-comment"># 允许所有建立起来的连接</span><br>-A INPUT -m state <span class="hljs-params">--state</span> ESTABLISHED,RELATED -j ACCEPT<br><span class="hljs-comment"># 允许所有出去的流量</span><br>-A OUTPUT -j ACCEPT<br>-A INPUT -p tcp <span class="hljs-params">--dport</span> 443 -j ACCEPT<br>-A INPUT -p tcp <span class="hljs-params">--dport</span> 80 -j ACCEPT<br><span class="hljs-comment"># ping</span><br>-A INPUT -p icmp -m  icmp <span class="hljs-params">--icmp-type</span>  8 -j ACCEPT<br><span class="hljs-comment"># allow ssh port login</span><br>-A INPUT -p  tcp -m state <span class="hljs-params">--state</span> NEW <span class="hljs-params">--dport</span> 8888 -j ACCEPT<br><br><span class="hljs-comment"># MongoDB connection</span><br>-A INPUT -s 127.0.0.1 -p tcp <span class="hljs-params">--destination-port</span> 27017 -m state <span class="hljs-params">--state</span> NEW,ESTABLISHED -j ACCEPT<br>-A OUTPUT -d 127.0.0.1 -p tcp <span class="hljs-params">--source-port</span> 27017 -m state <span class="hljs-params">--state</span> ESTABLISHED -j ACCEPT<br><br><span class="hljs-comment"># 3000端口</span><br>-A INPUT -s 127.0.0.1 -p tcp <span class="hljs-params">--destination-port</span> 3000 -m state <span class="hljs-params">--state</span> NEW,ESTABLISHED -j ACCEPT<br>-A OUTPUT -d 127.0.0.1 -p tcp <span class="hljs-params">--source-port</span> 3000 -m state <span class="hljs-params">--state</span> ESTABLISHED -j ACCEPT<br><br><span class="hljs-comment"># 9093端口</span><br>-A INPUT -s 127.0.0.1 -p tcp <span class="hljs-params">--destination-port</span> 9093 -m state <span class="hljs-params">--state</span> NEW,ESTABLISHED -j ACCEPT<br>-A OUTPUT -d 127.0.0.1 -p tcp <span class="hljs-params">--source-port</span> 9093 -m state <span class="hljs-params">--state</span> ESTABLISHED -j ACCEPT<br><br><span class="hljs-comment"># 记录被拒绝的请求</span><br>-A INPUT -m limit <span class="hljs-params">--limit</span> 5/min -j LOG <span class="hljs-params">--log-prefix</span> <span class="hljs-string">&quot;iptables denied:&quot;</span> <span class="hljs-params">--log-level</span> 7<br><span class="hljs-comment"># drop incoming sensitive connections</span><br>-A INPUT -p tcp <span class="hljs-params">--dport</span> 80 -i eth0 -m state <span class="hljs-params">--state</span> NEW -m recent <span class="hljs-params">--set</span><br>-A INPUT -p tcp <span class="hljs-params">--dport</span> 80 -i eth0 -m state <span class="hljs-params">--state</span> NEW -m recent <span class="hljs-params">--update</span> <span class="hljs-params">--seconds</span> 60 <span class="hljs-params">--hitcount</span> 150 -j DROP<br><span class="hljs-comment"># reject all other inbound</span><br>-A INPUT -j REJECT<br>-A FORWARD -j REJECT<br><br>COMMIT  <br><span class="hljs-params">-------------------------------------------</span><br>sudo iptables-restore &lt;<span class="hljs-string">/etc/iptables.up.rules</span> <span class="hljs-string">//</span>载入规则<br>sudo ufw status <span class="hljs-string">//</span>查看防火墙状态<br>sudo ufw enable <span class="hljs-string">//</span>激活<br><br>sudo vi <span class="hljs-string">/etc/network/if-up.d/iptables</span> <span class="hljs-string">//</span>让他开机自动启动<br>·<span class="hljs-params">-----------------------------------</span><br><span class="hljs-comment">#!/bin/sh</span><br>iptables-restore <span class="hljs-string">/etc/iptables.up.rulea</span><br><span class="hljs-params">-----------------------------------------------------</span><br>sudo chmod +x <span class="hljs-string">/etc/network/if-up.d/iptables</span><br><br><br><br><span class="hljs-comment">### 出现invalid host header的问题</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua">// react的话在<span class="hljs-built_in">config</span>里面的webpackDevServer.<span class="hljs-built_in">config</span>.js里面加一个<br>disableHostCheck: <span class="hljs-literal">true</span><br><br></code></pre></td></tr></table></figure>
+<h1 id="https配置"><a href="#https配置" class="headerlink" title="https配置"></a>https配置</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> 在腾讯云上申请证书(具体详见文档：https:<span class="hljs-regexp">//</span>cloud.tencent.com<span class="hljs-regexp">/document/</span>product<span class="hljs-regexp">/400/</span><span class="hljs-number">4143</span>)<br><span class="hljs-regexp">//</span> 把证书下载下来上传到服务器<br><span class="hljs-regexp">//</span> 修改配置文件<br>upstream blog&#123;<br>     server <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3000</span>;<br>&#125;<br><span class="hljs-comment"># NGINX Server Instance,PORT 80</span><br>server &#123;<br>        listen <span class="hljs-number">80</span>;<br>        server_name www.lizhihao.cn;<br>        <span class="hljs-comment"># rewrite ^(.*) https://$host$1 permanent;</span><br>        return <span class="hljs-number">301</span> https:<span class="hljs-regexp">//</span>www.lizhihao.cn<span class="hljs-variable">$request_uri</span>;<br>&#125;<br>server &#123;<br>        listen <span class="hljs-number">443</span>;<br>        server_name www.lizhihao.cn; <span class="hljs-comment">#填写绑定证书的域名</span><br>        ssl on;<br>        ssl_certificate <span class="hljs-regexp">/home/</span>lizhihao<span class="hljs-regexp">/https-key/</span><span class="hljs-number">1</span>_www.lizhihao.cn_bundle.crt;<br>        ssl_certificate_key  <span class="hljs-regexp">/home/</span>lizhihao<span class="hljs-regexp">/https-key/</span><span class="hljs-number">2</span>_www.lizhihao.cn.key;<br>        ssl_session_timeout <span class="hljs-number">5</span>m;<br>        ssl_protocols TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>; <span class="hljs-comment">#按照这个协议配置</span><br>        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; <span class="hljs-comment">#按照这个套件配置</span><br>        ssl_prefer_server_ciphers on;<br><br>        <span class="hljs-comment"># if($ssl_protocol = &quot;&quot;)&#123;</span><br>         <span class="hljs-comment">#  rewrite ^(.*) https://$host$1 permanent;</span><br>        <span class="hljs-comment"># &#125;</span><br><span class="hljs-comment"># Proxy to the Node instance</span><br>location / &#123;<br>       proxy_set_header X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>       proxy_set_header X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>       proxy_set_header Host <span class="hljs-variable">$http_host</span>;<br>       proxy_set_header X-NginX-Proxy true;<br>       proxy_pass http:<span class="hljs-regexp">//</span>blog;<br>       proxy_redirect off;<br>        &#125;<br>&#125;<br>测试nginx <br>重启nginx<br></code></pre></td></tr></table></figure>
+<h2 id="node-后端启动"><a href="#node-后端启动" class="headerlink" title="node 后端启动"></a>node 后端启动</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">nohup npm start &amp;<br>https:<span class="hljs-regexp">//</span>segmentfault.com<span class="hljs-regexp">/q/</span><span class="hljs-number">1010000004455598</span><br>lsof -i 查看端口<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/node/">node</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/02/%E5%9F%BA%E4%BA%8Evue%E7%90%86%E8%A7%A3%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91web%E5%BA%94%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基于vue理解前端框架开发web应用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/10/11/python%E4%B9%8B%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">python之函数使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
