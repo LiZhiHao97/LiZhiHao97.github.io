@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="多总结，多思考">
+  <meta name="author" content="Zh">
+  <meta name="keywords" content="">
+  <title>React Hooks理解 - Zh&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zh's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://image-1253774868.cos.ap-nanjing.myqcloud.com/img/7.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="React Hooks理解">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Zh
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-08 15:17" pubdate>
+        2022年4月8日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">React Hooks理解</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>React Hooks</code>是React16.8的强大特性，本文主要记录个人学习过程中的一些理解，由于<a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-intro.html">React官方文档</a>对其基本概念的描述已经十分直观,本文也不会啰嗦的再<del>复制</del>描述一遍它的概念。因此，本文可能不适用于未学习过Hooks的人群。本文的理解基于官方给的例子，后续可能会增添一些新的补充</p>
+<h2 id="React-Hooks做了什么事？"><a href="#React-Hooks做了什么事？" class="headerlink" title="React Hooks做了什么事？"></a>React Hooks做了什么事？</h2><h3 id="告别class"><a href="#告别class" class="headerlink" title="告别class"></a>告别class</h3><p>Hook 在 class 内部是不起作用的。但你可以使用它们来取代 class。</p>
+<p>因为我本身就在<code>React Hooks</code>发布之前使用过React，能明显感觉到其带来的好处。</p>
+<p>首先我们都知道，在<code>Hooks</code>诞生之前，函数组件被称为<code>无状态组件</code>，我们无法在函数组件中定义组件的状态，并使用<code>this.setState</code>这样的方法。</p>
+<p>而class也是学习React的一大障碍，即使我们能够很好的理解Javascript中<code>this</code>的定义，但复杂的场景有时也会为我们理解<code>this</code>的指向带来困扰。而且我们还不能忘记绑定事件处理器。</p>
+<p><code>Hooks</code>解决了这一问题，消除了<code>this</code>，让我们的代码更好理解，让函数组件能够使用更多的React特性，也不需要再区分class组件与函数组件的使用场景了。</p>
+<blockquote>
+<p>值得注意的是，React并没有弃用class的打算，Hook 和现有代码可以同时工作，我们可以渐进式地使用他们。React团队也将继续为class组件提供支持。</p>
+</blockquote>
+<h3 id="消除生命周期中的冗余和分离无关逻辑"><a href="#消除生命周期中的冗余和分离无关逻辑" class="headerlink" title="消除生命周期中的冗余和分离无关逻辑"></a>消除生命周期中的冗余和分离无关逻辑</h3><p>首先我们来了解一下<code>副作用</code>，引用官方原话：数据获取，设置订阅以及手动更改 React 组件中的 DOM 都属于副作用。不管你知不知道这些操作，或是“副作用”这个名字，应该都在组件中使用过它们。</p>
+<p><code>副作用</code>这个概念其实并不是来自React，讲到副作用，我们不得不提另一个概念：<code>纯函数</code>。简单来说，纯函数就是，通过确定的输入，产生确定的输出，像我们中学时期数学中用的函数，就是纯函数。<strong>数据获取，设置订阅以及手动更改 React 组件中的 DOM</strong>，这些副作用可能会产生不同的结果，改变上下文环境，有了这些，函数就不是纯函数了。</p>
+<p>曾经，我们经常在生命周期函数中使用副作用，比如在<code>componentDidMount</code>中发起请求获取数据</p>
+<p>以下例子为组件每次渲染后更新页面title：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Example</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = &#123;<br>      <span class="hljs-attr">count</span>: <span class="hljs-number">0</span><br>    &#125;;<br>  &#125;<br><br>  <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`You clicked <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.state.count&#125;</span> times`</span>;<br>  &#125;<br>  <span class="hljs-title function_">componentDidUpdate</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`You clicked <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.state.count&#125;</span> times`</span>;<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You clicked &#123;this.state.count&#125; times<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> this.setState(&#123; count: this.state.count + 1 &#125;)&#125;&gt;</span><br><span class="language-xml">          Click me</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在这个例子中，我们需要在两个生命周期函数中编写重复的代码，因为有些场景下，我们希望组件每次渲染后都执行某个操作，但React并没有提供这样的生命周期函数。</p>
+<p>我们可以使用<code>useEffect</code>处理这个问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">Example</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`You clicked <span class="hljs-subst">$&#123;count&#125;</span> times`</span>;<br>  &#125;);<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You clicked &#123;count&#125; times<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;</span><br><span class="language-xml">        Click me</span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>我们可以把useEffect Hook看做componentDidMount，componentDidUpdate和componentWillUnmount这三个函数的组合。</p>
+<p>对，你发现问题了，上述例子中我们<code>useEffect</code>的内容，只是在渲染后执行的,那么怎么实现<code>componentWillUnmount</code>呢？</p>
+<p>有一些副作用是需要清除的。例如订阅外部数据源。这种情况下，清除工作是非常重要的，可以防止引起内存泄露。</p>
+<p>看以下例子,假设我们有一个ChatAPI模块，它允许我们订阅好友的在线状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FriendStatus</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = &#123; <span class="hljs-attr">isOnline</span>: <span class="hljs-literal">null</span> &#125;;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);<br>  &#125;<br><br>  <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">subscribeToFriendStatus</span>(<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>,<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span><br>    );<br>  &#125;<br>  <span class="hljs-title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">unsubscribeFromFriendStatus</span>(<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>,<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span><br>    );<br>  &#125;<br>  <span class="hljs-title function_">handleStatusChange</span>(<span class="hljs-params">status</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123;<br>      <span class="hljs-attr">isOnline</span>: status.<span class="hljs-property">isOnline</span><br>    &#125;);<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">isOnline</span> === <span class="hljs-literal">null</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Loading...&#x27;</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">isOnline</span> ? <span class="hljs-string">&#x27;Online&#x27;</span> : <span class="hljs-string">&#x27;Offline&#x27;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>你会注意到 componentDidMount 和 componentWillUnmount 之间相互对应。使用生命周期函数迫使我们拆分这些逻辑代码，即使这两部分代码都作用于相同的副作用。</p>
+<p>我们使用<code>useEffect</code>来解决这个问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; useState, useEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">FriendStatus</span>(<span class="hljs-params">props</span>) &#123;<br>  <span class="hljs-keyword">const</span> [isOnline, setIsOnline] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleStatusChange</span>(<span class="hljs-params">status</span>) &#123;<br>      <span class="hljs-title function_">setIsOnline</span>(status.<span class="hljs-property">isOnline</span>);<br>    &#125;<br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">subscribeToFriendStatus</span>(props.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>, handleStatusChange);<br>    <span class="hljs-comment">// Specify how to clean up after this effect:</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">cleanup</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">unsubscribeFromFriendStatus</span>(props.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>, handleStatusChange);<br>    &#125;;<br>  &#125;);<br><br>  <span class="hljs-keyword">if</span> (isOnline === <span class="hljs-literal">null</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Loading...&#x27;</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> isOnline ? <span class="hljs-string">&#x27;Online&#x27;</span> : <span class="hljs-string">&#x27;Offline&#x27;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>useEffect</code>能够返回一个清除函数，这是可选的机制。如此可以将添加和移除订阅的逻辑放在一起。它们都属于 effect 的一部分。</p>
+<blockquote>
+<p>与componentWillUnmount不同的是，useEffect返回的清楚函数在每次重新渲染时都会执行</p>
+</blockquote>
+<p>以前在class中使用生命周期函数时还会遇到一个问题，以以上的例子举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FriendStatusWithCounter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = &#123; <span class="hljs-attr">count</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">isOnline</span>: <span class="hljs-literal">null</span> &#125;;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);<br>  &#125;<br><br>  <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`You clicked <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.state.count&#125;</span> times`</span>;<br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">subscribeToFriendStatus</span>(<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>,<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span><br>    );<br>  &#125;<br><br>  <span class="hljs-title function_">componentDidUpdate</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`You clicked <span class="hljs-subst">$&#123;<span class="hljs-variable language_">this</span>.state.count&#125;</span> times`</span>;<br>  &#125;<br><br>  <span class="hljs-title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">unsubscribeFromFriendStatus</span>(<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>,<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleStatusChange</span><br>    );<br>  &#125;<br><br>  <span class="hljs-title function_">handleStatusChange</span>(<span class="hljs-params">status</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123;<br>      <span class="hljs-attr">isOnline</span>: status.<span class="hljs-property">isOnline</span><br>    &#125;);<br>  &#125;<br>  <span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
+<p>看，当我们如果又需要设置页面的title，也需要订阅好友的在线状态时，我们只能像以上那样写，这样除了将相关逻辑分割到不同的生命周期函数以外，<code>componentDidMount</code>中同时包含了两个不同功能的代码。</p>
+<p>那么Hook如何解决这个问题呢？就像你可以使用多个state的Hook一样，你也可以使用多个effect。这会将不相关逻辑分离到不同的 effect中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">FriendStatusWithCounter</span>(<span class="hljs-params">props</span>) &#123;<br>  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);<br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = <span class="hljs-string">`You clicked <span class="hljs-subst">$&#123;count&#125;</span> times`</span>;<br>  &#125;);<br><br>  <span class="hljs-keyword">const</span> [isOnline, setIsOnline] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);<br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleStatusChange</span>(<span class="hljs-params">status</span>) &#123;<br>      <span class="hljs-title function_">setIsOnline</span>(status.<span class="hljs-property">isOnline</span>);<br>    &#125;<br><br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">subscribeToFriendStatus</span>(props.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>, handleStatusChange);<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">unsubscribeFromFriendStatus</span>(props.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>, handleStatusChange);<br>    &#125;;<br>  &#125;);<br>  <span class="hljs-comment">// ...</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>Hook允许我们按照代码的用途分离他们，而不是像生命周期函数那样。React将按照effect声明的顺序依次调用组件中的每一个effect。</p>
+<h3 id="复用状态逻辑"><a href="#复用状态逻辑" class="headerlink" title="复用状态逻辑"></a>复用状态逻辑</h3><p>如下所示，我们封装了一个好友在线状态的Hook,它将 friendID 作为参数，并返回该好友是否在线</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">useFriendStatus</span>(<span class="hljs-params">friendID</span>) &#123;<br>  <span class="hljs-keyword">const</span> [isOnline, setIsOnline] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>);<br><br>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleStatusChange</span>(<span class="hljs-params">status</span>) &#123;<br>    <span class="hljs-title function_">setIsOnline</span>(status.<span class="hljs-property">isOnline</span>);<br>  &#125;<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">subscribeToFriendStatus</span>(friendID, handleStatusChange);<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-title class_">ChatAPI</span>.<span class="hljs-title function_">unsubscribeFromFriendStatus</span>(friendID, handleStatusChange);<br>    &#125;;<br>  &#125;);<br><br>  <span class="hljs-keyword">return</span> isOnline;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>我们可以在两个组件中使用它</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">FriendStatus</span>(<span class="hljs-params">props</span>) &#123;<br>  <span class="hljs-keyword">const</span> isOnline = <span class="hljs-title function_">useFriendStatus</span>(props.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>);<br><br>  <span class="hljs-keyword">if</span> (isOnline === <span class="hljs-literal">null</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Loading...&#x27;</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> isOnline ? <span class="hljs-string">&#x27;Online&#x27;</span> : <span class="hljs-string">&#x27;Offline&#x27;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">FriendListItem</span>(<span class="hljs-params">props</span>) &#123;<br>  <span class="hljs-keyword">const</span> isOnline = <span class="hljs-title function_">useFriendStatus</span>(props.<span class="hljs-property">friend</span>.<span class="hljs-property">id</span>);<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">color:</span> <span class="hljs-attr">isOnline</span> ? &#x27;<span class="hljs-attr">green</span>&#x27; <span class="hljs-attr">:</span> &#x27;<span class="hljs-attr">black</span>&#x27; &#125;&#125;&gt;</span></span><br><span class="language-xml">      &#123;props.friend.name&#125;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>首先要注意的是，这两个两个组件的<code>state</code>是完全独立的，<code>Hook</code><strong>只复用state的逻辑，不复用state本身</strong></p>
+<p>也是这个例子，让我更好的理解了<code>Hook</code>名字的由来，正如它的中文翻译<code>钩子</code>,它能够将一些公用的逻辑抽离出组件（或者说一些特性，比如<code>useState</code>），与组件本身解耦，在需要使用它的组件里钩入它。</p>
+<h2 id="Hook规则"><a href="#Hook规则" class="headerlink" title="Hook规则"></a>Hook规则</h2><p>以下摘自官方文档原话</p>
+<h3 id="只在最顶层使用-Hook"><a href="#只在最顶层使用-Hook" class="headerlink" title="只在最顶层使用 Hook"></a>只在最顶层使用 Hook</h3><p>不要在循环，条件或嵌套函数中调用<code>Hook，</code>，确保总是在你的React函数的最顶层调用他们。遵守这条规则，你就能确保<code>Hook</code>在每一次渲染中都按照同样的顺序被调用。这让React能够在多次的<code>useState</code>和<code>useEffect</code>调用之间保持<code>Hook</code>状态的正确。</p>
+<p>至于为什么要这样做，React文档中也给了相关的原因:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Form</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 1. Use the name state variable</span><br>  <span class="hljs-keyword">const</span> [name, setName] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Mary&#x27;</span>);<br><br>  <span class="hljs-comment">// 2. Use an effect for persisting the form</span><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">persistForm</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;formData&#x27;</span>, name);<br>  &#125;);<br><br>  <span class="hljs-comment">// 3. Use the surname state variable</span><br>  <span class="hljs-keyword">const</span> [surname, setSurname] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Poppins&#x27;</span>);<br><br>  <span class="hljs-comment">// 4. Use an effect for updating the title</span><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">updateTitle</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = name + <span class="hljs-string">&#x27; &#x27;</span> + surname;<br>  &#125;);<br><br>  <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// ------------</span><br><span class="hljs-comment">// 首次渲染</span><br><span class="hljs-comment">// ------------</span><br><span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Mary&#x27;</span>)           <span class="hljs-comment">// 1. 使用 &#x27;Mary&#x27; 初始化变量名为 name 的 state</span><br><span class="hljs-title function_">useEffect</span>(persistForm)     <span class="hljs-comment">// 2. 添加 effect 以保存 form 操作</span><br><span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Poppins&#x27;</span>)        <span class="hljs-comment">// 3. 使用 &#x27;Poppins&#x27; 初始化变量名为 surname 的 state</span><br><span class="hljs-title function_">useEffect</span>(updateTitle)     <span class="hljs-comment">// 4. 添加 effect 以更新标题</span><br><br><span class="hljs-comment">// -------------</span><br><span class="hljs-comment">// 二次渲染</span><br><span class="hljs-comment">// -------------</span><br><span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Mary&#x27;</span>)           <span class="hljs-comment">// 1. 读取变量名为 name 的 state（参数被忽略）</span><br><span class="hljs-title function_">useEffect</span>(persistForm)     <span class="hljs-comment">// 2. 替换保存 form 的 effect</span><br><span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;Poppins&#x27;</span>)        <span class="hljs-comment">// 3. 读取变量名为 surname 的 state（参数被忽略）</span><br><span class="hljs-title function_">useEffect</span>(updateTitle)     <span class="hljs-comment">// 4. 替换更新标题的 effect</span><br><br><span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure><br>比如我们在组件中定义了四个<code>Hook</code>，如果在顶层调用的话，效果如上所示。</p>
+<p>我们注意到，二次渲染的时候，<code>useState</code>读取的是改变后的状态（如果未改变，就是之前的状态），这是怎么实现的呢？</p>
+<p><strong>只要 Hook 的调用顺序在多次渲染之间保持一致，React 就能正确地将内部 state 和对应的 Hook 进行关联。</strong></p>
+<p>如果我们将一个<code>Hook</code>的调用放到一个条件语句中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 在条件语句中使用 Hook 违反第一条规则</span><br><span class="hljs-keyword">if</span> (name !== <span class="hljs-string">&#x27;&#x27;</span>) &#123;<br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">persistForm</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;formData&#x27;</span>, name);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">useState</span><span class="hljs-params">(<span class="hljs-string">&#x27;Mary&#x27;</span>)</span></span>           <span class="hljs-comment">// 1. 读取变量名为 name 的 state（参数被忽略）</span><br><span class="hljs-comment">// useEffect(persistForm)  // 此 Hook 被忽略！</span><br><span class="hljs-function"><span class="hljs-title">useState</span><span class="hljs-params">(<span class="hljs-string">&#x27;Poppins&#x27;</span>)</span></span>        <span class="hljs-comment">// 2 （之前为 3）。读取变量名为 surname 的 state 失败, 它和上一次的useEffect(persistForm) 对应了</span><br><span class="hljs-function"><span class="hljs-title">useEffect</span><span class="hljs-params">(updateTitle)</span></span>     <span class="hljs-comment">// 3 （之前为 4）。替换更新标题的 effect 失败</span><br></code></pre></td></tr></table></figure>
+<p><strong>这就是为什么Hook需要在我们组件的最顶层调用。如果我们想要有条件地执行一个effect，可以将判断放到Hook的内部：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">useEffect</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">persistForm</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 👍 将条件判断放置在 effect 中</span><br>  <span class="hljs-keyword">if</span> (name !== <span class="hljs-string">&#x27;&#x27;</span>) &#123;<br>    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;formData&#x27;</span>, name);<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<h3 id="只在-React-函数中调用-Hook"><a href="#只在-React-函数中调用-Hook" class="headerlink" title="只在 React 函数中调用 Hook"></a>只在 React 函数中调用 Hook</h3><p>不要在普通的 JavaScript 函数中调用 Hook。你可以：</p>
+<ul>
+<li>在React的函数组件中调用<code>Hook</code></li>
+<li>在<code>自定义Hook</code>中调用其他<code>Hook</code></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Javascript/">Javascript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/React/">React</a>
+                    
+                      <a class="hover-with-bg" href="/tags/React-Hooks/">React Hooks</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/08/map(parseInt)%E7%9A%84%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">arr.map(parseInt)的问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/04/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%88%E4%BB%A3%E7%90%86%EF%BC%89%EF%BC%9F/">
+                        <span class="hidden-mobile">什么是事件委托（代理）？</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备2022010354号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
