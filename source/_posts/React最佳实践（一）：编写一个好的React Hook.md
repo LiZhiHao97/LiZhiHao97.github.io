@@ -276,6 +276,31 @@ useEffect(() => {
 
 至此，我们就完成一个完整的表单`Hook`了
 
+----更新----
+
+以上写的 data 初始化方法，在项目中带来了渲染 bug，当调用了`save`方法后，修改的表单数据丢失，变回了刚进详情页时的状态。原因在于`transformer`是一个传进来的外部依赖，且没有使用`useCallback`包裹，当定义`transformer`的组件更新后，`transformer`会被更新，链式的依赖导致了`useEffect`中的代码重新执行
+
+解决方法：改为`useMount`
+
+```typescript
+const initialData = useCallback(async () => {
+  if (data) {
+    const formData = transformer ? await transformer(data) : data;
+    formRef.current?.setFieldsValue(formData);
+  }
+}, [data, transformer]);
+
+useMount(() => {
+  initialData();
+});
+```
+
+这样写需要注意一个问题，data 只渲染一次，所以我们得保证 data 第一次传进来就得有数据，在最外层组件需要做一些限制
+
+```tsx
+data ? <DetailPage data={data} /> : <LoadingPage />;
+```
+
 ## 总结
 
 我们可以总结一下开发`React Hooks`过程中需要注意的点：
@@ -293,7 +318,6 @@ interface useFormOptions<T, DT, R> {
   transformer?: (data: DT) => T | Promise<T>;
   onSave?: (formData: T) => Promise<ResponseData<R>>;
   onCreate?: (formData: T) => Promise<ResponseData<R>>;
-  showErrorTip?: boolean;
 }
 
 export const useForm = <T = any, DT = any, R = boolean>(
@@ -305,7 +329,6 @@ export const useForm = <T = any, DT = any, R = boolean>(
     transformer,
     onSave,
     onCreate,
-    showErrorTip = true,
   } = options;
 
   const formRef = useRef<ProFormInstance>();
@@ -320,9 +343,9 @@ export const useForm = <T = any, DT = any, R = boolean>(
   }, [data, transformer]);
 
   // 表单读取数据初始化
-  useEffect(() => {
+  useMount(() => {
     initialData();
-  }, [initialData]);
+  });
 
   // 表单创建功能
   const create = async () => {
@@ -353,7 +376,6 @@ export const useForm = <T = any, DT = any, R = boolean>(
       }
     } catch (error: any) {
       setLoading(false);
-      showErrorTip && message.error("创建失败");
       console.log(error);
     }
   };
@@ -389,7 +411,6 @@ export const useForm = <T = any, DT = any, R = boolean>(
       }
     } catch (error) {
       setLoading(false);
-      showErrorTip && message.error("保存失败");
       console.log(error);
     }
   };
