@@ -191,9 +191,9 @@ const MyTable = forwardRef<MyModalInstance, MymodalProps>((props, ref) => {
 - 它们各自管理需要的状态，`data`在`MyTable`内部，`visible`在`Modal`内部
 - 它们耦合非常低，可以在其他场景复用，`Modla`只调用了`Table`实例提供的能力，完全可以在其他不同`Table`的场景下复用
 
-## 扩展
+## ref 的其他应用
 
-### ref 的其他应用
+### 保持值最新
 
 总结自一道面试题：
 
@@ -244,3 +244,57 @@ const App = () => {
 ```
 
 当 `i >= serviceIndex`，可以保证请求是最新的，我们才进行`data`的更新
+
+### 解决 Hooks 的依赖问题
+
+其实本质上也是保持值最新
+
+假如有这样一个需求，我们需要在`props`传下来的函数`dosomething`变更的时候执行它，它的参数为内部状态`data`，我们可以这样写。
+
+```jsx
+const App = (props) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    dosomething(data);
+  }, [dosomething]);
+};
+```
+
+这样显然是有问题的，因为`useEffect`只依赖`dosomething`，所以其内部作用于`data`的值一直不会变，当`dosomething`变更执行时，我们没法获取到最新的`data`。
+
+那这样呢？
+
+```jsx
+const App = (props) => {
+  const { dosomething } = props;
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    dosomething(data);
+  }, [dosomething, data]);
+};
+```
+
+显然也不行，我们期望的是`dosomething`变更时才执行。那该怎么办呢？
+
+```jsx
+const App = (props) => {
+  const { dosomething } = props;
+  const [data, setData] = useState([]);
+  const dataRef = useRef(data);
+
+  useEffect(() => {
+    dosomething(dataRef.current);
+  }, [dosomething]);
+
+  const data = (newData) => {
+    dataRef.current = newData;
+    setData(newData);
+  };
+};
+```
+
+这样就能保持执行`useEffec`t 时`data`的值是最新了，也不会造成不必要的渲染。
+
+> React 18 中的 useEvent 能够更优雅的解决这个问题
