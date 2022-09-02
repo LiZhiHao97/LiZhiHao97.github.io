@@ -218,11 +218,160 @@ const ajax = {
 };
 ```
 
+## 发布订阅模式与观察者模式
+
+| 设计模式 | 观察者模式                                       | 发布订阅模式                                               |
+| -------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| 主体     | Object 观察者、Subject 目标对象                  | Publisher 发布者、Event Channel 事件中心、Subscribe 订阅者 |
+| 主体关系 | Subject 中通过 observerList 记录 ObServer        | Publisher 和 Subscribe 不想不知道对方，通过中介联系        |
+| 优点     | 角色明确，Subject 和 Object 要遵循约定的成员方法 | 松散耦合，灵活度高，通常应用在异步编程中                   |
+| 缺点     | 紧耦合                                           | 当事件类型变多时，会增加维护成本                           |
+| 使用案例 | 双向数据绑定                                     | 事件总线 EventBus                                          |
+
+### 发布订阅模式
+
+```javascript
+class PubSub {
+  constructor() {
+    this.events = {};
+  }
+
+  publish(type, ...args) {
+    if (this.events[type]) {
+      this.events[type].forEach((cb) => cb(args));
+    }
+  }
+
+  subscribe(type, cb) {
+    if (!this.events[type]) {
+      this.events[type] = [];
+    }
+    this.events[type].push(cb);
+  }
+
+  ubsubscribe(type, cb) {
+    if (this.events[type]) {
+      const index = this.events[type].findIndex((e) => e === cb);
+      this.events.splice(index, 1);
+    }
+
+    if (this.events[type].length === 1) {
+      delete this.events[type];
+    }
+  }
+
+  unsubscribeAll() {}
+}
+
+const pubsub = new PubSub();
+
+pubsub.subscribe("war", (info) => {
+  console.log(`发布了${info}`);
+});
+
+pubsub.subscribe("routine", (info) => {
+  console.log(`发布了${info}`);
+});
+
+pubsub.publish("war", "猎杀老鼠");
+pubsub.publish("routine", "干杂活");
+```
+
+### 观察者模式
+
+```javascript
+class Observer {
+  constructor(name) {
+    this.name = name;
+  }
+
+  update({ tasktype, taskinfo }) {
+    // 可以给观察者自定义一些处理观察到的数据的逻辑
+    if (tasktype === "war") {
+      console.log(`${this.name}收到猎杀任务-${taskinfo}通知`);
+    }
+    if (tasktype === "routine") {
+      console.log(`${this.name}收到日常任务-${taskinfo}通知`);
+    }
+  }
+}
+
+class Subject {
+  constructor() {
+    this.observerList = [];
+  }
+
+  addObserver(observer) {
+    this.observerList.push(observer);
+  }
+
+  notify(task) {
+    this.observerList.forEach((observer) => observer.update(task));
+  }
+}
+
+const subject = new Subject();
+
+const observer1 = new Observer("弟子一");
+const observer2 = new Observer("弟子二");
+
+subject.addObserver(observer1);
+subject.addObserver(observer2);
+
+subject.notify({ tasktype: "war", taskinfo: "猎杀老鼠" });
+```
+
 ## 将 url 中的 queryString 转为 map
 
 ```javascript
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
+```
+
+## 获取页面中数量前三的标签
+
+```jsx
+const fn = () => {
+  const tags = document.getElementsByTagName("*");
+  const map = {};
+
+  for (const tag of tags) {
+    const tagName = tag.tagName;
+    if (map[tagName]) map[tagName] += 1;
+    else map[tagName] = 1;
+  }
+
+  const ret = Object.entries(map);
+
+  ret.sort((a, b) => b[1] - a[1]);
+
+  return ret.slice(0, 3);
+};
+```
+
+## Nodejs 爬取网页源码并对内容进行替换后保存文件
+
+```javascript
+const http = require("http");
+const fs = require("fs");
+
+const fn = () => {
+  http.get("http://www.baidu.com", (res) => {
+    let code = "";
+    res.on("data", (data) => {
+      code += data;
+    });
+    res.on("end", () => {
+      code = code.replaceAll("百度", "百度123");
+      fs.writeFile("code.html", code, (err) => {
+        if (err) console.error(err);
+        console.log("write done");
+      });
+    });
+  });
+};
+
+fn();
 ```
 
 ## 实现 new 关键字
@@ -253,9 +402,43 @@ function instanceOf(left, right) {
 }
 ```
 
+## 实现对象被 for of 遍历
+
+- `for in`用于遍历可枚举数据类型
+  - 对象
+  - 数组
+  - 字符串
+- `for of`用于遍历可迭代数据类型
+  - 数组
+  - 字符串
+  - Map
+  - Set
+
+```javascript
+const obj = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+  [Symbol.iterator]: function* () {
+    for (const key in obj) {
+      yield obj[key];
+    }
+  },
+};
+
+for (const val of obj) {
+  console.log(val);
+}
+```
+
 ## Promise
 
 ### 实现
+
+#### Promise
+
+看林三心大佬的这篇[文章](https://juejin.cn/post/6994594642280857630)
 
 #### Promise.all
 
